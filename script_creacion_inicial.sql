@@ -233,6 +233,18 @@ CREATE TABLE TODOX2LUCAS.Transacciones (
 ;
 
 --MIGRACION TABLA TANSACCIONES--
+INSERT INTO TODOX2LUCAS.Transacciones(Fecha_Transaccion,Nro_Dni,Cliente_Apellido,Forma_De_Pago)
+SELECT DISTINCT GETDATE(),c.Nro_Dni,c.Cliente_Apellido,'Efectivo',Pasaje_Codigo
+FROM gd_esquema.Maestra m JOIN TODOX2LUCAS.Clientes c ON (m.Cli_Dni=c.Nro_Dni)
+WHERE  Pasaje_Codigo != 0 
+UNION
+INSERT INTO TODOX2LUCAS.Transacciones(Fecha_Transaccion,Nro_Dni,Cliente_Apellido,Forma_De_Pago)
+SELECT DISTINCT GETDATE(),c.Nro_Dni,c.Cliente_Apellido,'Efectivo',Paquete_Codigo
+FROM gd_esquema.Maestra m JOIN TODOX2LUCAS.Clientes c ON (m.Cli_Dni=c.Nro_Dni)
+WHERE Paquete_Codigo != 0 
+
+
+
 
 --CREACION TABLA AERONAVES--
 CREATE TABLE TODOX2LUCAS.Aeronaves ( 
@@ -415,18 +427,19 @@ CREATE TABLE TODOX2LUCAS.Encomiendas (
 
 --MIGRACION TABLA ENCOMIENDAS--
 INSERT INTO TODOX2LUCAS.Encomiendas(Cod_Encomiendas,Precio_Encomienda,Kgs_A_Enviar,Fecha_Compra,Nro_Dni,Cliente_Apellido)
-SELECT DISTINCT Paquete_Codigo,Paquete_Precio,Paquete_KG,Paquete_FechaCompra,C.Nro_Dni,Cli_Apellido
+SELECT DISTINCT Paquete_Codigo,Paquete_Precio,Paquete_KG,Paquete_FechaCompra,C.Nro_Dni,c.Cliente_Apellido
 FROM gd_esquema.Maestra M JOIN TODOX2LUCAS.Clientes C ON(C.Nro_Dni = M.Cli_Dni)
+							JOIN TODOX2LUCAS.Transacciones t ()
 WHERE Paquete_Codigo != 0
 
-
+SELECT * FROM TODOX2LUCAS.Encomiendas
 --CREACION TABLA PASAJES--
 CREATE TABLE TODOX2LUCAS.Pasajes ( 
 	Cod_Pasaje numeric(18) PRIMARY KEY CLUSTERED,
 	Fecha_Viaje datetime,
 	Cod_Viaje int REFERENCES TODOX2LUCAS.Viajes (Cod_Viaje),
 	Butaca_Asociada int,
-	Numero_Compra int, --REFERENCES TODOX2LUCAS.Transacciones (Numero_Compra),
+	Numero_Compra int REFERENCES TODOX2LUCAS.Transacciones (Numero_Compra),
 	Nro_Dni numeric(18) ,
 	Pasaje_Precio numeric(18,2),
 	Cliente_Apellido nvarchar(255),
@@ -434,38 +447,47 @@ CREATE TABLE TODOX2LUCAS.Pasajes (
 )
 ;
 --MIGRACION TABLA PASAJES--
+drop procedure TODOX2LUCAS.Migrar_Pasajes
 CREATE PROCEDURE TODOX2LUCAS.Migrar_Pasajes
 AS
 BEGIN
 	DECLARE @codPasaje numeric(18),@fecha datetime,@codViaje int,
-			@butaca int,@dni numeric(18),@precio numeric(18,2),@codRuta numeric(18),@apellido nvarchar(255);
+			@butaca int,@dni numeric(18),@precio numeric(18,2),@codRuta numeric(18),@apellido nvarchar(255),
+			@codAeronave int, @fechaSalida datetime,@fechaLlegada datetime, @numeroCompra int;
 	
 	DECLARE pasaje_cursor CURSOR FOR 
-	SELECT Pasaje_Codigo,Pasaje_FechaCompra,Pasaje_Precio,Nro_Dni,Ruta_Codigo,Butaca_Nro,Cli_Apellido
+	SELECT Pasaje_Codigo,Pasaje_FechaCompra,Pasaje_Precio,Nro_Dni,Ruta_Codigo,Butaca_Nro,Cli_Apellido,FechaSalida,FechaLLegada
 	FROM gd_esquema.Maestra m JOIN TODOX2LUCAS.Clientes c ON(m.Cli_Dni =c.Nro_Dni)
 	WHERE Pasaje_Codigo !=0
-
+	
 	OPEN pasaje_cursor
-	FETCH NEXT FROM pasaje_cursor INTO @codPasaje,@fecha,@precio,@dni,@codRuta,@butaca,@apellido
+	FETCH NEXT FROM pasaje_cursor INTO @codPasaje,@fecha,@precio,@dni,@codRuta,@butaca,@apellido,@fechaSalida,@fechaLlegada
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		DECLARE @numeroCompra int;
-		SET @codViaje = (SELECT Cod_Viaje FROM TODOX2LUCAS.Viajes WHERE Cod_Ruta = @codRuta);
+		
+		SET @codViaje = (SELECT Cod_Viaje FROM TODOX2LUCAS.Viajes v 
+										WHERE Cod_Ruta =@codRuta  AND v.Fecha_Salida =@fechaSalida AND v.Fecha_Llegada = @fechaLlegada);
 		
 		INSERT INTO TODOX2LUCAS.Transacciones(Fecha_Transaccion,Nro_Dni,Cliente_Apellido,Forma_De_Pago)
 		VALUES (GETDATE(),@dni,@apellido,'Efectivo')
 
-		SET @numeroCompra = (SELECT @@IDENTITY FROM TODOX2LUCAS.Transacciones );
+		SET @numeroCompra = (SELECT DISTINCT @@IDENTITY FROM TODOX2LUCAS.Transacciones );
 
 		INSERT INTO TODOX2LUCAS.Pasajes(Cod_Pasaje,Fecha_Viaje,Cod_Viaje,Butaca_Asociada,Numero_Compra,Nro_Dni,Pasaje_Precio,Cliente_Apellido)
 		VALUES (@codPasaje,@fecha,@codViaje,@butaca,@numeroCompra,@dni,@precio,@apellido)
 		
-		FETCH NEXT FROM pasaje_cursor INTO @codPasaje,@fecha,@precio,@dni,@codRuta,@butaca
+		FETCH NEXT FROM pasaje_cursor INTO @codPasaje,@fecha,@precio,@dni,@codRuta,@butaca,@apellido,@fechaSalida,@fechaLlegada	
 	END
+	CLOSE pasaje_cursor
+	DEALLOCATE pasaje_cursor
 END	
 ; 
 
 EXEC TODOX2LUCAS.Migrar_Pasajes;
+SELECT * FROM TODOX2LUCAS.Pasajes
+SELECT * FROM TODOX2LUCAS.Transacciones
+delete from TODOX2LUCAS.Pasajes
+DELETE FROM TODOX2LUCAS.Transacciones
 
 CREATE TRIGGER Sumar_Millas
 ON TODOX2LUCAS.Pasajes 
