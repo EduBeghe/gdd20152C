@@ -1,6 +1,8 @@
 # gdd20152C
 Repo del Tp de GDD del segundo cuatrimestre del 2015
+
 Funcionalidades a Cumplir:
+
 1.  ABM de rol  --- HECHO
 
 2.  Login y Seguridad  --- HECHO
