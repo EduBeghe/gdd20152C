@@ -8,20 +8,20 @@ namespace AerolineaFrba.Domain
 {
     public class Aeronave
     {
-        public int aeronaveId { get; set; }
+        public int IdAeronave { get; set; }
         public int capacidadEncomiendas { get; set; }
-        public Estado estado { get; set; }
+        public EstadoAeronave estadoAeronave { get; set; }
         public Fabricante fabricante { get; set; }
         public DateTime fechaDeAlta { get; set; }
         public int numeroAeronave { get; set; }
         public string modelo { get; set; }
         public int matricula { get; set; }
 
-        public Aeronave(int aeronaveId, int capacidadEncomiendas, Estado estado, Fabricante fabricante, DateTime fechaDeAlta, int numeroAeronave, string modelo, int matricula)
+        public Aeronave(int IdAeronave, int capacidadEncomiendas, EstadoAeronave estadoAeronave, Fabricante fabricante, DateTime fechaDeAlta, int numeroAeronave, string modelo, int matricula)
         {
-            this.aeronaveId = aeronaveId;
+            this.IdAeronave = IdAeronave;
             this.capacidadEncomiendas = capacidadEncomiendas;
-            this.estado = estado;
+            this.estadoAeronave = estadoAeronave;
             this.fabricante = fabricante;
             this.fechaDeAlta = fechaDeAlta;
             this.numeroAeronave = numeroAeronave;

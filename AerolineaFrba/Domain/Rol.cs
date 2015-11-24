@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace AerolineaFrba.Domain
 {
         
-    public class Fabricante
+    public class Rol
     {
-        public int idFabricante { get; set; }
         public string nombre { get; set; }
-
-        public Fabricante(int idFabricante, string nombre)
+        public int estado { get; set; }
+        
+        public Rol( string nombre, int estado )
         {
-            this.idFabricante = idFabricante;
             this.nombre = nombre;
+            this.estado = estado;
         }
     }
 }

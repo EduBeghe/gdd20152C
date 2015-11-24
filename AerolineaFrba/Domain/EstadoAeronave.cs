@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace AerolineaFrba.Domain
 {
         
-    public class Estado
+    public class EstadoAeronave
     {
         public int idEstado { get; set; }
         public DateTime fechaReinicio { get; set; }
         public DateTime fechaFuera { get; set; }
 
-        public Estado(int idEstado, DateTime fechaReinicio, DateTime fechaFuera)
+        public EstadoAeronave(int idEstado, DateTime fechaReinicio, DateTime fechaFuera)
         {
             this.idEstado = idEstado;
             this.fechaFuera = fechaFuera;
