@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace AerolineaFrba.Domain
 {
         
-    public class Pasajes
+    public class Pasaje
     {
         public int idPasaje { get; set; }
         public Cliente cliente { get; set; }
         public Viaje viaje { get; set; }
         public int pnr { get; set; }
 
-        public Pasajes( int idPasaje, Cliente cliente, Viaje viaje, int pnr )
+        public Pasaje( int idPasaje, Cliente cliente, Viaje viaje, int pnr )
         {
             this.idPasaje = idPasaje;
             this.cliente = cliente;

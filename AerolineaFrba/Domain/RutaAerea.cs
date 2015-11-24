@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace AerolineaFrba
 {
-	public class RutasAereas
+	public class RutaAerea
 	{
 		public int idRutaAerea { get; set; }
 		public Ciudad origen { get; set; }
@@ -11,7 +11,7 @@ namespace AerolineaFrba
         public double precioXKg { get; set; }
         public double precioXPasaje { get; set; }
 
-		public RutasAereas ( int idRutaAerea, Ciudad origen, Ciudad destino, TipoServicio servicio, double precioXKg, double precioXPasaje )
+		public RutaAerea ( int idRutaAerea, Ciudad origen, Ciudad destino, TipoServicio servicio, double precioXKg, double precioXPasaje )
 		{
             this.idRutaAerea = idRutaAerea;
             this.origen = origen;

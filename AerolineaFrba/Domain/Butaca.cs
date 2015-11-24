@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AerolineaFrba.Domain
 {
         
-    public class Butacas
+    public class Butaca
     {
         // no falta el id ? 
         public Aeronave aeronave { get; set; }
@@ -15,7 +15,7 @@ namespace AerolineaFrba.Domain
         public TipoServicio tipoServicio { get; set; }
         public int estadoButaca { get; set; }
 
-        public Butacas( Aeronave aeronave, string ubicacion, TipoServicio tipoServicio, int estadoButaca )
+        public Butaca( Aeronave aeronave, string ubicacion, TipoServicio tipoServicio, int estadoButaca )
         {
             this.aeronave = aeronave;
         	this.ubicacion = ubicacion;
