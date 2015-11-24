@@ -105,7 +105,21 @@ IF OBJECT_ID('TODOX2LUCAS.Sumar_Millas_Pasajes') IS NOT NULL
 DROP TRIGGER TODOX2LUCAS.Sumar_Millas_Pasajes;
 IF OBJECT_ID('TODOX2LUCAS.Sumar_Millas_Paquetes') IS NOT NULL
 DROP TRIGGER TODOX2LUCAS.Sumar_Millas_Paquetes;
+IF OBJECT_ID('TODOX2LUCAS.Cargar_Butacas') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Cargar_Butacas;
+IF OBJECT_ID('TODOX2LUCAS.Consulta_Millas') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Consulta_Millas;
+IF OBJECT_ID('TODOX2LUCAS.Mostrar_Viajes_Disponibles') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Mostrar_Viajes_Disponibles;
+IF OBJECT_ID('TODOX2LUCAS.Comprar_Pasajes') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Comprar_Pasajes;
+IF OBJECT_ID('TODOX2LUCAS.Alta_Cliente') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Alta_Cliente;
+IF OBJECT_ID('TODOX2LUCAS.Modificar_Datos_Cliente') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Modificar_Datos_Cliente;
+
 GO
+
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
 --CREACION TABLA CIUDADES--
@@ -176,7 +190,6 @@ CREATE TABLE TODOX2LUCAS.Clientes (
 	Cliente_Mail nvarchar(255),
 	Cliente_Fecha_Nacimiento datetime,
 	Cant_Millas int,
-	Usuario_Nombre nvarchar(255) REFERENCES TODOX2LUCAS.Usuarios (Usuario_Nombre),
 	PRIMARY KEY CLUSTERED(Nro_Dni,Cliente_Apellido)
 )
 ;
@@ -206,8 +219,8 @@ CREATE TABLE TODOX2LUCAS.Aeronaves (
 	Cod_Fabricante int REFERENCES TODOX2LUCAS.Fabricantes (Cod_Fabricante),
 	Modelo nvarchar(255),
 	Cod_Tipo_Servicio int REFERENCES TODOX2LUCAS.Tipos_De_Servicios (Cod_Tipo_Servicio),
-	Kgs_Disponibles numeric(18)
-	
+	Kgs_Disponibles numeric(18),
+	Cantidad_Butacas int
 )
 ;
 --CREACION TABLA ESTADOS AERONAVES--
@@ -380,7 +393,7 @@ BEGIN
 	DECLARE @codRol int,@codFuncionalidad int;
 	SET @codFuncionalidad = (SELECT Cod_Funcionalidad FROM TODOX2LUCAS.Funcionalidades WHERE Nombre_Funcionalidad = @funcionalidad)
 	SET @codRol = (SELECT Cod_Rol FROM TODOX2LUCAS.Roles WHERE Nombre_Rol = @rol)
-	IF NOT EXISTS(SELECT Cod_Funcionalidad FROM TODOX2LUCAS.Rol_Por_Funcionalidad WHERE Cod_Funcionalidad=@codFuncionalidad)
+	IF NOT EXISTS(SELECT Cod_Funcionalidad FROM TODOX2LUCAS.Rol_Por_Funcionalidad WHERE Cod_Funcionalidad=@codFuncionalidad AND Cod_Rol=@codRol)
 	BEGIN
 		INSERT INTO TODOX2LUCAS.Rol_Por_Funcionalidad(Cod_Rol,Cod_Funcionalidad)
 		VALUES (@codRol,@codFuncionalidad)
@@ -481,16 +494,43 @@ BEGIN
 		INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Modelo,Cod_Tipo_Servicio,Kgs_Disponibles)
 		VALUES (@matricula,@fecha,@codFabricante,@modelo,@codServicio,@kgs)
 		
-													
 		FETCH NEXT FROM fila_Aeronave INTO @matricula,@fecha, @fabricante,@modelo,@kgs,@servicio
 
 	END
-	
 
 	CLOSE fila_Aeronave
 	DEALLOCATE fila_Aeronave
 	
 
+END
+GO
+/* ------------ PROCEDIMIENTO QUE AGREGA LAS BUTACAS TOTALES DE CADA AERONAVE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Cargar_Butacas
+AS
+BEGIN
+	DECLARE @cod_aeronave int;
+	DECLARE cursor_butacas CURSOR FOR
+	SELECT Cod_Aeronave
+	FROM TODOX2LUCAS.Aeronaves
+
+	OPEN cursor_butacas
+	FETCH NEXT FROM cursor_butacas INTO @cod_aeronave
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		DECLARE @butacasTotales int;
+
+		SELECT @butacasTotales = COUNT(B.Cod_Butaca)
+		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Butacas B ON (A.Cod_Aeronave=B.Cod_Aeronave)
+		WHERE A.Cod_Aeronave = @cod_aeronave
+
+		UPDATE TODOX2LUCAS.Aeronaves
+		SET Cantidad_Butacas = @butacasTotales
+		WHERE Cod_Aeronave = @cod_aeronave
+
+		FETCH NEXT FROM cursor_butacas INTO @cod_aeronave
+	END
+	CLOSE cursor_butacas
+	DEALLOCATE cursor_butacas
 END
 GO
 
@@ -720,10 +760,14 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Precios_Ruta_Aerea(@codRuta numeric(18),@precioKgs numeric(18,2),@precioPasaje numeric(18,2))
 AS
 BEGIN
-	UPDATE TODOX2LUCAS.RutasAereas
-	SET Precio_Base_Kg = @precioKgs,
-		Precio_Base_Pasaje = @precioPasaje
-	WHERE Cod_Ruta = @codRuta
+	IF NOT EXISTS (SELECT Cod_Viaje FROM TODOX2LUCAS.Viajes WHERE Cod_Ruta=@codRuta)
+	BEGIN
+		UPDATE TODOX2LUCAS.RutasAereas
+		SET Precio_Base_Kg = @precioKgs,
+			Precio_Base_Pasaje = @precioPasaje
+		WHERE Cod_Ruta = @codRuta
+	END
+	
 END
 GO
 
@@ -787,18 +831,18 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA GENERAR UN VIAJE ------------ */
-CREATE PROCEDURE  TODOX2LUCAS.Generar_Viaje(@codRuta numeric(18),@cod_Aeronave int,@fechaSalida datetime,@fechaLlegada datetime,@fechaLlegadestimada datetime)
+CREATE PROCEDURE  TODOX2LUCAS.Generar_Viaje(@codRuta numeric(18),@cod_Aeronave int,@fechaSalida datetime,@fechaLlegadestimada datetime)
 AS 
 BEGIN
-	IF (@fechaSalida > GETDATE() AND @fechaLlegada > @fechaSalida AND @fechaLlegadestimada > @fechaSalida)
+	IF (@fechaSalida > GETDATE() AND @fechaLlegadestimada > @fechaSalida)
 	BEGIN
 		DECLARE @codOrigen int,@codDestino int;
 		SELECT @codOrigen = Cod_Ciudad_Origen, @codDestino = Cod_Ciudad_Destino
 		FROM TODOX2LUCAS.RutasAereas
 		WHERE Cod_Ruta = @codRuta
 
-		INSERT INTO TODOX2LUCAS.Viajes(Cod_Ruta,Cod_Ciudad_Origen,Cod_Ciudad_Destino,Cod_Aeronave,Fecha_Salida,Fecha_Llegada,Fecha_Llegada_Estimada)
-		VALUES(@codRuta,@codOrigen,@codDestino,@cod_Aeronave,@fechaSalida,@fechaLlegada,@fechaLlegadestimada)
+		INSERT INTO TODOX2LUCAS.Viajes(Cod_Ruta,Cod_Ciudad_Origen,Cod_Ciudad_Destino,Cod_Aeronave,Fecha_Salida,Fecha_Llegada_Estimada)
+		VALUES(@codRuta,@codOrigen,@codDestino,@cod_Aeronave,@fechaSalida,@fechaLlegadestimada)
 
 	END
 	ELSE
@@ -809,18 +853,31 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA EL REGISTRO DE LLEGADAS A DESTINO DE LAS AERONAVES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Registrar_Llegada(@matricula nvarchar(255),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255))
+CREATE PROCEDURE TODOX2LUCAS.Registrar_Llegada(@matricula nvarchar(255),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255),@fechaLlegada datetime)
 AS
 BEGIN
 	DECLARE @codOrigen int, @codDestino int;
 	SET @codOrigen = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadOrigen);
 	SET @codDestino = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadDestino);
 
-	SELECT a.Cod_Aeronave,a.Cod_Fabricante,a.Cod_Tipo_Servicio,a.Fecha_Alta,a.Kgs_Disponibles,a.Matricula,a.Modelo,V.Cod_Viaje,V.Cod_Ciudad_Origen,V.Cod_Ciudad_Destino,V.Fecha_Llegada
-	FROM TODOX2LUCAS.Aeronaves a JOIN TODOX2LUCAS.Viajes v ON(a.Cod_Aeronave=v.Cod_Aeronave)
-	WHERE Matricula = 'WWJ-213' AND V.Cod_Ciudad_Origen = 15 AND V.Cod_Ciudad_Destino= 21
+	IF EXISTS (SELECT A.Cod_Aeronave
+				FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON (A.Cod_Aeronave=V.Cod_Aeronave)
+				WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND Fecha_Llegada_Estimada  <= GETDATE() )
+	BEGIN
+		DECLARE @codAeronave int;
+		SELECT @codAeronave = A.Cod_Aeronave
+		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON (A.Cod_Aeronave=V.Cod_Aeronave)
+		WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND Fecha_Llegada_Estimada  <= GETDATE() 
+		
+		UPDATE TODOX2LUCAS.Viajes
+		SET Fecha_Llegada = @fechaLlegada
+		WHERE Cod_Aeronave = @codAeronave AND Cod_Ciudad_Origen = @codOrigen AND Cod_Ciudad_Destino = @codDestino
 	
-	
+	END
+	ELSE
+	BEGIN
+		print 'La aeronave no debia llegar al destino ingresado'
+	END
 	
 END
 GO
@@ -843,22 +900,123 @@ BEGIN
 	END
 END
 GO
+/* ------------ PROCEDIMIENTOS PARA MOSTRAR LOS PASAJES DISPONIBLES SEGUN FECHA Y CIUDADES INGRESADOS ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Mostrar_Viajes_Disponibles(@fechaSalida datetime,@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255))
+AS
+BEGIN
+	DECLARE @codOrigen int,@codDestino int,@butacasTotalesAvion int;
+	SET @codOrigen = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadOrigen);
+	SET @codDestino = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadDestino);
+
+	SELECT v.Cod_Viaje, C1.Nombre_Ciudad,C2.Nombre_Ciudad,V.Fecha_Salida,
+			(A.Cantidad_Butacas - COUNT(B.Cod_Butaca)) AS 'Butacas Disponibles',
+			kilogramos.[Kilogramos Disponibles],
+			T.Descripcion_Servicio
+	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
+								JOIN TODOX2LUCAS.Butacas B ON (B.Cod_Aeronave=A.Cod_Aeronave)
+								JOIN TODOX2LUCAS.Pasajes P ON (P.Cod_Viaje=V.Cod_Viaje AND P.Butaca_Asociada=B.Cod_Butaca) 
+								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON (T.Cod_Tipo_Servicio=A.Cod_Tipo_Servicio)
+								JOIN TODOX2LUCAS.Ciudades C1 ON (V.Cod_Ciudad_Origen=C1.Cod_Ciudad)
+								JOIN TODOX2LUCAS.Ciudades C2 ON (V.Cod_Ciudad_Destino=C2.Cod_Ciudad)
+								JOIN (SELECT V.Cod_Viaje,
+											(A.Kgs_Disponibles - SUM(E.Kgs_A_Enviar)) AS 'Kilogramos Disponibles'
+										FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
+																	JOIN TODOX2LUCAS.Encomiendas E ON (E.Cod_Viaje=V.Cod_Viaje)
+										GROUP BY A.Cod_Aeronave,V.Cod_Viaje,A.Kgs_Disponibles
+										) AS kilogramos ON (kilogramos.Cod_Viaje=v.Cod_Viaje)
+	WHERE Fecha_Salida = @fechaSalida AND v.Cod_Ciudad_Origen=@codOrigen AND v.Cod_Ciudad_Destino=@codDestino
+			AND (NOT EXISTS(SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave=A.Cod_Aeronave))
+	GROUP BY A.Cod_Aeronave,v.Cod_Viaje,A.Cantidad_Butacas,V.Fecha_Salida,kilogramos.[Kilogramos Disponibles],T.Descripcion_Servicio,C1.Nombre_Ciudad,C2.Nombre_Ciudad
+	
+END
+
+GO
+/* ------------ PROCEDIMIENTOS PARA COMPRAR PASAJES  ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Comprar_Pasajes(@butaca int,@codViaje int,@apellido nvarchar(255),@nro_dni numeric(18),
+												@formaDePago nvarchar(250),@numero_tarjeta numeric(16),@cod_seg numeric(3),@fecha_vencimiento datetime,
+												@tipo_tarjeta nvarchar(200))
+AS
+BEGIN
+	DECLARE @fecha datetime, @precioPasaje numeric(18,2),@precioBasePasaje numeric(18,2),@precioServicio numeric(18),@codPasaje numeric(18) ;
+
+	SELECT  @fecha = Fecha_Salida , @precioBasePasaje = r.Precio_Base_Pasaje,@precioServicio = t.Precio_Servicio
+	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.RutasAereas R ON (V.Cod_Ruta=R.Cod_Ruta)
+								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(t.Cod_Tipo_Servicio=r.Cod_Tipo_Servicio)
+	WHERE V.Cod_Viaje = @codViaje
+
+	SET @precioPasaje = (@precioBasePasaje * @precioServicio)
+
+	INSERT INTO TODOX2LUCAS.Pasajes(Fecha_Viaje,Cod_Viaje,Butaca_Asociada,Nro_Dni,Pasaje_Precio,Cliente_Apellido)
+	VALUES(@fecha,@codViaje,@butaca,@nro_dni,@precioPasaje,@apellido)
+
+	SET @codPasaje = (SELECT SCOPE_IDENTITY() FROM TODOX2LUCAS.Pasajes);
+
+	INSERT INTO TODOX2LUCAS.TransaccionesPasajes(Nro_Dni,Cliente_Apellido,Cod_Pasaje,Fecha_Transaccion,Forma_De_Pago)
+	VALUES (@nro_dni,@apellido,@codPasaje,GETDATE(),@formaDePago)
+	IF (@formaDePago = 'Tarjeta')
+	BEGIN
+		INSERT INTO TODOX2LUCAS.Tarjetas(Numero_Tarjeta,Cod_Seg,Fecha_Vencimiento,Tipo_Tarjeta,Nro_Dni,Cliente_Apellido)
+		VALUES(@numero_tarjeta,@cod_seg,@fecha_vencimiento,@tipo_tarjeta,@nro_dni,@apellido)
+	END
+END
+GO
+
+/* ------------ PROCEDIMIENTOS PARA DAR DE ALTA UN  CLIENTE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Alta_Cliente(@nro_dni numeric(18),@apellido nvarchar(255),@nombre nvarchar(255),
+											@direccion nvarchar(255),@mail nvarchar(255),@fechaNacimiento datetime,@telefono numeric(18))
+AS
+BEGIN
+
+	INSERT INTO TODOX2LUCAS.Clientes(Nro_Dni,Cliente_Apellido,Cliente_Nombre,Cliente_Direccion,Cliente_Mail,Cliente_Fecha_Nacimiento,Cliente_Telefono)
+	VALUES(@nro_dni,@apellido,@nombre,@direccion,@mail,@fechaNacimiento,@telefono)
+
+END
+GO
+/* ------------ PROCEDIMIENTOS PARA MODIFICAR DATOS DE UN CLIENTE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Modificar_Datos_Cliente(@nro_dni numeric(18),@apellido nvarchar(255),@nombre nvarchar(255),
+												@direccion nvarchar(255),@mail nvarchar(255),@fechaNacimiento datetime,@telefono nvarchar(255))
+AS
+BEGIN
+	
+	UPDATE TODOX2LUCAS.Clientes
+	SET Nro_Dni=@nro_dni,
+		Cliente_Apellido=@apellido,
+		Cliente_Nombre=@nombre,
+		Cliente_Direccion=@direccion,
+		Cliente_Mail=@mail,
+		Cliente_Fecha_Nacimiento=@fechaNacimiento,
+		Cliente_Telefono=@telefono
+	WHERE Nro_Dni=@nro_dni AND Cliente_Apellido = @apellido
+	
+END
+GO
+
+/* ------------ PROCEDIMIENTOS PARA MOSTRAR MILLAS DE UN CLIENTE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Consulta_Millas(@dni numeric(18),@apellido nvarchar(255))
+AS
+BEGIN
+	SELECT Cant_Millas
+	FROM TODOX2LUCAS.Clientes
+	WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
+END
+GO
 
 /* ------------ PROCEDIMIENTOS PARA LOS LISTADOS ESTADISTICOS ------------ */
 /* ------------ Top 5 de los destinos con más pasajes comprados ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Pasajes_Mas_Comprados
+CREATE PROCEDURE TODOX2LUCAS.Pasajes_Mas_Comprados(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
 	SELECT TOP 5  COUNT(V.Cod_Ciudad_Destino),V.Cod_Ciudad_Destino,C.Nombre_Ciudad
 	FROM TODOX2LUCAS.Pasajes P JOIN TODOX2LUCAS.Viajes V ON (P.Cod_Viaje=V.Cod_Viaje)
 								JOIN TODOX2LUCAS.Ciudades C ON (V.Cod_Ciudad_Destino = C.Cod_Ciudad)
+	WHERE V.Fecha_Llegada BETWEEN @fecha_inicio AND @fecha_fin
 	GROUP BY V.Cod_Ciudad_Destino, C.Nombre_Ciudad
 	ORDER BY 1 DESC
 END
 GO
 
 /* ------------ Top 5 de los destinos con aeronaves más vacías ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Aeronaves_Mas_Vacias
+CREATE PROCEDURE TODOX2LUCAS.Aeronaves_Mas_Vacias(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
 	SELECT TOP 5 C.Nombre_Ciudad,COUNT(B.Cod_Butaca) AS 'CANT_BUTACAS'
@@ -866,6 +1024,7 @@ BEGIN
 								JOIN TODOX2LUCAS.Aeronaves A ON(A.Cod_Aeronave=V.Cod_Aeronave)
 								JOIN TODOX2LUCAS.Butacas B ON(A.Cod_Aeronave=B.Cod_Aeronave AND P.Butaca_Asociada=B.Cod_Butaca)
 								JOIN TODOX2LUCAS.Ciudades C ON (V.Cod_Ciudad_Destino = C.Cod_Ciudad)
+	WHERE V.Fecha_Llegada BETWEEN @fecha_inicio AND @fecha_fin
 	GROUP BY C.Nombre_Ciudad,B.Cod_Butaca,A.Cod_Aeronave
 	ORDER BY 2 DESC
 
@@ -883,13 +1042,14 @@ END
 GO
 
 /* ------------ Top 5 de los destinos con pasajes cancelados ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Destinos_Mas_Cancelados
+CREATE PROCEDURE TODOX2LUCAS.Destinos_Mas_Cancelados(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
 	SELECT TOP 5 CIU.Nombre_Ciudad,COUNT(C.Cod_Pasaje)
 	FROM TODOX2LUCAS.Cancelaciones C JOIN TODOX2LUCAS.Pasajes P ON (C.Cod_Pasaje=P.Cod_Pasaje)
 									JOIN TODOX2LUCAS.Viajes V ON (P.Cod_Viaje=V.Cod_Viaje)
 									JOIN TODOX2LUCAS.Ciudades CIU ON (V.Cod_Ciudad_Destino=CIU.Cod_Ciudad)
+	WHERE V.Fecha_Llegada BETWEEN @fecha_inicio AND @fecha_fin
 	GROUP BY CIU.Nombre_Ciudad
 	ORDER BY 2 DESC
 
@@ -897,11 +1057,12 @@ END
 GO
 
 /* ------------ Top 5 de las aeronaves con mayor cantidad de días fuera de servicio ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Aeronave_Mayoria_Fuera_Servicio
+CREATE PROCEDURE TODOX2LUCAS.Aeronave_Mayoria_Fuera_Servicio(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
 	SELECT TOP 5 A.Cod_Aeronave,(DATEDIFF(DAY,E.Fecha_Reinicio_Servicio,E.Fecha_Fuera_Servicio)) AS 'DIAS FUERA DE SERVICIO'
 	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Estados_Aeronaves E ON(A.Cod_Aeronave=E.Cod_Aeronave)
+	WHERE E.Fecha_Fuera_Servicio BETWEEN @fecha_inicio AND @fecha_fin
 	GROUP BY A.Cod_Aeronave, E.Fecha_Reinicio_Servicio,E.Fecha_Fuera_Servicio
 	ORDER BY 2 DESC							
 END
@@ -1021,25 +1182,19 @@ EXEC TODOX2LUCAS.Agregar_Rol 'Administrador General'
 
 GO
 --DATOS INICIALES PARA LA TABLA USUARIOS--
+/* ------------ SET DE USUSARIOS PARA EL TP (EL ABM DE USUARIO NO SE DEBE IMPLEMENTAR) ------------ */
 DECLARE @clave nvarchar(255);
 SET @clave = HASHBYTES('SHA2_256','w23e');
-INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol)
-SELECT DISTINCT CONVERT(nvarchar(255),Cli_Dni) + Cli_Apellido, @clave, 1
-FROM gd_esquema.Maestra
-
-GO
-
-/* ------------ SET DE USUSARIOS PARA EL TP (EL ABM DE USUARIO NO SE DEBE IMPLEMENTAR) ------------ */
 INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
-VALUES('Lucas',HASHBYTES('SHA2_256','w23e'),2,1)
+VALUES('Lucas',@clave,2,1)
 INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
-VALUES('Eduardo',HASHBYTES('SHA2_256','w23e'),2,1)
+VALUES('Eduardo',@clave,2,1)
 INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
-VALUES('Pepe',HASHBYTES('SHA2_256','w23e'),2,1)
+VALUES('Pepe',@clave,2,1)
 INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
-VALUES('Roman',HASHBYTES('SHA2_256','w23e'),2,1)
+VALUES('Roman',@clave,2,1)
 INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
-VALUES('Messi',HASHBYTES('SHA2_256','w23e'),2,1)
+VALUES('Messi',@clave,2,1)
 GO
 
 
@@ -1070,8 +1225,8 @@ EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Cliente','Canje Millas'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Listado Estadístico'
 GO
 --MIGRACION CLIENTES--
-INSERT INTO TODOX2LUCAS.Clientes(Nro_Dni, Cliente_Nombre, Cliente_Apellido, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento, Cant_Millas, Usuario_Nombre)
-SELECT DISTINCT Cli_Dni, Cli_Nombre, Cli_Apellido, Cli_Dir, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac, 0 , CONVERT(nvarchar(255),Cli_Dni) + Cli_Apellido
+INSERT INTO TODOX2LUCAS.Clientes(Nro_Dni, Cliente_Nombre, Cliente_Apellido, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento, Cant_Millas)
+SELECT DISTINCT Cli_Dni, Cli_Nombre, Cli_Apellido, Cli_Dir, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac, 0 
 FROM gd_esquema.Maestra  
 
 GO
@@ -1102,6 +1257,8 @@ FROM gd_esquema.Maestra M JOIN TODOX2LUCAS.Aeronaves A ON (A.Matricula = M.Aeron
 WHERE Butaca_Piso!=0 AND Butaca_Tipo !='0'
 ORDER BY A.Cod_Aeronave,Butaca_Nro
 
+GO
+EXEC TODOX2LUCAS.Cargar_Butacas
 GO
 --MIGRACION TABLA RUTASAEREAS--
 EXEC TODOX2LUCAS.Migrar_Rutas_Aereas
