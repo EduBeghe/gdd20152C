@@ -170,6 +170,10 @@
     <Compile Include="Devolucion\RegistroDevolucion.Designer.cs">
       <DependentUpon>RegistroDevolucion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Aeronave.cs" />
+    <Compile Include="Domain\Estado.cs" />
+    <Compile Include="Domain\Fabricante.cs" />
+    <Compile Include="Domain\TipoServicio.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,6 +326,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Domain\RutasAereas.cs" />
+    <Compile Include="Domain\Ciudad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

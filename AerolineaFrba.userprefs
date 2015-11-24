@@ -1,0 +1,12 @@
+﻿<Properties StartupItem="AerolineaFrba\AerolineaFrba.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AerolineaFrba\Domain\Ciudad.cs">
+    <Files>
+      <File FileName="AerolineaFrba\Domain\Ciudad.cs" Line="5" Column="21" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
