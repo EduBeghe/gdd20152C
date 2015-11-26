@@ -8,7 +8,7 @@ namespace AerolineaFrba.Domain
 {
     public class Aeronave
     {
-        public int IdAeronave { get; set; }
+        public int idAeronave { get; set; }
         public int capacidadEncomiendas { get; set; }
         public EstadoAeronave estadoAeronave { get; set; }
         public Fabricante fabricante { get; set; }
@@ -16,9 +16,11 @@ namespace AerolineaFrba.Domain
         public int numeroAeronave { get; set; }
         public string modelo { get; set; }
         public int matricula { get; set; }
+        // Servicio ? 
 
         public Aeronave(int IdAeronave, int capacidadEncomiendas, EstadoAeronave estadoAeronave, Fabricante fabricante, DateTime fechaDeAlta, int numeroAeronave, string modelo, int matricula)
         {
+            // Servicio
             this.IdAeronave = IdAeronave;
             this.capacidadEncomiendas = capacidadEncomiendas;
             this.estadoAeronave = estadoAeronave;

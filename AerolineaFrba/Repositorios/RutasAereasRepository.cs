@@ -14,22 +14,52 @@ namespace AerolineaFrba.Repositories {
 		public void darDeAlta(  RutaAerea rutaAerea )
 		{
 			DBAdapter.executeProcedure("Alta_Ruta_Aerea", 
-			rutaAerea.origen,
-			rutaAerea.destino,
-			rutaAerea.servicio,
+			rutaAerea.origen.idCiudad,
+			rutaAerea.destino.idCiudad,
+			rutaAerea.servicio.idTipoServicio,
 			rutaAerea.precioXKg,
-			rutaAerea.precioXPasaje,
+			rutaAerea.precioXPasaje
 			);
 		}
 
-		public void modificar(  RutaAerea rutaAerea )
+		// Ingresa una ruta aerea ? 
+		public void modificarCiudaes(  RutaAerea rutaAerea )
 		{
-			//DBAdapter.executeProcedure("XXXXX", cliente.idCliente);				
+			DBAdapter.executeProcedure("Modificar_Ciudades_Ruta_Aereas", 
+			rutaAerea.idRutaAerea,
+			rutaAerea.origen.idCiudad,
+			rutaAerea.destino.idCiudad
+			);				
 		}
 
+		public void modificarTipoServicio(  RutaAerea rutaAerea )
+		{
+			DBAdapter.executeProcedure("Modificar_Servicio_Ruta_Aerea", 
+			rutaAerea.idRutaAerea,
+			rutaAerea.servicio.idTipoServicio
+			);				
+		}
+
+		public void modificarPrecio(  RutaAerea rutaAerea )
+		{
+			DBAdapter.executeProcedure("Modificar_Precios_Ruta_Aerea", 
+			rutaAerea.idRutaAerea,
+			rutaAerea.precioXKg,
+			rutaAerea.precioXPasaje
+			);				
+		}
+
+		// El motivo no lo tengo en ningun lado asi que deberia ingresar como param.
 		public void darDeBaja(  RutaAerea rutaAerea )
 		{
-			//Adapter.executeProcedure("XXXX", cliente.idCliente);				
+			Adapter.executeProcedure("Baja_Ruta_Aerea", 
+			rutaAerea.origen.idCiudad,
+			rutaAerea.destino.idCiudad,
+			rutaAerea.servicio.idTipoServicio,
+			rutaAerea.precioXKg,
+			rutaAerea.precioXPasaje
+			// motivo?
+			);				
 		}
 
 	}

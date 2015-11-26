@@ -13,13 +13,15 @@ namespace AerolineaFrba.Domain
         public Cliente cliente { get; set; }
         public Viaje viaje { get; set; }
         public int pnr { get; set; }
+        public Butaca butaca { get; set; }
 
-        public Pasaje( int idPasaje, Cliente cliente, Viaje viaje, int pnr )
+        public Pasaje( int idPasaje, Cliente cliente, Viaje viaje, int pnr, Butaca butaca )
         {
             this.idPasaje = idPasaje;
             this.cliente = cliente;
             this.viaje = viaje;
             this.pnr = pnr;
+            this.butaca = butaca;
         }
     }
 }

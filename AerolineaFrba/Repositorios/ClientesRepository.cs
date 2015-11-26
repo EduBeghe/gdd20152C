@@ -14,7 +14,7 @@ namespace AerolineaFrba.Repositories
 
         internal void darDeBaja(Cliente cliente)
         {
-            DBAdapter.executeProcedure("Baja_Cliente", cliente.idCliente);
+            //DBAdapter.executeProcedure("Baja_Cliente", cliente.idCliente);
         }
 
         internal void modificar(Cliente cliente)
@@ -26,9 +26,8 @@ namespace AerolineaFrba.Repositories
             cliente.nombre,
             cliente.direccion,
             cliente.email,
-            cliente.telefono,
             cliente.fechaNacimimento,
-            //cliente.millasAcumuladas
+            cliente.telefono,
             );
         }
 
@@ -41,9 +40,8 @@ namespace AerolineaFrba.Repositories
             cliente.nombre,
             cliente.direccion,
             cliente.email,
-            cliente.telefono,
             cliente.fechaNacimimento,
-            //cliente.millasAcumuladas
+            cliente.telefono
             );
         }
 
