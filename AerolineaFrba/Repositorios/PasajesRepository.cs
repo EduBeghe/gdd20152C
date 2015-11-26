@@ -29,6 +29,16 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
+		public void cancelarPasaje( Pasaje pasaje )
+		{
+			Adapter.executeProcedure("Cancelar_Pasajes",
+				pasaje.viaje.fechaSalida,
+				pasaje.viaje.aeronave.idAeronave,
+				pasaje.viaje.rutaAerea.idRutaAerea,
+				// motivo 
+			);
+		}
+
 
 	}
 }

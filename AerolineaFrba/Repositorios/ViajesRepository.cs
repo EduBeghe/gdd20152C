@@ -11,9 +11,10 @@ namespace AerolineaFrba.Repositories {
 
 	class ViajesRepository {
 
+		// Return de exito ?
 		public void generarViaje( Viaje viaje )
 		{
-			Adapter.executeProcedure("Generar_Viaje", 
+			DBAdapter.executeProcedure("Generar_Viaje", 
 			viaje.rutaAerea.idRutaAerea,
 			viaje.aeronave.idAeronave,
 			viaje.fechaSalida,
@@ -21,15 +22,33 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
-		// Verificar parametros
+		// Verificar parametros y como retornar
 		public void getViajesDisponibles( DateTime fechaSalida, Ciudad origen, Ciudad destino )
 		{
-			Adapter.executeProcedure( "Mostrar_Viajes_Disponibles",
+			return parseViajes( 
+			DBAdapter.retrieveDataTable("Mostrar_Viajes_Disponibles",
 			fechaSalida, 
 			origen.idCiudad, 
-			destino.idCiudad
+			destino.idCiudad )
 			);
 		}
+
+		private List<Viaje> parseViajes ( DataTable dataTable )
+		{
+			return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+		}
+
+		private Viaje parse(DataRow dr)
+        {
+       		return new Viaje( Convert.ToInt32(dr["Cod_Viaje"] ),
+			dr["Fecha_Salida"] as DateTime,
+			dr["Fecha_Llegada"] as DateTime,
+			dr["Fecha_Llegada_Estimada"] as DateTime,
+			new AeronaveRepository.getAeronave( Convert.ToInt32(dr["Cod_Aeronave"]) ),
+			// Mirar parametros necesario para getRuta Aerea 
+			new RutaAereaRepository.getRuta( Convert.ToInt32(dr["Cod_Ruta"]) )
+			),
+        }
 
 
 

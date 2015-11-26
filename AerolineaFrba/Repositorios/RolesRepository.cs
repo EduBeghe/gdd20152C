@@ -31,9 +31,9 @@ namespace AerolineaFrba.Repositories {
 		public void modificarEstado( Rol rol )
 		{
 			DBAdapter.executeProcedure("Modificar_Estado_Rol", 
-				rol.nombre,
-				rol.estado
-				);
+			rol.nombre,
+			rol.estado
+			);
 		}
 
 		public void darDeBaja( Rol rol )
