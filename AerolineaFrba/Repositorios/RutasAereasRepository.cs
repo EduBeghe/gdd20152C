@@ -58,7 +58,7 @@ namespace AerolineaFrba.Repositories {
 			rutaAerea.servicio.Cod_Tipo_Servicio,
 			rutaAerea.Precio_Base_Kg,
 			rutaAerea.Precio_Base_Pasaje
-			// motivo? ( entra por la form ?)
+			// motivo? ( entra por la form ? )
 			);				
 		}
 
