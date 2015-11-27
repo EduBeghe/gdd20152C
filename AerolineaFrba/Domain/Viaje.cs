@@ -9,22 +9,23 @@ namespace AerolineaFrba.Domain
         
     public class Viaje
     {
-        public int idViaje { get; set; }
-        public DateTime fechaSalida { get; set; }
-        public DateTime fechaLlegada { get; set; }
-        public DateTime fechaLlegadaEstimada { get; set; }
-        public Aeronave aeronave { get; set; }
+        public int Cod_Viaje { get; set; }
         public RutasAereas rutaAerea { get; set; }
+        public Aeronave aeronave { get; set; }
+        public DateTime Fecha_Salida { get; set; }
+        public DateTime Fecha_Llegada { get; set; }
+        public DateTime Fecha_Llegada_Estimada { get; set; }
 
 
-        public Viaje( int idViaje, DateTime fechaSalida, DateTime fechaLlegada, DateTime fechaLlegadaEstimada, Aeronave aeronave, RutasAereas rutaAerea )
+
+        public Viaje( int Cod_Viaje, RutasAereas rutaAerea, Aeronave aeronave, DateTime Fecha_Salida, DateTime Fecha_Llegada, DateTime Fecha_Llegada_Estimada)
         {
-            this.idViaje = idViaje;
-            this.fechaSalida = fechaSalida;
-            this.fechaLlegada = fechaLlegada;
-            this.fechaLlegadaEstimada = fechaLlegadaEstimada;
-            this.aeronave = aeronave;
+            this.Cod_Viaje = Cod_Viaje;
             this.rutaAerea = rutaAerea;
+            this.aeronave = aeronave;
+            this.Fecha_Salida = Fecha_Salida;
+            this.Fecha_Llegada = Fecha_Llegada;
+            this.Fecha_Llegada_Estimada = Fecha_Llegada_Estimada;
         }
     }
 }

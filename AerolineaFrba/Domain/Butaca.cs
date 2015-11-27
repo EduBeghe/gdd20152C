@@ -10,19 +10,19 @@ namespace AerolineaFrba.Domain
     public class Butaca
     {
 
-        public int idButaca { get; set; }
+        public int Cod_Butaca { get; set; }
         public Aeronave aeronave { get; set; }
-        public string ubicacion { get; set; }
-        public TipoServicio tipoServicio { get; set; }
-        public int estadoButaca { get; set; }
+        public string Pos_Butaca { get; set; }
+        public int Piso_Butaca { get; set; }
+        public bool Estado_Butaca { get; set; }
 
-        public Butaca( int idButaca, Aeronave aeronave, string ubicacion, TipoServicio tipoServicio, int estadoButaca )
+        public Butaca( int Cod_Butaca, Aeronave aeronave, string Pos_Butaca, int Piso_Butaca, bool Estado_Butaca )
         {
-            this.idButaca = idButaca;
+            this.Cod_Butaca = Cod_Butaca;
             this.aeronave = aeronave;
-        	this.ubicacion = ubicacion;
-        	this.tipoServicio = tipoServicio;
-        	this.estadoButaca = estadoButaca;
+        	this.Pos_Butaca = Pos_Butaca;
+            this.Piso_Butaca = Piso_Butaca;
+            this.Estado_Butaca = Estado_Butaca;
         }
     }
 }
