@@ -33,22 +33,24 @@ namespace AerolineaFrba.Repositories {
 		public void clientesConMasPuntos()
 		{
 			return parseClientes (
-			DBAdapter.executeProcedure( "Cliente_Mayoria_Puntos" );
+			DBAdapter.retrieveDataTable( "Cliente_Mayoria_Puntos" );
 		}
 
 		public void destinosConMasPasajesCancelados(  DateTime fechaInicio, DateTime fechaFin )
 		{
-			DBAdapter.executeProcedure("Destinos_Mas_Cancelados", 
+			return parseCiudades (
+			DBAdapter.retrieveDataTable("Destinos_Mas_Cancelados", 
 			fechaInicio,
-			fechaFin	
+			fechaFin )
 			);
 		}
 
 		public void aeronavesConMasDiasFueraDeServicio(  DateTime fechaInicio, DateTime fechaFin )
 		{
+			return parseAeronaves (
 			DBAdapter.executeProcedure("Aeronave_Mayoria_Fuera_Servicio", 
 			fechaInicio,
-			fechaFin	
+			fechaFin )
 			);
 		}
 
