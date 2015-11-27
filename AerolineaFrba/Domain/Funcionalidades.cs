@@ -9,13 +9,13 @@ namespace AerolineaFrba.Domain
         
     public class Funcionalidades
     {
-        public int idFuncionabildiad { get; set; }
-        public string detalleFuncionabilidad { get; set; }
+        public int Cod_Funcionalidad { get; set; }
+        public string Nombre_Funcionalidad { get; set; }
 
-        public Funcionalidades( int idFuncionabildiad, string detalleFuncionabilidad )
+        public Funcionalidades( int Cod_Funcionalidad, string Nombre_Funcionalidad )
         {
-            this.idFuncionabildiad = idFuncionabildiad;
-            this.detalleFuncionabilidad = detalleFuncionabilidad;
+            this.Cod_Funcionalidad = Cod_Funcionalidad;
+            this.Nombre_Funcionalidad = Nombre_Funcionalidad;
         }
     }
 }

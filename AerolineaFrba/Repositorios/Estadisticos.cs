@@ -9,32 +9,36 @@ using System.Data;
 
 namespace AerolineaFrba.Repositories {
 
+	
 	class Estadísticos {
 
 		public void destinosConMasPasajes( DateTime fechaInicio, DateTime fechaFin ) 
 		{
-			Adapter.executeProcedure("Pasajes_Mas_Comprados", 
+			return parsePasajes ( 
+			DBAdapter.retrieveDataTable("Pasajes_Mas_Comprados", 
 			fechaInicio,
-			fechaFin
+			fechaFin )
 			);
 		}
 
 		public void destinosConMasAeronavesVacias( DateTime fechaInicio, DateTime fechaFin )
 		{
-			Adapter.executeProcedure("Aeronaves_Mas_Vacias", 
+			return parseAeronaves ( 
+			DBAdapter.retrieveDataTable("Aeronaves_Mas_Vacias", 
 			fechaInicio,
-			fechaFin
+			fechaFin )
 			);	
 		}
 
 		public void clientesConMasPuntos()
 		{
-			Adapter.executeProcedure("Cliente_Mayoria_Puntos", );
+			return parseClientes (
+			DBAdapter.executeProcedure( "Cliente_Mayoria_Puntos" );
 		}
 
 		public void destinosConMasPasajesCancelados(  DateTime fechaInicio, DateTime fechaFin )
 		{
-			Adapter.executeProcedure("Destinos_Mas_Cancelados", 
+			DBAdapter.executeProcedure("Destinos_Mas_Cancelados", 
 			fechaInicio,
 			fechaFin	
 			);
@@ -42,11 +46,13 @@ namespace AerolineaFrba.Repositories {
 
 		public void aeronavesConMasDiasFueraDeServicio(  DateTime fechaInicio, DateTime fechaFin )
 		{
-			Adapter.executeProcedure("Aeronave_Mayoria_Fuera_Servicio", 
+			DBAdapter.executeProcedure("Aeronave_Mayoria_Fuera_Servicio", 
 			fechaInicio,
 			fechaFin	
 			);
 		}
+
+
 
 	}
 }

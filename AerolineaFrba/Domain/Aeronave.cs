@@ -9,6 +9,7 @@ namespace AerolineaFrba.Domain
     public class Aeronave
     {
         public int idAeronave { get; set; }
+        // fuera de servicio
         public int capacidadEncomiendas { get; set; }
         public EstadoAeronave estadoAeronave { get; set; }
         public Fabricante fabricante { get; set; }

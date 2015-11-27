@@ -64,6 +64,19 @@ namespace AerolineaFrba.Repositories
             );
         }
 
+        public List<Cliente> parseClientes ( DataTable dataTable )
+        {
+            return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+        }
+
+        public Cliente parse(DataRow dr)
+        {
+            return new Cliente( Convert.ToInt32(dr["Nro_Dni"]), dr["Cliente_Apellido"] 
+            // Terminar cuando esten los atributos de Cliente definidos!
+            );
+        }
+
+
         /* 
         public List<Cliente> findClientes(string nombre, string apellido, TipoDocumento tipo_doc, string mail, int? nro_doc)
         {

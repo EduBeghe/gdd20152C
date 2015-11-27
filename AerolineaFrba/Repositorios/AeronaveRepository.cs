@@ -38,6 +38,19 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
+		public List<Aeronave> parseAeronaves ( DataTable dataTable )
+		{
+			return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+		}
+
+		public Aeronave parse(DataRow dr)
+        {
+       		return new Aeronave( 
+       			Convert.ToInt32(dr["Cod_Aeronave"] ),
+       			// Terminar con los atributos bien
+			);
+        }
+
 
 
 	}

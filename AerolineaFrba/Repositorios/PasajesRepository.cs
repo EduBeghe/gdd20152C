@@ -39,6 +39,21 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
+		
+		public List<Pasaje> parsePasajes ( DataTable dataTable )
+		{
+			return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+		}
+
+		public Pasaje parse(DataRow dr)
+        {
+       		return new Pasaje( Convert.ToInt32(dr["Cod_Pasaje"] ),
+       			// Verificar tipo de datos de dr[ "Cliente_apellido" ]
+       		new ClientesRepository.getCliente( Convert.ToInt32(dr["Nro_Dni"]), dr["Cliente_Apellido"] ),
+			new ViajesRepository.getViaje( Convert.ToInt32(dr["Cod_Viaje"]) ),
+			// Terminar cuando esten los atributos de Pasaje definidos!
+			);
+        }
 
 	}
 }

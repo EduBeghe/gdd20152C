@@ -9,15 +9,15 @@ namespace AerolineaFrba.Domain
         
     public class ProductoCanje
     {
-        public int idProducto { get; set; }
-        public string nombre { get; set; }
-        public int stock { get; set; }
+        public int Cod_Producto { get; set; }
+        public string Descripcion_Producto { get; set; }
+        public int Cantidad { get; set; }
 
-        public ProductoCanje( int idProducto, string nombre, int stock )
+        public ProductoCanje( int Cod_Producto, string Descripcion_Producto, int Cantidad )
         {
-            this.idProducto = idProducto;
-            this.nombre = nombre;
-            this.stock = stock;
+            this.Cod_Producto = Cod_Producto;
+            this.Descripcion_Producto = Descripcion_Producto;
+            this.Cantidad = Cantidad;
         }
     }
 }

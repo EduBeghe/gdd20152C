@@ -9,13 +9,13 @@ namespace AerolineaFrba.Domain
         
     public class Fabricante
     {
-        public int idFabricante { get; set; }
-        public string nombre { get; set; }
+        public int Cod_Fabricante { get; set; }
+        public string Nombre_Fabricante { get; set; }
 
-        public Fabricante(int idFabricante, string nombre)
+        public Fabricante(int Cod_Fabricante, string Nombre_Fabricante)
         {
-            this.idFabricante = idFabricante;
-            this.nombre = nombre;
+            this.Cod_Fabricante = Cod_Fabricante;
+            this.Nombre_Fabricante = Nombre_Fabricante;
         }
     }
 }
