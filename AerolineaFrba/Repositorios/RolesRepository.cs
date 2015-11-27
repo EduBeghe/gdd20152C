@@ -13,7 +13,7 @@ namespace AerolineaFrba.Repositories {
 
 		public void agregarRol( Rol rol )
 		{
-			DBAdapter.executeProcedure("Agregar_Rol", rol.nombre );
+			DBAdapter.executeProcedure("Agregar_Rol", rol.Nombre_Rol );
 		}
 
 		// Esto deberia estar aca ? 
@@ -25,20 +25,21 @@ namespace AerolineaFrba.Repositories {
 
 		public void modificarNombre( Rol rol )
 		{
-			DBAdapter.executeProcedure("Agregar_Rol", rol.nombre );
+			DBAdapter.executeProcedure("Modificar_Nombre_Rol", rol.Nombre_Rol);
 		}
 
 		public void modificarEstado( Rol rol )
 		{
 			DBAdapter.executeProcedure("Modificar_Estado_Rol", 
-			rol.nombre,
-			rol.estado
+			rol.Nombre_Rol,
+			rol.Estado_Rol
 			);
 		}
 
+
 		public void darDeBaja( Rol rol )
 		{
-			Adapter.executeProcedure("Baja_Rol", rol.nombre );				
+			Adapter.executeProcedure("Baja_Rol", rol.Nombre_Rol );				
 		}
 
 	}
