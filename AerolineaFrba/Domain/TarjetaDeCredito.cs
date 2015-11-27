@@ -4,20 +4,23 @@ namespace AerolineaFrba
 {
 	public class TarjetaDeCredito
 	{
-        public int numeroTarjeta { get; set; }
-        public int codigoSeguridad { get; set; }
-        public DateTime fechaVencimiento { get; set; }
-        public TipoTarjeta tipoTarjeta { get; set; }
+        public int Numero_Tarjeta { get; set; }
+        public int Cod_Seg { get; set; }
+        public DateTime Fecha_Vencimiento { get; set; }
+        // Tipo de tarjeta no es una clase ? 
+        public string Tipo_Tarjeta { get; set; }
+        public Cliente cliente { get; set; }
+
         public int dni { get; set; }
 
-		public TarjetaDeCredito( int numeroTarjeta, int codigoSeguridad, DateTime fechaVencimiento, TipoTarjeta tipoTarjeta, int dni )
+		public TarjetaDeCredito( int Numero_Tarjeta, int Cod_Seg, DateTime Fecha_Vencimiento, string Tipo_Tarjeta, Cliente cliente )
 		{
-            this.numeroTarjeta = numeroTarjeta;
-            this.codigoSeguridad = codigoSeguridad;
-            this.fechaVencimiento = fechaVencimiento;
-            this.tipoTarjeta = tipoTarjeta;
-            this.dni = dni;
-		}
+            this.Numero_Tarjeta = Numero_Tarjeta;
+            this.Cod_Seg = Cod_Seg;
+            this.Fecha_Vencimiento = Fecha_Vencimiento;
+            this.Tipo_Tarjeta = Tipo_Tarjeta;
+            this.cliente = cliente;
+t		}
 	}
 }
 

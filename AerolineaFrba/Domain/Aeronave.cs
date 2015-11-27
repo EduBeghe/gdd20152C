@@ -8,29 +8,27 @@ namespace AerolineaFrba.Domain
 {
     public class Aeronave
     {
-        public int idAeronave { get; set; }
-        // fuera de servicio
-        public int capacidadEncomiendas { get; set; }
-        public EstadoAeronave estadoAeronave { get; set; }
+        public int Cod_Aeronave { get; set; }
+        public int Matricula { get; set; }
+        public DateTime Fecha_Alta { get; set; }
         public Fabricante fabricante { get; set; }
-        public DateTime fechaDeAlta { get; set; }
-        public int numeroAeronave { get; set; }
-        public string modelo { get; set; }
-        public int matricula { get; set; }
-        // Servicio ? 
+        public string Modelo { get; set; }
+        public TipoServicio servicio { get; set; }
+        public int Kgs_Disponibles { get; set; }
+        public int Cantidad_Butacas { get; set; }
+        // public EstadoAeronave estadoAeronave { get; set; }
 
-        public Aeronave(int IdAeronave, int capacidadEncomiendas, EstadoAeronave estadoAeronave, Fabricante fabricante, DateTime fechaDeAlta, int numeroAeronave, string modelo, int matricula)
+        public Aeronave(int Cod_Aeronave, int Matricula, DateTime Fecha_Alta,  Fabricante fabricante, string Modelo, TipoServicio servicio, int Kgs_Disponibles, int Cantidad_Butacas )
         {
             // Servicio
-            this.IdAeronave = IdAeronave;
-            this.capacidadEncomiendas = capacidadEncomiendas;
-            this.estadoAeronave = estadoAeronave;
+            this.Cod_Aeronave = Cod_Aeronave;
+          	this.Matricula = Matricula;
+            this.Fecha_Alta = Fecha_Alta;
             this.fabricante = fabricante;
-            this.fechaDeAlta = fechaDeAlta;
-            this.numeroAeronave = numeroAeronave;
-            this.modelo = modelo;
-          	this.matricula = matricula;
-
+            this.Modelo = Modelo;
+            this.servicio = servicio;
+            this.Kgs_Disponibles = Kgs_Disponibles;
+            this.Cantidad_Butacas = Cantidad_Butacas;
         }
 
     }

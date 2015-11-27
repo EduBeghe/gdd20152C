@@ -8,13 +8,15 @@ namespace AerolineaFrba.Domain
 {
     public class TipoServicio
     {
-        public int idTipoServicio { get; set; }
-        public string nombreTipoServicio { get; set; }
+        public int Cod_Tipo_Servicio { get; set; }
+        public string Descripcion_Servicio { get; set; }
+        public int Precio_Servicio { get; set; }
 
-        public TipoServicio(int idTipoServicio, string nombreTipoServicio)
+        public TipoServicio(int Cod_Tipo_Servicio, string Descripcion_Servicio, int Precio_Servicio )
         {
-            this.idTipoServicio = idTipoServicio;
-            this.nombreTipoServicio = nombreTipoServicio;
+            this.Cod_Tipo_Servicio = Cod_Tipo_Servicio;
+            this.Descripcion_Servicio = Descripcion_Servicio;
+            this.Precio_Servicio = Precio_Servicio;
         }
     }
 }
