@@ -9,17 +9,21 @@ namespace AerolineaFrba.Domain
         
     public class Pasaje
     {
-        public int idPasaje { get; set; }
-        public Cliente cliente { get; set; }
+        public int Cod_Pasaje { get; set; }
+        public DateTime Fecha_Viaje { get; set; }
         public Viaje viaje { get; set; }
-        public int pnr { get; set; }
+        public int Butaca_Asociada { get; set; }
+        public Cliente cliente { get; set; }
+        public int Pasaje_Precio { get; set; }
 
-        public Pasaje( int idPasaje, Cliente cliente, Viaje viaje, int pnr )
+        public Pasaje( int Cod_Pasaje, DateTime Fecha_Viaje, Viaje viaje, int Butaca_Asociada, Cliente cliente, int Pasaje_Precio )
         {
-            this.idPasaje = idPasaje;
-            this.cliente = cliente;
+            this.Cod_Pasaje = Cod_Pasaje;
+            this.Fecha_Viaje = Fecha_Viaje;
             this.viaje = viaje;
-            this.pnr = pnr;
+            this.Butaca_Asociada = Butaca_Asociada;
+            this.cliente = cliente;
+            this.Pasaje_Precio = Pasaje_Precio;
         }
     }
 }

@@ -4,20 +4,23 @@ namespace AerolineaFrba
 {
 	public class RutaAerea
 	{
-		public int idRutaAerea { get; set; }
+		public int Cod_Ruta { get; set; }
 		public Ciudad origen { get; set; }
         public Ciudad destino { get; set; }
         public TipoServicio servicio { get; set; }
-        public double precioXKg { get; set; }
-        public double precioXPasaje { get; set; }
+        public int Precio_Base_Pasaje { get; set; }
+        public int Precio_Base_Kg { get; set; }
+        public bool Estado_Ruta  { get; set; }
 
-		public RutaAerea ( int idRutaAerea, Ciudad origen, Ciudad destino, TipoServicio servicio, double precioXKg, double precioXPasaje )
+		public RutaAerea ( int Cod_Ruta, Ciudad origen, Ciudad destino, TipoServicio servicio, int Precio_Base_Pasaje, int Precio_Base_Kg, bool Estado_Ruta )
 		{
-            this.idRutaAerea = idRutaAerea;
+            this.Cod_Ruta = Cod_Ruta;
             this.origen = origen;
             this.destino = destino;
             this.servicio = servicio;
-            this.precioXKg = precioXKg;
+            this.Precio_Base_Pasaje = Precio_Base_Pasaje;
+            this.Precio_Base_Kg = Precio_Base_Kg;
+            this.Estado_Ruta = Estado_Ruta;
 		}
 	}
 }

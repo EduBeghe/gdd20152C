@@ -14,36 +14,34 @@ namespace AerolineaFrba.Repositories
 
         internal void darDeBaja(Cliente cliente)
         {
-            DBAdapter.executeProcedure("Baja_Cliente", cliente.idCliente);
+            // DBAdapter.executeProcedure("Baja_Cliente", cliente.idCliente);
         }
 
         internal void modificar(Cliente cliente)
         {
-            DBAdapter.executeProcedureWithReturnValue("Modificar_Datos_Cliente",
+            DBAdapter.executeProcedure("Modificar_Datos_Cliente",
             //cliente.idCliente,
             cliente.dni,
             cliente.apellido,
             cliente.nombre,
             cliente.direccion,
             cliente.email,
-            cliente.telefono,
             cliente.fechaNacimimento,
-            //cliente.millasAcumuladas
+            cliente.telefono,
             );
         }
 
         internal void darDeAlta( Cliente cliente )
         {
-            return DBAdapter.executeProcedureWithReturnValue("Alta_Cliente",
+            return DBAdapter.executeProcedure("Alta_Cliente",
             //cliente.idCliente,
             cliente.dni,
             cliente.apellido,
             cliente.nombre,
             cliente.direccion,
             cliente.email,
-            cliente.telefono,
             cliente.fechaNacimimento,
-            //cliente.millasAcumuladas
+            cliente.telefono
             );
         }
 
@@ -54,6 +52,31 @@ namespace AerolineaFrba.Repositories
                 cliente.apellido,
                 );
         }
+
+        // 
+        public void canjeMillas( Cliente cliente, ProductoCanje producto, int cantidad  )
+        {
+            DBAdapter.executeProcedure( "Canjear_Millas", 
+            cliente.dni,
+            cliente.apellido,
+            producto.idProducto
+            cantidad
+            );
+        }
+
+        public List<Cliente> parseClientes ( DataTable dataTable )
+        {
+            return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+        }
+
+        public Cliente parse(DataRow dr)
+        {
+            return new Cliente( Convert.ToInt32(dr["Nro_Dni"]), dr["Cliente_Apellido"] 
+            // Terminar cuando esten los atributos de Cliente definidos!
+            );
+        }
+
+
         /* 
         public List<Cliente> findClientes(string nombre, string apellido, TipoDocumento tipo_doc, string mail, int? nro_doc)
         {

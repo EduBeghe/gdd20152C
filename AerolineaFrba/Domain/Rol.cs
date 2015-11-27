@@ -9,13 +9,15 @@ namespace AerolineaFrba.Domain
         
     public class Rol
     {
-        public string nombre { get; set; }
-        public int estado { get; set; }
+        public int Cod_Rol { get; set; }
+        public string Nombre_Rol { get; set; }
+        public bool Estado_Rol { get; set; }
         
-        public Rol( string nombre, int estado )
+        public Rol( int Cod_Rol, string Nombre_Rol, bool Estado_Rol )
         {
-            this.nombre = nombre;
-            this.estado = estado;
+            this.Cod_Rol = Cod_Rol;
+            this.Nombre_Rol = Nombre_Rol;
+            this.Estado_Rol = Estado_Rol;
         }
     }
 }

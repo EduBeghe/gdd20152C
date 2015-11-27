@@ -9,16 +9,18 @@ namespace AerolineaFrba.Domain
         
     public class LogCancelaciones
     {
-        public DateTime fechaDevolucion { get; set; }
-        public Pasaje pasaje { get; set; }
-        public string motivoCancelacion { get; set; }
+        public int Codigo_Devolucion { get; set; }
+        public DateTime Fecha_Devolucion { get; set; }
+        //public Pasaje pasaje { get; set; }
+        public string Motivo { get; set; }
 
 
-        public LogCancelaciones( DateTime fechaDevolucion, Pasaje pasaje, string motivoCancelacion )
+        public LogCancelaciones( int Codigo_Devolucion, DateTime Fecha_Devolucion, Pasaje pasaje ) 
         {
-            this.fechaDevolucion = fechaDevolucion;
-            this.pasaje = pasaje;
-            this.motivoCancelacion = motivoCancelacion;
+            this.Codigo_Devolucion = Codigo_Devolucion;
+            this.Fecha_Devolucion = Fecha_Devolucion;
+            // this.pasaje = pasaje;
+            this.Motivo = Motivo;
         }
     }
 }

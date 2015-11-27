@@ -158,7 +158,7 @@ CREATE TABLE TODOX2LUCAS.Roles (
 --CREACION TABLA USUARIOS--
 CREATE TABLE TODOX2LUCAS.Usuarios ( 
 	Usuario_Nombre nvarchar(255) PRIMARY KEY CLUSTERED,
-	Contraseña nvarchar(255) NOT NULL,
+	ContraseÃ±a nvarchar(255) NOT NULL,
 	Cod_Rol int REFERENCES TODOX2LUCAS.Roles (Cod_Rol),
 	Intentos_Login int NOT NULL DEFAULT 0,
 	Estado_Usuario bit
@@ -625,7 +625,7 @@ BEGIN
 	FROM TODOX2LUCAS.Usuarios
 	WHERE Estado_Usuario = 1 AND
 		  Usuario_Nombre = @username AND
-		  Contraseña = @password
+		  ContraseÃ±a = @password
 	
 	EXEC TODOX2LUCAS.actualizarIntentos @username,@Cantidad
 	
@@ -771,7 +771,7 @@ BEGIN
 END
 GO
 
-/* ------------ PROCEDMIENTO PARA DAR DE BAJA UNA AERONAVE ------------ */
+/* ------------ PROCEDMIENTO PARA DAR DE jAJA UNA AERONAVE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Baja_Por_Vida_Util(@codAeronave int,@cancelaciones bit)
 AS
 BEGIN
@@ -1050,7 +1050,7 @@ END
 GO
 
 /* ------------ PROCEDIMIENTOS PARA LOS LISTADOS ESTADISTICOS ------------ */
-/* ------------ Top 5 de los destinos con más pasajes comprados ------------ */
+/* ------------ Top 5 de los destinos con mÃ¡s pasajes comprados ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Pasajes_Mas_Comprados(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
@@ -1063,7 +1063,7 @@ BEGIN
 END
 GO
 
-/* ------------ Top 5 de los destinos con aeronaves más vacías ------------ */
+/* ------------ Top 5 de los destinos con aeronaves mÃ¡s vacÃ­as ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Aeronaves_Mas_Vacias(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
@@ -1079,7 +1079,7 @@ BEGIN
 END
 GO
 
-/* ------------ Top 5 de los Clientes con más puntos acumulados a la fecha ------------ */
+/* ------------ Top 5 de los Clientes con mÃ¡s puntos acumulados a la fecha ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Cliente_Mayoria_Puntos
 AS
 BEGIN
@@ -1104,7 +1104,7 @@ BEGIN
 END
 GO
 
-/* ------------ Top 5 de las aeronaves con mayor cantidad de días fuera de servicio ------------ */
+/* ------------ Top 5 de las aeronaves con mayor cantidad de dÃ­as fuera de servicio ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Aeronave_Mayoria_Fuera_Servicio(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
@@ -1197,24 +1197,24 @@ GO
 --DATOS INICIALES PARA LA TABLA FUNCIONALIDADES--
 
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Alta Rol'
-EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Modificación Rol'
+EXEC TODOX2LUCAS.Agregar_Funcionalidad 'ModificaciÃ³n Rol'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Baja Rol'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Alta Ciudad'
-EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Modificación Ciudad'
+EXEC TODOX2LUCAS.Agregar_Funcionalidad 'ModificaciÃ³n Ciudad'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Baja Ciudad'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Alta Aeronave'
-EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Modificación Aeronave'
+EXEC TODOX2LUCAS.Agregar_Funcionalidad 'ModificaciÃ³n Aeronave'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Baja Aeronave'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Alta Ruta'
-EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Modificación Ruta'
+EXEC TODOX2LUCAS.Agregar_Funcionalidad 'ModificaciÃ³n Ruta'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Baja Ruta'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Canje Millas'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Compra Pasajes'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Compra Encomiendas'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Consulta Millas'
-EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Devolución'
-EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Generación Viaje'
-EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Listado Estadístico'
+EXEC TODOX2LUCAS.Agregar_Funcionalidad 'DevoluciÃ³n'
+EXEC TODOX2LUCAS.Agregar_Funcionalidad 'GeneraciÃ³n Viaje'
+EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Listado EstadÃ­stico'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Registro de Usuario'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Registro Llegada Destino'
 GO
@@ -1233,15 +1233,15 @@ GO
 /* ------------ SET DE USUSARIOS PARA EL TP (EL ABM DE USUARIO NO SE DEBE IMPLEMENTAR) ------------ */
 DECLARE @clave nvarchar(255);
 SET @clave = HASHBYTES('SHA2_256','w23e');
-INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
+INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,ContraseÃ±a,Cod_Rol,Estado_Usuario)
 VALUES('Lucas',@clave,2,1)
-INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
+INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,ContraseÃ±a,Cod_Rol,Estado_Usuario)
 VALUES('Eduardo',@clave,2,1)
-INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
+INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,ContraseÃ±a,Cod_Rol,Estado_Usuario)
 VALUES('Pepe',@clave,2,1)
-INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
+INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,ContraseÃ±a,Cod_Rol,Estado_Usuario)
 VALUES('Roman',@clave,2,1)
-INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
+INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,ContraseÃ±a,Cod_Rol,Estado_Usuario)
 VALUES('Messi',@clave,2,1)
 GO
 
@@ -1249,28 +1249,28 @@ GO
 --DATOS INICIALES PARA LA TABLA ROL POR FUNCIONALIDAD--
 
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Alta Rol'
-EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Modificación Rol'
+EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','ModificaciÃ³n Rol'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Baja Rol'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Registro de Usuario'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Alta Ciudad'
-EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Modificación Ciudad'
+EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','ModificaciÃ³n Ciudad'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Baja Ciudad'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Alta Ruta'
-EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Modificación Ruta'
+EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','ModificaciÃ³n Ruta'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Baja Ruta'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Alta Aeronave'
-EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Modificación Aeronave'
+EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','ModificaciÃ³n Aeronave'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Baja Aeronave'
-EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Generación Viaje'
+EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','GeneraciÃ³n Viaje'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Registro Llegada Destino'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Compra Pasajes'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Compra Encomiendas'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Cliente','Compra Pasajes'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Cliente','Compra Encomiendas'
-EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Devolución'
+EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','DevoluciÃ³n'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Cliente','Consulta Millas'
 EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Cliente','Canje Millas'
-EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Listado Estadístico'
+EXEC TODOX2LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador','Listado EstadÃ­stico'
 GO
 --MIGRACION CLIENTES--
 INSERT INTO TODOX2LUCAS.Clientes(Nro_Dni, Cliente_Nombre, Cliente_Apellido, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento, Cant_Millas)

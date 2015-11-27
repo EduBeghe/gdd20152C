@@ -9,15 +9,25 @@ namespace AerolineaFrba.Domain
         
     public class EstadoAeronave
     {
-        public int idEstado { get; set; }
-        public DateTime fechaReinicio { get; set; }
-        public DateTime fechaFuera { get; set; }
+        public int Cod_Estado { get; set; }
+        public Aeronave aeronave { get; set; }
+        public bool Fuera_De_Servicio { get; set; }
+        public bool Vida_Util { get; set; }
+        public DateTime Fecha_Fuera_Servicio { get; set; }
+        public DateTime Fecha_Reinicio_Servicio { get; set; }
+        public DateTime Fecha_Baja_Definitiva { get; set; }
 
-        public EstadoAeronave(int idEstado, DateTime fechaReinicio, DateTime fechaFuera)
+
+        public EstadoAeronave(int Cod_Estado, Aeronave aeronave, bool Fuera_De_Servicio, bool Vida_Util ,DateTime Fecha_Fuera_Servicio, DateTime Fecha_Reinicio_Servicio, DateTime Fecha_Baja_Definitiva )
         {
-            this.idEstado = idEstado;
-            this.fechaFuera = fechaFuera;
-            this.fechaReinicio = fechaReinicio;
+            this.Cod_Estado = Cod_Estado;
+            this.aeronave = aeronave;
+            this.Fuera_De_Servicio = Fuera_De_Servicio;
+            this.Vida_Util = Vida_Util;
+            this.Fecha_Fuera_Servicio = Fecha_Fuera_Servicio;
+            this.Fecha_Reinicio_Servicio = Fecha_Reinicio_Servicio;
+            this.Fecha_Baja_Definitiva = Fecha_Baja_Definitiva;
+
         }
     }
 }
