@@ -29,12 +29,12 @@ namespace AerolineaFrba.Repositories {
 		public void darDeAlta( Aeronave aeronave )
 		{
 			Adapter.executeProcedure("Alta_Aeronave", 
-			aeronave.matricula,
-			aeronave.fechaDeAlta,
+			aeronave.Matricula,
+			aeronave.Fecha_Alta,
 			aeronave.fabricante,
-			aeronave.modelo,
-			aeronave.servicio.idTipoServicio, // ( no esta en la clase MIRAR! )
-			aeronave.capacidadEncomiendas 
+			aeronave.Modelo,
+			aeronave.Servicio,
+			aeronave.Kgs_Disponibles	
 			);
 		}
 
@@ -46,8 +46,14 @@ namespace AerolineaFrba.Repositories {
 		public Aeronave parse(DataRow dr)
         {
        		return new Aeronave( 
-       			Convert.ToInt32(dr["Cod_Aeronave"] ),
-       			// Terminar con los atributos bien
+       			Convert.ToInt32(dr["Cod_Aeronave"]),
+       			Convert.ToInt32(dr["Matricula"]),
+       			Convert.ToDateTime(dr["Fecha_Alta"]),
+       			new FabricantesRepository().getFabricante( Convert.ToInt32(dr["Cod_Fabricante"]) ),
+       			dr["Modelo"] as string,
+       			new TipoServicioRepository().getTipoServicio( Convert.ToInt32(["Cod_Tipo_Servicio"])),
+       			Convert.ToInt32(dr["Kgs_Disponibles"]),
+       			Convert.ToInt32(dr["Cantidad_Butacas"])
 			);
         }
 

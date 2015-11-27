@@ -20,36 +20,35 @@ namespace AerolineaFrba.Repositories
         internal void modificar(Cliente cliente)
         {
             DBAdapter.executeProcedure("Modificar_Datos_Cliente",
-            //cliente.idCliente,
-            cliente.dni,
-            cliente.apellido,
-            cliente.nombre,
-            cliente.direccion,
-            cliente.email,
-            cliente.fechaNacimimento,
-            cliente.telefono,
+            cliente.Nro_Dni,
+            cliente.Cliente_Apellido,
+            cliente.Cliente_Nombre,
+            cliente.Cliente_Direccion,
+            cliente.Cliente_Mail,
+            cliente.Cliente_Fecha_Nacimiento,
+            cliente.Cliente_Telefono,
             );
         }
 
         internal void darDeAlta( Cliente cliente )
         {
             return DBAdapter.executeProcedure("Alta_Cliente",
-            //cliente.idCliente,
-            cliente.dni,
-            cliente.apellido,
-            cliente.nombre,
-            cliente.direccion,
-            cliente.email,
-            cliente.fechaNacimimento,
-            cliente.telefono
+            cliente.Nro_Dni,
+            cliente.Cliente_Apellido,
+            cliente.Cliente_Nombre,
+            cliente.Cliente_Direccion,
+            cliente.Cliente_Mail,
+            cliente.Cliente_Fecha_Nacimiento,
+            cliente.Cliente_Telefono,
             );
         }
 
         internal int getMillas( Cliente cliente )
         {
+            // Verificar tipo de retorno y que llamada a DBA
             return DBAdapter.executeProcedureWithReturnValue("Consulta_Millas",
-                cliente.dni,
-                cliente.apellido,
+                cliente.Nro_Dni,
+                cliente.Cliente_Apellido,
                 );
         }
 
@@ -57,9 +56,9 @@ namespace AerolineaFrba.Repositories
         public void canjeMillas( Cliente cliente, ProductoCanje producto, int cantidad  )
         {
             DBAdapter.executeProcedure( "Canjear_Millas", 
-            cliente.dni,
-            cliente.apellido,
-            producto.idProducto
+            cliente.Nro_Dni,
+            cliente.Cliente_Apellido,
+            producto.Cod_Producto
             cantidad
             );
         }
@@ -71,8 +70,15 @@ namespace AerolineaFrba.Repositories
 
         public Cliente parse(DataRow dr)
         {
-            return new Cliente( Convert.ToInt32(dr["Nro_Dni"]), dr["Cliente_Apellido"] 
-            // Terminar cuando esten los atributos de Cliente definidos!
+            return new Cliente( 
+            Convert.ToInt32(dr["Nro_Dni"]), 
+            dr["Cliente_Nombre"] as string,
+            dr["Cliente_Apellido"] as string,
+            dr["Cliente_Direccion"] as string,
+            Convert.ToInt32(dr["Cliente_Telefono"]), 
+            dr["Cliente_Mail"] as string,
+            Convert.ToDateTime(dr["Cliente_Fecha_Nacimiento"]),
+            Convert.ToInt32(dr["Cant_Millas"])
             );
         }
 
