@@ -784,20 +784,31 @@ BEGIN
 
 	IF (@cancelaciones = 0)
 	BEGIN
-		DECLARE @codfabricante int ,@codServicio int,@modelo nvarchar(255);
-		SELECT A.Cod_Fabricante,A.Cod_Tipo_Servicio,A.Modelo
-		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes v ON (a.Cod_Aeronave=v.Cod_Aeronave)
-		WHERE a.Cod_Aeronave = 2 --@codAeronave
-			AND v.Fecha_Salida > @fecha
-
-		--BUSCAR AERONAVE PARA SUPLANTAR--
-		--SELECT DISTINCT a1.Cod_Aeronave,v.Cod_Ciudad_Origen
-		--FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
-		--	GROUP BY a1.Cod_Aeronave,a2.Cod_Aeronave
-		--	HAVING SELECT A1.COD_AERONAVE
-		--		FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
-		--		WHERE
+		DECLARE @codfabricante int ,@codServicio int,@modelo nvarchar(255),@fechaSalida datetime,@fechaLlegadaEstimada datetime,@codViaje int;
+		SELECT @codfabricante= A.Cod_Fabricante,@codServicio = A.Cod_Tipo_Servicio, @modelo = A.Modelo, @codViaje = v.Cod_Viaje,
+				@fechaSalida = V.Fecha_Salida, @fechaLlegadaEstimada = v.Fecha_Llegada_Estimada
+		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes v ON (A.Cod_Aeronave=v.Cod_Aeronave)
+										JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
+										JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
+		WHERE a.Cod_Aeronave = @codAeronave AND @fecha <= @fechaSalida
 		
+		--BUSCAR AERONAVE PARA SUPLANTAR--
+		DECLARE cursor_fechas CURSOR FOR
+		
+		SELECT DISTINCT a1.Cod_Aeronave,v.Cod_Ciudad_Origen,V.Cod_Viaje,v.Fecha_Salida,v.Fecha_Llegada,v.Fecha_Llegada_Estimada
+		FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
+										JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
+										JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
+		WHERE A1.Cod_Aeronave != @codAeronave AND
+				A1.Cod_Fabricante = @codfabricante AND
+				A1.Modelo = @modelo AND
+				A1.Cod_Tipo_Servicio = @codServicio 
+				--manejo de las fechas
+				
+
+		
+		
+
 	END
 	ELSE
 	BEGIN
@@ -960,16 +971,53 @@ BEGIN
 	END
 END
 GO
+/* ------------ PROCEDIMIENTOS PARA COMPRAR ENCOMIENDA  ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Comprar_Encomienda(@kgs_a_enviar int,@codViaje int,@apellido nvarchar(255),@nro_dni numeric(18),
+												@formaDePago nvarchar(250),@numero_tarjeta numeric(16),@cod_seg numeric(3),@fecha_vencimiento datetime,
+												@tipo_tarjeta nvarchar(200))
+AS
+BEGIN
+	DECLARE @fecha datetime, @precioEncomienda numeric(18,2),@precioBaseEncomienda numeric(18,2),@precioServicio numeric(18),@codEncomienda numeric(18) ;
+
+	SELECT  @fecha = Fecha_Salida , @precioBaseEncomienda = r.Precio_Base_Kg ,@precioServicio = t.Precio_Servicio
+	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.RutasAereas R ON (V.Cod_Ruta=R.Cod_Ruta)
+								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(t.Cod_Tipo_Servicio=r.Cod_Tipo_Servicio)
+	WHERE V.Cod_Viaje = @codViaje
+
+	SET @precioEncomienda = (@precioBaseEncomienda * @precioServicio)
+
+	INSERT INTO TODOX2LUCAS.Encomiendas(Fecha_Compra,Cod_Viaje,Kgs_A_Enviar,Nro_Dni,Precio_Encomienda,Cliente_Apellido)
+	VALUES(@fecha,@codViaje,@kgs_a_enviar,@nro_dni,@precioEncomienda,@apellido)
+
+	SET @codEncomienda = (SELECT SCOPE_IDENTITY() FROM TODOX2LUCAS.Pasajes);
+
+	INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Nro_Dni,Cliente_Apellido,Cod_Encomiendas,Fecha_Transaccion,Forma_De_Pago)
+	VALUES (@nro_dni,@apellido,@codEncomienda,GETDATE(),@formaDePago)
+
+	IF (@formaDePago = 'Tarjeta')
+	BEGIN
+		INSERT INTO TODOX2LUCAS.Tarjetas(Numero_Tarjeta,Cod_Seg,Fecha_Vencimiento,Tipo_Tarjeta,Nro_Dni,Cliente_Apellido)
+		VALUES(@numero_tarjeta,@cod_seg,@fecha_vencimiento,@tipo_tarjeta,@nro_dni,@apellido)
+	END
+END
+GO
 
 /* ------------ PROCEDIMIENTOS PARA DAR DE ALTA UN  CLIENTE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Alta_Cliente(@nro_dni numeric(18),@apellido nvarchar(255),@nombre nvarchar(255),
 											@direccion nvarchar(255),@mail nvarchar(255),@fechaNacimiento datetime,@telefono numeric(18))
 AS
 BEGIN
-
-	INSERT INTO TODOX2LUCAS.Clientes(Nro_Dni,Cliente_Apellido,Cliente_Nombre,Cliente_Direccion,Cliente_Mail,Cliente_Fecha_Nacimiento,Cliente_Telefono)
-	VALUES(@nro_dni,@apellido,@nombre,@direccion,@mail,@fechaNacimiento,@telefono)
-
+	IF NOT EXISTS (SELECT 1 FROM TODOX2LUCAS.Clientes WHERE Nro_Dni=@nro_dni AND Cliente_Apellido=@apellido)
+	BEGIN
+		INSERT INTO TODOX2LUCAS.Clientes(Nro_Dni,Cliente_Apellido,Cliente_Nombre,Cliente_Direccion,Cliente_Mail,Cliente_Fecha_Nacimiento,Cliente_Telefono)
+		VALUES(@nro_dni,@apellido,@nombre,@direccion,@mail,@fechaNacimiento,@telefono)
+	END
+	ELSE
+	BEGIN
+		print 'El cliente ya existe'
+		SELECT * 
+		FROM TODOX2LUCAS.Clientes WHERE Nro_Dni=@nro_dni AND Cliente_Apellido=@apellido
+	END
 END
 GO
 /* ------------ PROCEDIMIENTOS PARA MODIFICAR DATOS DE UN CLIENTE ------------ */
