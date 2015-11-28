@@ -32,7 +32,7 @@ namespace AerolineaFrba.Repositories
 
         internal void darDeAlta( Cliente cliente )
         {
-            return DBAdapter.executeProcedure("Alta_Cliente",
+            DBAdapter.executeProcedure("Alta_Cliente",
             cliente.Nro_Dni,
             cliente.Cliente_Apellido,
             cliente.Cliente_Nombre,

@@ -20,7 +20,7 @@ namespace AerolineaFrba.Repositories {
 			viaje.Fecha_Salida,
 			viaje.Fecha_Llegada_Estimada
 			);
-		}
+		}		
 
 		// Verificar parametros
 		public void getViajesDisponibles( DateTime fechaSalida, Ciudad origen, Ciudad destino )

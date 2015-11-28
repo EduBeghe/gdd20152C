@@ -14,16 +14,18 @@ namespace AerolineaFrba.Repositories {
 		public void darDeBajaXVidaUtil( Aeronave aeronave ) 
 		{
 			Adapter.executeProcedure("Baja_Por_Vida_Util", 
-			aeronave.idAeronave,
+			aeronave.Cod_Aeronave,
 			// @cancelaciones bit
 			);
 		}
 
-		public void darDeBajaXProblemasTecnicos( Aeronave aeronave )
+		public void darDeBajaXProblemasTecnicos( Aeronave aeronave, DateTime fechaReinicio )
 		{
-			//Adapter.executeProcedure("XXXX", 
-			//aeronave.idAeronave
-			//);	
+			Adapter.executeProcedure("Baja_Por_Fuera_De_Servicio", 
+			aeronave.Cod_Aeronave,
+			// @cancelaciones bit 
+			fechaReinicio
+			);	
 		}
 
 		public void darDeAlta( Aeronave aeronave )
