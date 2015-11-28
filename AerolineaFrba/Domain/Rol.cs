@@ -9,7 +9,8 @@ namespace AerolineaFrba.Domain
         
     public class Rol
     {
-        public int Cod_Rol { get; set; }
+        // Cod_rol nunca se usa 
+        public int Cod_Rol { get; set; } 
         public string Nombre_Rol { get; set; }
         public bool Estado_Rol { get; set; }
         

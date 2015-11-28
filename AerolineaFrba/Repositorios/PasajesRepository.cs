@@ -14,28 +14,28 @@ namespace AerolineaFrba.Repositories {
 		// Forma de pago ?
 		// Deberia entrar como parametro la tarjeta o cliente tiene una forma
 		// de referenciar su propia tarjeta ?
-		public void comprarPasajes( Pasaje pasaje, Cliente cliente )
+		public void comprarPasajes( Pasaje pasaje, Cliente cliente, TarjetaDeCredito tarjeta )
 		{
 			Adapter.executeProcedure("Comprar_Pasajes",
-				pasaje.butaca.idButaca,
-				pasaje.viaje.idViaje,
-				cliente.apellido,
-				cliente.dni,
-				// Forma de pago
-				// numero de Tarjeta
-				// codigo de seguridad
-				// fecha de vencimiento
-				// tipo de tarjeta 
+				pasaje.Butaca_Asociada,
+				pasaje.viaje.Cod_Viaje,
+				cliente.Cliente_Apellido,
+				cliente.Nro_Dni,
+				// Forma de pago ( viene del form ? ) ( otra opcion que no sea tarjeta ? )
+				tarjeta.Numero_Tarjeta,
+				tarjeta.Cod_Seg,
+				tarjeta.Fecha_Vencimiento
+				tarjeta.Tipo_Tarjeta
 			);
 		}
 
 		public void cancelarPasaje( Pasaje pasaje )
 		{
 			Adapter.executeProcedure("Cancelar_Pasajes",
-				pasaje.viaje.fechaSalida,
-				pasaje.viaje.aeronave.idAeronave,
-				pasaje.viaje.rutaAerea.idRutaAerea,
-				// motivo 
+				pasaje.viaje.Fecha_Viaje,
+				pasaje.viaje.aeronave.Cod_Aeronave,
+				pasaje.viaje.rutaAerea.Cod_Ruta,
+				// motivo ( de la form ? ) 
 			);
 		}
 
@@ -47,12 +47,14 @@ namespace AerolineaFrba.Repositories {
 
 		public Pasaje parse(DataRow dr)
         {
-       		return new Pasaje( Convert.ToInt32(dr["Cod_Pasaje"] ),
-       			// Verificar tipo de datos de dr[ "Cliente_apellido" ]
-       		new ClientesRepository.getCliente( Convert.ToInt32(dr["Nro_Dni"]), dr["Cliente_Apellido"] ),
-			new ViajesRepository.getViaje( Convert.ToInt32(dr["Cod_Viaje"]) ),
-			// Terminar cuando esten los atributos de Pasaje definidos!
-			);
+       		return new Pasaje( 
+       		Convert.ToInt32(dr["Cod_Pasaje"] ),
+       		Convert.ToDateTime(dr["Fecha_Viaje"]),
+       		new ViajesRepository().getViaje( Convert.ToInt32(dr["Cod_Viaje"])),
+       		Convert.ToInt32(dr["Butaca_Asociada"]),
+       		new ClientesRepository().getCliente( Convert.ToInt32(dr["Nro_Dni"]), dr["Cliente_Apellido"] as string ),
+       		Convert.ToInt32(dr["Pasaje_Precio"])
+ 			);
         }
 
 	}
