@@ -121,8 +121,21 @@ IF OBJECT_ID('TODOX2LUCAS.Baja_Por_Fuera_De_Servicio') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Baja_Por_Fuera_De_Servicio;
 IF OBJECT_ID('TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones;
+IF OBJECT_ID('TODOX2LUCAS.GetRuta') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetRuta;
+IF OBJECT_ID('TODOX2LUCAS.GetAeronave') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetAeronave;
+IF OBJECT_ID('TODOX2LUCAS.GetTipoServicio') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetTipoServicio;
+IF OBJECT_ID('TODOX2LUCAS.GetFabricante') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetFabricante;
+IF OBJECT_ID('TODOX2LUCAS.GetCliente') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetCliente;
+IF OBJECT_ID('TODOX2LUCAS.GetViaje') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetViaje;
+IF OBJECT_ID('TODOX2LUCAS.Comprar_Encomienda') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Comprar_Encomienda;
 GO
-
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
 --CREACION TABLA CIUDADES--
@@ -1090,7 +1103,62 @@ BEGIN
 	WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
 END
 GO
+/* ------------ PROCEDIMIENTOS GETTER RUTA ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetRuta(@codRuta numeric(18),@ciudadOrigen int,@ciudadDestino int)
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.RutasAereas 
+	WHERE Cod_Ruta = @codRuta AND Cod_Ciudad_Origen = @ciudadOrigen AND Cod_Ciudad_Destino = @ciudadDestino
+ END
+ GO
+/* ------------ PROCEDIMIENTOS GETTER AERONAVE ------------ */
+ CREATE PROCEDURE  TODOX2LUCAS.GetAeronave(@codAeronave int)
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Aeronaves 
+	WHERE Cod_Aeronave = @codAeronave
+ END
+ GO
+/* ------------ PROCEDIMIENTOS GETTER TIPO SERVICIO ------------ */
+ CREATE PROCEDURE  TODOX2LUCAS.GetTipoServicio(@codServicio int)
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Tipos_De_Servicios
+	WHERE Cod_Tipo_Servicio = @codServicio
+ END
+ GO
+/* ------------ PROCEDIMIENTOS GETTER FABRICANTE ------------ */
+ CREATE PROCEDURE   TODOX2LUCAS.GetFabricante(@codFabricante int)
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Fabricantes
+	WHERE Cod_Fabricante = @codFabricante
+ END
+ GO
+/* ------------ PROCEDIMIENTOS GETTER CLIENTE ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetCliente(@dni numeric(18),@apellido nvarchar(255))
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Clientes
+	WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
+ END
+ GO
+/* ------------ PROCEDIMIENTOS GETTER VIAJE ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetViaje(@codViaje int)
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Viajes
+	WHERE Cod_Viaje = @codViaje
+ END
+ GO
 
+ 
 /* ------------ PROCEDIMIENTOS PARA LOS LISTADOS ESTADISTICOS ------------ */
 /* ------------ Top 5 de los destinos con más pasajes comprados ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Pasajes_Mas_Comprados(@fecha_inicio datetime, @fecha_fin datetime)
@@ -1219,6 +1287,7 @@ BEGIN
 	DEALLOCATE cursor_encomienda
 END
 GO
+
 CREATE TRIGGER TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones
 ON TODOX2LUCAS.Cancelaciones
 AFTER INSERT
@@ -1268,7 +1337,6 @@ BEGIN
 END
 GO
 /***************************************  MIGRACIONES DE DATOS ***********************************************/
-
 --MIGRACINON TABLA CIUDADES--
 INSERT INTO TODOX2LUCAS.Ciudades(Nombre_Ciudad,Estado_Ciudad)
 SELECT DISTINCT Ruta_Ciudad_Destino, 1
@@ -1383,9 +1451,6 @@ GO
 EXEC TODOX2LUCAS.Migrar_Aeronaves
 
 GO
---MIGRACION TABLA ESTADOS AERONAVES--
-
---esta tabla no necesita de migracion tendra que ir actualizandose a medida que en la aplicacion lo utilicen
 
 --MIGRACION TABLA BUTACAS--
 INSERT INTO TODOX2LUCAS.Butacas(Cod_Aeronave,Cod_Butaca,Pos_Butaca,Piso_Butaca,Estado_Butaca)
@@ -1415,7 +1480,6 @@ GO
 
 --MIGRACION TABLA ENCOMIENDAS--
 --tiene q dar 135.658
-GO
 INSERT INTO TODOX2LUCAS.Encomiendas(Cod_Encomiendas,Precio_Encomienda,Kgs_A_Enviar,Fecha_Compra,Cod_Viaje,Nro_Dni,Cliente_Apellido)
 SELECT DISTINCT M.Paquete_Codigo,M.Paquete_Precio,M.Paquete_KG,M.Paquete_FechaCompra,v.Cod_Viaje,C.Nro_Dni,c.Cliente_Apellido
 FROM gd_esquema.Maestra M JOIN TODOX2LUCAS.Clientes C ON(C.Nro_Dni = M.Cli_Dni AND c.Cliente_Apellido=m.Cli_Apellido)
@@ -1423,10 +1487,9 @@ FROM gd_esquema.Maestra M JOIN TODOX2LUCAS.Clientes C ON(C.Nro_Dni = M.Cli_Dni A
 							JOIN TODOX2LUCAS.Ciudades cd ON (cd.Nombre_Ciudad=Ruta_Ciudad_Destino)
 							JOIN TODOX2LUCAS.RutasAereas r ON (co.Cod_Ciudad=r.Cod_Ciudad_Origen AND cd.Cod_Ciudad=r.Cod_Ciudad_Destino)
 							JOIN TODOX2LUCAS.Aeronaves a ON (m.Aeronave_Matricula=a.Matricula)
-							JOIN TODOX2LUCAS.Viajes v ON(v.Cod_Ruta =r.Cod_Ruta AND v.Cod_Aeronave=a.Cod_Aeronave AND v.Fecha_Salida=m.FechaSalida AND v.Fecha_Llegada=m.FechaLLegada AND v.Fecha_Llegada_Estimada=m.Fecha_LLegada_Estimada)
+							JOIN TODOX2LUCAS.Viajes v ON(v.Cod_Ruta =r.Cod_Ruta AND v.Cod_Aeronave=a.Cod_Aeronave AND v.Fecha_Salida=m.FechaSalida  AND v.Fecha_Llegada_Estimada=m.Fecha_LLegada_Estimada)
 							
 WHERE M.Paquete_Codigo != 0
-
 GO
 --MIGRACION TABLA PASAJES--
 -- tendria que dar 265.646
@@ -1437,7 +1500,7 @@ FROM gd_esquema.Maestra m JOIN TODOX2LUCAS.Ciudades co ON (co.Nombre_Ciudad=m.Ru
 							JOIN TODOX2LUCAS.Ciudades cd ON (cd.Nombre_Ciudad=Ruta_Ciudad_Destino)
 							JOIN TODOX2LUCAS.RutasAereas r ON (co.Cod_Ciudad=r.Cod_Ciudad_Origen AND cd.Cod_Ciudad=r.Cod_Ciudad_Destino)
 							JOIN TODOX2LUCAS.Aeronaves a ON (m.Aeronave_Matricula=a.Matricula)
-							JOIN TODOX2LUCAS.Viajes v ON(v.Cod_Ruta =r.Cod_Ruta AND v.Cod_Aeronave=a.Cod_Aeronave AND v.Fecha_Salida=m.FechaSalida AND v.Fecha_Llegada=m.FechaLLegada AND v.Fecha_Llegada_Estimada=m.Fecha_LLegada_Estimada)
+							JOIN TODOX2LUCAS.Viajes v ON(v.Cod_Ruta =r.Cod_Ruta AND v.Cod_Aeronave=a.Cod_Aeronave AND v.Fecha_Salida=m.FechaSalida AND v.Fecha_Llegada_Estimada=m.Fecha_LLegada_Estimada)
 							JOIN TODOX2LUCAS.Butacas b ON(b.Cod_Aeronave=a.Cod_Aeronave AND m.Butaca_Nro=b.Cod_Butaca)
 							JOIN TODOX2LUCAS.Clientes c ON (c.Nro_Dni=m.Cli_Dni AND c.Cliente_Apellido=m.Cli_Apellido)
 WHERE m.Pasaje_Codigo != 0
@@ -1459,4 +1522,3 @@ FROM TODOX2LUCAS.Encomiendas e JOIN TODOX2LUCAS.Clientes c ON (e.Nro_Dni=c.Nro_D
 							JOIN gd_esquema.Maestra m ON (m.Paquete_Codigo=e.Cod_Encomiendas)
 GO
 
---MIGRACION TABLA CANCELACIONES--
