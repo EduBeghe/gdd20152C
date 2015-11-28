@@ -117,7 +117,10 @@ IF OBJECT_ID('TODOX2LUCAS.Alta_Cliente') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Alta_Cliente;
 IF OBJECT_ID('TODOX2LUCAS.Modificar_Datos_Cliente') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Modificar_Datos_Cliente;
-
+IF OBJECT_ID('TODOX2LUCAS.Baja_Por_Fuera_De_Servicio') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Baja_Por_Fuera_De_Servicio;
+IF OBJECT_ID('TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones;
 GO
 
 
@@ -771,7 +774,7 @@ BEGIN
 END
 GO
 
-/* ------------ PROCEDMIENTO PARA DAR DE BAJA UNA AERONAVE ------------ */
+/* ------------ PROCEDMIENTO PARA DAR DE BAJA UNA AERONAVE POR VIDA UTIL------------ */
 CREATE PROCEDURE TODOX2LUCAS.Baja_Por_Vida_Util(@codAeronave int,@cancelaciones bit)
 AS
 BEGIN
@@ -785,30 +788,69 @@ BEGIN
 	IF (@cancelaciones = 0)
 	BEGIN
 		DECLARE @codfabricante int ,@codServicio int,@modelo nvarchar(255),@fechaSalida datetime,@fechaLlegadaEstimada datetime,@codViaje int;
-		SELECT @codfabricante= A.Cod_Fabricante,@codServicio = A.Cod_Tipo_Servicio, @modelo = A.Modelo, @codViaje = v.Cod_Viaje,
-				@fechaSalida = V.Fecha_Salida, @fechaLlegadaEstimada = v.Fecha_Llegada_Estimada
+
+		DECLARE cursor_Bajas CURSOR FOR
+		SELECT DISTINCT v.Cod_Viaje, V.Fecha_Salida,v.Fecha_Llegada_Estimada
 		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes v ON (A.Cod_Aeronave=v.Cod_Aeronave)
 										JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
 										JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
-		WHERE a.Cod_Aeronave = @codAeronave AND @fecha <= @fechaSalida
+		WHERE a.Cod_Aeronave =  @codAeronave AND @fecha <= v.Fecha_Salida AND  v.Fecha_Llegada IS NULL
 		
-		--BUSCAR AERONAVE PARA SUPLANTAR--
-		DECLARE cursor_fechas CURSOR FOR
-		
-		SELECT DISTINCT a1.Cod_Aeronave,v.Cod_Ciudad_Origen,V.Cod_Viaje,v.Fecha_Salida,v.Fecha_Llegada,v.Fecha_Llegada_Estimada
-		FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
-										JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
-										JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
-		WHERE A1.Cod_Aeronave != @codAeronave AND
-				A1.Cod_Fabricante = @codfabricante AND
-				A1.Modelo = @modelo AND
-				A1.Cod_Tipo_Servicio = @codServicio 
-				--manejo de las fechas
-				
+		OPEN cursor_bajas
+		FETCH NEXT FROM cursor_bajas INTO @codViaje,@fechaSalida,@fechaLlegadaEstimada
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+				SELECT V.Cod_Aeronave 
+				FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON(A.Cod_Aeronave=V.Cod_Aeronave)
+				WHERE V.Cod_Aeronave != @codAeronave AND
+						V.Fecha_Salida = @fechaSalida
+											
 
-		
-		
 
+
+
+
+
+
+
+			FETCH NEXT FROM cursor_bajas INTO @codViaje,@fechaSalida,@fechaLlegadaEstimada
+		END
+		CLOSE cursor_bajas
+		DEALLOCATE cursor_bajas		
+
+	END
+	ELSE
+	BEGIN
+		EXEC TODOX2LUCAS.Cancelar_Pasajes @fecha,@codAeronave,NULL,@motivo
+		EXEC TODOX2LUCAS.Cancelar_Paquetes @fecha,@codAeronave,NULL,@motivo
+	END
+END
+GO
+/* AERONAVES QUE LIBRES DE VUELO DADA UNA FECHA*/
+/* ------------ PROCEDMIENTO PARA DAR DE BAJA UNA AERONAVE POR FUERA DE SERVICIO ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Baja_Por_Fuera_De_Servicio(@codAeronave int,@cancelaciones bit,@fechaReinicio datetime)
+AS
+BEGIN
+	DECLARE @fecha datetime,@motivo nvarchar(255);
+	SET @fecha = GETDATE();
+	SET @motivo = 'Baja por fuera de servicio';
+	
+	INSERT INTO TODOX2LUCAS.Estados_Aeronaves (Cod_Aeronave,Fuera_De_Servicio,Fecha_Fuera_Servicio,Fecha_Reinicio_Servicio)
+	VALUES(@codAeronave,1,@fecha,@fechaReinicio)
+
+	IF (@cancelaciones = 0)
+	BEGIN
+		-- EXEC TODOX2LUCAS.EncontrarAeronaveReemplazo @codAeronave;
+			--BUSCAR AERONAVE PARA SUPLANTAR--
+			SELECT DISTINCT a1.Cod_Aeronave,v.Cod_Ciudad_Origen,V.Cod_Viaje,v.Fecha_Salida,v.Fecha_Llegada,v.Fecha_Llegada_Estimada
+			FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
+											JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
+											JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
+		--	WHERE A1.Cod_Aeronave != 2	 AND
+		--			A1.Cod_Fabricante = @codfabricante AND
+		--			A1.Modelo = @modelo AND
+		--			A1.Cod_Tipo_Servicio = @codServicio 
+		
 	END
 	ELSE
 	BEGIN
@@ -1177,7 +1219,54 @@ BEGIN
 	DEALLOCATE cursor_encomienda
 END
 GO
+CREATE TRIGGER TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones
+ON TODOX2LUCAS.Cancelaciones
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @codDevolucion int, @codPasaje numeric(18),@codEncomiendas numeric(18);
+	DECLARE cursor_cancelar CURSOR FOR	
+	SELECT I.Codigo_Devolucion,I.Cod_Pasaje,I.Cod_Encomiendas
+	FROM inserted I
+	
+	OPEN cursor_cancelar
+	FETCH NEXT FROM cursor_cancelar INTO @codDevolucion,@codPasaje,@codEncomiendas
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		IF (@codPasaje) IS NULL 
+		BEGIN
+			DECLARE @millasEncomienda int,@Nro_Dni_Encomienda numeric(18),@apellido_Encomienda nvarchar(255),@precio_Encomienda numeric(18,2);
+			SELECT @Nro_Dni_Encomienda = Nro_Dni,@apellido_Encomienda=Cliente_Apellido,@precio_Encomienda = Precio_Encomienda
+			FROM TODOX2LUCAS.Encomiendas
+			WHERE Cod_Encomiendas = @codEncomiendas
 
+			SET @millasEncomienda = FLOOR((@precio_Encomienda/10));
+			
+			UPDATE TODOX2LUCAS.Clientes
+			SET	Cant_Millas = Cant_Millas - @millasEncomienda
+			WHERE Nro_Dni = @Nro_Dni_Encomienda AND Cliente_Apellido = @apellido_Encomienda
+		END
+		IF (@codEncomiendas) IS NULL
+		BEGIN
+			DECLARE @millasPasaje int,@Nro_Dni_Pasaje numeric(18),@apellido_Pasaje nvarchar(255),@precio_Pasaje numeric(18,2);
+			SELECT @Nro_Dni_Pasaje = Nro_Dni , @apellido_Pasaje = Cliente_Apellido , @precio_Pasaje = Pasaje_Precio
+			FROM TODOX2LUCAS.Pasajes
+			WHERE Cod_Pasaje = @codPasaje
+
+			SET @millasPasaje = FLOOR((@precio_Pasaje/10));
+			
+			UPDATE TODOX2LUCAS.Clientes
+			SET	Cant_Millas = Cant_Millas - @millasPasaje
+			WHERE Nro_Dni = @Nro_Dni_Pasaje AND Cliente_Apellido = @apellido_Pasaje
+			
+		END
+		FETCH NEXT FROM cursor_cancelar INTO @codDevolucion,@codPasaje,@codEncomiendas
+	END
+	CLOSE cursor_cancelar
+	DEALLOCATE cursor_cancelar
+
+END
+GO
 /***************************************  MIGRACIONES DE DATOS ***********************************************/
 
 --MIGRACINON TABLA CIUDADES--
@@ -1315,7 +1404,7 @@ GO
 --MIGRACION TABLA VIAJES
 
 INSERT INTO TODOX2LUCAS.Viajes(Cod_Ruta,Cod_Ciudad_Origen,Cod_Ciudad_Destino,Cod_Aeronave,Fecha_Salida,Fecha_Llegada,Fecha_Llegada_Estimada)
-SELECT DISTINCT r.Cod_Ruta,c1.Cod_Ciudad,c2.Cod_Ciudad,a.Cod_Aeronave,m.FechaSalida,m.FechaLLegada,m.Fecha_LLegada_Estimada
+SELECT DISTINCT r.Cod_Ruta,c1.Cod_Ciudad,c2.Cod_Ciudad,a.Cod_Aeronave,m.FechaSalida,NULL,m.Fecha_LLegada_Estimada
 FROM gd_esquema.Maestra m JOIN TODOX2LUCAS.Ciudades c1 ON(m.Ruta_Ciudad_Origen=c1.Nombre_Ciudad)
 							JOIN TODOX2LUCAS.Ciudades c2 ON(m.Ruta_Ciudad_Destino=c2.Nombre_Ciudad)
 							JOIN TODOX2LUCAS.RutasAereas r ON (c1.Cod_Ciudad = r.Cod_Ciudad_Origen AND c2.Cod_Ciudad=r.Cod_Ciudad_Destino) 
