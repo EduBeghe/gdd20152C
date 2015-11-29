@@ -30,6 +30,12 @@ namespace AerolineaFrba.Repositories
             );
         }
 
+        public Cliente getCliente( int dni, string apellido )
+        {
+            return parse ( DBAdapter.retrieveDataTable("GetCliente", dni, apellido ).Rows[0]);
+        }
+
+
         internal void darDeAlta( Cliente cliente )
         {
             DBAdapter.executeProcedure("Alta_Cliente",

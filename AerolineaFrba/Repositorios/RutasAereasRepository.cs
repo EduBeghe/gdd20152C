@@ -67,5 +67,21 @@ namespace AerolineaFrba.Repositories {
 			);				
 		}
 
+
+		public RutaAerea parse(DataRow dr)
+        {
+       		return new RutaAerea( 
+       			Convert.ToInt32(dr["Cod_Ruta"]),
+       			new CiudadRepository().getCiudad( Convert.ToInt32(dr["Cod_Ciudad_Origen"]) ),
+       			new CiudadRepository().getCiudad( Convert.ToInt32(dr["Cod_Ciudad_Destino"]) ),
+       			new TipoServicioRepository().getTipoServicio( Convert.ToInt32(dr["Cod_Tipo_Servicio"])),
+       			Convert.ToInt32( dr["Precio_Base_Pasaje"]),
+       			Convert.ToInt32( dr["Precio_Base_Kg"]),
+       			( bool ) dr["Estado_Ruta"] 
+			);
+        }
+
+
+
 	}
 }
