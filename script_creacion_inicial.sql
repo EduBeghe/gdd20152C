@@ -786,6 +786,36 @@ BEGIN
 	
 END
 GO
+/* ------------ PROCEDIMIENTO QUE DEVUELVE UNA AERONAVE A SUPLANTAR  ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Aeronave_Para_Reemplazar(@codAeronave int,@aeronaveSuplente int OUT)
+AS
+BEGIN
+	DECLARE @fecha datetime,@codfabricante int ,@codServicio int,@modelo nvarchar(255),@fechaSalida datetime,@fechaLlegadaEstimada datetime,@codViaje int;
+	SET @fecha = GETDATE();
+	
+	SELECT DISTINCT @codfabricante = a.Cod_Fabricante, @modelo = A.Modelo, @codServicio = a.Cod_Tipo_Servicio
+	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes v ON (A.Cod_Aeronave=v.Cod_Aeronave)
+									JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
+									JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
+	WHERE a.Cod_Aeronave =  @codAeronave 
+	
+	--BUSCAR AERONAVE PARA SUPLANTAR--
+	SELECT DISTINCT @aeronaveSuplente = a1.Cod_Aeronave
+	FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
+									JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
+									JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
+	WHERE A1.Cod_Aeronave != 2	 AND
+			A1.Cod_Fabricante =	@codfabricante  AND
+			A1.Modelo =@modelo  AND
+			A1.Cod_Tipo_Servicio = @codServicio  AND
+			v.Fecha_Salida != ALL (SELECT DISTINCT Fecha_Salida 
+									FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes v ON (A.Cod_Aeronave=v.Cod_Aeronave)
+																JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
+																JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
+									WHERE a.Cod_Aeronave =  @codAeronave AND @fecha <= v.Fecha_Salida AND  v.Fecha_Llegada IS NULL)
+	RETURN @aeronaveSuplente;
+END
+GO
 
 /* ------------ PROCEDMIENTO PARA DAR DE BAJA UNA AERONAVE POR VIDA UTIL------------ */
 CREATE PROCEDURE TODOX2LUCAS.Baja_Por_Vida_Util(@codAeronave int,@cancelaciones bit)
@@ -800,36 +830,20 @@ BEGIN
 
 	IF (@cancelaciones = 0)
 	BEGIN
-		DECLARE @codfabricante int ,@codServicio int,@modelo nvarchar(255),@fechaSalida datetime,@fechaLlegadaEstimada datetime,@codViaje int;
-
-		DECLARE cursor_Bajas CURSOR FOR
-		SELECT DISTINCT v.Cod_Viaje, V.Fecha_Salida,v.Fecha_Llegada_Estimada
-		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes v ON (A.Cod_Aeronave=v.Cod_Aeronave)
-										JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
-										JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
-		WHERE a.Cod_Aeronave =  @codAeronave AND @fecha <= v.Fecha_Salida AND  v.Fecha_Llegada IS NULL
+		DECLARE @aeronaveSuplente int;
+		EXEC TODOX2LUCAS.Aeronave_Para_Reemplazar @codAeronave ,@aeronaveSuplente;
 		
-		OPEN cursor_bajas
-		FETCH NEXT FROM cursor_bajas INTO @codViaje,@fechaSalida,@fechaLlegadaEstimada
-		WHILE @@FETCH_STATUS = 0
+		IF (@aeronaveSuplente = NULL)
 		BEGIN
-				SELECT V.Cod_Aeronave 
-				FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON(A.Cod_Aeronave=V.Cod_Aeronave)
-				WHERE V.Cod_Aeronave != @codAeronave AND
-						V.Fecha_Salida = @fechaSalida
-											
+			UPDATE TODOX2LUCAS.Viajes
+			SET Cod_Aeronave = @aeronaveSuplente
+			WHERE Cod_Aeronave = @codAeronave
 
-
-
-
-
-
-
-
-			FETCH NEXT FROM cursor_bajas INTO @codViaje,@fechaSalida,@fechaLlegadaEstimada
+		END			
+		ELSE
+		BEGIN
+			RETURN -2;
 		END
-		CLOSE cursor_bajas
-		DEALLOCATE cursor_bajas		
 
 	END
 	ELSE
@@ -853,16 +867,21 @@ BEGIN
 
 	IF (@cancelaciones = 0)
 	BEGIN
-		-- EXEC TODOX2LUCAS.EncontrarAeronaveReemplazo @codAeronave;
-			--BUSCAR AERONAVE PARA SUPLANTAR--
-			SELECT DISTINCT a1.Cod_Aeronave,v.Cod_Ciudad_Origen,V.Cod_Viaje,v.Fecha_Salida,v.Fecha_Llegada,v.Fecha_Llegada_Estimada
-			FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
-											JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
-											JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
-		--	WHERE A1.Cod_Aeronave != 2	 AND
-		--			A1.Cod_Fabricante = @codfabricante AND
-		--			A1.Modelo = @modelo AND
-		--			A1.Cod_Tipo_Servicio = @codServicio 
+		DECLARE @aeronaveSuplente int;
+		EXEC TODOX2LUCAS.Aeronave_Para_Reemplazar @codAeronave ,@aeronaveSuplente;
+		
+		IF (@aeronaveSuplente = NULL)
+		BEGIN
+			UPDATE TODOX2LUCAS.Viajes
+			SET Cod_Aeronave = @aeronaveSuplente
+			WHERE Cod_Aeronave = @codAeronave
+
+		END			
+		ELSE
+		BEGIN
+			RETURN -2;
+		END
+
 		
 	END
 	ELSE
@@ -872,6 +891,7 @@ BEGIN
 	END
 END
 GO
+
 
 /* ------------ PROCEDIMIENTO PARA DAR DE ALTA UNA AERONAVE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Alta_Aeronave(@matricula nvarchar(255),@fecha_Alta datetime,@fabricante nvarchar(255),
