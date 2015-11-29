@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Registro_Llegada_Destino
+namespace AerolineaFrba.Generacion_Viaje
 {
     public partial class Form1 : Form
     {
