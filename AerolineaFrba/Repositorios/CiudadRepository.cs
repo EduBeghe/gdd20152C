@@ -28,6 +28,12 @@ namespace AerolineaFrba.Repositories {
 			//Adapter.executeProcedure("XXXX", cliente.idCliente);				
 		}
 
+		public Ciudad getCiudad()
+		{
+			return parse ( DBAdapter.retrieveDataTable("GetCiudad" ).Rows[0]);
+		}
+
+
 				
         public List<Cliente> parseClientes ( DataTable dataTable )
         {
