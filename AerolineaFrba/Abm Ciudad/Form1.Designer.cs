@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Registro_de_Usuario
+﻿namespace AerolineaFrba.Abm_Ciudad
 {
     partial class Form1
     {

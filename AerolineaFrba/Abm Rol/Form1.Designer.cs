@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Registro_Llegada_Destino
+﻿namespace AerolineaFrba.Abm_Rol
 {
     partial class Form1
     {

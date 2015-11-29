@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Listado_Estadistico
+﻿namespace AerolineaFrba.Generacion_Viaje
 {
     partial class Form1
     {

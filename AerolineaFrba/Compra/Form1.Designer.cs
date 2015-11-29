@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Listado_Estadistico
+﻿namespace AerolineaFrba.Compra
 {
     partial class Form1
     {
