@@ -28,6 +28,12 @@ namespace AerolineaFrba.Repositories {
 			);	
 		}
 
+		public Aeronave getAeronave( int idAeronave )
+		{
+			return parse ( DBAdapter.retrieveDataTable("GetAeronave", idAeronave ).Rows[0]);
+		}
+
+
 		public void darDeAlta( Aeronave aeronave )
 		{
 			Adapter.executeProcedure("Alta_Aeronave", 

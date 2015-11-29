@@ -22,6 +22,11 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
+		public RutaAerea getRuta( int idRuta, Ciudad origen, Ciduad destino )
+		{
+			return parse ( DBAdapter.retrieveDataTable("GetRuta", idRuta, origen, destino ).Rows[0]);
+		}
+
 		// Ingresa una ruta aerea ? 
 		public void modificarCiudaes(  RutaAerea rutaAerea )
 		{

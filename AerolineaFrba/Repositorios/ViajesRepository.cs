@@ -33,6 +33,12 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
+		public Viaje getViaje( int idViaje )
+		{
+			return parse ( DBAdapter.retrieveDataTable("GetViaje", idViaje ).Rows[0]);
+		}
+
+
 		public List<Viaje> parseViajes ( DataTable dataTable )
 		{
 			return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
@@ -43,7 +49,11 @@ namespace AerolineaFrba.Repositories {
         	// Verificar parametros de gets
        		return new Viaje( 
        		Convert.ToInt32(dr["Cod_Viaje"] ),
-       		new RutasAereasRepository().getRuta( Convert.ToInt32(dr["Cod_Ruta"] ) ),
+       		new RutasAereasRepository().getRuta( 
+       			Convert.ToInt32(dr["Cod_Ruta"] ) 
+       			// get Ciudad origen 
+       			//  get Ciudad destino 
+       			),
        		new AeronaveRepository().getAeronave( Convert.ToInt32(dr["Cod_Aeronave"])),
 			Convert.ToDateTime(dr["Fecha_Salida"]),
 			Convert.ToDateTime(dr["Fecha_Llegada"]),
