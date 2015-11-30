@@ -23,5 +23,6 @@ namespace AerolineaFrba.Domain
             this.Intentos_Login = Intentos_Login;
             this.Estado_Usuario = Estado_Usuario;     
         }
+
     }
 }
