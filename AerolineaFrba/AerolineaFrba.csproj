@@ -135,6 +135,12 @@
     <Compile Include="Abm Ruta\Listado.Designer.cs">
       <DependentUpon>Listado.cs</DependentUpon>
     </Compile>
+    <Compile Include="BienvenidaWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BienvenidaWindow.Designer.cs">
+      <DependentUpon>BienvenidaWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Consulta Millas\ConsultaMillas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,11 +223,17 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Form1.cs">
+    <Compile Include="Login\ForgotPasswordScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Login\ForgotPasswordScreen.Designer.cs">
+      <DependentUpon>ForgotPasswordScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\LoginScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginScreen.Designer.cs">
+      <DependentUpon>LoginScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -311,6 +323,9 @@
     <EmbeddedResource Include="Abm Ruta\Listado.resx">
       <DependentUpon>Listado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BienvenidaWindow.resx">
+      <DependentUpon>BienvenidaWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\ConsultaMillas.resx">
       <DependentUpon>ConsultaMillas.cs</DependentUpon>
     </EmbeddedResource>
@@ -332,8 +347,11 @@
     <EmbeddedResource Include="Generacion Viaje\AltaViaje.resx">
       <DependentUpon>AltaViaje.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Login\ForgotPasswordScreen.resx">
+      <DependentUpon>ForgotPasswordScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginScreen.resx">
+      <DependentUpon>LoginScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

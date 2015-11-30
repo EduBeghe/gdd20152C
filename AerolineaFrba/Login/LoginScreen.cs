@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AerolineaFrba.Utils;
 
-namespace PagoElectronico.UI.Login
+namespace AerolineaFrba.Login
 {
     public partial class LoginScreen : Form
     {
@@ -39,6 +39,11 @@ namespace PagoElectronico.UI.Login
         }
 
         private void olvidoPasswordLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void usuarioTextbox_TextChanged(object sender, EventArgs e)
         {
 
         }

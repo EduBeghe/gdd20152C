@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AerolineaFrba.Utils;
 
-namespace PagoElectronico.UI.Login
+namespace AerolineaFrba.Login
 {
     public partial class ForgotPasswordScreen : Form
     {

@@ -2,3 +2,5 @@ c:\users\matias\documents\visual studio 2012\Projects\AerolineaFrba\AerolineaFrb
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\2 C\TP Aerolinea FRBA 1.0 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\2 C\Prueba\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\2 C\Codigo\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
