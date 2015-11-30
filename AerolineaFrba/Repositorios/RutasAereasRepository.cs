@@ -27,6 +27,11 @@ namespace AerolineaFrba.Repositories {
 			return parse ( DBAdapter.retrieveDataTable("GetRuta", idRuta, origen, destino ).Rows[0]);
 		}
 
+		public List<Ruta> findRuta( )
+		{
+			return parseRutas( DBAdapter.retrieveDataTable( "FindRuta" ).Rows[0]);
+		}
+
 		// Ingresa una ruta aerea ? 
 		public void modificarCiudaes(  RutaAerea rutaAerea )
 		{
@@ -66,6 +71,12 @@ namespace AerolineaFrba.Repositories {
 			// motivo? ( entra por la form ? )
 			);				
 		}
+
+		public List<RutaAerea> parseRutas ( DataTable dataTable )
+		{
+			return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+		}
+
 
 
 		public RutaAerea parse(DataRow dr)

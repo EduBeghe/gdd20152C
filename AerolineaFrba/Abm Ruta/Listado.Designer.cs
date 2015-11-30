@@ -35,13 +35,13 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.rutasGrid = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.rutasGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -104,15 +104,6 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Filtro 4";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 197);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(525, 261);
-            this.dataGridView1.TabIndex = 7;
-            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
@@ -138,6 +129,7 @@
             this.button2.TabIndex = 10;
             this.button2.Text = "buscar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -157,17 +149,26 @@
             this.button5.Text = "Modificar";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // rutasGrid
+            // 
+            this.rutasGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.rutasGrid.Location = new System.Drawing.Point(12, 197);
+            this.rutasGrid.Name = "rutasGrid";
+            this.rutasGrid.RowTemplate.Height = 28;
+            this.rutasGrid.Size = new System.Drawing.Size(525, 261);
+            this.rutasGrid.TabIndex = 14;
+            // 
             // AltaAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 509);
+            this.Controls.Add(this.rutasGrid);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox2);
@@ -177,7 +178,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AltaAeronave";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rutasGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,5 +199,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridView rutasGrid;
     }
 }
