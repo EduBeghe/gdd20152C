@@ -35,13 +35,13 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.aeronavesGrid = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -106,12 +106,12 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 197);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(525, 261);
-            this.dataGridView1.TabIndex = 7;
+            this.aeronavesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.aeronavesGrid.Location = new System.Drawing.Point(12, 197);
+            this.aeronavesGrid.Name = "dataGridView1";
+            this.aeronavesGrid.RowTemplate.Height = 28;
+            this.aeronavesGrid.Size = new System.Drawing.Size(525, 261);
+            this.aeronavesGrid.TabIndex = 7;
             // 
             // comboBox1
             // 
@@ -167,7 +167,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.aeronavesGrid);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox2);
@@ -177,7 +177,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AltaAeronave";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
