@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Repositories;
+using AerolineaFrba.Domain;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
@@ -17,9 +19,14 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+           
+        }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.AeronavesGrid.DataSource = new BindingSource( new BindingList<Aeronave>( new AeronaveRepository().findAeronave() ), null ); 
         }
     }
 }
