@@ -1,4 +1,4 @@
-﻿namespace PagoElectronico.UI.Login
+﻿namespace AerolineaFrba.Login
 {
     partial class LoginScreen
     {
