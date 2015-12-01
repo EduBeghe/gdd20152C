@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Repositories;
+using AerolineaFrba.Domain;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -17,14 +19,10 @@ namespace AerolineaFrba.Abm_Ciudad
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
+            // Cargar los datos de los inputs box
+            new AeronaveRepository().darDeAlta(new Aeronave( ));
         }
     }
 }

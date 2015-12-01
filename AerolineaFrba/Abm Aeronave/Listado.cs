@@ -34,11 +34,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button4_Click(object sender, EventArgs e)
         {
-            // Se necesita un form aparte para que el usuario ingrese la fecha de reinicio
-            //var aeronave = (Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem;
-            //new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, fechaReinicio);
-            //MessageBox.Show("Aeronave dada de baja con exito");
-            //this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave()), null); 
+           // mandar a form baja por problemas tecnicos
         }
     }
 }

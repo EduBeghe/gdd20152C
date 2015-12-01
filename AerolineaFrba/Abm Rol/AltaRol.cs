@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Rol
 {
@@ -17,9 +19,9 @@ namespace AerolineaFrba.Abm_Rol
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            new RolesRepository().agregarRol(new Rol( nombreRol, funcionalidades ));
         }
     }
 }

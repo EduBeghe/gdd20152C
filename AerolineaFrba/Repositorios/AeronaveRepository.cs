@@ -16,6 +16,7 @@ namespace AerolineaFrba.Repositories {
 			Adapter.executeProcedure("Baja_Por_Vida_Util", 
 			aeronave.Cod_Aeronave,
 			// @cancelaciones bit
+			// fecha actual ?
 			);
 		}
 
@@ -25,6 +26,7 @@ namespace AerolineaFrba.Repositories {
 			aeronave.Cod_Aeronave,
 			// @cancelaciones bit 
 			fechaReinicio
+			// fecha actual ?
 			);	
 		}
 
