@@ -34,13 +34,12 @@
             this.passwordTextbox = new System.Windows.Forms.TextBox();
             this.usuarioTextbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(49, 109);
+            this.loginButton.Location = new System.Drawing.Point(113, 111);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.Size = new System.Drawing.Size(114, 23);
             this.loginButton.TabIndex = 10;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
@@ -84,14 +83,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(325, 157);
-            this.Controls.Add(this.olvidoPasswordLinkLabel);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usuarioLabel);
             this.Controls.Add(this.passwordTextbox);
             this.Controls.Add(this.usuarioTextbox);
             this.Name = "LoginScreen";
-            this.Text = "Form1";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.LoginScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
