@@ -23,5 +23,13 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().findRol()), null); 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var rol = (Rol) rolGrid.SelectedRows[0].DataBoundItem;
+            new RolesRepository().darDeBaja(rol);
+            MessageBox.Show("Rol eliminada con exito");
+            this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().findRol()), null); 
+        }
     }
 }

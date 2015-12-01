@@ -23,5 +23,13 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var ruta = (RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem;
+            new RutaAereaRepository().darDeBaja( ruta ) ;
+            MessageBox.Show("Ruta dada de baja con exito");
+            this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 
+        }
     }
 }
