@@ -7,14 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class AltaAeronave : Form
+    public partial class BajaPorVidaUtil : Form
     {
-        public AltaAeronave()
+        private Aeronave aeronave;
+
+        public BajaPorVidaUtil()
         {
             InitializeComponent();
+        }
+
+        internal void ShowDialog(Aeronave aeronave)
+        {
+            // haver el copy de aeronovae
+            this.aeronave = Aeronave.Copy(cli);
+            this.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

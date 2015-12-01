@@ -7,24 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
-    public partial class Form1 : Form
+    public partial class ModificarAeronave : Form
     {
-        public Form1()
+        public ModificarAeronave()
         {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
+            // Falta el modificar aeronaves en el repo
         }
     }
 }

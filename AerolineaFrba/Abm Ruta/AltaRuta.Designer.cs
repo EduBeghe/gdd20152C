@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ruta
 {
-    partial class Form1
+    partial class AltaRuta
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(98, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Alta de Ruta";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -88,7 +87,7 @@
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(158, 88);
             this.checkedListBox1.TabIndex = 6;
-            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
+
             // 
             // button1
             // 

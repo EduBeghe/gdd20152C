@@ -12,9 +12,9 @@ using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class AltaAeronave : Form
+    public partial class ConsultaMillas : Form
     {
-        public AltaAeronave()
+        public ConsultaMillas()
         {
             InitializeComponent();
         }

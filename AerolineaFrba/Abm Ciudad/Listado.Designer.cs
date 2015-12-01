@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Aeronave
 {
-    partial class AltaAeronave
+    partial class ListadoCiudad
     {
         /// <summary>
         /// Required designer variable.

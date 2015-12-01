@@ -12,9 +12,9 @@ using AerolineaFrba.Domain;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
-    public partial class Form1 : Form
+    public partial class AltaAeronave : Form
     {
-        public Form1()
+        public AltaAeronave()
         {
             InitializeComponent();
         }

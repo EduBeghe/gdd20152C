@@ -12,9 +12,9 @@ using AerolineaFrba.Domain;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class AltaAeronave : Form
+    public partial class ListadoAeronave : Form
     {
-        public AltaAeronave()
+        public ListadoAeronave()
         {
             InitializeComponent();
         }
@@ -34,7 +34,13 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button4_Click(object sender, EventArgs e)
         {
-           // mandar a form baja por problemas tecnicos
+           // necesario el import de las otras forms?
+            new BajaPorProblemasTecnicos().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new ModificarAeronave().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
         }
     }
 }

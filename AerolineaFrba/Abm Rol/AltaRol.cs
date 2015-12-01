@@ -12,9 +12,9 @@ using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Rol
 {
-    public partial class Form1 : Form
+    public partial class AltaRol : Form
     {
-        public Form1()
+        public AltaRol()
         {
             InitializeComponent();
         }

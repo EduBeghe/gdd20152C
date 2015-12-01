@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Aeronave
 {
-    partial class AltaAeronave
+    partial class ListadoRuta
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(52, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Filtros";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
             // 
@@ -149,6 +148,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "Modificar";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // rutasGrid
             // 

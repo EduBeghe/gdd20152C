@@ -13,9 +13,9 @@ using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class AltaAeronave : Form
+    public partial class BajaPorProblemasTecnicos : Form
     {
-        public AltaAeronave()
+        public BajaPorProblemasTecnicos()
         {
             InitializeComponent();
         }

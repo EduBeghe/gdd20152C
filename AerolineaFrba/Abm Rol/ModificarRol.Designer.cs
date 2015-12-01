@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Rol
 {
-    partial class Form1
+    partial class ModificarRol
     {
         /// <summary>
         /// Required designer variable.
@@ -53,7 +53,6 @@
             this.label2.Size = new System.Drawing.Size(118, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre del Rol";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox1
             // 
@@ -87,6 +86,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 

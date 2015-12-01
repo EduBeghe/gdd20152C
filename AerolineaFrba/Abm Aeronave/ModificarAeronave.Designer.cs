@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ciudad
 {
-    partial class Form1
+    partial class ModificarAeronave
     {
         /// <summary>
         /// Required designer variable.
@@ -72,7 +72,7 @@
             this.label3.Size = new System.Drawing.Size(159, 20);
             this.label3.TabIndex = 3;
             this.label3.Text = "Numero de Aeronave";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+ 
             // 
             // label4
             // 
@@ -187,6 +187,7 @@
             this.button1.TabIndex = 19;
             this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listBox1
             // 

@@ -6,9 +6,9 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using PagoElectronico.Utils;
+using AerolineaFrba.Utils;
 
-namespace PagoElectronico.Utils
+namespace AerolineaFrba.Utils
 {
     class DBAdapter
     {

@@ -12,9 +12,9 @@ using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class AltaAeronave : Form
+    public partial class ListadoRuta : Form
     {
-        public AltaAeronave()
+        public ListadoRuta()
         {
             InitializeComponent();
         }
@@ -30,6 +30,11 @@ namespace AerolineaFrba.Abm_Aeronave
             new RutaAereaRepository().darDeBaja( ruta ) ;
             MessageBox.Show("Ruta dada de baja con exito");
             this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // llamar a form modificar
         }
     }
 }

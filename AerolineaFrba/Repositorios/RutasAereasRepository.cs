@@ -5,6 +5,9 @@ using System.Text;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
 using System.Data;
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
+using AerolineaFrba.Utils;
 
 
 namespace AerolineaFrba.Repositories {
@@ -22,31 +25,31 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
-		public RutaAerea getRuta( int idRuta, Ciudad origen, Ciduad destino )
+		public RutaAerea getRuta( int idRuta, Ciudad origen, Ciudad destino )
 		{
 			return parse ( DBAdapter.retrieveDataTable("GetRuta", idRuta, origen, destino ).Rows[0]);
 		}
 
-		public List<Ruta> findRuta( )
+		public List<RutaAerea> findRuta( )
 		{
 			return parseRutas( DBAdapter.retrieveDataTable( "FindRuta" ).Rows[0]);
 		}
 
 		// Ingresa una ruta aerea ? 
-		public void modificarCiudaes(  RutaAerea rutaAerea )
+		public void modificarCiudades(  RutaAerea rutaAerea, Ciudad origen, Ciudad destino )
 		{
 			DBAdapter.executeProcedure("Modificar_Ciudades_Ruta_Aereas", 
 			rutaAerea.Cod_Ruta,
-			rutaAerea.origen.Cod_Ciudad,
-			rutaAerea.destino.Cod_Ciudad
+			origen.Nombre_Ciudad,
+			destino.Nombre_Ciudad
 			);				
 		}
 
-		public void modificarTipoServicio(  RutaAerea rutaAerea )
+		public void modificarTipoServicio(  RutaAerea rutaAerea, TipoServicio servicio )
 		{
 			DBAdapter.executeProcedure("Modificar_Servicio_Ruta_Aerea", 
 			rutaAerea.Cod_Ruta,
-			rutaAerea.servicio.Cod_Tipo_Servicio
+			servicio.Descripcion_Servicio
 			);				
 		}
 
@@ -62,7 +65,7 @@ namespace AerolineaFrba.Repositories {
 		// El motivo no lo tengo en ningun lado asi que deberia ingresar como param.
 		public void darDeBaja(  RutaAerea rutaAerea )
 		{
-			Adapter.executeProcedure("Baja_Ruta_Aerea", 
+			DBAdapter.executeProcedure("Baja_Ruta_Aerea", 
 			rutaAerea.origen.Cod_Ciudad,
 			rutaAerea.destino.Cod_Ciudad,
 			rutaAerea.servicio.Cod_Tipo_Servicio,

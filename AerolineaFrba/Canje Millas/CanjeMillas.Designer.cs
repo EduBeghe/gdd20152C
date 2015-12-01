@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Aeronave
 {
-    partial class AltaAeronave
+    partial class CanejMillas
     {
         /// <summary>
         /// Required designer variable.

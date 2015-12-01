@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ciudad
 {
-    partial class Form1
+    partial class AltaAeronave
     {
         /// <summary>
         /// Required designer variable.
@@ -70,7 +70,6 @@
             this.label2.Size = new System.Drawing.Size(108, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Fecha de Alta";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // dateTimePicker1
             // 
@@ -87,7 +86,6 @@
             this.label3.Size = new System.Drawing.Size(159, 20);
             this.label3.TabIndex = 3;
             this.label3.Text = "Numero de Aeronave";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
