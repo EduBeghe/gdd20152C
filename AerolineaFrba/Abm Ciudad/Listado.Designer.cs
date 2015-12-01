@@ -35,13 +35,13 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.aeronavesGrid = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.ciudadesGrid = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.ciudadesGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -52,6 +52,7 @@
             this.label1.Size = new System.Drawing.Size(52, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Filtros";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
             // 
@@ -103,6 +104,15 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Filtro 4";
             // 
+            // dataGridView1
+            // 
+            this.aeronavesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.aeronavesGrid.Location = new System.Drawing.Point(12, 197);
+            this.aeronavesGrid.Name = "dataGridView1";
+            this.aeronavesGrid.RowTemplate.Height = 28;
+            this.aeronavesGrid.Size = new System.Drawing.Size(525, 261);
+            this.aeronavesGrid.TabIndex = 7;
+            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
@@ -147,26 +157,17 @@
             this.button5.Text = "Modificar";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // ciudadesGrid
-            // 
-            this.ciudadesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ciudadesGrid.Location = new System.Drawing.Point(12, 209);
-            this.ciudadesGrid.Name = "ciudadesGrid";
-            this.ciudadesGrid.RowTemplate.Height = 28;
-            this.ciudadesGrid.Size = new System.Drawing.Size(525, 249);
-            this.ciudadesGrid.TabIndex = 14;
-            // 
-            // ListadoCiudad
+            // AltaAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 509);
-            this.Controls.Add(this.ciudadesGrid);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.aeronavesGrid);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox2);
@@ -174,9 +175,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "ListadoCiudad";
+            this.Name = "AltaAeronave";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.ciudadesGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,6 +198,5 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.DataGridView ciudadesGrid;
     }
 }

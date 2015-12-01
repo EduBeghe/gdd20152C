@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Aeronave
 {
-    partial class canjeMillas
+    partial class CanejMillas
     {
         /// <summary>
         /// Required designer variable.
@@ -48,6 +48,7 @@
             this.label1.Size = new System.Drawing.Size(112, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Realizar Canje";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
