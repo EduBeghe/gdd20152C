@@ -5,7 +5,8 @@ using System.Text;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
 using System.Data;
-
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Repositories {
 
@@ -13,10 +14,10 @@ namespace AerolineaFrba.Repositories {
 
 		public void cancelarPaquete(  Encomienda encomienda )
 		{
-			Adapter.executeProcedure("Cancelar_Paquetes",
+			DBAdapter.executeProcedure("Cancelar_Paquetes",
 				//Fecha actual,
 				encomienda.viaje.aeronave.Cod_Aeronave,
-				encomienda.vieja.rutaAerea.Cod_Ruta,
+				encomienda.viaje.rutaAerea.Cod_Ruta
 				// motivo ( sale de la form ?)
 			);
 		}

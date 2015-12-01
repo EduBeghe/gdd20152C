@@ -180,6 +180,7 @@
     <Compile Include="Domain\Aeronave.cs" />
     <Compile Include="Domain\Butaca.cs" />
     <Compile Include="Domain\Cliente.cs" />
+    <Compile Include="Domain\Encomienda.cs" />
     <Compile Include="Domain\EstadoAeronave.cs" />
     <Compile Include="Domain\Excepciones\NoOpenSessionException.cs" />
     <Compile Include="Domain\Fabricante.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Repositorios\PasajesRepository.cs" />
     <Compile Include="Repositorios\RolesRepository.cs" />
     <Compile Include="Repositorios\RutasAereasRepository.cs" />
+    <Compile Include="Repositorios\TipoServicioRepository.cs" />
     <Compile Include="Repositorios\ViajesRepository.cs" />
     <Compile Include="Utils\CLC_SessionManager.cs" />
     <Compile Include="Utils\DBAdapter.cs" />

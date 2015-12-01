@@ -1,4 +1,7 @@
 using System;
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba
 {
@@ -20,7 +23,7 @@ namespace AerolineaFrba
             this.Fecha_Vencimiento = Fecha_Vencimiento;
             this.Tipo_Tarjeta = Tipo_Tarjeta;
             this.cliente = cliente;
-t		}
+		}
 	}
 }
 

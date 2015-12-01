@@ -1,4 +1,6 @@
 using System;
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba
 {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AerolineaFrba.Repositories;
+using AerolineaFrba.Domain;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Domain
 {
@@ -10,7 +13,7 @@ namespace AerolineaFrba.Domain
     public class Viaje
     {
         public int Cod_Viaje { get; set; }
-        public RutasAereas rutaAerea { get; set; }
+        public RutaAerea rutaAerea { get; set; }
         public Aeronave aeronave { get; set; }
         public DateTime Fecha_Salida { get; set; }
         public DateTime Fecha_Llegada { get; set; }
@@ -18,7 +21,7 @@ namespace AerolineaFrba.Domain
 
 
 
-        public Viaje( int Cod_Viaje, RutasAereas rutaAerea, Aeronave aeronave, DateTime Fecha_Salida, DateTime Fecha_Llegada, DateTime Fecha_Llegada_Estimada)
+        public Viaje(int Cod_Viaje, RutaAerea rutaAerea, Aeronave aeronave, DateTime Fecha_Salida, DateTime Fecha_Llegada, DateTime Fecha_Llegada_Estimada)
         {
             this.Cod_Viaje = Cod_Viaje;
             this.rutaAerea = rutaAerea;
