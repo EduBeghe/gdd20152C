@@ -161,7 +161,8 @@ CREATE TABLE TODOX2LUCAS.Funcionalidades (
 CREATE TABLE TODOX2LUCAS.Productos ( 
 	Cod_Producto int PRIMARY KEY CLUSTERED,
 	Descripcion_Producto nvarchar(255),
-	Cantidad int
+	Cantidad int,
+	PrecioEnMillas int
 )
 ;
 --CREACION TABLA ROLES--
@@ -721,7 +722,7 @@ BEGIN
 		UPDATE TODOX2LUCAS.RutasAereas
 		SET Estado_Ruta = 0
 		WHERE Cod_Ruta = @codRuta
-		
+	
 		EXEC TODOX2LUCAS.Cancelar_Pasajes @fecha,NULL,@codRuta,@motivo
 
 		EXEC TODOX2LUCAS.Cancelar_Paquetes @fecha,NULL,@codRuta,@motivo
@@ -800,7 +801,7 @@ BEGIN
 	WHERE a.Cod_Aeronave =  @codAeronave 
 	
 	--BUSCAR AERONAVE PARA SUPLANTAR--
-	SELECT DISTINCT @aeronaveSuplente = a1.Cod_Aeronave
+	SELECT TOP 1 DISTINCT @aeronaveSuplente = a1.Cod_Aeronave
 	FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
 									JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
 									JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
@@ -909,9 +910,15 @@ BEGIN
 	BEGIN 
 		print 'El servicio ingresado no existe'
 	END
-
-	INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Modelo,Cod_Tipo_Servicio,Kgs_Disponibles )
-	VALUES(@matricula,@fecha_Alta,@cod_Fabricante,@modelo,@cod_Tipo_Servicio,@kgs_Disponibles)
+	IF NOT EXISTS (SELECT Matricula FROM TODOX2LUCAS.Aeronaves WHERE Matricula = @matricula)
+	BEGIN
+		INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Modelo,Cod_Tipo_Servicio,Kgs_Disponibles )
+		VALUES(@matricula,@fecha_Alta,@cod_Fabricante,@modelo,@cod_Tipo_Servicio,@kgs_Disponibles)
+	END
+	ELSE
+	BEGIN
+		print 'La matricula ya existe'
+	END
 
 END
 GO
@@ -978,11 +985,17 @@ BEGIN
 	END
 	ELSE 
 	BEGIN
-		DECLARE @codProducto int;
-		SELECT @codProducto = Cod_Producto FROM TODOX2LUCAS.Productos WHERE Descripcion_Producto = @producto
+		DECLARE @codProducto int, @precioMillas int;
+		SELECT @codProducto = Cod_Producto, @precioMillas = PrecioEnMillas
+		FROM TODOX2LUCAS.Productos 
+		WHERE Descripcion_Producto = @producto
+		
 		INSERT INTO TODOX2LUCAS.Canjes(Nro_Dni,Cliente_Apellido,Cod_Producto,Fecha)
 		VALUES (@dni,@cliente,@codProducto,GETDATE())
-
+		
+		UPDATE TODOX2LUCAS.Clientes
+		SET Cant_Millas = Cant_Millas - PrecioEnMillas
+		WHERE Nro_Dni = @dni AND Cliente_Apellido = @cliente
 	END
 END
 GO
@@ -1250,7 +1263,7 @@ GO
 /***************************************  TRIGGERS ***********************************************/
 -- TRIGGER QUE ACTUALIZA EL ATRIBUTO DE LA TABLA CLIENTES(CANT_MILLAS) ANTE UN INSERT EN LA TABLA DE PASAJES--
 GO
-CREATE TRIGGER Sumar_Millas_Pasajes
+CREATE TRIGGER TODOX2LUCAS.Sumar_Millas_Pasajes
 ON TODOX2LUCAS.Pasajes 
 AFTER INSERT
 AS
@@ -1279,7 +1292,7 @@ BEGIN
 END
 GO
 
-CREATE TRIGGER Sumar_Millas_Paquetes
+CREATE TRIGGER TODOX2LUCAS.Sumar_Millas_Paquetes
 ON TODOX2LUCAS.Encomiendas 
 AFTER INSERT
 AS
