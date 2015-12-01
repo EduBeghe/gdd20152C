@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.label5 = new System.Windows.Forms.Label();
-            this.aeronavesGrid = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).BeginInit();
+            this.disponibilidadGrid = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.disponibilidadGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label5
@@ -46,15 +46,6 @@
             this.label5.Size = new System.Drawing.Size(107, 20);
             this.label5.TabIndex = 6;
             this.label5.Text = "Disponibilidad";
-            // 
-            // dataGridView1
-            // 
-            this.aeronavesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.aeronavesGrid.Location = new System.Drawing.Point(12, 42);
-            this.aeronavesGrid.Name = "dataGridView1";
-            this.aeronavesGrid.RowTemplate.Height = 28;
-            this.aeronavesGrid.Size = new System.Drawing.Size(525, 261);
-            this.aeronavesGrid.TabIndex = 7;
             // 
             // button3
             // 
@@ -97,21 +88,30 @@
             this.textBox2.Size = new System.Drawing.Size(100, 26);
             this.textBox2.TabIndex = 17;
             // 
-            // AltaAeronave
+            // disponibilidadGrid
+            // 
+            this.disponibilidadGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.disponibilidadGrid.Location = new System.Drawing.Point(16, 53);
+            this.disponibilidadGrid.Name = "disponibilidadGrid";
+            this.disponibilidadGrid.RowTemplate.Height = 28;
+            this.disponibilidadGrid.Size = new System.Drawing.Size(520, 260);
+            this.disponibilidadGrid.TabIndex = 18;
+            // 
+            // Disponibilidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 509);
+            this.Controls.Add(this.disponibilidadGrid);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.aeronavesGrid);
             this.Controls.Add(this.label5);
-            this.Name = "AltaAeronave";
+            this.Name = "Disponibilidad";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.disponibilidadGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,5 +126,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridView disponibilidadGrid;
     }
 }
