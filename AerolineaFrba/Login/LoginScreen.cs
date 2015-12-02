@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AerolineaFrba.Utils;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Login
 {
@@ -18,7 +19,7 @@ namespace AerolineaFrba.Login
         }
         private void loginButton_Click(object sender, EventArgs e)
         {
-
+            new UsuarioRepository().login(usuarioTextbox.Text, passwordTextbox.Text);
         }
 
     }
