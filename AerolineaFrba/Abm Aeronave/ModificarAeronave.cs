@@ -14,9 +14,17 @@ namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class ModificarAeronave : Form
     {
+        private Aeronave aeronave;
+
         public ModificarAeronave()
         {
             InitializeComponent();
+        }
+
+        internal void ShowDialog(Aeronave aeronave)
+        {
+            this.aeronave = Aeronave.Copy(aeronave);
+            this.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)

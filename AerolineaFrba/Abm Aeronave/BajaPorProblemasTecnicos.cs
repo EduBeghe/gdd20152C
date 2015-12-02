@@ -30,10 +30,10 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var aeronave = (Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem;
-            new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, fechaReinicio);
+            //var aeronave = (Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem;
+            new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, fechaProblemasTecnicos.Value );
             MessageBox.Show("Aeronave dada de baja con exito");
-            this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave()), null); 
+            //this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave()), null); 
         }
     }
 }
