@@ -17,6 +17,12 @@ namespace AerolineaFrba.Login
         {
             InitializeComponent();
         }
+        
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
         private void loginButton_Click(object sender, EventArgs e)
         {
             new UsuarioRepository().login(usuarioTextbox.Text, passwordTextbox.Text);

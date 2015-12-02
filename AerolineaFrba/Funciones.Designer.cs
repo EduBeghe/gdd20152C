@@ -44,6 +44,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.CanjeMillasButton = new System.Windows.Forms.Button();
             this.ConsultarMillasButton = new System.Windows.Forms.Button();
+            this.LoginButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -73,6 +74,7 @@
             this.BuscarAeronaveButton.TabIndex = 2;
             this.BuscarAeronaveButton.Text = "Buscar Aeronave";
             this.BuscarAeronaveButton.UseVisualStyleBackColor = true;
+            this.BuscarAeronaveButton.Click += new System.EventHandler(this.BuscarAeronaveButton_Click);
             // 
             // label2
             // 
@@ -100,6 +102,7 @@
             this.BuscarRutaButton.TabIndex = 6;
             this.BuscarRutaButton.Text = "Buscar Ruta Aerea";
             this.BuscarRutaButton.UseVisualStyleBackColor = true;
+            this.BuscarRutaButton.Click += new System.EventHandler(this.BuscarRutaButton_Click);
             // 
             // AltaRutaButton
             // 
@@ -109,6 +112,7 @@
             this.AltaRutaButton.TabIndex = 5;
             this.AltaRutaButton.Text = "Alta Ruta Aerea";
             this.AltaRutaButton.UseVisualStyleBackColor = true;
+            this.AltaRutaButton.Click += new System.EventHandler(this.AltaRutaButton_Click);
             // 
             // BuscarRolButton
             // 
@@ -118,6 +122,7 @@
             this.BuscarRolButton.TabIndex = 9;
             this.BuscarRolButton.Text = "Buscar Rol";
             this.BuscarRolButton.UseVisualStyleBackColor = true;
+            this.BuscarRolButton.Click += new System.EventHandler(this.BuscarRolButton_Click);
             // 
             // AltaRolButton
             // 
@@ -127,6 +132,7 @@
             this.AltaRolButton.TabIndex = 8;
             this.AltaRolButton.Text = "Alta Rol";
             this.AltaRolButton.UseVisualStyleBackColor = true;
+            this.AltaRolButton.Click += new System.EventHandler(this.AltaRolButton_Click);
             // 
             // label4
             // 
@@ -145,6 +151,7 @@
             this.BuscarCiudadButton.TabIndex = 12;
             this.BuscarCiudadButton.Text = "Buscar Ciudad";
             this.BuscarCiudadButton.UseVisualStyleBackColor = true;
+            this.BuscarCiudadButton.Click += new System.EventHandler(this.BuscarCiudadButton_Click);
             // 
             // AltaCiudadButton
             // 
@@ -154,6 +161,7 @@
             this.AltaCiudadButton.TabIndex = 11;
             this.AltaCiudadButton.Text = "Alta Ciudad";
             this.AltaCiudadButton.UseVisualStyleBackColor = true;
+            this.AltaCiudadButton.Click += new System.EventHandler(this.AltaCiudadButton_Click);
             // 
             // label5
             // 
@@ -181,6 +189,7 @@
             this.CanjeMillasButton.TabIndex = 14;
             this.CanjeMillasButton.Text = "Canje Millas";
             this.CanjeMillasButton.UseVisualStyleBackColor = true;
+            this.CanjeMillasButton.Click += new System.EventHandler(this.CanjeMillasButton_Click);
             // 
             // ConsultarMillasButton
             // 
@@ -190,12 +199,24 @@
             this.ConsultarMillasButton.TabIndex = 15;
             this.ConsultarMillasButton.Text = "Consultar Millas";
             this.ConsultarMillasButton.UseVisualStyleBackColor = true;
+            this.ConsultarMillasButton.Click += new System.EventHandler(this.ConsultarMillasButton_Click);
+            // 
+            // LoginButton
+            // 
+            this.LoginButton.Location = new System.Drawing.Point(192, 12);
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(441, 33);
+            this.LoginButton.TabIndex = 16;
+            this.LoginButton.Text = "Login como Administrador";
+            this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // Funciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 288);
+            this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.ConsultarMillasButton);
             this.Controls.Add(this.CanjeMillasButton);
             this.Controls.Add(this.label6);
@@ -237,5 +258,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button CanjeMillasButton;
         private System.Windows.Forms.Button ConsultarMillasButton;
+        private System.Windows.Forms.Button LoginButton;
     }
 }
