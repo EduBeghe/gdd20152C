@@ -15,7 +15,7 @@ namespace AerolineaFrba.Repositories {
 		public void generarViaje( Viaje viaje )
 		{
 			DBAdapter.executeProcedure("Generar_Viaje", 
-			viaje.rutaAerea.Cod_Viaje,
+			viaje.rutaAerea.Cod_Ruta,
 			viaje.aeronave.Cod_Aeronave,
 			viaje.Fecha_Salida,
 			viaje.Fecha_Llegada_Estimada
@@ -23,7 +23,7 @@ namespace AerolineaFrba.Repositories {
 		}		
 
 		// Verificar parametros
-		public void getViajesDisponibles( DateTime fechaSalida, Ciudad origen, Ciudad destino )
+		public List<Viaje> getViajesDisponibles( DateTime fechaSalida, Ciudad origen, Ciudad destino )
 		{
 			return parseViajes( 
 			DBAdapter.retrieveDataTable("Mostrar_Viajes_Disponibles",

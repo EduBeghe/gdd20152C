@@ -210,6 +210,7 @@
     <Compile Include="Repositorios\CiudadRepository.cs" />
     <Compile Include="Repositorios\ClientesRepository.cs" />
     <Compile Include="Repositorios\Estadisticos.cs" />
+    <Compile Include="Repositorios\FabricantesRepository.cs" />
     <Compile Include="Repositorios\PaquetesRepository.cs" />
     <Compile Include="Repositorios\PasajesRepository.cs" />
     <Compile Include="Repositorios\RolesRepository.cs" />

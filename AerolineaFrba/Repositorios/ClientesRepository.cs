@@ -64,7 +64,7 @@ namespace AerolineaFrba.Repositories
             DBAdapter.executeProcedure( "Canjear_Millas", 
             cliente.Nro_Dni,
             cliente.Cliente_Apellido,
-            producto.Cod_Producto
+            producto.Descripcion_Producto,
             cantidad
             );
         }
