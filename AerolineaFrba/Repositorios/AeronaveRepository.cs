@@ -11,12 +11,11 @@ namespace AerolineaFrba.Repositories {
 
 	class AeronaveRepository {
 
-		public void darDeBajaXVidaUtil( Aeronave aeronave, DateTime fechaActual ) 
+		public void darDeBajaXVidaUtil( Aeronave aeronave ) 
 		{
 			DBAdapter.executeProcedure("Baja_Por_Vida_Util", 
 			aeronave.Cod_Aeronave,
 			// @cancelaciones bit
-			fechaActual
 			);
 		}
 
