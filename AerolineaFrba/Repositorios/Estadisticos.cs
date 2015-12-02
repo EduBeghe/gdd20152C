@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
+using AerolineaFrba.Repositories;
 using System.Data;
 
 

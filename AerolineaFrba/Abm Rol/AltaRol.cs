@@ -21,7 +21,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new RolesRepository().agregarRol(new Rol( nombreRol, funcionalidades ));
+            ///new RolesRepository().agregarRol(new Rol( nombreRol, funcionalidades ));
         }
     }
 }

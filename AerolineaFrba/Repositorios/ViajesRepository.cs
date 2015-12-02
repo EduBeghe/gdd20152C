@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
+using AerolineaFrba.Repositories;
 using System.Data;
 
 
@@ -49,7 +50,7 @@ namespace AerolineaFrba.Repositories {
         	// Verificar parametros de gets
        		return new Viaje( 
        		Convert.ToInt32(dr["Cod_Viaje"] ),
-       		new RutasAereasRepository().getRuta( 
+       		new RutaAereaRepository().getRuta( 
        			Convert.ToInt32(dr["Cod_Ruta"] ) 
        			// get Ciudad origen 
        			//  get Ciudad destino 

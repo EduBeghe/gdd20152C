@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
+using AerolineaFrba.Repositories;
 using System.Data;
 
 
@@ -16,7 +17,7 @@ namespace AerolineaFrba.Repositories {
 		// de referenciar su propia tarjeta ?
 		public void comprarPasajes( Pasaje pasaje, Cliente cliente, TarjetaDeCredito tarjeta )
 		{
-			Adapter.executeProcedure("Comprar_Pasajes",
+			DBAdapter.executeProcedure("Comprar_Pasajes",
 				pasaje.Butaca_Asociada,
 				pasaje.viaje.Cod_Viaje,
 				cliente.Cliente_Apellido,
@@ -24,15 +25,15 @@ namespace AerolineaFrba.Repositories {
 				// Forma de pago ( viene del form ? ) ( otra opcion que no sea tarjeta ? )
 				tarjeta.Numero_Tarjeta,
 				tarjeta.Cod_Seg,
-				tarjeta.Fecha_Vencimiento
+				tarjeta.Fecha_Vencimiento,
 				tarjeta.Tipo_Tarjeta
 			);
 		}
 
-		public void cancelarPasaje( Pasaje pasaje )
+		public void cancelarPasaje( Pasaje pasaje, DateTime fecha )
 		{
-			Adapter.executeProcedure("Cancelar_Pasajes",
-				pasaje.viaje.Fecha_Viaje,
+			DBAdapter.executeProcedure("Cancelar_Pasajes",
+				fecha,
 				pasaje.viaje.aeronave.Cod_Aeronave,
 				pasaje.viaje.rutaAerea.Cod_Ruta,
 				// motivo ( de la form ? ) 
