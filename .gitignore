@@ -1,3 +1,6 @@
 AerolineaFrba.v11.suo
 *.csproj
 *.suo
+*.exe
+*.pdb
+*.manifest
