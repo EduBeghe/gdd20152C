@@ -35,7 +35,7 @@ namespace AerolineaFrba.Repositories {
 
 
 				
-        public List<Ciudad> parseCiudad ( DataTable dataTable )
+        public List<Ciudad> parseCiudades ( DataTable dataTable )
         {
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
         }

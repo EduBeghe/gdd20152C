@@ -13,43 +13,45 @@ namespace AerolineaFrba.Repositories {
 	
 	class Estadísticos {
 
-		public void destinosConMasPasajes( DateTime fechaInicio, DateTime fechaFin ) 
+		public List<Ciudad> destinosConMasPasajes( DateTime fechaInicio, DateTime fechaFin ) 
 		{
-			return parsePasajes ( 
+            
+			return new CiudadRepository().parseCiudades ( 
 			DBAdapter.retrieveDataTable("Pasajes_Mas_Comprados", 
 			fechaInicio,
 			fechaFin )
 			);
 		}
 
-		public void destinosConMasAeronavesVacias( DateTime fechaInicio, DateTime fechaFin )
+		public List<Ciudad> destinosConMasAeronavesVacias( DateTime fechaInicio, DateTime fechaFin )
 		{
-			return parseAeronaves ( 
+			return new CiudadRepository().parseCiudades ( 
 			DBAdapter.retrieveDataTable("Aeronaves_Mas_Vacias", 
 			fechaInicio,
 			fechaFin )
 			);	
 		}
 
-		public void clientesConMasPuntos()
+		public List<Cliente> clientesConMasPuntos()
 		{
-			return parseClientes (
-			DBAdapter.retrieveDataTable( "Cliente_Mayoria_Puntos" );
+			return new ClientesRepository().parseClientes (
+			DBAdapter.retrieveDataTable( "Cliente_Mayoria_Puntos" )
+            );
 		}
 
-		public void destinosConMasPasajesCancelados(  DateTime fechaInicio, DateTime fechaFin )
+		public List<Ciudad> destinosConMasPasajesCancelados(  DateTime fechaInicio, DateTime fechaFin )
 		{
-			return parseCiudades (
+			return new CiudadRepository().parseCiudades (
 			DBAdapter.retrieveDataTable("Destinos_Mas_Cancelados", 
 			fechaInicio,
 			fechaFin )
 			);
 		}
 
-		public void aeronavesConMasDiasFueraDeServicio(  DateTime fechaInicio, DateTime fechaFin )
+		public List<Aeronave> aeronavesConMasDiasFueraDeServicio(  DateTime fechaInicio, DateTime fechaFin )
 		{
-			return parseAeronaves (
-			DBAdapter.executeProcedure("Aeronave_Mayoria_Fuera_Servicio", 
+			return new AeronaveRepository().parseAeronaves(
+            DBAdapter.retrieveDataTable("Aeronave_Mayoria_Fuera_Servicio", 
 			fechaInicio,
 			fechaFin )
 			);
