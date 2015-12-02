@@ -45,12 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Aeronave\BajaPorVidaUtil.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Aeronave\BajaPorVidaUtil.Designer.cs">
-      <DependentUpon>BajaPorVidaUtil.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Aeronave\AltaAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,9 +225,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Aeronave\BajaPorProblemasTecnicos.resx">
       <DependentUpon>BajaPorProblemasTecnicos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Aeronave\BajaPorVidaUtil.resx">
-      <DependentUpon>BajaPorVidaUtil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Aeronave\ModificarAeronave.resx">
       <DependentUpon>ModificarAeronave.cs</DependentUpon>

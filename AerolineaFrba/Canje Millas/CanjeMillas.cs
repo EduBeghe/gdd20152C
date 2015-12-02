@@ -22,7 +22,7 @@ namespace AerolineaFrba.Abm_Aeronave
         private void button1_Click(object sender, EventArgs e)
         {
             var clientesRepository = new ClientesRepository();
-            clientesRepository.canjeMillas( clientesRepository.getCliente( dni, apellido ), prodcuto, cantidad );
+            //clientesRepository.canjeMillas( clientesRepository.getCliente( dni, apellido ), prodcuto, cantidad );
             // Mensaje de exito 
         }
     }

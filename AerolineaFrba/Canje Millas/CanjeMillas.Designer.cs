@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Aeronave
 {
-    partial class CanejMillas
+    partial class canjeMillas
     {
         /// <summary>
         /// Required designer variable.
@@ -11,14 +11,15 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+           /*
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
             {
                 components.Dispose();
             }
-            base.Dispose(disposing);
-        }
+           base.Dispose(disposing);
+        }*/
 
         #region Windows Form Designer generated code
 
@@ -48,7 +49,6 @@
             this.label1.Size = new System.Drawing.Size(112, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Realizar Canje";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 

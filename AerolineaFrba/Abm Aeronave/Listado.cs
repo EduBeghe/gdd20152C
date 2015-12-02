@@ -27,7 +27,7 @@ namespace AerolineaFrba.Abm_Aeronave
         private void button3_Click(object sender, EventArgs e)
         {
             var aeronave = (Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem;
-            new AeronaveRepository().darDeBajaXVidaUtil(aeronave);
+            new AeronaveRepository().darDeBajaXVidaUtil(aeronave, DateTime.Now );
             MessageBox.Show("Aeronave dada de baja con exito");
             this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave()), null); 
         }
