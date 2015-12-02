@@ -15,9 +15,17 @@ namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class BajaPorProblemasTecnicos : Form
     {
+        private Aeronave aeronave;
+
         public BajaPorProblemasTecnicos()
         {
             InitializeComponent();
+        }
+
+        internal void ShowDialog( Aeronave aeronave )
+        {
+            this.aeronave = Aeronave.Copy(aeronave);
+            this.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)

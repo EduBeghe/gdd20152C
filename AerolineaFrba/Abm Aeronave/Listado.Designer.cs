@@ -53,11 +53,10 @@
             this.label1.Size = new System.Drawing.Size(52, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Filtros";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(99, 57);
+            this.textBox1.Location = new System.Drawing.Point(190, 54);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 26);
             this.textBox1.TabIndex = 1;
@@ -67,22 +66,22 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(27, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 20);
+            this.label2.Size = new System.Drawing.Size(59, 20);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Filtro 1";
+            this.label2.Text = "Codigo";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(27, 120);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 20);
+            this.label3.Size = new System.Drawing.Size(73, 20);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Filtro 2";
+            this.label3.Text = "Matricula";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(99, 114);
+            this.textBox2.Location = new System.Drawing.Point(190, 114);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 26);
             this.textBox2.TabIndex = 4;
@@ -92,9 +91,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(296, 60);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 20);
+            this.label4.Size = new System.Drawing.Size(85, 20);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Filtro 3";
+            this.label4.Text = "Fabricante";
             // 
             // label5
             // 
@@ -171,7 +170,7 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // AltaAeronave
+            // ListadoAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -190,7 +189,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "AltaAeronave";
+            this.Name = "ListadoAeronave";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).EndInit();
             this.ResumeLayout(false);
