@@ -58,7 +58,7 @@ namespace AerolineaFrba.Repositories {
        		new AeronaveRepository().getAeronave( Convert.ToInt32(dr["Cod_Aeronave"])),
 			Convert.ToDateTime(dr["Fecha_Salida"]),
 			Convert.ToDateTime(dr["Fecha_Llegada"]),
-			Convert.ToDateTime(dr["Fecha_Llegada_Estimada"]),
+			Convert.ToDateTime(dr["Fecha_Llegada_Estimada"])
 			);
         }
 

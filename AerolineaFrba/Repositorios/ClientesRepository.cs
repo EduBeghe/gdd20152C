@@ -26,7 +26,7 @@ namespace AerolineaFrba.Repositories
             cliente.Cliente_Direccion,
             cliente.Cliente_Mail,
             cliente.Cliente_Fecha_Nacimiento,
-            cliente.Cliente_Telefono,
+            cliente.Cliente_Telefono
             );
         }
 
@@ -45,7 +45,7 @@ namespace AerolineaFrba.Repositories
             cliente.Cliente_Direccion,
             cliente.Cliente_Mail,
             cliente.Cliente_Fecha_Nacimiento,
-            cliente.Cliente_Telefono,
+            cliente.Cliente_Telefono
             );
         }
 
@@ -54,7 +54,7 @@ namespace AerolineaFrba.Repositories
             // Verificar tipo de retorno y que llamada a DBA
             return DBAdapter.executeProcedureWithReturnValue("Consulta_Millas",
                 cliente.Nro_Dni,
-                cliente.Cliente_Apellido,
+                cliente.Cliente_Apellido
                 );
         }
 
