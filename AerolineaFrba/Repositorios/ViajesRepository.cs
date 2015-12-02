@@ -51,10 +51,10 @@ namespace AerolineaFrba.Repositories {
        		return new Viaje( 
        		Convert.ToInt32(dr["Cod_Viaje"] ),
        		new RutaAereaRepository().getRuta( 
-       			Convert.ToInt32(dr["Cod_Ruta"] ) 
-       			// get Ciudad origen 
-       			//  get Ciudad destino 
-       			),
+       			Convert.ToInt32(dr["Cod_Ruta"] ),
+       			new CiudadRepository().getCiudad( Convert.ToInt32( dr["Cod_Ciudad_Origen"]) ),
+       			new CiudadRepository().getCiudad( Convert.ToInt32( dr["Cod_Ciudad_Destino"]) )
+       		),
        		new AeronaveRepository().getAeronave( Convert.ToInt32(dr["Cod_Aeronave"])),
 			Convert.ToDateTime(dr["Fecha_Salida"]),
 			Convert.ToDateTime(dr["Fecha_Llegada"]),

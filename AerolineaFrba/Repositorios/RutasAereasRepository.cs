@@ -31,7 +31,8 @@ namespace AerolineaFrba.Repositories {
 
 		public List<RutaAerea> findRuta( )
 		{
-			return parseRutas( DBAdapter.retrieveDataTable( "FindRuta" ).Rows[0]);
+			//return parseRutas( DBAdapter.retrieveDataTable( "FindRuta" ).Rows[0]);
+            return new List<RutaAerea>();
 		}
 
 		// Ingresa una ruta aerea ? 

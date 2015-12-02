@@ -39,6 +39,7 @@ namespace AerolineaFrba.Repositories {
 		{
             // Cual es la idea del metodo, buscar todas las aeronaves o una en particular ?
 			//return parseAeronaves( DBAdapter.retrieveDataTable( "FindAeronave" ).Rows[0] );
+            return new List<Aeronave>();
 		}
 
 		public void darDeAlta( Aeronave aeronave )

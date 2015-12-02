@@ -36,7 +36,7 @@ namespace AerolineaFrba.Repositories {
 				fecha,
 				pasaje.viaje.aeronave.Cod_Aeronave,
 				pasaje.viaje.rutaAerea.Cod_Ruta,
-				// motivo ( de la form ? ) 
+				"motivo" // motivo ( de la form ? ) 
 			);
 		}
 
