@@ -806,7 +806,7 @@ BEGIN
 	WHERE a.Cod_Aeronave =  @codAeronave 
 	
 	--BUSCAR AERONAVE PARA SUPLANTAR--
-	SELECT TOP 1 DISTINCT @aeronaveSuplente = a1.Cod_Aeronave
+	SELECT DISTINCT TOP 1 @aeronaveSuplente = a1.Cod_Aeronave
 	FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
 									JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
 									JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
@@ -999,7 +999,7 @@ BEGIN
 		VALUES (@dni,@cliente,@codProducto,GETDATE())
 		
 		UPDATE TODOX2LUCAS.Clientes
-		SET Cant_Millas = Cant_Millas - PrecioEnMillas
+		SET Cant_Millas = Cant_Millas - @precioMillas
 		WHERE Nro_Dni = @dni AND Cliente_Apellido = @cliente
 	END
 END
