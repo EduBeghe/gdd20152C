@@ -27,8 +27,8 @@ namespace AerolineaFrba.Abm_Ciudad
                 new Aeronave( 
                 Convert.ToInt32( codigoAeronave.Text ),
                 Convert.ToInt32( matriculaAeronave.Text),
-                DateTime.Now,
-                new Fabricante( Convert.ToInt32( codigoFabricante) , nombreFabricante.Text ),
+                fechaAltaAeronave.Value,
+                ( Fabricante ) fabricanteAeronave.SelectedItem,
                 modeloAeronave.Text,
                 ( TipoServicio ) tipoServicio.SelectedItem,
                 Convert.ToInt32( kgAeronave ),
