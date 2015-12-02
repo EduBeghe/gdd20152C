@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Domain;
 
+
 namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class AltaAeronave : Form
@@ -26,10 +27,10 @@ namespace AerolineaFrba.Abm_Ciudad
                 new Aeronave( 
                 Convert.ToInt32( codigoAeronave.Text ),
                 Convert.ToInt32( matriculaAeronave.Text),
-                // tiempo actual
+                DateTime.Now,
                 new Fabricante( Convert.ToInt32( codigoFabricante) , nombreFabricante.Text ),
                 modeloAeronave.Text,
-                new TipoServicio(),
+                ( TipoServicio ) tipoServicio.SelectedItem,
                 Convert.ToInt32( kgAeronave ),
                 Convert.ToInt32( butacasPasillo) + Convert.ToInt32( butacasVentanilla )
                 ));
