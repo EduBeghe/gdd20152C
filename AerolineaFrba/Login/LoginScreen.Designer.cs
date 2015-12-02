@@ -28,29 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.olvidoPasswordLinkLabel = new System.Windows.Forms.LinkLabel();
             this.loginButton = new System.Windows.Forms.Button();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.usuarioLabel = new System.Windows.Forms.Label();
             this.passwordTextbox = new System.Windows.Forms.TextBox();
             this.usuarioTextbox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // olvidoPasswordLinkLabel
-            // 
-            this.olvidoPasswordLinkLabel.AutoSize = true;
-            this.olvidoPasswordLinkLabel.Location = new System.Drawing.Point(230, 175);
-            this.olvidoPasswordLinkLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.olvidoPasswordLinkLabel.Name = "olvidoPasswordLinkLabel";
-            this.olvidoPasswordLinkLabel.Size = new System.Drawing.Size(161, 20);
-            this.olvidoPasswordLinkLabel.TabIndex = 11;
-            this.olvidoPasswordLinkLabel.TabStop = true;
-            this.olvidoPasswordLinkLabel.Text = "Olvido su contrase;a?";
-            this.olvidoPasswordLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.olvidoPasswordLinkLabel_LinkClicked);
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(74, 168);
+            this.loginButton.Location = new System.Drawing.Point(236, 160);
             this.loginButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(136, 27);
@@ -95,14 +83,23 @@
             this.usuarioTextbox.Name = "usuarioTextbox";
             this.usuarioTextbox.Size = new System.Drawing.Size(228, 26);
             this.usuarioTextbox.TabIndex = 6;
-            this.usuarioTextbox.TextChanged += new System.EventHandler(this.usuarioTextbox_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(214, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Login";
             // 
             // LoginScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 242);
-            this.Controls.Add(this.olvidoPasswordLinkLabel);
+            this.ClientSize = new System.Drawing.Size(380, 200);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usuarioLabel);
@@ -111,7 +108,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "LoginScreen";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.LoginScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,11 +115,11 @@
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel olvidoPasswordLinkLabel;
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.Label usuarioLabel;
         private System.Windows.Forms.TextBox passwordTextbox;
         private System.Windows.Forms.TextBox usuarioTextbox;
+        private System.Windows.Forms.Label label1;
     }
 }

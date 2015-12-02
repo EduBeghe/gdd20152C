@@ -16,38 +16,6 @@ namespace AerolineaFrba.Login
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            this.Hide();
-            new ForgotPasswordScreen().ShowDialog();
-        }
-
-        private void LoginScreen_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void olvidoPasswordLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
-        private void usuarioTextbox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void loginButton_Click(object sender, EventArgs e)
         {
 
