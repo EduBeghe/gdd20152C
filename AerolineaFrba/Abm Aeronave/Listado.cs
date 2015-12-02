@@ -19,6 +19,12 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+
         private void button2_Click_1(object sender, EventArgs e)
         {
             this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave()), null); 

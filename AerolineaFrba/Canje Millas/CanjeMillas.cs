@@ -19,6 +19,13 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             var clientesRepository = new ClientesRepository();
