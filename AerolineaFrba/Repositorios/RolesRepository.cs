@@ -30,7 +30,9 @@ namespace AerolineaFrba.Repositories {
 
 		public List<Rol> findRol( )
 		{
-			//return parseRoles( DBAdapter.retrieveDataTable( "FindRol" ).Rows[0]);
+			// falta procedure findRol, verificar si es necesario 
+            //return parseRoles( DBAdapter.retrieveDataTable( "FindRol" ).Rows[0]);
+            return new List<Rol>();
 		}
 
 		public void modificarEstado( Rol rol )

@@ -48,5 +48,10 @@ namespace AerolineaFrba.Login
 
         }
 
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

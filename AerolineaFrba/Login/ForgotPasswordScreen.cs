@@ -39,5 +39,10 @@ namespace AerolineaFrba.Login
 
         }
 
+        private void respuestaButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

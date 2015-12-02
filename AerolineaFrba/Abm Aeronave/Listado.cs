@@ -40,7 +40,8 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button5_Click(object sender, EventArgs e)
         {
-            new ModificarAeronave().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+            // no encuentra a la form modificar aeronave
+            //new ModificarAeronave().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
         }
     }
 }
