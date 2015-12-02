@@ -14,7 +14,7 @@ namespace AerolineaFrba.Repositories {
 		public void darDeBajaXVidaUtil( Aeronave aeronave ) 
 		{
 			DBAdapter.executeProcedure("Baja_Por_Vida_Util", 
-			aeronave.Cod_Aeronave,
+			aeronave.Cod_Aeronave
 			// @cancelaciones bit
 			);
 		}
