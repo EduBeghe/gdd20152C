@@ -1,5 +1,10 @@
 USE GD2C2015
 GO
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'TODOX2LUCAS')
+BEGIN
+	EXEC ('CREATE SCHEMA TODOX2LUCAS AUTHORIZATION gd')
+END
+GO
 /**************************************************  DROP TRABLES  ***************************************************/
 IF OBJECT_ID('TODOX2LUCAS.Cancelaciones') IS NOT NULL
 DROP TABLE TODOX2LUCAS.Cancelaciones;
