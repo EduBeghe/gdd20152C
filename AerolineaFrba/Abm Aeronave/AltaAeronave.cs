@@ -22,7 +22,18 @@ namespace AerolineaFrba.Abm_Ciudad
         private void button1_Click(object sender, EventArgs e)
         {
             // Cargar los datos de los inputs box
-            new AeronaveRepository().darDeAlta(new Aeronave( ));
+            new AeronaveRepository().darDeAlta(
+                new Aeronave( 
+                Convert.ToInt32( codigoAeronave.Text ),
+                Convert.ToInt32( matriculaAeronave.Text),
+                // tiempo actual
+                new Fabricante( Convert.ToInt32( codigoFabricante) , nombreFabricante.Text ),
+                modeloAeronave.Text,
+                new TipoServicio(),
+                Convert.ToInt32( kgAeronave ),
+                Convert.ToInt32( butacasPasillo) + Convert.ToInt32( butacasVentanilla )
+                ));
         }
+
     }
 }
