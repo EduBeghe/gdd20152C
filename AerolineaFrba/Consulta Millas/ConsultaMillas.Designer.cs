@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Abm_Aeronave
+﻿namespace AerolineaFrba.Abm_Ciudad
 {
     partial class ConsultaMillas
     {

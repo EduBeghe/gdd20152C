@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Abm_Aeronave
+﻿namespace AerolineaFrba.Abm_Ciudad
 {
     partial class ListadoRol
     {
@@ -148,6 +148,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "Modificar";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // rolGrid
             // 
@@ -158,7 +159,7 @@
             this.rolGrid.Size = new System.Drawing.Size(525, 239);
             this.rolGrid.TabIndex = 14;
             // 
-            // AltaAeronave
+            // ListadoRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -176,7 +177,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "AltaAeronave";
+            this.Name = "ListadoRol";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.rolGrid)).EndInit();
             this.ResumeLayout(false);

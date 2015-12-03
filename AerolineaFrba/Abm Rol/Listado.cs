@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Domain;
 
-namespace AerolineaFrba.Abm_Aeronave
+namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class ListadoRol : Form
     {
@@ -36,6 +36,11 @@ namespace AerolineaFrba.Abm_Aeronave
             new RolesRepository().darDeBaja(rol);
             MessageBox.Show("Rol eliminada con exito");
             this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().findRol()), null); 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

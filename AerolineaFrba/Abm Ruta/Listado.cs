@@ -11,7 +11,7 @@ using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Abm_Ruta;
 
-namespace AerolineaFrba.Abm_Aeronave
+namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class ListadoRuta : Form
     {
