@@ -30,13 +30,13 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
-		public void cancelarPasaje( Pasaje pasaje, DateTime fecha )
+		public void cancelarPasaje( Pasaje pasaje, DateTime fecha, string motivo )
 		{
 			DBAdapter.executeProcedure("Cancelar_Pasajes",
 				fecha,
 				pasaje.viaje.aeronave.Cod_Aeronave,
 				pasaje.viaje.rutaAerea.Cod_Ruta,
-				"motivo" // motivo ( de la form ? ) 
+				motivo
 			);
 		}
 
