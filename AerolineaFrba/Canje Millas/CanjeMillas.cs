@@ -29,7 +29,11 @@ namespace AerolineaFrba.Abm_Ciudad
         private void button1_Click(object sender, EventArgs e)
         {
             var clientesRepository = new ClientesRepository();
-            //clientesRepository.canjeMillas( clientesRepository.getCliente( dni, apellido ), prodcuto, cantidad );
+            clientesRepository.canjeMillas( 
+                clientesRepository.getCliente( Convert.ToInt32(dni), apellido.Text), 
+                ( ProductoCanje ) producto.SelectedItem, 
+                Convert.ToInt32( cantidad )
+                );
             // Mensaje de exito 
         }
     }
