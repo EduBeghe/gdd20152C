@@ -16,5 +16,16 @@ namespace AerolineaFrba.Compra
         {
             InitializeComponent();
         }
+
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

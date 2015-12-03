@@ -19,6 +19,12 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+
         private void button2_Click(object sender, EventArgs e)
         {
             this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 

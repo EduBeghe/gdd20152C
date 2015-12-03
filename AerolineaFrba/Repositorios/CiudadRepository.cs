@@ -28,22 +28,24 @@ namespace AerolineaFrba.Repositories {
 			//Adapter.executeProcedure("XXXX", cliente.idCliente);				
 		}
 
-		public Ciudad getCiudad()
+		public Ciudad getCiudad( int Cod_Ciudad )
 		{
 			return parse ( DBAdapter.retrieveDataTable("GetCiudad" ).Rows[0]);
 		}
 
 
 				
-        public List<Cliente> parseClientes ( DataTable dataTable )
+        public List<Ciudad> parseCiudades ( DataTable dataTable )
         {
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
         }
 
-        public Cliente parse(DataRow dr)
+        public Ciudad parse(DataRow dr)
         {
-            return new Cliente( Convert.ToInt32(dr["Nro_Dni"]), dr["Cliente_Apellido"] 
-            // Terminar cuando esten los atributos de Cliente definidos!
+            return new Ciudad( 
+            	dr["Nombre_Ciudad"] as string,
+                Convert.ToInt32(dr["Cod_Ciudad"]),
+            	( bool ) dr["Estado_Ciudad"]
             );
         }
 

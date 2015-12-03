@@ -24,8 +24,8 @@ namespace AerolineaFrba.Abm_Ruta
             // recivir la ruta como parametro en algun lado
 
             // Ver si la opcion seleccionada es directamente el string o la entidad Ciudad ( lo mismo con el servicio 
-            if (ciudadOrigen != null && ciudadDestino != null ) new RutaAereaRepository().modificarCiudades( ruta, ciudadOrigen, ciudadDestino );
-            if (tipoServicio != null) new RutaAereaRepository().modificarTipoServicio(ruta, tipoServicio);
+            //if (ciudadOrigen != null && ciudadDestino != null ) new RutaAereaRepository().modificarCiudades( ruta, ciudadOrigen, ciudadDestino );
+            //if (tipoServicio != null) new RutaAereaRepository().modificarTipoServicio(ruta, tipoServicio);
             MessageBox.Show("Ruta modificada con exito");
 
             // Recivo tmb la grid por parametro ?

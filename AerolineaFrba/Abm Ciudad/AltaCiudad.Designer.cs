@@ -67,8 +67,9 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Dar de Alta";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // AltaCiudad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -77,7 +78,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "AltaCiudad";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

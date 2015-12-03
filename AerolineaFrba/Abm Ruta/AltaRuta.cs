@@ -19,9 +19,15 @@ namespace AerolineaFrba.Abm_Ruta
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
-            new RutaAereaRepository().darDeAlta(new RutaAerea());
+          //  new RutaAereaRepository().darDeAlta(new RutaAerea());
         }
     }
 }

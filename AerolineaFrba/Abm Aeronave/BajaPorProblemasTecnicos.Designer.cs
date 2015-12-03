@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.fechaProblemasTecnicos = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -43,12 +43,12 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Fecha de Reinicio de Servicio";
             // 
-            // dateTimePicker2
+            // fechaProblemasTecnicos
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(268, 45);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 26);
-            this.dateTimePicker2.TabIndex = 3;
+            this.fechaProblemasTecnicos.Location = new System.Drawing.Point(268, 45);
+            this.fechaProblemasTecnicos.Name = "fechaProblemasTecnicos";
+            this.fechaProblemasTecnicos.Size = new System.Drawing.Size(200, 26);
+            this.fechaProblemasTecnicos.TabIndex = 3;
             // 
             // label3
             // 
@@ -69,16 +69,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // AltaAeronave
+            // BajaPorProblemasTecnicos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 136);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.fechaProblemasTecnicos);
             this.Controls.Add(this.label2);
-            this.Name = "AltaAeronave";
+            this.Name = "BajaPorProblemasTecnicos";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -88,7 +88,7 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker fechaProblemasTecnicos;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
     }

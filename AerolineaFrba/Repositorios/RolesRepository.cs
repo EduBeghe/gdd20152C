@@ -30,7 +30,9 @@ namespace AerolineaFrba.Repositories {
 
 		public List<Rol> findRol( )
 		{
-			return parseRoles( DBAdapter.retrieveDataTable( "FindRol" ).Rows[0]);
+			// falta procedure findRol, verificar si es necesario 
+            //return parseRoles( DBAdapter.retrieveDataTable( "FindRol" ).Rows[0]);
+            return new List<Rol>();
 		}
 
 		public void modificarEstado( Rol rol )
@@ -44,7 +46,7 @@ namespace AerolineaFrba.Repositories {
 
 		public void darDeBaja( Rol rol )
 		{
-			Adapter.executeProcedure("Baja_Rol", rol.Nombre_Rol );				
+			DBAdapter.executeProcedure("Baja_Rol", rol.Nombre_Rol );				
 		}
 
 		public List<Rol> parseRoles ( DataTable dataTable )
@@ -54,16 +56,12 @@ namespace AerolineaFrba.Repositories {
 
 		public Rol parse(DataRow dr)
         {
-       		// return new Aeronave( 
-       			// Convert.ToInt32(dr["Cod_Aeronave"]),
-       			// Convert.ToInt32(dr["Matricula"]),
-       			// Convert.ToDateTime(dr["Fecha_Alta"]),
-       			// new FabricantesRepository().getFabricante( Convert.ToInt32(dr["Cod_Fabricante"]) ),
-       			// dr["Modelo"] as string,
-       			// new TipoServicioRepository().getTipoServicio( Convert.ToInt32(["Cod_Tipo_Servicio"])),
-       			// Convert.ToInt32(dr["Kgs_Disponibles"]),
-       			// Convert.ToInt32(dr["Cantidad_Butacas"])
-			);
+        	return new Rol(
+        		Convert.ToInt32(dr["Cod_Rol"]),
+        		dr["Nombre_Rol"] as string,
+        		( bool ) dr["Estado_Rol"],
+        		new List<Funcionalidades>()// CORREGIR! donde sale esta lista ?
+       		);
         }
 
 

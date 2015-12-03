@@ -1,5 +1,10 @@
 USE GD2C2015
 GO
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'TODOX2LUCAS')
+BEGIN
+	EXEC ('CREATE SCHEMA TODOX2LUCAS AUTHORIZATION gd')
+END
+GO
 /**************************************************  DROP TRABLES  ***************************************************/
 IF OBJECT_ID('TODOX2LUCAS.Cancelaciones') IS NOT NULL
 DROP TABLE TODOX2LUCAS.Cancelaciones;
@@ -801,7 +806,7 @@ BEGIN
 	WHERE a.Cod_Aeronave =  @codAeronave 
 	
 	--BUSCAR AERONAVE PARA SUPLANTAR--
-	SELECT TOP 1 DISTINCT @aeronaveSuplente = a1.Cod_Aeronave
+	SELECT DISTINCT TOP 1 @aeronaveSuplente = a1.Cod_Aeronave
 	FROM TODOX2LUCAS.Aeronaves a1 JOIN TODOX2LUCAS.Viajes v ON (a1.Cod_Aeronave=v.Cod_Aeronave)
 									JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
 									JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
@@ -994,7 +999,7 @@ BEGIN
 		VALUES (@dni,@cliente,@codProducto,GETDATE())
 		
 		UPDATE TODOX2LUCAS.Clientes
-		SET Cant_Millas = Cant_Millas - PrecioEnMillas
+		SET Cant_Millas = Cant_Millas - @precioMillas
 		WHERE Nro_Dni = @dni AND Cliente_Apellido = @cliente
 	END
 END
@@ -1126,7 +1131,39 @@ BEGIN
 	
 END
 GO
-
+/* ------------ PROCEDIMIENTO PARA DAR DE ALTA UNA CIUDAD ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Alta_Ciudad(@ciudad nvarchar(255))
+AS
+BEGIN
+	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudad)
+	BEGIN
+		INSERT INTO TODOX2LUCAS.Ciudades(Nombre_Ciudad,Estado_Ciudad)
+		VALUES(@ciudad,1)
+	END
+	ELSE
+	BEGIN
+		print 'Ya existe la ciudad' 
+	END
+END
+GO
+/* ------------ PROCEDIMIENTO PARA MODIFICAR UNA CIUDAD ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Modificar_Nombre_Ciudad(@ciudad nvarchar(255),@nuevoNombre nvarchar(255))
+AS
+BEGIN
+	UPDATE TODOX2LUCAS.Ciudades
+	SET Nombre_Ciudad = @nuevoNombre
+	WHERE Nombre_Ciudad = @ciudad
+END
+GO
+/* ------------ PROCEDIMIENTO PARA DAR DE BAJA UNA CIUDAD ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Baja_Ciudad(@ciudad nvarchar(255))
+AS
+BEGIN
+	UPDATE TODOX2LUCAS.Ciudades
+	SET Estado_Ciudad = 0
+	WHERE Nombre_Ciudad = @ciudad
+END
+GO
 /* ------------ PROCEDIMIENTOS PARA MOSTRAR MILLAS DE UN CLIENTE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Consulta_Millas(@dni numeric(18),@apellido nvarchar(255))
 AS

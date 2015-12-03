@@ -19,10 +19,17 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             var clientesRepository = new ClientesRepository();
-            clientesRepository.canjeMillas( clientesRepository.getCliente( dni, apellido ), prodcuto, cantidad );
+            //clientesRepository.canjeMillas( clientesRepository.getCliente( dni, apellido ), prodcuto, cantidad );
             // Mensaje de exito 
         }
     }

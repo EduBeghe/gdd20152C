@@ -141,8 +141,9 @@
             this.button1.TabIndex = 11;
             this.button1.Text = "Generar viaje";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // AltaViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -159,7 +160,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "AltaViaje";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

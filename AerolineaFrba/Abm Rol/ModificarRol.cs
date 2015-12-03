@@ -21,7 +21,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (nombre != null) new RolesRepository().modificarNombre(nombre);
+            //if (nombre != null) new RolesRepository().modificarNombre(nombre);
             // modificar funcionabilidad, FALTA METODO EN REPO!
         }
     }

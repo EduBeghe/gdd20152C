@@ -19,9 +19,15 @@ namespace AerolineaFrba.Abm_Rol
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
-            new RolesRepository().agregarRol(new Rol( nombreRol, funcionalidades ));
+            ///new RolesRepository().agregarRol(new Rol( nombreRol, funcionalidades ));
         }
     }
 }

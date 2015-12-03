@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
 using System.Data;
-
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Repositories {
 
@@ -13,16 +13,15 @@ namespace AerolineaFrba.Repositories {
 
 		public void darDeBajaXVidaUtil( Aeronave aeronave ) 
 		{
-			Adapter.executeProcedure("Baja_Por_Vida_Util", 
-			aeronave.Cod_Aeronave,
+			DBAdapter.executeProcedure("Baja_Por_Vida_Util", 
+			aeronave.Cod_Aeronave
 			// @cancelaciones bit
-			// fecha actual ?
 			);
 		}
 
 		public void darDeBajaXProblemasTecnicos( Aeronave aeronave, DateTime fechaReinicio )
 		{
-			Adapter.executeProcedure("Baja_Por_Fuera_De_Servicio", 
+			DBAdapter.executeProcedure("Baja_Por_Fuera_De_Servicio", 
 			aeronave.Cod_Aeronave,
 			// @cancelaciones bit 
 			fechaReinicio
@@ -37,17 +36,19 @@ namespace AerolineaFrba.Repositories {
 
 		public List<Aeronave> findAeronave( )
 		{
-			return parseAeronaves( DBAdapter.retrieveDataTable( "FindAeronave" ).Rows[0]);
+            // Cual es la idea del metodo, buscar todas las aeronaves o una en particular ?
+			//return parseAeronaves( DBAdapter.retrieveDataTable( "FindAeronave" ).Rows[0] );
+            return new List<Aeronave>();
 		}
 
 		public void darDeAlta( Aeronave aeronave )
 		{
-			Adapter.executeProcedure("Alta_Aeronave", 
+			DBAdapter.executeProcedure("Alta_Aeronave", 
 			aeronave.Matricula,
 			aeronave.Fecha_Alta,
-			aeronave.fabricante,
+			aeronave.fabricante.Nombre_Fabricante,
 			aeronave.Modelo,
-			aeronave.Servicio,
+			aeronave.servicio.Descripcion_Servicio,
 			aeronave.Kgs_Disponibles	
 			);
 		}
@@ -65,7 +66,7 @@ namespace AerolineaFrba.Repositories {
        			Convert.ToDateTime(dr["Fecha_Alta"]),
        			new FabricantesRepository().getFabricante( Convert.ToInt32(dr["Cod_Fabricante"]) ),
        			dr["Modelo"] as string,
-       			new TipoServicioRepository().getTipoServicio( Convert.ToInt32(["Cod_Tipo_Servicio"])),
+       			new TipoServicioRepository().getTipoServicio( Convert.ToInt32(dr["Cod_Tipo_Servicio"])),
        			Convert.ToInt32(dr["Kgs_Disponibles"]),
        			Convert.ToInt32(dr["Cantidad_Butacas"])
 			);

@@ -7,7 +7,6 @@ using AerolineaFrba.Utils;
 using System.Data;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
-using AerolineaFrba.Utils;
 
 
 namespace AerolineaFrba.Repositories {
@@ -32,7 +31,8 @@ namespace AerolineaFrba.Repositories {
 
 		public List<RutaAerea> findRuta( )
 		{
-			return parseRutas( DBAdapter.retrieveDataTable( "FindRuta" ).Rows[0]);
+			//return parseRutas( DBAdapter.retrieveDataTable( "FindRuta" ).Rows[0]);
+            return new List<RutaAerea>();
 		}
 
 		// Ingresa una ruta aerea ? 
