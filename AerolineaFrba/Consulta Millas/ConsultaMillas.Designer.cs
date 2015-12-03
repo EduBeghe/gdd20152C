@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Abm_Aeronave
+﻿namespace AerolineaFrba.Abm_Ciudad
 {
     partial class ConsultaMillas
     {
@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dni = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.apellido = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -46,12 +46,12 @@
             this.label1.Text = "Consulta de Millas";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // dni
             // 
-            this.textBox1.Location = new System.Drawing.Point(124, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 26);
-            this.textBox1.TabIndex = 1;
+            this.dni.Location = new System.Drawing.Point(124, 57);
+            this.dni.Name = "dni";
+            this.dni.Size = new System.Drawing.Size(100, 26);
+            this.dni.TabIndex = 1;
             // 
             // label2
             // 
@@ -81,25 +81,25 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "Apellido";
             // 
-            // textBox2
+            // apellido
             // 
-            this.textBox2.Location = new System.Drawing.Point(124, 92);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 26);
-            this.textBox2.TabIndex = 12;
+            this.apellido.Location = new System.Drawing.Point(124, 92);
+            this.apellido.Name = "apellido";
+            this.apellido.Size = new System.Drawing.Size(100, 26);
+            this.apellido.TabIndex = 12;
             // 
-            // AltaAeronave
+            // ConsultaMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(236, 178);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.apellido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.dni);
             this.Controls.Add(this.label1);
-            this.Name = "AltaAeronave";
+            this.Name = "ConsultaMillas";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -109,11 +109,11 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox dni;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox apellido;
     }
 }

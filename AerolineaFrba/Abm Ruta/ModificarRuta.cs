@@ -14,22 +14,35 @@ namespace AerolineaFrba.Abm_Ruta
 {
     public partial class ModificarRuta : Form
     {
+        private RutaAerea ruta;
+
         public ModificarRuta()
         {
             InitializeComponent();
         }
 
+        internal void ShowDialog(RutaAerea ruta)
+        {
+            this.ruta = RutaAerea.Copy(ruta);
+            this.ShowDialog();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            // recivir la ruta como parametro en algun lado
+            
 
-            // Ver si la opcion seleccionada es directamente el string o la entidad Ciudad ( lo mismo con el servicio 
-            //if (ciudadOrigen != null && ciudadDestino != null ) new RutaAereaRepository().modificarCiudades( ruta, ciudadOrigen, ciudadDestino );
-            //if (tipoServicio != null) new RutaAereaRepository().modificarTipoServicio(ruta, tipoServicio);
+            
+            if (origenRuta != null && destinoRuta != null ) new RutaAereaRepository().modificarCiudades( 
+                ruta, 
+                ( Ciudad ) origenRuta.SelectedItem, 
+                ( Ciudad ) destinoRuta.SelectedItem );
+            if (servicioRuta != null) new RutaAereaRepository().modificarTipoServicio(ruta, ( TipoServicio ) servicioRuta.SelectedItem);
+            if (costoKgRuta != null && costoPasajeRuta != null) new RutaAereaRepository().modificarPrecio(
+                ruta, 
+                Convert.ToInt32(costoKgRuta), 
+                Convert.ToInt32(costoPasajeRuta ));
             MessageBox.Show("Ruta modificada con exito");
-
-            // Recivo tmb la grid por parametro ?
-            //this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 
+            // recargar info ? 
         }
     }
 }

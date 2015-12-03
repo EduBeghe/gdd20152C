@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Abm_Aeronave
+﻿namespace AerolineaFrba.Abm_Ciudad
 {
     partial class ListadoCiudad
     {
@@ -52,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(52, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Filtros";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
             // 
@@ -139,6 +138,7 @@
             this.button4.TabIndex = 12;
             this.button4.Text = "Dar de Baja Ciudad";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 

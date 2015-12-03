@@ -6,7 +6,6 @@ C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\bin\Debug\Aero
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.AltaAeronave.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.BajaPorProblemasTecnicos.resources
-C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.BajaPorVidaUtil.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ModificarAeronave.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.ListadoAeronave.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.AltaCiudad.resources
@@ -27,8 +26,15 @@ C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\Aero
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.canjeMillas.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Devolucion.RegistroDevolucion.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.AltaViaje.resources
-C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Login.ForgotPasswordScreen.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Login.LoginScreen.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
+<<<<<<< HEAD
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
+=======
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.exe
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.exe
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Funciones.resources
+>>>>>>> 4fad9f1d91248df4d9a9dcdef0226d7ba0f01be5

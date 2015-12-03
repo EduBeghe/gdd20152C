@@ -24,6 +24,22 @@ namespace AerolineaFrba
             this.Precio_Base_Kg = Precio_Base_Kg;
             this.Estado_Ruta = Estado_Ruta;
 		}
+
+        public static RutaAerea Copy(RutaAerea a)
+        {
+            // Boolean copyEstdo = c.estado;
+            return new RutaAerea ( 
+                a.Cod_Ruta,
+                new Ciudad( a.origen.Nombre_Ciudad, a.origen.Cod_Ciudad, a.origen.Estado_Ciudad ),
+                new Ciudad ( a.destino.Nombre_Ciudad, a.destino.Cod_Ciudad, a.destino.Estado_Ciudad ),
+                new TipoServicio( a.servicio.Cod_Tipo_Servicio, a.servicio.Descripcion_Servicio, a.servicio.Precio_Servicio ),
+                a.Precio_Base_Pasaje,
+                a.Precio_Base_Kg,
+                a.Estado_Ruta
+                );
+        }
+
+
 	}
 }
 

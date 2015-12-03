@@ -135,6 +135,12 @@
     <Compile Include="BienvenidaWindow.Designer.cs">
       <DependentUpon>BienvenidaWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\CancelarPasaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\CancelarPasaje.Designer.cs">
+      <DependentUpon>CancelarPasaje.cs</DependentUpon>
+    </Compile>
     <Compile Include="Consulta Millas\ConsultaMillas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,17 +198,17 @@
     <Compile Include="Domain\TipoTarjeta.cs" />
     <Compile Include="Domain\Usuario.cs" />
     <Compile Include="Domain\Viaje.cs" />
+    <Compile Include="Funciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Funciones.Designer.cs">
+      <DependentUpon>Funciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Generacion Viaje\AltaViaje.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Generacion Viaje\AltaViaje.Designer.cs">
       <DependentUpon>AltaViaje.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\ForgotPasswordScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login\ForgotPasswordScreen.Designer.cs">
-      <DependentUpon>ForgotPasswordScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\LoginScreen.cs">
       <SubType>Form</SubType>
@@ -222,6 +228,7 @@
     <Compile Include="Repositorios\RolesRepository.cs" />
     <Compile Include="Repositorios\RutasAereasRepository.cs" />
     <Compile Include="Repositorios\TipoServicioRepository.cs" />
+    <Compile Include="Repositorios\UsuariosRepository.cs" />
     <Compile Include="Repositorios\ViajesRepository.cs" />
     <Compile Include="Utils\CLC_SessionManager.cs" />
     <Compile Include="Utils\DBAdapter.cs" />
@@ -272,6 +279,9 @@
     <EmbeddedResource Include="BienvenidaWindow.resx">
       <DependentUpon>BienvenidaWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\CancelarPasaje.resx">
+      <DependentUpon>CancelarPasaje.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\ConsultaMillas.resx">
       <DependentUpon>ConsultaMillas.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,11 +300,11 @@
     <EmbeddedResource Include="Devolucion\RegistroDevolucion.resx">
       <DependentUpon>RegistroDevolucion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Funciones.resx">
+      <DependentUpon>Funciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\AltaViaje.resx">
       <DependentUpon>AltaViaje.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Login\ForgotPasswordScreen.resx">
-      <DependentUpon>ForgotPasswordScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>

@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Domain;
+using AerolineaFrba.Abm_Ciudad;
 
-namespace AerolineaFrba.Abm_Aeronave
+namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class ListadoAeronave : Form
     {
@@ -46,8 +47,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button5_Click(object sender, EventArgs e)
         {
-            // no encuentra a la form modificar aeronave
-            //new ModificarAeronave().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+            new ModificarAeronave().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
         }
     }
 }

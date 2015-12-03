@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -25,7 +26,7 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            new CiudadRepository().darDeAlta( nombreCiudad.Text );
         }
     }
 }

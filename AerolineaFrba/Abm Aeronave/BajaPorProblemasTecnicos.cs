@@ -11,7 +11,7 @@ using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 
 
-namespace AerolineaFrba.Abm_Aeronave
+namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class BajaPorProblemasTecnicos : Form
     {

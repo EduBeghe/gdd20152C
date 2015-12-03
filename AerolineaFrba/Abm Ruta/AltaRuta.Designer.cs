@@ -32,16 +32,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.origen = new System.Windows.Forms.ComboBox();
+            this.destino = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.costoKg = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.codigo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.costoPasaje = new System.Windows.Forms.TextBox();
+            this.servicio = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -74,20 +74,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 237);
+            this.label4.Location = new System.Drawing.Point(25, 245);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 20);
             this.label4.TabIndex = 5;
             this.label4.Text = "Tipo de Servicio";
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(172, 237);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(158, 88);
-            this.checkedListBox1.TabIndex = 6;
-
             // 
             // button1
             // 
@@ -99,21 +90,21 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // comboBox1
+            // origen
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(172, 72);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(158, 28);
-            this.comboBox1.TabIndex = 8;
+            this.origen.FormattingEnabled = true;
+            this.origen.Location = new System.Drawing.Point(172, 72);
+            this.origen.Name = "origen";
+            this.origen.Size = new System.Drawing.Size(158, 28);
+            this.origen.TabIndex = 8;
             // 
-            // comboBox2
+            // destino
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(172, 116);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(158, 28);
-            this.comboBox2.TabIndex = 9;
+            this.destino.FormattingEnabled = true;
+            this.destino.Location = new System.Drawing.Point(172, 116);
+            this.destino.Name = "destino";
+            this.destino.Size = new System.Drawing.Size(158, 28);
+            this.destino.TabIndex = 9;
             // 
             // label5
             // 
@@ -124,12 +115,12 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Costo Base por KG";
             // 
-            // textBox1
+            // costoKg
             // 
-            this.textBox1.Location = new System.Drawing.Point(254, 163);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(76, 26);
-            this.textBox1.TabIndex = 11;
+            this.costoKg.Location = new System.Drawing.Point(254, 163);
+            this.costoKg.Name = "costoKg";
+            this.costoKg.Size = new System.Drawing.Size(76, 26);
+            this.costoKg.TabIndex = 11;
             // 
             // label6
             // 
@@ -140,12 +131,12 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Codigo";
             // 
-            // textBox2
+            // codigo
             // 
-            this.textBox2.Location = new System.Drawing.Point(172, 32);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(158, 26);
-            this.textBox2.TabIndex = 13;
+            this.codigo.Location = new System.Drawing.Point(172, 32);
+            this.codigo.Name = "codigo";
+            this.codigo.Size = new System.Drawing.Size(158, 26);
+            this.codigo.TabIndex = 13;
             // 
             // label7
             // 
@@ -156,33 +147,41 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Costo Base por Pasaje";
             // 
-            // textBox3
+            // costoPasaje
             // 
-            this.textBox3.Location = new System.Drawing.Point(254, 197);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(76, 26);
-            this.textBox3.TabIndex = 15;
+            this.costoPasaje.Location = new System.Drawing.Point(254, 197);
+            this.costoPasaje.Name = "costoPasaje";
+            this.costoPasaje.Size = new System.Drawing.Size(76, 26);
+            this.costoPasaje.TabIndex = 15;
             // 
-            // Form1
+            // servicio
+            // 
+            this.servicio.FormattingEnabled = true;
+            this.servicio.Location = new System.Drawing.Point(172, 237);
+            this.servicio.Name = "servicio";
+            this.servicio.Size = new System.Drawing.Size(158, 28);
+            this.servicio.TabIndex = 16;
+            // 
+            // AltaRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 391);
-            this.Controls.Add(this.textBox3);
+            this.ClientSize = new System.Drawing.Size(335, 391);
+            this.Controls.Add(this.servicio);
+            this.Controls.Add(this.costoPasaje);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.codigo);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.costoKg);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.destino);
+            this.Controls.Add(this.origen);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "AltaRuta";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -195,15 +194,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox origen;
+        private System.Windows.Forms.ComboBox destino;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox costoKg;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox codigo;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox costoPasaje;
+        private System.Windows.Forms.ComboBox servicio;
     }
 }

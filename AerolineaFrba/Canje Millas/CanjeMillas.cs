@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 
-namespace AerolineaFrba.Abm_Aeronave
+namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class canjeMillas : Form
     {
@@ -29,7 +29,11 @@ namespace AerolineaFrba.Abm_Aeronave
         private void button1_Click(object sender, EventArgs e)
         {
             var clientesRepository = new ClientesRepository();
-            //clientesRepository.canjeMillas( clientesRepository.getCliente( dni, apellido ), prodcuto, cantidad );
+            clientesRepository.canjeMillas( 
+                clientesRepository.getCliente( Convert.ToInt32(dni), apellido.Text), 
+                ( ProductoCanje ) producto.SelectedItem, 
+                Convert.ToInt32( cantidad )
+                );
             // Mensaje de exito 
         }
     }

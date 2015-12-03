@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Abm_Aeronave
+namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class ListadoButacas : Form
     {
