@@ -27,7 +27,16 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
-          //  new RutaAereaRepository().darDeAlta(new RutaAerea());
+            new RutaAereaRepository().darDeAlta(
+                new RutaAerea( 
+                    Convert.ToInt32( codigo ),
+                    ( Ciudad ) origen.SelectedItem,
+                    ( Ciudad ) destino.SelectedItem,
+                    ( TipoServicio ) servicio.SelectedItem,
+                    Convert.ToInt32( costoKg ),
+                    Convert.ToInt32( costoPasaje ),
+                    ( bool ) true // MIRAR! Agregar estado a la form 
+                    ));
         }
     }
 }

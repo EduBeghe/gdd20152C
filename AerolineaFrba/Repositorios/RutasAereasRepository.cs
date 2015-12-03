@@ -53,12 +53,12 @@ namespace AerolineaFrba.Repositories {
 			);				
 		}
 
-		public void modificarPrecio(  RutaAerea rutaAerea )
+		public void modificarPrecio(  RutaAerea rutaAerea, int precioKg, int precioPasaje )
 		{
 			DBAdapter.executeProcedure("Modificar_Precios_Ruta_Aerea", 
 			rutaAerea.Cod_Ruta,
-			rutaAerea.Precio_Base_Kg,
-			rutaAerea.Precio_Base_Pasaje
+			precioKg,
+			precioPasaje
 			);				
 		}
 

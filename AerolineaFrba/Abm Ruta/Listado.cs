@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Abm_Ruta;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
@@ -40,7 +41,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button5_Click(object sender, EventArgs e)
         {
-            // llamar a form modificar
+            new ModificarRuta().ShowDialog( (RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem);
         }
     }
 }
