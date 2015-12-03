@@ -9,7 +9,6 @@ using System.Data;
 
 namespace AerolineaFrba.Repositories {
 
-	// POSIBLEMENTE NO SEA NECESARIO HACERLO 
 	class CiudadRepository {
 
 		public void darDeAlta(  string nombre )
@@ -35,8 +34,6 @@ namespace AerolineaFrba.Repositories {
 			return parse ( DBAdapter.retrieveDataTable("GetCiudad" ).Rows[0]);
 		}
 
-
-				
         public List<Ciudad> parseCiudades ( DataTable dataTable )
         {
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
