@@ -12,20 +12,22 @@ namespace AerolineaFrba.Repositories {
 	// POSIBLEMENTE NO SEA NECESARIO HACERLO 
 	class CiudadRepository {
 
-		public void darDeAlta(  RutaAerea rutaAerea )
+		public void darDeAlta(  Ciudad ciudad )
 		{
-			//DBAdapter.executeProcedure("XXXX", 
-			//);
+			DBAdapter.executeProcedure("Alta_Ciudad",  ciudad.Nombre_Ciudad );
 		}
 
-		public void modificar(  RutaAerea rutaAerea )
+		public void modificarNombre(  Ciudad ciudad, string nombre )
 		{
-			//DBAdapter.executeProcedure("XXXXX", cliente.idCliente);				
+			DBAdapter.executeProcedure("Modificar_Nombre_Ciudad", 
+			ciudad.Nombre_Ciudad,
+			nombre 
+			);				
 		}
 
-		public void darDeBaja(  RutaAerea rutaAerea )
+		public void darDeBaja(  Ciudad ciudad )
 		{
-			//Adapter.executeProcedure("XXXX", cliente.idCliente);				
+			DBAdapter.executeProcedure("Baja_Ciudad", ciudad.Nombre_Ciudad );				
 		}
 
 		public Ciudad getCiudad( int Cod_Ciudad )
