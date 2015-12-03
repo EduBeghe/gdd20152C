@@ -5,7 +5,6 @@ using System.Text;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
 using System.Data;
-using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Repositories {

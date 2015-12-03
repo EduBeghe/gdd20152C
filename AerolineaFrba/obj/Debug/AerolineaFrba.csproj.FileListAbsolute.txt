@@ -38,3 +38,35 @@ C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\bin\Debug\Aero
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Funciones.resources
 >>>>>>> 4fad9f1d91248df4d9a9dcdef0226d7ba0f01be5
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.exe
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.AltaAeronave.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.BajaPorProblemasTecnicos.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ModificarAeronave.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ListadoAeronave.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.AltaCiudad.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.BajaCiudad.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ListadoCiudad.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ModificarCiudad.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.AltaRol.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.ModificarRol.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ListadoRol.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.AltaRuta.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.ModificarRuta.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ListadoRuta.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.BienvenidaWindow.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.CancelarPasaje.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ConsultaMillas.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.Compra.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ListadoButacas.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.Disponibilidad.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.canjeMillas.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Devolucion.RegistroDevolucion.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Funciones.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.AltaViaje.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Login.LoginScreen.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.exe
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
