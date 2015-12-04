@@ -72,33 +72,28 @@ namespace AerolineaFrba.Listado_Estadistico
                 {
                     case 0:
                         {
-                            DataTable tablaRetorno = DBAdapter.retrieveDataTable("Pasajes_Mas_Comprados", fechaInicial, fechaFinal);
-                            dataGridEstadistica.DataSource = tablaRetorno;
+                            new Repositories.Estadísticos().destinosConMasPasajes(fechaInicial, fechaFinal);
                         } 
                         break;
 
                     case 1:
                         {
-                            DataTable dt0 = DBAdapter.retrieveDataTable("Aeronaves_Mas_Vacias", fechaInicial, fechaFinal);
-                            dataGridEstadistica.DataSource = dt0;
+                            new Repositories.Estadísticos().destinosConMasAeronavesVacias(fechaInicial, fechaFinal);
                         } break;
 
                     case 2:
                         {
-                            DataTable dt0 = DBAdapter.retrieveDataTable("Cliente_Mayoria_Puntos");
-                            dataGridEstadistica.DataSource = dt0;
+                            new Repositories.Estadísticos().clientesConMasPuntos();
                         } break;
 
                     case 3:
                         {
-                            DataTable dt0 = DBAdapter.retrieveDataTable("Destinos_Mas_Cancelados", fechaInicial, fechaFinal);
-                            dataGridEstadistica.DataSource = dt0;
+                            new Repositories.Estadísticos().destinosConMasPasajesCancelados(fechaInicial, fechaFinal);
                         } break;
 
                     case 4:
                         {
-                            DataTable dt0 = DBAdapter.retrieveDataTable("Aeronave_Mayoria_Fuera_Servicio", fechaInicial, fechaFinal);
-                            dataGridEstadistica.DataSource = dt0;
+                            new Repositories.Estadísticos().aeronavesConMasDiasFueraDeServicio(fechaInicial, fechaFinal);
                         } break;
 
                 }
