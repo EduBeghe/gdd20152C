@@ -23,10 +23,10 @@ namespace AerolineaFrba
         private void button1_Click(object sender, EventArgs e)
         {
             Form pantallaLogin = new LoginScreen();
-            Form pantallaRutas = new AltaRuta();
+            //Form pantallaRutas = new AltaRuta();
             this.Hide();
             pantallaLogin.ShowDialog(this);
-            pantallaRutas.ShowDialog(this);
+            //pantallaRutas.ShowDialog(this);
             this.Close();
         }
 

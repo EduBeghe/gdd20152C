@@ -14,8 +14,8 @@ namespace AerolineaFrba.Repositories {
 
 		public int ValidarLogin( string usuario, string pass )
 		{
-			return DBAdapter.executeProcedureWithReturnValue("Validar_Login", usuario, pass );
-
+			var cantUsuarios = DBAdapter.executeProcedureWithReturnValue("Validar_Login", usuario, new Encription().encryptToSHA256( pass ) );
+            return cantUsuarios;
 		}
 
         public Usuario getUsuario( string username )

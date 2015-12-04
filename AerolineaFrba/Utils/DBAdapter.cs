@@ -237,9 +237,12 @@ namespace AerolineaFrba.Utils
             {
                 conexionSql(cn, cm);
                 cm.CommandType = CommandType.Text;
-                cm.CommandText = "SELECT PARAMETER_NAME FROM information_schema.parameters WHERE SPECIFIC_SCHEMA='TODOX2LUCAS' AND SPECIFIC_NAME='" + procedure + "'";
+                var command = "SELECT PARAMETER_NAME FROM information_schema.parameters WHERE SPECIFIC_SCHEMA='TODOX2LUCAS' AND SPECIFIC_NAME='" + procedure + "'";
+                cm.CommandText = command;
                 dr = cm.ExecuteReader();
                 dt.Load(dr);
+                //if (dr == null) MessageBox.Show("dr es null ");
+                //else if ( dr.HasRows) MessageBox.Show("dr TIENE FILAS"); 
                 foreach (DataRow d in dt.Rows)
                 {
                     args.Add(d[0].ToString());
@@ -249,6 +252,7 @@ namespace AerolineaFrba.Utils
             catch (Exception)
             {
                 MessageBox.Show("Exception en _generateArguments connection");
+                //throw;
                 return null;
             }
 
