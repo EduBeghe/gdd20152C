@@ -35,5 +35,10 @@ namespace AerolineaFrba.Abm_Ciudad
             MessageBox.Show("Rol eliminada con exito");
             //this.ciudadesGrid.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().findCiudad()), null); 
         }
+
+        private void ListadoCiudad_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
