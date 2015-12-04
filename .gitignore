@@ -4,3 +4,5 @@ AerolineaFrba.v11.suo
 *.exe
 *.pdb
 *.manifest
+*.dll
+*.cache
