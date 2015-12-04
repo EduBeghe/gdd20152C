@@ -19,12 +19,13 @@ namespace AerolineaFrba.Repositories {
 
         public Usuario getUsuario( string username )
         {
-            return parse(DBAdapter.retrieveDataTable("GetUsuario", username ).Rows[0]);
+            return parse(DBAdapter.retrieveDataTable("GetUsuario", username).Rows[0]);
         }
 
 
 		public void iniciarSesion(string userName) {
-            CLC_SessionManager.currentUser = getUsuario( userName ) ;
+            //CLC_SessionManager.currentUser = getUsuario( userName ) ;
+            CLC_SessionManager.setCurrentUser( parse(DBAdapter.retrieveDataTable("GetUsuario", userName).Rows[0]) );
         }
 
         public Usuario parse(DataRow dr)

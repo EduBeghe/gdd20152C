@@ -1235,7 +1235,15 @@ GO
 	WHERE Cod_Viaje = @codViaje
  END
  GO
-
+/* ------------ PROCEDIMIENTOS GETTER USUARIO ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetUsuario(@usrname nvarchar(255))
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Usuarios
+	WHERE Usuario_Nombre = @usrname
+ END
+ GO
  
 /* ------------ PROCEDIMIENTOS PARA LOS LISTADOS ESTADISTICOS ------------ */
 /* ------------ Top 5 de los destinos con más pasajes comprados ------------ */
