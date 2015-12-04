@@ -28,5 +28,15 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             new CiudadRepository().darDeAlta( nombreCiudad.Text );
         }
+
+        private void AltaCiudad_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AltaCiudad_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

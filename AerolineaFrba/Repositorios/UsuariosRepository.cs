@@ -13,7 +13,7 @@ namespace AerolineaFrba.Repositories {
 
 		public int login( string usuario, string pass )
 		{
-			return DBAdapter.executeProcedureWithReturnValue( "Validar_Login", usuario, pass );
+			return DBAdapter.executeProcedureWithReturnValue("Validar_Login", usuario, pass );
 
 		}
 

@@ -1,4 +1,4 @@
-﻿namespace AerolineaFrba.Abm_Ciudad
+﻿namespace AerolineaFrba.Abm_Aeronave
 {
     partial class AltaAeronave
     {
@@ -28,6 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.fechaAltaAeronave = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.codigoAeronave = new System.Windows.Forms.TextBox();
+            this.modeloAeronave = new System.Windows.Forms.TextBox();
+            this.matriculaAeronave = new System.Windows.Forms.TextBox();
+            this.kgAeronave = new System.Windows.Forms.TextBox();
+            this.butacasPasillo = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.butacasVentanilla = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tipoServicio = new System.Windows.Forms.ComboBox();
+            this.fabricanteAeronave = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.SuspendLayout();
             // 
             // label1
             // 
@@ -52,7 +74,7 @@
             // fechaAltaAeronave
             // 
             this.fechaAltaAeronave.Location = new System.Drawing.Point(127, 48);
-            this.fechaAltaAeronave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fechaAltaAeronave.Margin = new System.Windows.Forms.Padding(2);
             this.fechaAltaAeronave.Name = "fechaAltaAeronave";
             this.fechaAltaAeronave.Size = new System.Drawing.Size(135, 20);
             this.fechaAltaAeronave.TabIndex = 2;
@@ -110,7 +132,7 @@
             // codigoAeronave
             // 
             this.codigoAeronave.Location = new System.Drawing.Point(127, 86);
-            this.codigoAeronave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.codigoAeronave.Margin = new System.Windows.Forms.Padding(2);
             this.codigoAeronave.Name = "codigoAeronave";
             this.codigoAeronave.Size = new System.Drawing.Size(68, 20);
             this.codigoAeronave.TabIndex = 11;
@@ -118,7 +140,7 @@
             // modeloAeronave
             // 
             this.modeloAeronave.Location = new System.Drawing.Point(127, 122);
-            this.modeloAeronave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.modeloAeronave.Margin = new System.Windows.Forms.Padding(2);
             this.modeloAeronave.Name = "modeloAeronave";
             this.modeloAeronave.Size = new System.Drawing.Size(68, 20);
             this.modeloAeronave.TabIndex = 12;
@@ -126,7 +148,7 @@
             // matriculaAeronave
             // 
             this.matriculaAeronave.Location = new System.Drawing.Point(127, 162);
-            this.matriculaAeronave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.matriculaAeronave.Margin = new System.Windows.Forms.Padding(2);
             this.matriculaAeronave.Name = "matriculaAeronave";
             this.matriculaAeronave.Size = new System.Drawing.Size(68, 20);
             this.matriculaAeronave.TabIndex = 13;
@@ -134,7 +156,7 @@
             // kgAeronave
             // 
             this.kgAeronave.Location = new System.Drawing.Point(329, 122);
-            this.kgAeronave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.kgAeronave.Margin = new System.Windows.Forms.Padding(2);
             this.kgAeronave.Name = "kgAeronave";
             this.kgAeronave.Size = new System.Drawing.Size(68, 20);
             this.kgAeronave.TabIndex = 14;
@@ -142,7 +164,7 @@
             // butacasPasillo
             // 
             this.butacasPasillo.Location = new System.Drawing.Point(364, 160);
-            this.butacasPasillo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butacasPasillo.Margin = new System.Windows.Forms.Padding(2);
             this.butacasPasillo.Name = "butacasPasillo";
             this.butacasPasillo.Size = new System.Drawing.Size(33, 20);
             this.butacasPasillo.TabIndex = 18;
@@ -150,7 +172,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(85, 274);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(97, 36);
             this.button1.TabIndex = 19;
@@ -161,7 +183,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(193, 274);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(97, 36);
             this.button2.TabIndex = 22;
@@ -181,7 +203,7 @@
             // butacasVentanilla
             // 
             this.butacasVentanilla.Location = new System.Drawing.Point(364, 183);
-            this.butacasVentanilla.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butacasVentanilla.Margin = new System.Windows.Forms.Padding(2);
             this.butacasVentanilla.Name = "butacasVentanilla";
             this.butacasVentanilla.Size = new System.Drawing.Size(33, 20);
             this.butacasVentanilla.TabIndex = 24;
@@ -198,27 +220,21 @@
             // 
             // tipoServicio
             // 
-            this.tipoServicio.DataSource = this.tiposDeServiciosBindingSource;
-            this.tipoServicio.DisplayMember = "Descripcion_Servicio";
             this.tipoServicio.FormattingEnabled = true;
             this.tipoServicio.Location = new System.Drawing.Point(302, 81);
-            this.tipoServicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tipoServicio.Margin = new System.Windows.Forms.Padding(2);
             this.tipoServicio.Name = "tipoServicio";
             this.tipoServicio.Size = new System.Drawing.Size(95, 21);
             this.tipoServicio.TabIndex = 28;
-            this.tipoServicio.ValueMember = "Descripcion_Servicio";
             // 
             // fabricanteAeronave
             // 
-            this.fabricanteAeronave.DataSource = this.fabricantesBindingSource;
-            this.fabricanteAeronave.DisplayMember = "Nombre_Fabricante";
             this.fabricanteAeronave.FormattingEnabled = true;
             this.fabricanteAeronave.Location = new System.Drawing.Point(113, 201);
-            this.fabricanteAeronave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fabricanteAeronave.Margin = new System.Windows.Forms.Padding(2);
             this.fabricanteAeronave.Name = "fabricanteAeronave";
             this.fabricanteAeronave.Size = new System.Drawing.Size(82, 21);
             this.fabricanteAeronave.TabIndex = 29;
-            this.fabricanteAeronave.ValueMember = "Nombre_Fabricante";
             // 
             // label6
             // 
@@ -256,18 +272,37 @@
             this.Controls.Add(this.fechaAltaAeronave);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AltaAeronave";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.AltaAeronave_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fabricantesBindingSource)).EndInit();
+            this.Text = "Alta Aeronaves";
+            this.Load += new System.EventHandler(this.AltaAeronave_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
         #endregion
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker fechaAltaAeronave;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox codigoAeronave;
+        private System.Windows.Forms.TextBox modeloAeronave;
+        private System.Windows.Forms.TextBox matriculaAeronave;
+        private System.Windows.Forms.TextBox kgAeronave;
+        private System.Windows.Forms.TextBox butacasPasillo;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox butacasVentanilla;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox tipoServicio;
+        private System.Windows.Forms.ComboBox fabricanteAeronave;
+        private System.Windows.Forms.Label label6;
     }
 }
