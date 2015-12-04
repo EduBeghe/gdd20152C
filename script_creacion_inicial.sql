@@ -4,7 +4,7 @@ IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'TODOX2LUCAS')
 BEGIN
 	EXEC ('CREATE SCHEMA TODOX2LUCAS AUTHORIZATION gd')
 END
-GO
+GO 
 /**************************************************  DROP TRABLES  ***************************************************/
 IF OBJECT_ID('TODOX2LUCAS.Cancelaciones') IS NOT NULL
 DROP TABLE TODOX2LUCAS.Cancelaciones;
@@ -140,6 +140,14 @@ IF OBJECT_ID('TODOX2LUCAS.GetViaje') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetViaje;
 IF OBJECT_ID('TODOX2LUCAS.Comprar_Encomienda') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Comprar_Encomienda;
+IF OBJECT_ID('TODOX2LUCAS.Aeronave_Para_Reemplazar') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Aeronave_Para_Reemplazar;
+IF OBJECT_ID('TODOX2LUCAS.Baja_Ciudad') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Baja_Ciudad;
+IF OBJECT_ID('TODOX2LUCAS.Modificar_Nombre_Ciudad') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Modificar_Nombre_Ciudad;
+IF OBJECT_ID('TODOX2LUCAS.Alta_Ciudad') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Alta_Ciudad;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
