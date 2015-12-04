@@ -1241,9 +1241,17 @@ GO
  BEGIN
 	SELECT *
 	FROM TODOX2LUCAS.Usuarios
-	WHERE Usuario_Nombre = @usrname
+	WHERE Usuario_Nombre = @usrname	
  END
  GO
+ /* ------------ PROCEDIMIENTOS GETTER ROL ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetRol(@codRol int)
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Roles
+	WHERE Cod_Rol = @codRol
+ END
  
 /* ------------ PROCEDIMIENTOS PARA LOS LISTADOS ESTADISTICOS ------------ */
 /* ------------ Top 5 de los destinos con más pasajes comprados ------------ */

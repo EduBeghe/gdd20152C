@@ -6,6 +6,7 @@ using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
 using System.Data;
 using AerolineaFrba.Repositories;
+using System.Windows.Forms;
 
 namespace AerolineaFrba.Repositories {
 
@@ -25,7 +26,9 @@ namespace AerolineaFrba.Repositories {
 
 		public void iniciarSesion(string userName) {
             //CLC_SessionManager.currentUser = getUsuario( userName ) ;
-            CLC_SessionManager.setCurrentUser( parse(DBAdapter.retrieveDataTable("GetUsuario", userName).Rows[0]) );
+            var usr = getUsuario(userName);
+            if ( usr != null ) CLC_SessionManager.setCurrentUser( usr );
+            else MessageBox.Show("usr es null");
         }
 
         public Usuario parse(DataRow dr)
