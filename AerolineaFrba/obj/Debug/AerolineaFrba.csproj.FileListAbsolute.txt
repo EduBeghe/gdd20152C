@@ -35,7 +35,6 @@ C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\Aero
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.exe
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Funciones.resources
->>>>>>> 4fad9f1d91248df4d9a9dcdef0226d7ba0f01be5
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.exe
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
