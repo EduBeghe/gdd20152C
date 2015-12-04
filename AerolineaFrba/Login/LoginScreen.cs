@@ -25,7 +25,14 @@ namespace AerolineaFrba.Login
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            new UsuarioRepository().login(usuarioTextbox.Text, passwordTextbox.Text);
+            
+            var valido = new UsuarioRepository().ValidarLogin(usuarioTextbox.Text, passwordTextbox.Text);
+            if (valido > 0)
+            {
+                new UsuarioRepository().iniciarSesion(usuarioTextbox.Text);
+                MessageBox.Show("Bienvenido " + CLC_SessionManager.currentUser.Usuario_Nombre, "Login exitoso");
+            }
+            else MessageBox.Show("Cuenta Bloqueada");
         }
 
     }

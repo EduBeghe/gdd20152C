@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AerolineaFrba.Domain;
 
 namespace AerolineaFrba.Domain
 {
         
     public class Rol
     {
-        // Cod_rol nunca se usa 
         public int Cod_Rol { get; set; } 
         public string Nombre_Rol { get; set; }
         public bool Estado_Rol { get; set; }

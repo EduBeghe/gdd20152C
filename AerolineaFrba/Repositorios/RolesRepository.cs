@@ -35,6 +35,12 @@ namespace AerolineaFrba.Repositories {
             return new List<Rol>();
 		}
 
+		public Rol getRol( int idRol )
+		{
+			return parse ( DBAdapter.retrieveDataTable("GetRol", idRol ).Rows[0]);
+		}
+
+
 		public void modificarEstado( Rol rol )
 		{
 			DBAdapter.executeProcedure("Modificar_Estado_Rol", 

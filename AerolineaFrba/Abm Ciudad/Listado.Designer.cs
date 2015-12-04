@@ -178,6 +178,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ListadoCiudad";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.ListadoCiudad_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

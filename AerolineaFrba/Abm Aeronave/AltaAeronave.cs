@@ -43,13 +43,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void AltaAeronave_Load(object sender, EventArgs e)
         {
-            
-        }
-
-        private void AltaAeronave_Load_1(object sender, EventArgs e)
-        {
 
         }
-
     }
 }
