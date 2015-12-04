@@ -24,6 +24,7 @@ namespace AerolineaFrba.Utils
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Exception en conexionSql connection");
                 throw ex;
             }
         }
@@ -147,6 +148,7 @@ namespace AerolineaFrba.Utils
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Exception en checkIfExist connection");
                 throw ex;
             }
 
@@ -178,6 +180,7 @@ namespace AerolineaFrba.Utils
             }
             catch (Exception)
             {
+                MessageBox.Show("Exception en _executeProcedureWithReturnValue connection");
                 return -1;
             }
 
@@ -211,6 +214,7 @@ namespace AerolineaFrba.Utils
             }
             catch (Exception)
             {
+                MessageBox.Show("Exception en _retrieveDataTable connection");
                 return null;
             }
 
@@ -244,6 +248,7 @@ namespace AerolineaFrba.Utils
             }
             catch (Exception)
             {
+                MessageBox.Show("Exception en _generateArguments connection");
                 return null;
             }
 
