@@ -158,7 +158,10 @@ IF OBJECT_ID('TODOX2LUCAS.Alta_Ciudad') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Alta_Ciudad;
 IF OBJECT_ID('TODOX2LUCAS.Filtrar_Rutas') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Filtrar_Rutas;
-
+IF OBJECT_ID('TODOX2LUCAS.GetUsuario') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetUsuario;
+IF OBJECT_ID('TODOX2LUCAS.GetRol') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetRol;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1263,7 +1266,7 @@ GO
 	FROM TODOX2LUCAS.Roles
 	WHERE Cod_Rol = @codRol
  END
- 
+ GO
 /* ------------ PROCEDIMIENTOS PARA LOS LISTADOS ESTADISTICOS ------------ */
 /* ------------ Top 5 de los destinos con más pasajes comprados ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Pasajes_Mas_Comprados(@fecha_inicio datetime, @fecha_fin datetime)
@@ -1335,7 +1338,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Aeronaves(@matricula nvarchar(255),@codAeronave int,@fabricante nvarchar(255), @servicio nvarchar(255))
 AS
 BEGIN
-	SELECT A.Cod_Aeronave,A.Matricula,A.Modelo,A.Cantidad_Butacas,A.Kgs_Disponibles,F.Nombre_Fabricante,T.Descripcion_Servicio
+	SELECT A.Cod_Aeronave as  'CODIGO AERONAVE',A.Matricula AS 'MATRICULA',A.Modelo AS 'MODELO',A.Cantidad_Butacas AS 'CANTIDAD DE BUTACAS',A.Kgs_Disponibles AS 'CANTIDAD DE KILOGRAMOS',F.Nombre_Fabricante AS 'NOMBRE FABRICANTE',T.Descripcion_Servicio AS 'SERVICIO'
 	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Fabricantes F ON(A.Cod_Fabricante=F.Cod_Fabricante)
 								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(T.Cod_Tipo_Servicio=A.Cod_Tipo_Servicio)
 	WHERE A.Matricula = @matricula OR
@@ -1348,7 +1351,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Roles(@rol nvarchar(255))
 AS
 BEGIN
-	SELECT *
+	SELECT Cod_Rol AS 'CODIGO ROL',Nombre_Rol AS 'NOMBRE ROL', Estado_Rol AS 'ESTADO ROL'
 	FROM TODOX2LUCAS.Roles
 	WHERE Nombre_Rol = @rol
 END
@@ -1357,7 +1360,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Ciudades(@nombre nvarchar(255))
 AS
 BEGIN
-	SELECT *
+	SELECT Cod_Ciudad AS 'CODIGO CIUDAD',Nombre_Ciudad AS 'NOMBRE CIUDAD',Estado_Ciudad AS 'ESTADO CIUDAD'
 	FROM TODOX2LUCAS.Ciudades
 	WHERE Nombre_Ciudad = @nombre
 END
@@ -1366,7 +1369,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Rutas(@codRuta numeric(18),@origen nvarchar(255),@destino nvarchar(255),@servicio nvarchar(255))
 AS
 BEGIN
-	SELECT r.Cod_Ruta,c1.Nombre_Ciudad,c2.Nombre_Ciudad
+	SELECT r.Cod_Ruta AS 'CODIGO RUTA',c1.Nombre_Ciudad AS 'CIUDAD SALIDA',c2.Nombre_Ciudad AS 'CIUDAD ARRIBO',r.Precio_Base_Kg AS 'PRECIO BASE KILOGRAMOS',r.Precio_Base_Pasaje AS 'PRECIO BASE PASAJE'
 	FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
 									JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
 									JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
