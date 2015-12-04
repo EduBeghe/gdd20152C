@@ -44,5 +44,14 @@ namespace AerolineaFrba.Abm_Ruta
             MessageBox.Show("Ruta modificada con exito");
             // recargar info ? 
         }
+
+        private void ModificarRuta_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet4.Tipos_De_Servicios' Puede moverla o quitarla según sea necesario.
+            this.tipos_De_ServiciosTableAdapter.Fill(this.gD2C2015DataSet4.Tipos_De_Servicios);
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet3.Ciudades' Puede moverla o quitarla según sea necesario.
+            this.ciudadesTableAdapter.Fill(this.gD2C2015DataSet3.Ciudades);
+
+        }
     }
 }

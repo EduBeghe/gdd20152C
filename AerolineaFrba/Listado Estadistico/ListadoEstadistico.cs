@@ -21,14 +21,14 @@ namespace AerolineaFrba.Listado_Estadistico
         private DateTime parsearFechaInicial()
         {
 
-            DateTime fecha = default(DateTime);
+            DateTime fecha;
             switch (semestre.SelectedIndex)
             {
                 case 0: 
                     fecha = Convert.ToDateTime("01/01/" + Convert.ToString(anio.Value));
                     break;
-                case 1: 
-                    fecha = Convert.ToDateTime("01/07/" + Convert.ToString(anio.Value));
+                default:
+                    fecha = Convert.ToDateTime("01/07/" + Convert.ToString(anio.Value + 1));
                     break;
             }
 
@@ -39,13 +39,13 @@ namespace AerolineaFrba.Listado_Estadistico
         private DateTime parsearFechaFinal()
         {
 
-            DateTime fecha = default(DateTime);
+            DateTime fecha;
             switch (semestre.SelectedIndex)
             {
                 case 0: 
                     fecha = Convert.ToDateTime("01/07/" + Convert.ToString(anio.Value)); 
                     break;
-                case 1: 
+                default:
                     fecha = Convert.ToDateTime("01/01/" + Convert.ToString(anio.Value + 1));
                     break;
             }
@@ -72,9 +72,10 @@ namespace AerolineaFrba.Listado_Estadistico
                 {
                     case 0:
                         {
-                            DataTable dt0 = DBAdapter.retrieveDataTable("Pasajes_Mas_Comprados", fechaInicial, fechaFinal);
-                            dataGridEstadistica.DataSource = dt0;
-                        } break;
+                            DataTable tablaRetorno = DBAdapter.retrieveDataTable("Pasajes_Mas_Comprados", fechaInicial, fechaFinal);
+                            dataGridEstadistica.DataSource = tablaRetorno;
+                        } 
+                        break;
 
                     case 1:
                         {
@@ -106,6 +107,11 @@ namespace AerolineaFrba.Listado_Estadistico
         }
 
         private void ListadoEstadistico_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridEstadistica_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

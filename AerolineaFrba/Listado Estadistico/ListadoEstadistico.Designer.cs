@@ -28,16 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.estadistica = new System.Windows.Forms.ComboBox();
             this.semestre = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.anio = new System.Windows.Forms.NumericUpDown();
-            this.dataGridEstadistica = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
+            this.gD2C2015DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridEstadistica = new System.Windows.Forms.DataGridView();
+            this.listadoEstadisticoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.listadoEstadisticoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.anio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEstadistica)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listadoEstadisticoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listadoEstadisticoBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -114,14 +123,6 @@
             0,
             0});
             // 
-            // dataGridEstadistica
-            // 
-            this.dataGridEstadistica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridEstadistica.Location = new System.Drawing.Point(12, 156);
-            this.dataGridEstadistica.Name = "dataGridEstadistica";
-            this.dataGridEstadistica.Size = new System.Drawing.Size(489, 150);
-            this.dataGridEstadistica.TabIndex = 7;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(172, 127);
@@ -132,13 +133,41 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // gD2C2015DataSet
+            // 
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // gD2C2015DataSetBindingSource
+            // 
+            this.gD2C2015DataSetBindingSource.DataSource = this.gD2C2015DataSet;
+            this.gD2C2015DataSetBindingSource.Position = 0;
+            // 
+            // dataGridEstadistica
+            // 
+            this.dataGridEstadistica.AutoGenerateColumns = false;
+            this.dataGridEstadistica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridEstadistica.DataSource = this.gD2C2015DataSet;
+            this.dataGridEstadistica.Location = new System.Drawing.Point(27, 156);
+            this.dataGridEstadistica.Name = "dataGridEstadistica";
+            this.dataGridEstadistica.Size = new System.Drawing.Size(466, 150);
+            this.dataGridEstadistica.TabIndex = 9;
+            // 
+            // listadoEstadisticoBindingSource
+            // 
+            this.listadoEstadisticoBindingSource.DataSource = typeof(AerolineaFrba.Listado_Estadistico.ListadoEstadistico);
+            // 
+            // listadoEstadisticoBindingSource1
+            // 
+            this.listadoEstadisticoBindingSource1.DataSource = typeof(AerolineaFrba.Listado_Estadistico.ListadoEstadistico);
+            // 
             // ListadoEstadistico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 316);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridEstadistica);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.anio);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -149,7 +178,11 @@
             this.Text = "Listado Estadistico";
             this.Load += new System.EventHandler(this.ListadoEstadistico_Load);
             ((System.ComponentModel.ISupportInitialize)(this.anio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEstadistica)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listadoEstadisticoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listadoEstadisticoBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,8 +196,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown anio;
-        private System.Windows.Forms.DataGridView dataGridEstadistica;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.BindingSource gD2C2015DataSetBindingSource;
+        private GD2C2015DataSet gD2C2015DataSet;
+        private System.Windows.Forms.DataGridView dataGridEstadistica;
+        private System.Windows.Forms.BindingSource listadoEstadisticoBindingSource;
+        private System.Windows.Forms.BindingSource listadoEstadisticoBindingSource1;
 
     }
 }

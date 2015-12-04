@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,71 +40,87 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.apellido = new System.Windows.Forms.TextBox();
+            this.gD2C2015DataSet6 = new AerolineaFrba.GD2C2015DataSet6();
+            this.productosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.productosTableAdapter = new AerolineaFrba.GD2C2015DataSet6TableAdapters.ProductosTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(143, 9);
+            this.label1.Location = new System.Drawing.Point(95, 6);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 20);
+            this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Realizar Canje";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 40);
+            this.label2.Location = new System.Drawing.Point(8, 26);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(174, 20);
+            this.label2.Size = new System.Drawing.Size(117, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Numero de Documento";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 107);
+            this.label3.Location = new System.Drawing.Point(8, 70);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 20);
+            this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Producto Elegido";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 141);
+            this.label4.Location = new System.Drawing.Point(8, 92);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 20);
+            this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "Cantidad";
             // 
             // dni
             // 
-            this.dni.Location = new System.Drawing.Point(219, 32);
+            this.dni.Location = new System.Drawing.Point(146, 21);
+            this.dni.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dni.Name = "dni";
-            this.dni.Size = new System.Drawing.Size(200, 26);
+            this.dni.Size = new System.Drawing.Size(135, 20);
             this.dni.TabIndex = 4;
             // 
             // producto
             // 
+            this.producto.DataSource = this.productosBindingSource;
+            this.producto.DisplayMember = "Descripcion_Producto";
             this.producto.FormattingEnabled = true;
-            this.producto.Location = new System.Drawing.Point(219, 99);
+            this.producto.Location = new System.Drawing.Point(146, 64);
+            this.producto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.producto.Name = "producto";
-            this.producto.Size = new System.Drawing.Size(200, 28);
+            this.producto.Size = new System.Drawing.Size(135, 21);
             this.producto.TabIndex = 5;
+            this.producto.ValueMember = "Descripcion_Producto";
             // 
             // cantidad
             // 
-            this.cantidad.Location = new System.Drawing.Point(219, 135);
+            this.cantidad.Location = new System.Drawing.Point(146, 88);
+            this.cantidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cantidad.Name = "cantidad";
-            this.cantidad.Size = new System.Drawing.Size(200, 26);
+            this.cantidad.Size = new System.Drawing.Size(135, 20);
             this.cantidad.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 171);
+            this.button1.Location = new System.Drawing.Point(11, 111);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(403, 35);
+            this.button1.Size = new System.Drawing.Size(269, 23);
             this.button1.TabIndex = 9;
             this.button1.Text = "Registrar Canje";
             this.button1.UseVisualStyleBackColor = true;
@@ -112,24 +129,40 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 71);
+            this.label5.Location = new System.Drawing.Point(8, 46);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 20);
+            this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "Apellido";
             // 
             // apellido
             // 
-            this.apellido.Location = new System.Drawing.Point(219, 64);
+            this.apellido.Location = new System.Drawing.Point(146, 42);
+            this.apellido.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.apellido.Name = "apellido";
-            this.apellido.Size = new System.Drawing.Size(200, 26);
+            this.apellido.Size = new System.Drawing.Size(135, 20);
             this.apellido.TabIndex = 11;
+            // 
+            // gD2C2015DataSet6
+            // 
+            this.gD2C2015DataSet6.DataSetName = "GD2C2015DataSet6";
+            this.gD2C2015DataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // productosBindingSource
+            // 
+            this.productosBindingSource.DataMember = "Productos";
+            this.productosBindingSource.DataSource = this.gD2C2015DataSet6;
+            // 
+            // productosTableAdapter
+            // 
+            this.productosTableAdapter.ClearBeforeFill = true;
             // 
             // canjeMillas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 218);
+            this.ClientSize = new System.Drawing.Size(296, 142);
             this.Controls.Add(this.apellido);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button1);
@@ -140,8 +173,12 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "canjeMillas";
-            this.Text = "Form1";
+            this.Text = "Canje Millas";
+            this.Load += new System.EventHandler(this.canjeMillas_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,5 +196,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox apellido;
+        private GD2C2015DataSet6 gD2C2015DataSet6;
+        private System.Windows.Forms.BindingSource productosBindingSource;
+        private GD2C2015DataSet6TableAdapters.ProductosTableAdapter productosTableAdapter;
     }
 }

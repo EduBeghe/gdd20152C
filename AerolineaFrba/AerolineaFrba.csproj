@@ -204,6 +204,41 @@
     <Compile Include="Funciones.Designer.cs">
       <DependentUpon>Funciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="GD2C2015DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet5.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet5.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet6.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet6.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Generacion Viaje\AltaViaje.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +259,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro Llegada Destino\RegistroLlegada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Llegada Destino\RegistroLlegada.Designer.cs">
+      <DependentUpon>RegistroLlegada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositorios\AeronaveRepository.cs" />
     <Compile Include="Repositorios\CiudadRepository.cs" />
     <Compile Include="Repositorios\ClientesRepository.cs" />
@@ -327,6 +368,87 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registro Llegada Destino\RegistroLlegada.resx">
+      <DependentUpon>RegistroLlegada.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="GD2C2015DataSet.xsc">
+      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet.xss">
+      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet1.xsc">
+      <DependentUpon>GD2C2015DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet1.xss">
+      <DependentUpon>GD2C2015DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet2.xsc">
+      <DependentUpon>GD2C2015DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet2.xss">
+      <DependentUpon>GD2C2015DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet3.xsc">
+      <DependentUpon>GD2C2015DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet3.xss">
+      <DependentUpon>GD2C2015DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet4.xsc">
+      <DependentUpon>GD2C2015DataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet4.xss">
+      <DependentUpon>GD2C2015DataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet5.xsc">
+      <DependentUpon>GD2C2015DataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet5.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet5.xss">
+      <DependentUpon>GD2C2015DataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet6.xsc">
+      <DependentUpon>GD2C2015DataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet6.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet6.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet6.xss">
+      <DependentUpon>GD2C2015DataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\AerolineaFrba.Listado_Estadistico.ListadoEstadistico.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -343,7 +465,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Registro de Usuario\" />
-    <Folder Include="Registro Llegada Destino\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -36,18 +36,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(159, 24);
+            this.label1.Location = new System.Drawing.Point(106, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 20);
+            this.label1.Size = new System.Drawing.Size(103, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Butacas Disponibles";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(163, 227);
+            this.button3.Location = new System.Drawing.Point(109, 148);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 33);
+            this.button3.Size = new System.Drawing.Size(100, 21);
             this.button3.TabIndex = 11;
             this.button3.Text = "Seleccionar";
             this.button3.UseVisualStyleBackColor = true;
@@ -56,21 +58,23 @@
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(12, 57);
+            this.checkedListBox1.Location = new System.Drawing.Point(8, 37);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(535, 151);
+            this.checkedListBox1.Size = new System.Drawing.Size(358, 94);
             this.checkedListBox1.TabIndex = 14;
             // 
             // ListadoButacas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 270);
+            this.ClientSize = new System.Drawing.Size(373, 175);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ListadoButacas";
-            this.Text = "Form1";
+            this.Text = "Seleccion Butacas";
             this.ResumeLayout(false);
             this.PerformLayout();
 
