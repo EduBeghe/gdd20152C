@@ -17,5 +17,10 @@ namespace AerolineaFrba.Domain
             this.Cod_Fabricante = Cod_Fabricante;
             this.Nombre_Fabricante = Nombre_Fabricante;
         }
+
+        public override string ToString()
+        {
+            return Nombre_Fabricante;
+        }
     }
 }

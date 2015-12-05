@@ -43,7 +43,8 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void AltaAeronave_Load(object sender, EventArgs e)
         {
-            fabricanteAeronave.DisplayMember = "Nombre_Fabricante";
+            fabricanteAeronave.DisplayMember = "ToString";
+            tipoServicio.DisplayMember = "ToString";
             BindingSource servicioSource = new BindingSource(new BindingList<TipoServicio>(new TipoServicioRepository().getServicios()), null);
             this.tipoServicio.DataSource = servicioSource;
             BindingSource fabricanteSource = new BindingSource(new BindingList<Fabricante>(new FabricantesRepository().getFabricantes()), null);

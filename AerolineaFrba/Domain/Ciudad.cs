@@ -15,6 +15,11 @@ namespace AerolineaFrba
             this.Estado_Ciudad = Estado_Ciudad;		
         }
 
+        public override string ToString()
+        {
+            return Nombre_Ciudad;
+        }
+
 	}
 }
 
