@@ -196,9 +196,9 @@
             // 
             this.fabricante.DataSource = this.fabricantesBindingSource;
             this.fabricante.FormattingEnabled = true;
-            this.fabricante.Location = new System.Drawing.Point(111, 158);
+            this.fabricante.Location = new System.Drawing.Point(427, 52);
             this.fabricante.Name = "fabricante";
-            this.fabricante.Size = new System.Drawing.Size(331, 28);
+            this.fabricante.Size = new System.Drawing.Size(121, 28);
             this.fabricante.TabIndex = 16;
             // 
             // servicio

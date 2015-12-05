@@ -41,9 +41,7 @@ namespace AerolineaFrba.Abm_Ruta
         
         private void AltaRuta_Load(object sender, EventArgs e)
         {
-            origen.DisplayMember = "ToString";
             this.origen.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null);
-            destino.DisplayMember = "Descripcion_Servicio";
             this.destino.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null);
         }
     }
