@@ -1283,6 +1283,7 @@ GO
 	WHERE Usuario_Nombre = @usrname	
  END
  GO
+
  /* ------------ PROCEDIMIENTOS GETTER ROL ------------ */
  CREATE PROCEDURE TODOX2LUCAS.GetRol(@codRol int)
  AS
