@@ -40,10 +40,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.apellido = new System.Windows.Forms.TextBox();
-            this.gD2C2015DataSet6 = new AerolineaFrba.GD2C2015DataSet6();
             this.productosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productosTableAdapter = new AerolineaFrba.GD2C2015DataSet6TableAdapters.ProductosTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,17 +143,13 @@
             // 
             // gD2C2015DataSet6
             // 
-            this.gD2C2015DataSet6.DataSetName = "GD2C2015DataSet6";
-            this.gD2C2015DataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // productosBindingSource
             // 
             this.productosBindingSource.DataMember = "Productos";
-            this.productosBindingSource.DataSource = this.gD2C2015DataSet6;
             // 
             // productosTableAdapter
             // 
-            this.productosTableAdapter.ClearBeforeFill = true;
             // 
             // canjeMillas
             // 
@@ -177,7 +170,6 @@
             this.Name = "canjeMillas";
             this.Text = "Canje Millas";
             this.Load += new System.EventHandler(this.canjeMillas_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -196,8 +188,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox apellido;
-        private GD2C2015DataSet6 gD2C2015DataSet6;
         private System.Windows.Forms.BindingSource productosBindingSource;
-        private GD2C2015DataSet6TableAdapters.ProductosTableAdapter productosTableAdapter;
     }
 }

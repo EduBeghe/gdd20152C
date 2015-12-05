@@ -43,7 +43,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void AltaAeronave_Load(object sender, EventArgs e)
         {
-
+            this.tipoServicio.DataSource = new BindingSource(new BindingList<TipoServicio>(new TipoServicioRepository().getServicios()), null);
         }
     }
 }

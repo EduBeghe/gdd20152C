@@ -31,9 +31,7 @@ namespace AerolineaFrba.Generacion_Viaje
         private void AltaViaje_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet3.Aeronaves' Puede moverla o quitarla según sea necesario.
-            this.aeronavesTableAdapter.Fill(this.gD2C2015DataSet3.Aeronaves);
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.RutasAereas' Puede moverla o quitarla según sea necesario.
-            this.rutasAereasTableAdapter.Fill(this.gD2C2015DataSet.RutasAereas);
 
         }
 

@@ -41,23 +41,14 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.gD2C2015DataSet1 = new AerolineaFrba.GD2C2015DataSet1();
             this.fabricantesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fabricantesTableAdapter = new AerolineaFrba.GD2C2015DataSet1TableAdapters.FabricantesTableAdapter();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.gD2C2015DataSet2 = new AerolineaFrba.GD2C2015DataSet2();
             this.aeronavesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.aeronavesTableAdapter = new AerolineaFrba.GD2C2015DataSet2TableAdapters.AeronavesTableAdapter();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.gD2C2015DataSet3 = new AerolineaFrba.GD2C2015DataSet3();
             this.aeronavesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.aeronavesTableAdapter1 = new AerolineaFrba.GD2C2015DataSet3TableAdapters.AeronavesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fabricantesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -189,17 +180,13 @@
             // 
             // gD2C2015DataSet1
             // 
-            this.gD2C2015DataSet1.DataSetName = "GD2C2015DataSet1";
-            this.gD2C2015DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // fabricantesBindingSource
             // 
             this.fabricantesBindingSource.DataMember = "Fabricantes";
-            this.fabricantesBindingSource.DataSource = this.gD2C2015DataSet1;
             // 
             // fabricantesTableAdapter
             // 
-            this.fabricantesTableAdapter.ClearBeforeFill = true;
             // 
             // comboBox2
             // 
@@ -214,17 +201,13 @@
             // 
             // gD2C2015DataSet2
             // 
-            this.gD2C2015DataSet2.DataSetName = "GD2C2015DataSet2";
-            this.gD2C2015DataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // aeronavesBindingSource
             // 
             this.aeronavesBindingSource.DataMember = "Aeronaves";
-            this.aeronavesBindingSource.DataSource = this.gD2C2015DataSet2;
             // 
             // aeronavesTableAdapter
             // 
-            this.aeronavesTableAdapter.ClearBeforeFill = true;
             // 
             // comboBox3
             // 
@@ -239,17 +222,13 @@
             // 
             // gD2C2015DataSet3
             // 
-            this.gD2C2015DataSet3.DataSetName = "GD2C2015DataSet3";
-            this.gD2C2015DataSet3.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // aeronavesBindingSource1
             // 
             this.aeronavesBindingSource1.DataMember = "Aeronaves";
-            this.aeronavesBindingSource1.DataSource = this.gD2C2015DataSet3;
             // 
             // aeronavesTableAdapter1
             // 
-            this.aeronavesTableAdapter1.ClearBeforeFill = true;
             // 
             // ListadoAeronave
             // 
@@ -275,11 +254,8 @@
             this.Text = "Listado";
             this.Load += new System.EventHandler(this.ListadoAeronave_Load);
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fabricantesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -300,16 +276,10 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private GD2C2015DataSet1 gD2C2015DataSet1;
         private System.Windows.Forms.BindingSource fabricantesBindingSource;
-        private GD2C2015DataSet1TableAdapters.FabricantesTableAdapter fabricantesTableAdapter;
         private System.Windows.Forms.ComboBox comboBox2;
-        private GD2C2015DataSet2 gD2C2015DataSet2;
         private System.Windows.Forms.BindingSource aeronavesBindingSource;
-        private GD2C2015DataSet2TableAdapters.AeronavesTableAdapter aeronavesTableAdapter;
         private System.Windows.Forms.ComboBox comboBox3;
-        private GD2C2015DataSet3 gD2C2015DataSet3;
         private System.Windows.Forms.BindingSource aeronavesBindingSource1;
-        private GD2C2015DataSet3TableAdapters.AeronavesTableAdapter aeronavesTableAdapter1;
     }
 }

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Utils
 {
-    class CLC_SessionManager
+    public static class CLC_SessionManager
     {
         private static Usuario _administrador;
         public static Usuario currentUser { get { if (_administrador == null) throw new NoOpenSessionException(); else  return _administrador; } set { _administrador = value; } }
-        public static string connectionString = ConfigurationManager.ConnectionStrings["GD2C2015"].ConnectionString;      
+        public static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GD2C2015"].ConnectionString;      
         // public static bool esAdministrador = false;
         
         public static DateTime getFecha() {

@@ -1222,6 +1222,14 @@ GO
 	WHERE Cod_Tipo_Servicio = @codServicio
  END
  GO
+ /* ------------ PROCEDIMIENTOS GETTER TODOS LOS SERVICIOS ------------ */
+ CREATE PROCEDURE  TODOX2LUCAS.GetServicios
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Tipos_De_Servicios
+ END
+ GO
 /* ------------ PROCEDIMIENTOS GETTER FABRICANTE ------------ */
  CREATE PROCEDURE   TODOX2LUCAS.GetFabricante(@codFabricante int)
  AS

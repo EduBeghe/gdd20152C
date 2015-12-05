@@ -41,15 +41,8 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
-            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.rutasAereasBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rutasAereasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.RutasAereasTableAdapter();
-            this.gD2C2015DataSet3 = new AerolineaFrba.GD2C2015DataSet3();
-            this.aeronavesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.aeronavesTableAdapter = new AerolineaFrba.GD2C2015DataSet3TableAdapters.AeronavesTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rutasAereasBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,31 +168,23 @@
             // 
             // gD2C2015DataSet
             // 
-            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
-            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // rutasAereasBindingSource
             // 
             this.rutasAereasBindingSource.DataMember = "RutasAereas";
-            this.rutasAereasBindingSource.DataSource = this.gD2C2015DataSet;
             // 
             // rutasAereasTableAdapter
             // 
-            this.rutasAereasTableAdapter.ClearBeforeFill = true;
             // 
             // gD2C2015DataSet3
             // 
-            this.gD2C2015DataSet3.DataSetName = "GD2C2015DataSet3";
-            this.gD2C2015DataSet3.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // aeronavesBindingSource
             // 
             this.aeronavesBindingSource.DataMember = "Aeronaves";
-            this.aeronavesBindingSource.DataSource = this.gD2C2015DataSet3;
             // 
             // aeronavesTableAdapter
             // 
-            this.aeronavesTableAdapter.ClearBeforeFill = true;
             // 
             // AltaViaje
             // 
@@ -222,9 +207,7 @@
             this.Name = "AltaViaje";
             this.Text = "Alta de Viajes";
             this.Load += new System.EventHandler(this.AltaViaje_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rutasAereasBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -245,11 +228,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
         private System.Windows.Forms.Button button1;
-        private GD2C2015DataSet gD2C2015DataSet;
         private System.Windows.Forms.BindingSource rutasAereasBindingSource;
-        private GD2C2015DataSetTableAdapters.RutasAereasTableAdapter rutasAereasTableAdapter;
-        private GD2C2015DataSet3 gD2C2015DataSet3;
         private System.Windows.Forms.BindingSource aeronavesBindingSource;
-        private GD2C2015DataSet3TableAdapters.AeronavesTableAdapter aeronavesTableAdapter;
     }
 }

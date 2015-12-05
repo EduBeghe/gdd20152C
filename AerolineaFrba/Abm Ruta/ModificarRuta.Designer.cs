@@ -43,19 +43,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.costoPasajeRuta = new System.Windows.Forms.TextBox();
             this.servicioRuta = new System.Windows.Forms.ComboBox();
-            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.gD2C2015DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gD2C2015DataSet4 = new AerolineaFrba.GD2C2015DataSet4();
             this.ciudadesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ciudadesTableAdapter = new AerolineaFrba.GD2C2015DataSet4TableAdapters.CiudadesTableAdapter();
-            this.gD2C2015DataSet5 = new AerolineaFrba.GD2C2015DataSet5();
             this.tiposDeServiciosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tipos_De_ServiciosTableAdapter = new AerolineaFrba.GD2C2015DataSet5TableAdapters.Tipos_De_ServiciosTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -202,41 +194,30 @@
             // 
             // gD2C2015DataSet
             // 
-            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
-            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // gD2C2015DataSetBindingSource
             // 
-            this.gD2C2015DataSetBindingSource.DataSource = this.gD2C2015DataSet;
             this.gD2C2015DataSetBindingSource.Position = 0;
             // 
             // gD2C2015DataSet4
             // 
-            this.gD2C2015DataSet4.DataSetName = "GD2C2015DataSet4";
-            this.gD2C2015DataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ciudadesBindingSource
             // 
             this.ciudadesBindingSource.DataMember = "Ciudades";
-            this.ciudadesBindingSource.DataSource = this.gD2C2015DataSet4;
             // 
             // ciudadesTableAdapter
             // 
-            this.ciudadesTableAdapter.ClearBeforeFill = true;
             // 
             // gD2C2015DataSet5
             // 
-            this.gD2C2015DataSet5.DataSetName = "GD2C2015DataSet5";
-            this.gD2C2015DataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tiposDeServiciosBindingSource
             // 
             this.tiposDeServiciosBindingSource.DataMember = "Tipos_De_Servicios";
-            this.tiposDeServiciosBindingSource.DataSource = this.gD2C2015DataSet5;
             // 
             // tipos_De_ServiciosTableAdapter
             // 
-            this.tipos_De_ServiciosTableAdapter.ClearBeforeFill = true;
             // 
             // ModificarRuta
             // 
@@ -261,11 +242,8 @@
             this.Name = "ModificarRuta";
             this.Text = "Modificar Rutas";
             this.Load += new System.EventHandler(this.ModificarRuta_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -289,13 +267,8 @@
         private System.Windows.Forms.TextBox costoPasajeRuta;
         private System.Windows.Forms.ComboBox servicioRuta;
         private System.Windows.Forms.BindingSource gD2C2015DataSetBindingSource;
-        private GD2C2015DataSet gD2C2015DataSet;
-        private GD2C2015DataSet4 gD2C2015DataSet4;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
-        private GD2C2015DataSet4TableAdapters.CiudadesTableAdapter ciudadesTableAdapter;
-        private GD2C2015DataSet5 gD2C2015DataSet5;
         private System.Windows.Forms.BindingSource tiposDeServiciosBindingSource;
-        private GD2C2015DataSet5TableAdapters.Tipos_De_ServiciosTableAdapter tipos_De_ServiciosTableAdapter;
         
     }
 }

@@ -36,7 +36,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.origen = new System.Windows.Forms.ComboBox();
             this.ciudadesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gD2C2015DataSet4 = new AerolineaFrba.GD2C2015DataSet4();
             this.destino = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.costoKg = new System.Windows.Forms.TextBox();
@@ -46,13 +45,8 @@
             this.costoPasaje = new System.Windows.Forms.TextBox();
             this.servicio = new System.Windows.Forms.ComboBox();
             this.tiposDeServiciosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gD2C2015DataSet5 = new AerolineaFrba.GD2C2015DataSet5();
-            this.ciudadesTableAdapter = new AerolineaFrba.GD2C2015DataSet4TableAdapters.CiudadesTableAdapter();
-            this.tipos_De_ServiciosTableAdapter = new AerolineaFrba.GD2C2015DataSet5TableAdapters.Tipos_De_ServiciosTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet5)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -115,12 +109,9 @@
             // ciudadesBindingSource
             // 
             this.ciudadesBindingSource.DataMember = "Ciudades";
-            this.ciudadesBindingSource.DataSource = this.gD2C2015DataSet4;
             // 
             // gD2C2015DataSet4
             // 
-            this.gD2C2015DataSet4.DataSetName = "GD2C2015DataSet4";
-            this.gD2C2015DataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // destino
             // 
@@ -195,20 +186,15 @@
             // tiposDeServiciosBindingSource
             // 
             this.tiposDeServiciosBindingSource.DataMember = "Tipos_De_Servicios";
-            this.tiposDeServiciosBindingSource.DataSource = this.gD2C2015DataSet5;
             // 
             // gD2C2015DataSet5
             // 
-            this.gD2C2015DataSet5.DataSetName = "GD2C2015DataSet5";
-            this.gD2C2015DataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ciudadesTableAdapter
             // 
-            this.ciudadesTableAdapter.ClearBeforeFill = true;
             // 
             // tipos_De_ServiciosTableAdapter
             // 
-            this.tipos_De_ServiciosTableAdapter.ClearBeforeFill = true;
             // 
             // AltaRuta
             // 
@@ -233,9 +219,7 @@
             this.Text = "Alta Ruta";
             this.Load += new System.EventHandler(this.AltaRuta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,11 +241,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox costoPasaje;
         private System.Windows.Forms.ComboBox servicio;
-        private GD2C2015DataSet4 gD2C2015DataSet4;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
-        private GD2C2015DataSet4TableAdapters.CiudadesTableAdapter ciudadesTableAdapter;
-        private GD2C2015DataSet5 gD2C2015DataSet5;
         private System.Windows.Forms.BindingSource tiposDeServiciosBindingSource;
-        private GD2C2015DataSet5TableAdapters.Tipos_De_ServiciosTableAdapter tipos_De_ServiciosTableAdapter;
      }
 }
