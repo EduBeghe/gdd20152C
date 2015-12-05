@@ -25,7 +25,7 @@ namespace AerolineaFrba.Utils
             catch (Exception ex)
             {
                 MessageBox.Show("Exception en conexionSql connection");
-                throw ex;
+                throw;
             }
         }
         
@@ -117,6 +117,7 @@ namespace AerolineaFrba.Utils
             catch (Exception)
             {
                 MessageBox.Show("Error al ejecutar el procedimiento almacenado " + cm.CommandText);
+                throw;
             }
 
             finally
@@ -149,7 +150,7 @@ namespace AerolineaFrba.Utils
             catch (Exception ex)
             {
                 MessageBox.Show("Exception en checkIfExist connection");
-                throw ex;
+                throw;
             }
 
             finally
@@ -181,7 +182,8 @@ namespace AerolineaFrba.Utils
             catch (Exception)
             {
                 MessageBox.Show("Exception en _executeProcedureWithReturnValue connection");
-                return -1;
+                throw;
+                //return -1;
             }
 
             finally
@@ -252,8 +254,8 @@ namespace AerolineaFrba.Utils
             catch (Exception)
             {
                 MessageBox.Show("Exception en _generateArguments connection");
-                //throw;
-                return null;
+                throw;
+                //return null;
             }
 
             finally

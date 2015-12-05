@@ -75,7 +75,8 @@ namespace AerolineaFrba
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            new LoginScreen().ShowDialog();
+            new LoginScreen().ShowDialog(this);
+
         }
 
        
