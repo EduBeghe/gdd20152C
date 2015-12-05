@@ -41,7 +41,7 @@ namespace AerolineaFrba.Repositories {
 			codigo,
 			fabricante.Nombre_Fabricante,
 			servicio.Descripcion_Servicio
-			);	
+			));	
 		}
 
 		public void darDeAlta( Aeronave aeronave )
