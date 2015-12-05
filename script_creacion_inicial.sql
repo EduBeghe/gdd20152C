@@ -995,30 +995,39 @@ GO
 
 /* ------------ PROCEDIMIENTO PARA DAR DE ALTA UNA AERONAVE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Alta_Aeronave(@matricula nvarchar(255),@fecha_Alta datetime,@fabricante nvarchar(255),
-											@modelo nvarchar(255),@servicio nvarchar(255), @kgs_Disponibles numeric(18))
+											@modelo nvarchar(255),@servicio nvarchar(255), @kgs_Disponibles numeric(18),
+											@cantButacasPasillo int,@cantButacasVentanilla int)
 AS
 BEGIN
 	DECLARE @cod_Fabricante int,@cod_Tipo_Servicio int;
 	SET @cod_Fabricante = (SELECT Cod_Fabricante FROM TODOX2LUCAS.Fabricantes WHERE Nombre_Fabricante=@fabricante);
-	IF (@cod_Fabricante = NULL) 
-	BEGIN
-		print 'El fabricante ingresado no existe' 
-	END
 	SET @cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio);
-	IF (@cod_Tipo_Servicio = NULL)
-	BEGIN 
-		print 'El servicio ingresado no existe'
-	END
-	IF NOT EXISTS (SELECT Matricula FROM TODOX2LUCAS.Aeronaves WHERE Matricula = @matricula)
+	
+	INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Modelo,Cod_Tipo_Servicio,Kgs_Disponibles,Cantidad_Butacas )
+	VALUES(@matricula,@fecha_Alta,@cod_Fabricante,@modelo,@cod_Tipo_Servicio,@kgs_Disponibles,(@cantButacasPasillo + @cantButacasVentanilla))
+	
+	DECLARE @codAeronave int;
+	SET @codAeronave = (SELECT SCOPE_IDENTITY() FROM TODOX2LUCAS.Aeronaves);
+	
+	DECLARE @contador numeric(18);
+	SET @contador = 0;
+	WHILE (@cantButacasVentanilla != 0)
 	BEGIN
-		INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Modelo,Cod_Tipo_Servicio,Kgs_Disponibles )
-		VALUES(@matricula,@fecha_Alta,@cod_Fabricante,@modelo,@cod_Tipo_Servicio,@kgs_Disponibles)
+		INSERT INTO TODOX2LUCAS.Butacas(Cod_Aeronave,Cod_Butaca,Pos_Butaca,Piso_Butaca,Estado_Butaca)
+		VALUES(@codAeronave,@contador,'Ventanilla',1,1)
+		
+		SET @contador = @contador + 1;
+		SET @cantButacasVentanilla = @cantButacasVentanilla - 1;
 	END
-	ELSE
+	WHILE(@cantButacasPasillo != 0)	
 	BEGIN
-		print 'La matricula ya existe'
+		INSERT INTO TODOX2LUCAS.Butacas(Cod_Aeronave,Cod_Butaca,Pos_Butaca,Piso_Butaca,Estado_Butaca)
+		VALUES(@codAeronave,@contador,'Pasillo',1,1)
+		
+		SET @contador = @contador + 1;
+		SET @cantButacasPasillo = @cantButacasPasillo - 1;
 	END
-
+	
 END
 GO
 
