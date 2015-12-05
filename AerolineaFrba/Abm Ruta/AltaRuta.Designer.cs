@@ -97,32 +97,23 @@
             // 
             // origen
             // 
-            this.origen.DataSource = this.ciudadesBindingSource;
-            this.origen.DisplayMember = "Nombre_Ciudad";
             this.origen.FormattingEnabled = true;
             this.origen.Location = new System.Drawing.Point(172, 71);
             this.origen.Name = "origen";
             this.origen.Size = new System.Drawing.Size(158, 28);
             this.origen.TabIndex = 8;
-            this.origen.ValueMember = "Nombre_Ciudad";
             // 
             // ciudadesBindingSource
             // 
             this.ciudadesBindingSource.DataMember = "Ciudades";
             // 
-            // gD2C2015DataSet4
-            // 
-            // 
             // destino
             // 
-            this.destino.DataSource = this.ciudadesBindingSource;
-            this.destino.DisplayMember = "Nombre_Ciudad";
             this.destino.FormattingEnabled = true;
             this.destino.Location = new System.Drawing.Point(172, 115);
             this.destino.Name = "destino";
             this.destino.Size = new System.Drawing.Size(158, 28);
             this.destino.TabIndex = 9;
-            this.destino.ValueMember = "Nombre_Ciudad";
             // 
             // label5
             // 
@@ -186,15 +177,6 @@
             // tiposDeServiciosBindingSource
             // 
             this.tiposDeServiciosBindingSource.DataMember = "Tipos_De_Servicios";
-            // 
-            // gD2C2015DataSet5
-            // 
-            // 
-            // ciudadesTableAdapter
-            // 
-            // 
-            // tipos_De_ServiciosTableAdapter
-            // 
             // 
             // AltaRuta
             // 

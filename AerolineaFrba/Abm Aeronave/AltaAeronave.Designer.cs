@@ -48,12 +48,12 @@
             this.butacasVentanilla = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tipoServicio = new System.Windows.Forms.ComboBox();
-            this.fabricanteAeronave = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.gD2C2015DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tiposDeServiciosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
+            this.fabricanteAeronave = new System.Windows.Forms.ComboBox();
+            this.gD2C2015DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -128,23 +128,23 @@
             // 
             // codigoAeronave
             // 
-            this.codigoAeronave.Location = new System.Drawing.Point(190, 132);
+            this.codigoAeronave.Location = new System.Drawing.Point(163, 129);
             this.codigoAeronave.Name = "codigoAeronave";
-            this.codigoAeronave.Size = new System.Drawing.Size(100, 26);
+            this.codigoAeronave.Size = new System.Drawing.Size(146, 26);
             this.codigoAeronave.TabIndex = 11;
             // 
             // modeloAeronave
             // 
-            this.modeloAeronave.Location = new System.Drawing.Point(190, 188);
+            this.modeloAeronave.Location = new System.Drawing.Point(128, 188);
             this.modeloAeronave.Name = "modeloAeronave";
-            this.modeloAeronave.Size = new System.Drawing.Size(100, 26);
+            this.modeloAeronave.Size = new System.Drawing.Size(181, 26);
             this.modeloAeronave.TabIndex = 12;
             // 
             // matriculaAeronave
             // 
-            this.matriculaAeronave.Location = new System.Drawing.Point(190, 249);
+            this.matriculaAeronave.Location = new System.Drawing.Point(128, 249);
             this.matriculaAeronave.Name = "matriculaAeronave";
-            this.matriculaAeronave.Size = new System.Drawing.Size(100, 26);
+            this.matriculaAeronave.Size = new System.Drawing.Size(181, 26);
             this.matriculaAeronave.TabIndex = 13;
             // 
             // kgAeronave
@@ -216,12 +216,17 @@
             this.tipoServicio.TabIndex = 28;
             this.tipoServicio.ValueMember = "Descripcion_Servicio";
             // 
+            // tiposDeServiciosBindingSource
+            // 
+            this.tiposDeServiciosBindingSource.DataMember = "Tipos_De_Servicios";
+            // 
             // fabricanteAeronave
             // 
+            this.fabricanteAeronave.DataSource = this.gD2C2015DataSetBindingSource;
             this.fabricanteAeronave.FormattingEnabled = true;
-            this.fabricanteAeronave.Location = new System.Drawing.Point(170, 309);
+            this.fabricanteAeronave.Location = new System.Drawing.Point(128, 310);
             this.fabricanteAeronave.Name = "fabricanteAeronave";
-            this.fabricanteAeronave.Size = new System.Drawing.Size(121, 28);
+            this.fabricanteAeronave.Size = new System.Drawing.Size(181, 28);
             this.fabricanteAeronave.TabIndex = 29;
             // 
             // label6
@@ -232,23 +237,6 @@
             this.label6.Size = new System.Drawing.Size(85, 20);
             this.label6.TabIndex = 30;
             this.label6.Text = "Fabricante";
-            // 
-            // gD2C2015DataSet
-            // 
-            // 
-            // gD2C2015DataSetBindingSource
-            // 
-            this.gD2C2015DataSetBindingSource.Position = 0;
-            // 
-            // gD2C2015DataSet7
-            // 
-            // 
-            // tiposDeServiciosBindingSource
-            // 
-            this.tiposDeServiciosBindingSource.DataMember = "Tipos_De_Servicios";
-            // 
-            // tipos_De_ServiciosTableAdapter
-            // 
             // 
             // AltaAeronave
             // 
@@ -279,8 +267,8 @@
             this.Name = "AltaAeronave";
             this.Text = "Alta Aeronaves";
             this.Load += new System.EventHandler(this.AltaAeronave_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

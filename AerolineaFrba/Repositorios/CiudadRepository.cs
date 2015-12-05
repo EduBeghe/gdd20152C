@@ -34,6 +34,11 @@ namespace AerolineaFrba.Repositories {
 			return parse ( DBAdapter.retrieveDataTable("GetCiudad" ).Rows[0]);
 		}
 
+		public List<Ciudad> getCiudades()
+		{
+			return parseCiudades( DBAdapter.retrieveDataTable("GetCiudades" ) );
+		}
+
         public List<Ciudad> parseCiudades ( DataTable dataTable )
         {
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();

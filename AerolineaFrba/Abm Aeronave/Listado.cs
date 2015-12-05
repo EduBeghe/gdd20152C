@@ -52,10 +52,12 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void ListadoAeronave_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet3.Aeronaves' Puede moverla o quitarla según sea necesario.
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet2.Aeronaves' Puede moverla o quitarla según sea necesario.
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet1.Fabricantes' Puede moverla o quitarla según sea necesario.
-
+            servicio.DisplayMember = "Descripcion_Servicio";
+            // servicio.ValueMember = ? ( que elemento queremos que seleccione ) 
+            this.servicio.DataSource = new BindingSource(new BindingList<TipoServicio>(new TipoServicioRepository().getServicios()), null);
+            fabricante.DisplayMember = "Nombre_Fabricante";
+            // servicio.ValueMember = ? ( que elemento queremos que seleccione )    
+            this.fabricante.DataSource = new BindingSource(new BindingList<Fabricante>(new FabricantesRepository().getFabricantes()), null);
         }
     }
 }
