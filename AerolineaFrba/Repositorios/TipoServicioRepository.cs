@@ -19,7 +19,7 @@ namespace AerolineaFrba.Repositories {
 
 		public List<TipoServicio> getServicios()
 		{
-			return parseServicios( DBAdapter.retrieveDataTable("getServicios" ) );
+			return parseServicios( DBAdapter.retrieveDataTable("GetServicios" ) );
 		}
 
 		public List<TipoServicio> parseServicios( DataTable dataTable )
