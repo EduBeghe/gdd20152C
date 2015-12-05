@@ -25,52 +25,52 @@ namespace AerolineaFrba
 
         private void AltaAeronaveButton_Click(object sender, EventArgs e)
         {
-            new AltaAeronave().ShowDialog();
+            new AltaAeronave().ShowDialog(this);
         }
 
         private void BuscarAeronaveButton_Click(object sender, EventArgs e)
         {
-            new ListadoAeronave().ShowDialog();
+            new ListadoAeronave().ShowDialog(this);
         }
 
         private void AltaRutaButton_Click(object sender, EventArgs e)
         {
-            new AltaRuta().ShowDialog();
+            new AltaRuta().ShowDialog(this);
         }
 
         private void BuscarRutaButton_Click(object sender, EventArgs e)
         {
-            new ListadoRuta().ShowDialog();
+            new ListadoRuta().ShowDialog(this);
         }
 
         private void AltaRolButton_Click(object sender, EventArgs e)
         {
-            new AltaRol().ShowDialog();
+            new AltaRol().ShowDialog(this);
         }
 
         private void BuscarRolButton_Click(object sender, EventArgs e)
         {
-            new ListadoRol().ShowDialog();
+            new ListadoRol().ShowDialog(this);
         }
 
         private void AltaCiudadButton_Click(object sender, EventArgs e)
         {
-            new AltaCiudad().ShowDialog();
+            new AltaCiudad().ShowDialog(this);
         }
 
         private void BuscarCiudadButton_Click(object sender, EventArgs e)
         {
-            new ListadoCiudad().ShowDialog();
+            new ListadoCiudad().ShowDialog(this);
         }
 
         private void CanjeMillasButton_Click(object sender, EventArgs e)
         {
-            new canjeMillas().ShowDialog();
+            new canjeMillas().ShowDialog(this);
         }
 
         private void ConsultarMillasButton_Click(object sender, EventArgs e)
         {
-            new ConsultaMillas().ShowDialog();
+            new ConsultaMillas().ShowDialog(this);
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
