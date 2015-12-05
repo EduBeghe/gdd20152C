@@ -40,7 +40,6 @@ namespace AerolineaFrba.Abm_Ciudad
         private void canjeMillas_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet6.Productos' Puede moverla o quitarla según sea necesario.
-            this.productosTableAdapter.Fill(this.gD2C2015DataSet6.Productos);
 
         }
     }

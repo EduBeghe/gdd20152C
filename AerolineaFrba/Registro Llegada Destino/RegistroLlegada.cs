@@ -20,9 +20,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet4.Ciudades' Puede moverla o quitarla según sea necesario.
-            this.ciudadesTableAdapter.Fill(this.gD2C2015DataSet4.Ciudades);
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet2.Aeronaves' Puede moverla o quitarla según sea necesario.
-            this.aeronavesTableAdapter.Fill(this.gD2C2015DataSet2.Aeronaves);
 
         }
 

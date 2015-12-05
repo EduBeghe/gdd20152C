@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.fechaAltaAeronave = new System.Windows.Forms.DateTimePicker();
@@ -49,6 +50,10 @@
             this.tipoServicio = new System.Windows.Forms.ComboBox();
             this.fabricanteAeronave = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.gD2C2015DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tiposDeServiciosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -202,11 +207,14 @@
             // 
             // tipoServicio
             // 
+            this.tipoServicio.DataSource = this.tiposDeServiciosBindingSource;
+            this.tipoServicio.DisplayMember = "Descripcion_Servicio";
             this.tipoServicio.FormattingEnabled = true;
             this.tipoServicio.Location = new System.Drawing.Point(453, 125);
             this.tipoServicio.Name = "tipoServicio";
             this.tipoServicio.Size = new System.Drawing.Size(140, 28);
             this.tipoServicio.TabIndex = 28;
+            this.tipoServicio.ValueMember = "Descripcion_Servicio";
             // 
             // fabricanteAeronave
             // 
@@ -224,6 +232,23 @@
             this.label6.Size = new System.Drawing.Size(85, 20);
             this.label6.TabIndex = 30;
             this.label6.Text = "Fabricante";
+            // 
+            // gD2C2015DataSet
+            // 
+            // 
+            // gD2C2015DataSetBindingSource
+            // 
+            this.gD2C2015DataSetBindingSource.Position = 0;
+            // 
+            // gD2C2015DataSet7
+            // 
+            // 
+            // tiposDeServiciosBindingSource
+            // 
+            this.tiposDeServiciosBindingSource.DataMember = "Tipos_De_Servicios";
+            // 
+            // tipos_De_ServiciosTableAdapter
+            // 
             // 
             // AltaAeronave
             // 
@@ -254,6 +279,8 @@
             this.Name = "AltaAeronave";
             this.Text = "Alta Aeronaves";
             this.Load += new System.EventHandler(this.AltaAeronave_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,5 +309,7 @@
         private System.Windows.Forms.ComboBox tipoServicio;
         private System.Windows.Forms.ComboBox fabricanteAeronave;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.BindingSource gD2C2015DataSetBindingSource;
+        private System.Windows.Forms.BindingSource tiposDeServiciosBindingSource;
     }
 }

@@ -38,22 +38,16 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.aeronavesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gD2C2015DataSet2 = new AerolineaFrba.GD2C2015DataSet2();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.ciudadesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gD2C2015DataSet4 = new AerolineaFrba.GD2C2015DataSet4();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
-            this.aeronavesTableAdapter = new AerolineaFrba.GD2C2015DataSet2TableAdapters.AeronavesTableAdapter();
-            this.ciudadesTableAdapter = new AerolineaFrba.GD2C2015DataSet4TableAdapters.CiudadesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -137,12 +131,9 @@
             // aeronavesBindingSource
             // 
             this.aeronavesBindingSource.DataMember = "Aeronaves";
-            this.aeronavesBindingSource.DataSource = this.gD2C2015DataSet2;
             // 
             // gD2C2015DataSet2
             // 
-            this.gD2C2015DataSet2.DataSetName = "GD2C2015DataSet2";
-            this.gD2C2015DataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // comboBox2
             // 
@@ -158,12 +149,9 @@
             // ciudadesBindingSource
             // 
             this.ciudadesBindingSource.DataMember = "Ciudades";
-            this.ciudadesBindingSource.DataSource = this.gD2C2015DataSet4;
             // 
             // gD2C2015DataSet4
             // 
-            this.gD2C2015DataSet4.DataSetName = "GD2C2015DataSet4";
-            this.gD2C2015DataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // comboBox3
             // 
@@ -230,11 +218,9 @@
             // 
             // aeronavesTableAdapter
             // 
-            this.aeronavesTableAdapter.ClearBeforeFill = true;
             // 
             // ciudadesTableAdapter
             // 
-            this.ciudadesTableAdapter.ClearBeforeFill = true;
             // 
             // RegistroLlegada
             // 
@@ -260,9 +246,7 @@
             this.Text = "Registrar Llegada de Aeronave";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -288,11 +272,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.Button button1;
-        private GD2C2015DataSet2 gD2C2015DataSet2;
         private System.Windows.Forms.BindingSource aeronavesBindingSource;
-        private GD2C2015DataSet2TableAdapters.AeronavesTableAdapter aeronavesTableAdapter;
-        private GD2C2015DataSet4 gD2C2015DataSet4;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
-        private GD2C2015DataSet4TableAdapters.CiudadesTableAdapter ciudadesTableAdapter;
     }
 }

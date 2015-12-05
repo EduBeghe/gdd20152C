@@ -36,12 +36,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.ciudadesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gD2C2015DataSet4 = new AerolineaFrba.GD2C2015DataSet4();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.ciudadesTableAdapter = new AerolineaFrba.GD2C2015DataSet4TableAdapters.CiudadesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet4)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -107,12 +104,9 @@
             // ciudadesBindingSource
             // 
             this.ciudadesBindingSource.DataMember = "Ciudades";
-            this.ciudadesBindingSource.DataSource = this.gD2C2015DataSet4;
             // 
             // gD2C2015DataSet4
             // 
-            this.gD2C2015DataSet4.DataSetName = "GD2C2015DataSet4";
-            this.gD2C2015DataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // comboBox2
             // 
@@ -139,7 +133,6 @@
             // 
             // ciudadesTableAdapter
             // 
-            this.ciudadesTableAdapter.ClearBeforeFill = true;
             // 
             // Compra
             // 
@@ -159,7 +152,6 @@
             this.Text = "Compra Pasajes";
             this.Load += new System.EventHandler(this.Compra_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,8 +167,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button button1;
-        private GD2C2015DataSet4 gD2C2015DataSet4;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
-        private GD2C2015DataSet4TableAdapters.CiudadesTableAdapter ciudadesTableAdapter;
     }
 }

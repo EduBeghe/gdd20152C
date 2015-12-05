@@ -53,11 +53,8 @@ namespace AerolineaFrba.Abm_Ciudad
         private void ListadoAeronave_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet3.Aeronaves' Puede moverla o quitarla según sea necesario.
-            this.aeronavesTableAdapter1.Fill(this.gD2C2015DataSet3.Aeronaves);
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet2.Aeronaves' Puede moverla o quitarla según sea necesario.
-            this.aeronavesTableAdapter.Fill(this.gD2C2015DataSet2.Aeronaves);
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet1.Fabricantes' Puede moverla o quitarla según sea necesario.
-            this.fabricantesTableAdapter.Fill(this.gD2C2015DataSet1.Fabricantes);
 
         }
     }
