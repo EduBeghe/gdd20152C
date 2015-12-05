@@ -41,12 +41,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.aeronavesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.aeronavesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.fabricante = new System.Windows.Forms.ComboBox();
             this.servicio = new System.Windows.Forms.ComboBox();
+            this.codigo = new System.Windows.Forms.TextBox();
+            this.matricula = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fabricantesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).BeginInit();
@@ -160,33 +160,9 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // comboBox2
-            // 
-            this.comboBox2.DataSource = this.aeronavesBindingSource;
-            this.comboBox2.DisplayMember = "Matricula";
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(150, 115);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 28);
-            this.comboBox2.TabIndex = 14;
-            this.comboBox2.ValueMember = "Matricula";
-            // 
             // aeronavesBindingSource
             // 
             this.aeronavesBindingSource.DataMember = "Aeronaves";
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.DataSource = this.aeronavesBindingSource1;
-            this.comboBox3.DisplayMember = "Cod_Aeronave";
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(150, 55);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 28);
-            this.comboBox3.TabIndex = 15;
-            this.comboBox3.ValueMember = "Cod_Aeronave";
             // 
             // aeronavesBindingSource1
             // 
@@ -209,15 +185,29 @@
             this.servicio.Size = new System.Drawing.Size(121, 28);
             this.servicio.TabIndex = 17;
             // 
+            // codigo
+            // 
+            this.codigo.Location = new System.Drawing.Point(139, 52);
+            this.codigo.Name = "codigo";
+            this.codigo.Size = new System.Drawing.Size(129, 26);
+            this.codigo.TabIndex = 18;
+            // 
+            // matricula
+            // 
+            this.matricula.Location = new System.Drawing.Point(139, 114);
+            this.matricula.Name = "matricula";
+            this.matricula.Size = new System.Drawing.Size(129, 26);
+            this.matricula.TabIndex = 19;
+            // 
             // ListadoAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(560, 509);
+            this.Controls.Add(this.matricula);
+            this.Controls.Add(this.codigo);
             this.Controls.Add(this.servicio);
             this.Controls.Add(this.fabricante);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -255,11 +245,11 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.BindingSource fabricantesBindingSource;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.BindingSource aeronavesBindingSource;
-        private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.BindingSource aeronavesBindingSource1;
         private System.Windows.Forms.ComboBox fabricante;
         private System.Windows.Forms.ComboBox servicio;
+        private System.Windows.Forms.TextBox codigo;
+        private System.Windows.Forms.TextBox matricula;
     }
 }

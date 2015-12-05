@@ -36,7 +36,12 @@ namespace AerolineaFrba.Abm_Ciudad
             var aeronave = (Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem;
             new AeronaveRepository().darDeBajaXVidaUtil(aeronave);
             MessageBox.Show("Aeronave dada de baja con exito");
-            this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave()), null); 
+            this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new  AeronaveRepository().findAeronave(
+                matricula.Text, 
+                Convert.ToInt32( codigo.Text ), 
+                new FabricantesRepository().getFabricante( Convert.ToInt32( fabricante.ValueMember )),
+                new TipoServicioRepository().getTipoServicio( Convert.ToInt32( servicio.ValueMember ))
+                )), null); 
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -53,10 +58,10 @@ namespace AerolineaFrba.Abm_Ciudad
         private void ListadoAeronave_Load(object sender, EventArgs e)
         {
             servicio.DisplayMember = "Descripcion_Servicio";
-            // servicio.ValueMember = ? ( que elemento queremos que seleccione ) 
+            servicio.ValueMember = "Cod_Tipo_Servicio";
             this.servicio.DataSource = new BindingSource(new BindingList<TipoServicio>(new TipoServicioRepository().getServicios()), null);
             fabricante.DisplayMember = "Nombre_Fabricante";
-            // servicio.ValueMember = ? ( que elemento queremos que seleccione )    
+            servicio.ValueMember = "Cod_Fabricante";
             this.fabricante.DataSource = new BindingSource(new BindingList<Fabricante>(new FabricantesRepository().getFabricantes()), null);
         }
     }
