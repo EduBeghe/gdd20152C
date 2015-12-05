@@ -31,7 +31,7 @@ namespace AerolineaFrba.Abm_Aeronave
             new AeronaveRepository().darDeAlta(
                 new Aeronave( 
                 Convert.ToInt32( codigoAeronave.Text ),
-                Convert.ToInt32( matriculaAeronave.Text),
+                matriculaAeronave.Text,
                 fechaAltaAeronave.Value,
                 ( Fabricante ) fabricanteAeronave.SelectedItem,
                 modeloAeronave.Text,

@@ -34,11 +34,14 @@ namespace AerolineaFrba.Repositories {
 			return parse ( DBAdapter.retrieveDataTable("GetAeronave", idAeronave ).Rows[0]);
 		}
 
-		public List<Aeronave> findAeronave( )
+		public List<Aeronave> findAeronave( string matricula, int codigo, Fabricante fabricante, TipoServicio servicio  )
 		{
-            // Cual es la idea del metodo, buscar todas las aeronaves o una en particular ?
-			//return parseAeronaves( DBAdapter.retrieveDataTable( "FindAeronave" ).Rows[0] );
-            return new List<Aeronave>();
+			return parseAeronaves( DBAdapter.retrieveDataTable("Filtrar_Aeronaves",
+			matricula,
+			codigo,
+			fabricante.Nombre_Fabricante,
+			servicio.Descripcion_Servicio
+			));	
 		}
 
 		public void darDeAlta( Aeronave aeronave )
@@ -62,7 +65,7 @@ namespace AerolineaFrba.Repositories {
         {
        		return new Aeronave( 
        			Convert.ToInt32(dr["Cod_Aeronave"]),
-       			Convert.ToInt32(dr["Matricula"]),
+       			dr["Matricula"] as string,
        			Convert.ToDateTime(dr["Fecha_Alta"]),
        			new FabricantesRepository().getFabricante( Convert.ToInt32(dr["Cod_Fabricante"]) ),
        			dr["Modelo"] as string,
