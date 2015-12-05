@@ -17,6 +17,17 @@ namespace AerolineaFrba.Repositories {
 			return parse ( DBAdapter.retrieveDataTable("GetTipoServicio", codTipoServicio ).Rows[0]);
 		}
 
+		public List<TipoServicio> getServicios()
+		{
+			return parseServicios( DBAdapter.retrieveDataTable("getServicios" ) );
+		}
+
+		public List<TipoServicio> parseServicios( DataTable dataTable )
+		{
+			return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+		}
+
+
 
 		public TipoServicio parse(DataRow dr)
         {
