@@ -232,6 +232,7 @@
     </Compile>
     <Compile Include="Repositorios\AeronaveRepository.cs" />
     <Compile Include="Repositorios\CiudadRepository.cs" />
+    <Compile Include="Repositorios\ProductoRepository.cs" />
     <Compile Include="Repositorios\ClientesRepository.cs" />
     <Compile Include="Repositorios\Estadisticos.cs" />
     <Compile Include="Repositorios\FabricantesRepository.cs" />

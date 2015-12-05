@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -39,8 +40,7 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void canjeMillas_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet6.Productos' Puede moverla o quitarla según sea necesario.
-
+            this.producto.DataSource = new BindingSource(new BindingList<ProductoCanje>(new Repositorios.ProductoRepository().getProductos()), null);
         }
     }
 }
