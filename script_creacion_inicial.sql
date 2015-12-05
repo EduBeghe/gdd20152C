@@ -126,6 +126,18 @@ IF OBJECT_ID('TODOX2LUCAS.Baja_Por_Fuera_De_Servicio') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Baja_Por_Fuera_De_Servicio;
 IF OBJECT_ID('TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones;
+IF OBJECT_ID('TODOX2LUCAS.GetRuta') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetRuta;
+IF OBJECT_ID('TODOX2LUCAS.GetAeronave') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetAeronave;
+IF OBJECT_ID('TODOX2LUCAS.GetTipoServicio') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetTipoServicio;
+IF OBJECT_ID('TODOX2LUCAS.GetFabricante') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetFabricante;
+IF OBJECT_ID('TODOX2LUCAS.GetCliente') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetCliente;
+IF OBJECT_ID('TODOX2LUCAS.GetViaje') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetViaje;
 IF OBJECT_ID('TODOX2LUCAS.Comprar_Encomienda') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Comprar_Encomienda;
 IF OBJECT_ID('TODOX2LUCAS.Aeronave_Para_Reemplazar') IS NOT NULL
@@ -146,94 +158,10 @@ IF OBJECT_ID('TODOX2LUCAS.Alta_Ciudad') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Alta_Ciudad;
 IF OBJECT_ID('TODOX2LUCAS.Filtrar_Rutas') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Filtrar_Rutas;
-IF OBJECT_ID('TODOX2LUCAS.GetCiudades') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetCiudades;
-IF OBJECT_ID('TODOX2LUCAS.GetCiudad') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetCiudad;
-IF OBJECT_ID('TODOX2LUCAS.GetFabricante') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetFabricante;
-IF OBJECT_ID('TODOX2LUCAS.GetFabricantes') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetFabricantes;
-IF OBJECT_ID('TODOX2LUCAS.Get_Funcionalidad') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Funcionalidad;
-IF OBJECT_ID('TODOX2LUCAS.Get_Funcionalidades') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Funcionalidades;
-IF OBJECT_ID('TODOX2LUCAS.Get_Producto') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Producto;
-IF OBJECT_ID('TODOX2LUCAS.Get_Productos') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Productos;
-IF OBJECT_ID('TODOX2LUCAS.GetRol') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetRol;
-IF OBJECT_ID('TODOX2LUCAS.Get_Roles') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Roles;
 IF OBJECT_ID('TODOX2LUCAS.GetUsuario') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetUsuario;
-IF OBJECT_ID('TODOX2LUCAS.Get_Usuarios') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Usuarios;
-IF OBJECT_ID('TODOX2LUCAS.GetAuditoriaLogin') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetAuditoriaLogin;
-IF OBJECT_ID('TODOX2LUCAS.Get_AuditoriasLogin') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_AuditoriasLogin;
-IF OBJECT_ID('TODOX2LUCAS.GetRolPorFuncionalidad') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetRolPorFuncionalidad;
-IF OBJECT_ID('TODOX2LUCAS.Get_RolPorFuncionalidades') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_RolPorFuncionalidades;
-IF OBJECT_ID('TODOX2LUCAS.GetCliente') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetCliente;
-IF OBJECT_ID('TODOX2LUCAS.Get_Clientes') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Clientes;
-IF OBJECT_ID('TODOX2LUCAS.GetTarjeta') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetTarjeta;
-IF OBJECT_ID('TODOX2LUCAS.Get_Tarjetas') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Tarjetas;
-IF OBJECT_ID('TODOX2LUCAS.GetTipoServicio') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetTipoServicio;
-IF OBJECT_ID('TODOX2LUCAS.GetServicios') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetServicios;
-IF OBJECT_ID('TODOX2LUCAS.GetAeronave') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetAeronave;
-IF OBJECT_ID('TODOX2LUCAS.Get_Aeronaves') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Aeronaves;
-IF OBJECT_ID('TODOX2LUCAS.GetEstadoAeronave') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetEstadoAeronave;
-IF OBJECT_ID('TODOX2LUCAS.Get_EstadosAeronaves') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_EstadosAeronaves;
-IF OBJECT_ID('TODOX2LUCAS.GetButaca') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetButaca;
-IF OBJECT_ID('TODOX2LUCAS.Get_Butacas') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Butacas;
-IF OBJECT_ID('TODOX2LUCAS.Get_Rutas') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Rutas;
-IF OBJECT_ID('TODOX2LUCAS.GetRuta') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetRuta;
-IF OBJECT_ID('TODOX2LUCAS.GetViaje') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetViaje;
-IF OBJECT_ID('TODOX2LUCAS.Get_Viajes') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Viajes;
-IF OBJECT_ID('TODOX2LUCAS.GetCanje') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetCanje;
-IF OBJECT_ID('TODOX2LUCAS.Get_Canjes') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Canjes;
-IF OBJECT_ID('TODOX2LUCAS.GetEncomienda') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetEncomienda;
-IF OBJECT_ID('TODOX2LUCAS.Get_Encomiendas') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Encomiendas;
-IF OBJECT_ID('TODOX2LUCAS.GetPasaje') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetPasaje;
-IF OBJECT_ID('TODOX2LUCAS.Get_Pasajes') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Pasajes;
-IF OBJECT_ID('TODOX2LUCAS.GetTransaccionPasaje') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetTransaccionPasaje;
-IF OBJECT_ID('TODOX2LUCAS.Get_TransaccionesPasajes') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_TransaccionesPasajes;
-IF OBJECT_ID('TODOX2LUCAS.GetTransaccionPaquete') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetTransaccionPaquete;
-IF OBJECT_ID('TODOX2LUCAS.Get_TransacionesPaquetes') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_TransacionesPaquetes;
-IF OBJECT_ID('TODOX2LUCAS.GetCancelacion') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetCancelacion;
-IF OBJECT_ID('TODOX2LUCAS.Get_Cancelaciones') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Cancelaciones;
+IF OBJECT_ID('TODOX2LUCAS.GetRol') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetRol;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1267,192 +1195,24 @@ BEGIN
 	WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
 END
 GO
------------------------------------------ GETTERS TABLAS DE TODOS SUS DATOS Y CON FILTRO POR PK------------------------------------------------
-------------------------------------------------- TABLA CIUDADES ---------------------------------------------------------------
- /* ------------ PROCEDIMIENTOS GETTER TODOS LAS CIUDADES ------------ */
- CREATE PROCEDURE  TODOX2LUCAS.GetCiudades
+/* ------------ PROCEDIMIENTOS GETTER RUTA ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetRuta(@codRuta numeric(18),@ciudadOrigen int,@ciudadDestino int)
  AS
  BEGIN
 	SELECT *
-	FROM TODOX2LUCAS.Ciudades
+	FROM TODOX2LUCAS.RutasAereas 
+	WHERE Cod_Ruta = @codRuta AND Cod_Ciudad_Origen = @ciudadOrigen AND Cod_Ciudad_Destino = @ciudadDestino
  END
  GO
-/* ------------ PROCEDIMIENTOS GETTER TODOS LAS CIUDADES ------------ */
- CREATE PROCEDURE TODOX2LUCAS.GetCiudad(@codCiudad int)
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Ciudades
-	WHERE Cod_Ciudad = @codCiudad
-END
-GO
---------------------------------------------------- TABLA FABRICANTES ---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER FABRICANTE ------------ */
- CREATE PROCEDURE   TODOX2LUCAS.GetFabricante(@codFabricante int)
+/* ------------ PROCEDIMIENTOS GETTER AERONAVE ------------ */
+ CREATE PROCEDURE  TODOX2LUCAS.GetAeronave(@codAeronave int)
  AS
  BEGIN
 	SELECT *
-	FROM TODOX2LUCAS.Fabricantes
-	WHERE Cod_Fabricante = @codFabricante
+	FROM TODOX2LUCAS.Aeronaves 
+	WHERE Cod_Aeronave = @codAeronave
  END
  GO
- /* ------------ PROCEDIMIENTOS GETTER TODOS LOS FABRICANTES ------------ */
- CREATE PROCEDURE  TODOX2LUCAS.GetFabricantes
- AS
- BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Fabricantes
- END
- GO
-
-------------------------------------------------- TABLA FUNCIONALIDADES ---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER FUNCIONALIDADES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Funcionalidad(@codFuncionalidad int)
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Funcionalidades
-	WHERE Cod_Funcionalidad = @codFuncionalidad
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS FUNCIONALIDADES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Funcionalidades
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Funcionalidades
-END
-GO
-------------------------------------------------- TABLA PRODUCTOS---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER PRODUCTOS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Producto(@codProducto int)
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Productos 
-	WHERE Cod_Producto = @codProducto
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LOS PRODUCTOS ------------ */ 
-CREATE PROCEDURE TODOX2LUCAS.Get_Productos
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Productos 
-END
-GO
-------------------------------------------------- TABLA ROLES---------------------------------------------------------------
- /* ------------ PROCEDIMIENTOS GETTER ROL ------------ */
- CREATE PROCEDURE TODOX2LUCAS.GetRol(@codRol int)
- AS
- BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Roles
-	WHERE Cod_Rol = @codRol
- END
- GO
-/* ------------ PROCEDIMIENTOS GETTER TODOS LOS ROLES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Roles
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Roles 
-END
-GO
-------------------------------------------------- TABLA USUARIOS---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER USUARIO ------------ */
- CREATE PROCEDURE TODOX2LUCAS.GetUsuario(@usrname nvarchar(255))
- AS
- BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Usuarios
-	WHERE Usuario_Nombre = @usrname	
- END
- GO
-
-/* ------------ PROCEDIMIENTOS GETTER TODOS LOS USUARIOS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Usuarios
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Usuarios
-END
-GO
-------------------------------------------------- TABLA AUDITORIA LOGIN---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER AUDITORIA LOGIN ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetAuditoriaLogin(@codAuditoria int)
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Auditoria_Login
-	WHERE Cod_Auditoria = @codAuditoria
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS AUDITORIAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_AuditoriasLogin
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Auditoria_Login
-END
-GO
-
-------------------------------------------------- TABLA ROL POR FUNCIONALIDAD---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER ROL FUNCIONALIDAD ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetRolPorFuncionalidad(@codRol int,@codFuncionalidad int)
-AS
-BEGIN 
-	SELECT *
-	FROM TODOX2LUCAS.Rol_Por_Funcionalidad
-	WHERE Cod_Rol = @codRol AND Cod_Funcionalidad = @codFuncionalidad
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LOS ROLES POR FUNCIONALIDADES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_RolPorFuncionalidades
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Rol_Por_Funcionalidad
-END
-GO
-------------------------------------------------- TABLA CLIENTES ---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER CLIENTE ------------ */
- CREATE PROCEDURE TODOX2LUCAS.GetCliente(@dni numeric(18),@apellido nvarchar(255))
- AS
- BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Clientes
-	WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
- END
- GO
-/* ------------ PROCEDIMIENTOS GETTER TODOS LOS CLIENTES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Clientes
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Clientes
-END
-GO
-------------------------------------------------- TABLA TARJETAS---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER TARJETAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetTarjeta(@numTarjeta numeric(16))
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Tarjetas 
-	WHERE Numero_Tarjeta = @numTarjeta
-END
-GO
-
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS TARJETAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Tarjetas
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Tarjetas
-END
-GO
-------------------------------------------------- TABLA TIPOS DE SERVICIOS---------------------------------------------------------------
 /* ------------ PROCEDIMIENTOS GETTER TIPO SERVICIO ------------ */
  CREATE PROCEDURE  TODOX2LUCAS.GetTipoServicio(@codServicio int)
  AS
@@ -1470,80 +1230,41 @@ GO
 	FROM TODOX2LUCAS.Tipos_De_Servicios
  END
  GO
+/* ------------ PROCEDIMIENTOS GETTER FABRICANTE ------------ */
+ CREATE PROCEDURE   TODOX2LUCAS.GetFabricante(@codFabricante int)
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Fabricantes
+	WHERE Cod_Fabricante = @codFabricante
+ END
+ GO
+ /* ------------ PROCEDIMIENTOS GETTER TODOS LOS FABRICANTES ------------ */
+ CREATE PROCEDURE  TODOX2LUCAS.GetFabricantes
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Fabricantes
+ END
+ GO
+ /* ------------ PROCEDIMIENTOS GETTER TODOS LAS CIUDADES ------------ */
+ CREATE PROCEDURE  TODOX2LUCAS.GetCiudades
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Ciudades
+ END
+ GO
 
-------------------------------------------------- TABLA AERONAVES---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER AERONAVE ------------ */
- CREATE PROCEDURE  TODOX2LUCAS.GetAeronave(@codAeronave int)
+/* ------------ PROCEDIMIENTOS GETTER CLIENTE ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetCliente(@dni numeric(18),@apellido nvarchar(255))
  AS
  BEGIN
 	SELECT *
-	FROM TODOX2LUCAS.Aeronaves 
-	WHERE Cod_Aeronave = @codAeronave
+	FROM TODOX2LUCAS.Clientes
+	WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
  END
  GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS AERONAVES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Aeronaves
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Aeronaves 
-END
-GO
-------------------------------------------------- TABLA ESTADOS AERONAVES---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER ESTADOS AERONAVES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetEstadoAeronave(@codEstado int,@codAeronave int)
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Estados_Aeronaves
-	WHERE Cod_Estado = @codEstado AND Cod_Aeronave = @codAeronave
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODOS LOS AERONAVES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_EstadosAeronaves
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Estados_Aeronaves
-END
-GO
-------------------------------------------------- TABLA BUTACAS---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER BUTACAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetButaca(@codButaca numeric(18),@codAeronave int)
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Butacas 
-	WHERE Cod_Butaca = @codButaca AND Cod_Aeronave = @codAeronave
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS BUTACAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Butacas
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Butacas
-END
-GO
-------------------------------------------------- TABLA RUTASAEREAS---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER RUTA ------------ */
- CREATE PROCEDURE TODOX2LUCAS.GetRuta(@codRuta numeric(18),@ciudadOrigen int,@ciudadDestino int)
- AS
- BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.RutasAereas 
-	WHERE Cod_Ruta = @codRuta AND Cod_Ciudad_Origen = @ciudadOrigen AND Cod_Ciudad_Destino = @ciudadDestino
- END
- GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS RUTAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Rutas
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.RutasAereas
-END
-GO
-------------------------------------------------- TABLA VIAJES---------------------------------------------------------------
 /* ------------ PROCEDIMIENTOS GETTER VIAJE ------------ */
  CREATE PROCEDURE TODOX2LUCAS.GetViaje(@codViaje int)
  AS
@@ -1553,125 +1274,25 @@ GO
 	WHERE Cod_Viaje = @codViaje
  END
  GO
+/* ------------ PROCEDIMIENTOS GETTER USUARIO ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetUsuario(@usrname nvarchar(255))
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Usuarios
+	WHERE Usuario_Nombre = @usrname	
+ END
+ GO
 
-/* ------------ PROCEDIMIENTOS GETTER TODOS LOS VIAJES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Viajes
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Viajes
-END
-GO
-------------------------------------------------- TABLA CANJES---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER CANJES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetCanje(@codCanje int)
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Canjes
-	WHERE Cod_Canje = @codCanje
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODOS LOS CANJES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Canjes
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Canjes
-END
-GO
-------------------------------------------------- TABLA ENCOMIENDAS---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER ENCOMIENDAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetEncomienda(@codEncomiendas numeric(18))
-AS
-BEGIN
+ /* ------------ PROCEDIMIENTOS GETTER ROL ------------ */
+ CREATE PROCEDURE TODOX2LUCAS.GetRol(@codRol int)
+ AS
+ BEGIN
 	SELECT *
-	FROM TODOX2LUCAS
-	WHERE Cod_Encomiendas = @codEncomiendas
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS ENCOMIENAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Encomiendas
-AS
-BEGIN
-	SELECT * 
-	FROM TODOX2LUCAS.Encomiendas
-END
-GO
-------------------------------------------------- TABLA PASAJES---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER PASAJES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetPasaje(@codPasaje numeric(18))
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Pasajes
-	WHERE Cod_Pasaje = @codPasaje
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODOS LOS PASAJES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Pasajes
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Encomiendas
-END
-GO
-------------------------------------------------- TABLA TRANSACCIONES PASAJES---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER TRANSACCIONES PASAJES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetTransaccionPasaje(@numeroCompra int,@codPasaje numeric(18))
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.TransaccionesPasajes
-	WHERE Numero_Compra = @numeroCompra AND Cod_Pasaje = @codPasaje
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS TRANSACCIONES PASAJES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_TransaccionesPasajes
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.TransaccionesPasajes
-END
-GO
-------------------------------------------------- TABLA TRANSACCIONES PAQUETES---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER TRANSACCIONES PAQUETES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetTransaccionPaquete(@numeroCompra int,@codEncomienda numeric(18))
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.TransaccionesPaquetes
-	WHERE Numero_Compra = @numeroCompra AND Cod_Encomiendas = @codEncomienda
-END
-GO
-
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS TRANSACCIONES PAQUETES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_TransacionesPaquetes
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.TransaccionesPaquetes
-END
-GO
-
-------------------------------------------------- TABLA CANCELACIONES---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER CANCELACIONES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetCancelacion(@codDevolucion int,@codPasaje numeric(18),@codEncomienda numeric(18))
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Cancelaciones
-	WHERE Codigo_Devolucion = @codDevolucion AND Cod_Pasaje = @codPasaje AND Cod_Encomiendas = @codEncomienda
-END
-GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS CANCELACIONES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Cancelaciones
-AS
-BEGIN
-	SELECT *
-	FROM TODOX2LUCAS.Cancelaciones
-END
-GO
+	FROM TODOX2LUCAS.Roles
+	WHERE Cod_Rol = @codRol
+ END
+ GO
 /* ------------ PROCEDIMIENTOS PARA LOS LISTADOS ESTADISTICOS ------------ */
 /* ------------ Top 5 de los destinos con más pasajes comprados ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Pasajes_Mas_Comprados(@fecha_inicio datetime, @fecha_fin datetime)
@@ -1743,11 +1364,12 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Aeronaves(@matricula nvarchar(255),@codAeronave int,@fabricante nvarchar(255), @servicio nvarchar(255))
 AS
 BEGIN
-	SELECT A.Cod_Aeronave as  'CODIGO AERONAVE',A.Matricula AS 'MATRICULA',A.Modelo AS 'MODELO',A.Cantidad_Butacas AS 'CANTIDAD DE BUTACAS',A.Kgs_Disponibles AS 'CANTIDAD DE KILOGRAMOS',F.Nombre_Fabricante AS 'NOMBRE FABRICANTE',T.Descripcion_Servicio AS 'SERVICIO'
+	SELECT A.*
 	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Fabricantes F ON(A.Cod_Fabricante=F.Cod_Fabricante)
 								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(T.Cod_Tipo_Servicio=A.Cod_Tipo_Servicio)
 	WHERE A.Matricula = @matricula OR
 			A.Cod_Aeronave = @codAeronave OR
+			
 			f.Nombre_Fabricante = @fabricante OR
 			t.Descripcion_Servicio = @servicio
 END

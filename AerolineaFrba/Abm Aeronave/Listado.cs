@@ -28,11 +28,15 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            Fabricante fb = (Fabricante) fabricante.SelectedItem;
+            TipoServicio ts = (TipoServicio) servicio.SelectedItem;
+            Int32 cod = Convert.ToInt32(codigo.Text);
+            string mt = matricula.Text;
             this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave(
-                matricula.Text,
-                Convert.ToInt32(codigo.Text),
-                new FabricantesRepository().getFabricante(Convert.ToInt32(fabricante.ValueMember)),
-                new TipoServicioRepository().getTipoServicio(Convert.ToInt32(servicio.ValueMember))
+                mt,
+                cod,
+                fb,//new FabricantesRepository().getFabricante(Convert.ToInt32(fabricante.SelectedItem)),
+                ts//new TipoServicioRepository().getTipoServicio(Convert.ToInt32(servicio.SelectedItem))
                 )), null); 
         }
 
@@ -44,8 +48,8 @@ namespace AerolineaFrba.Abm_Ciudad
             this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new  AeronaveRepository().findAeronave(
                 matricula.Text, 
                 Convert.ToInt32( codigo.Text ), 
-                new FabricantesRepository().getFabricante( Convert.ToInt32( fabricante.ValueMember )),
-                new TipoServicioRepository().getTipoServicio( Convert.ToInt32( servicio.ValueMember ))
+                (Fabricante) fabricante.SelectedItem, //new FabricantesRepository().getFabricante( Convert.ToInt32( fabricante.SelectedItem )),
+                (TipoServicio) servicio.SelectedItem//new TipoServicioRepository().getTipoServicio( Convert.ToInt32( servicio.SelectedItem ))
                 )), null); 
         }
 
@@ -63,10 +67,10 @@ namespace AerolineaFrba.Abm_Ciudad
         private void ListadoAeronave_Load(object sender, EventArgs e)
         {
             servicio.DisplayMember = "Descripcion_Servicio";
-            servicio.ValueMember = "Cod_Tipo_Servicio";
-            this.servicio.DataSource = new BindingSource(new BindingList<TipoServicio>(new TipoServicioRepository().getServicios()), null);
+            //servicio.ValueMember = "Cod_Tipo_Servicio";
             fabricante.DisplayMember = "Nombre_Fabricante";
-            servicio.ValueMember = "Cod_Fabricante";
+            //fabricante.ValueMember = "Cod_Fabricante";
+            this.servicio.DataSource = new BindingSource(new BindingList<TipoServicio>(new TipoServicioRepository().getServicios()), null);
             this.fabricante.DataSource = new BindingSource(new BindingList<Fabricante>(new FabricantesRepository().getFabricantes()), null);
         }
     }

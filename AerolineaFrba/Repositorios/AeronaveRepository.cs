@@ -36,7 +36,7 @@ namespace AerolineaFrba.Repositories {
 
 		public List<Aeronave> findAeronave( string matricula, int codigo, Fabricante fabricante, TipoServicio servicio  )
 		{
-			return parseAeronaves( DBAdapter.retrieveDataTable("GetAeronave",
+			return parseAeronaves( DBAdapter.retrieveDataTable("Filtrar_Aeronaves",
 			matricula,
 			codigo,
 			fabricante.Nombre_Fabricante,
@@ -65,7 +65,7 @@ namespace AerolineaFrba.Repositories {
         {
        		return new Aeronave( 
        			Convert.ToInt32(dr["Cod_Aeronave"]),
-       			Convert.ToInt32(dr["Matricula"]),
+       			dr["Matricula"] as string,
        			Convert.ToDateTime(dr["Fecha_Alta"]),
        			new FabricantesRepository().getFabricante( Convert.ToInt32(dr["Cod_Fabricante"]) ),
        			dr["Modelo"] as string,
