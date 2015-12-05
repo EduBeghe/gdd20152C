@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Login;
-using AerolineaFrba.Abm_Ruta;
 
 
 namespace AerolineaFrba
@@ -23,10 +22,8 @@ namespace AerolineaFrba
         private void button1_Click(object sender, EventArgs e)
         {
             Form pantallaLogin = new LoginScreen();
-            Form pantallaRutas = new AltaRuta();
             this.Hide();
             pantallaLogin.ShowDialog(this);
-            pantallaRutas.ShowDialog(this);
             this.Close();
         }
 
