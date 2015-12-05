@@ -34,7 +34,7 @@ namespace AerolineaFrba.Repositories {
 			return parse ( DBAdapter.retrieveDataTable("GetAeronave", idAeronave ).Rows[0]);
 		}
 
-		public List<Aeronave> findAeronave( string matricula, int codigo, Fabricante fabricante, TipoServicio servicio  )
+		public List<Aeronave> findAeronave( string matricula, int? codigo, Fabricante fabricante, TipoServicio servicio  )
 		{
 			return parseAeronaves( DBAdapter.retrieveDataTable("Filtrar_Aeronaves",
 			matricula,

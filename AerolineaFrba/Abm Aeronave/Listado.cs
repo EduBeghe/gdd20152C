@@ -28,16 +28,17 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            Fabricante fb = (Fabricante) fabricante.SelectedItem;
-            TipoServicio ts = (TipoServicio) servicio.SelectedItem;
-            Int32 cod = Convert.ToInt32(codigo.Text);
-            string mt = matricula.Text;
-            this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave(
-                mt,
-                cod,
-                fb,//new FabricantesRepository().getFabricante(Convert.ToInt32(fabricante.SelectedItem)),
-                ts//new TipoServicioRepository().getTipoServicio(Convert.ToInt32(servicio.SelectedItem))
-                )), null); 
+
+            if (codigo.Text != "")
+            {
+                this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave(
+                matricula.Text, Convert.ToInt32(codigo.Text), (Fabricante)fabricante.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+            }
+            else
+            {
+                this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave(
+                matricula.Text, null, (Fabricante)fabricante.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
