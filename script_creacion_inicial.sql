@@ -1239,6 +1239,23 @@ GO
 	WHERE Cod_Fabricante = @codFabricante
  END
  GO
+ /* ------------ PROCEDIMIENTOS GETTER TODOS LOS FABRICANTES ------------ */
+ CREATE PROCEDURE  TODOX2LUCAS.GetFabricantes
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Fabricantes
+ END
+ GO
+ /* ------------ PROCEDIMIENTOS GETTER TODOS LAS CIUDADES ------------ */
+ CREATE PROCEDURE  TODOX2LUCAS.GetCiudades
+ AS
+ BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Ciudades
+ END
+ GO
+
 /* ------------ PROCEDIMIENTOS GETTER CLIENTE ------------ */
  CREATE PROCEDURE TODOX2LUCAS.GetCliente(@dni numeric(18),@apellido nvarchar(255))
  AS
