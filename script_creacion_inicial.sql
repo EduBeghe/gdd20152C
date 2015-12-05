@@ -258,7 +258,7 @@ CREATE TABLE TODOX2LUCAS.Funcionalidades (
 ;
 --CREACION TABLA PRODUCTOS--
 CREATE TABLE TODOX2LUCAS.Productos ( 
-	Cod_Producto int PRIMARY KEY CLUSTERED,
+	Cod_Producto int PRIMARY KEY CLUSTERED IDENTITY,
 	Descripcion_Producto nvarchar(255),
 	Cantidad int,
 	PrecioEnMillas int
@@ -311,7 +311,7 @@ CREATE TABLE TODOX2LUCAS.Clientes (
 ;
 --CREACION TABLA TARJETAS--
 CREATE TABLE TODOX2LUCAS.Tarjetas ( 
-	Numero_Tarjeta numeric(16) PRIMARY KEY IDENTITY(4345676543213456,1),
+	Numero_Tarjeta numeric(16) PRIMARY KEY ,
 	Cod_Seg numeric(3),
 	Fecha_Vencimiento datetime,
 	Tipo_Tarjeta nvarchar(200),
@@ -400,7 +400,7 @@ CREATE TABLE TODOX2LUCAS.Canjes (
 --CREACION TABLA ENCOMIENDAS--
 
 CREATE TABLE TODOX2LUCAS.Encomiendas ( 
-	Cod_Encomiendas numeric(18) PRIMARY KEY CLUSTERED,
+	Cod_Encomiendas numeric(18) PRIMARY KEY CLUSTERED IDENTITY(79291562,1),
 	Precio_Encomienda numeric(18,2),
 	Kgs_A_Enviar numeric(18),
 	Fecha_Compra datetime,
@@ -413,7 +413,7 @@ CREATE TABLE TODOX2LUCAS.Encomiendas (
 
 --CREACION TABLA PASAJES--
 CREATE TABLE TODOX2LUCAS.Pasajes ( 
-	Cod_Pasaje numeric(18) PRIMARY KEY CLUSTERED,
+	Cod_Pasaje numeric(18) PRIMARY KEY CLUSTERED IDENTITY(76163527,1),
 	Fecha_Viaje datetime,
 	Cod_Viaje int REFERENCES TODOX2LUCAS.Viajes (Cod_Viaje),
 	Butaca_Asociada numeric(18) ,
@@ -1595,7 +1595,7 @@ CREATE PROCEDURE TODOX2LUCAS.GetEncomienda(@codEncomiendas numeric(18))
 AS
 BEGIN
 	SELECT *
-	FROM TODOX2LUCAS
+	FROM TODOX2LUCAS.Encomiendas
 	WHERE Cod_Encomiendas = @codEncomiendas
 END
 GO
@@ -1940,8 +1940,15 @@ EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Registro de Usuario'
 EXEC TODOX2LUCAS.Agregar_Funcionalidad 'Registro Llegada Destino'
 GO
 --DATOS INICIALES PARA LA TABLA DE PRODUCTOS--
-
-
+INSERT INTO TODOX2LUCAS.Productos(Descripcion_Producto,PrecioEnMillas,Cantidad)
+VALUES('Licuadora',1500,60)
+INSERT INTO TODOX2LUCAS.Productos(Descripcion_Producto,PrecioEnMillas,Cantidad)
+VALUES('TV Led HD',10000,10)
+INSERT INTO TODOX2LUCAS.Productos(Descripcion_Producto,PrecioEnMillas,Cantidad)
+VALUES('Cafetera',2000,50)
+INSERT INTO TODOX2LUCAS.Productos(Descripcion_Producto,PrecioEnMillas,Cantidad)
+VALUES('Tablet',5000,100)
+GO
 
 --DATOS INICIALES PARA LA TABLA DE ROLES--
 
@@ -2044,6 +2051,7 @@ GO
 
 --MIGRACION TABLA ENCOMIENDAS--
 --tiene q dar 135.658
+SET IDENTITY_INSERT TODOX2LUCAS.Encomiendas ON
 INSERT INTO TODOX2LUCAS.Encomiendas(Cod_Encomiendas,Precio_Encomienda,Kgs_A_Enviar,Fecha_Compra,Cod_Viaje,Nro_Dni,Cliente_Apellido)
 SELECT DISTINCT M.Paquete_Codigo,M.Paquete_Precio,M.Paquete_KG,M.Paquete_FechaCompra,v.Cod_Viaje,C.Nro_Dni,c.Cliente_Apellido
 FROM gd_esquema.Maestra M JOIN TODOX2LUCAS.Clientes C ON(C.Nro_Dni = M.Cli_Dni AND c.Cliente_Apellido=m.Cli_Apellido)
@@ -2054,10 +2062,11 @@ FROM gd_esquema.Maestra M JOIN TODOX2LUCAS.Clientes C ON(C.Nro_Dni = M.Cli_Dni A
 							JOIN TODOX2LUCAS.Viajes v ON(v.Cod_Ruta =r.Cod_Ruta AND v.Cod_Aeronave=a.Cod_Aeronave AND v.Fecha_Salida=m.FechaSalida  AND v.Fecha_Llegada_Estimada=m.Fecha_LLegada_Estimada)
 							
 WHERE M.Paquete_Codigo != 0
-GO
+SET IDENTITY_INSERT TODOX2LUCAS.Encomiendas OFF
+GO 
 --MIGRACION TABLA PASAJES--
 -- tendria que dar 265.646
-
+SET IDENTITY_INSERT TODOX2LUCAS.Pasajes ON
 INSERT INTO TODOX2LUCAS.Pasajes(Cod_Pasaje,Fecha_Viaje,Cod_Viaje,Butaca_Asociada,Nro_Dni,Pasaje_Precio,Cliente_Apellido)
 SELECT DISTINCT m.Pasaje_Codigo,m.Pasaje_FechaCompra,v.Cod_Viaje,b.Cod_Butaca,c.Nro_Dni,m.Pasaje_Precio,c.Cliente_Apellido
 FROM gd_esquema.Maestra m JOIN TODOX2LUCAS.Ciudades co ON (co.Nombre_Ciudad=m.Ruta_Ciudad_Origen)
@@ -2068,9 +2077,8 @@ FROM gd_esquema.Maestra m JOIN TODOX2LUCAS.Ciudades co ON (co.Nombre_Ciudad=m.Ru
 							JOIN TODOX2LUCAS.Butacas b ON(b.Cod_Aeronave=a.Cod_Aeronave AND m.Butaca_Nro=b.Cod_Butaca)
 							JOIN TODOX2LUCAS.Clientes c ON (c.Nro_Dni=m.Cli_Dni AND c.Cliente_Apellido=m.Cli_Apellido)
 WHERE m.Pasaje_Codigo != 0
-
+SET IDENTITY_INSERT TODOX2LUCAS.Pasajes OFF
 GO
-
 
 --MIGRACION TABLA TRANSACCIONES PASAJES--
 INSERT INTO TODOX2LUCAS.TransaccionesPasajes(Cod_Pasaje,Fecha_Transaccion,Nro_Dni,Cliente_Apellido,Forma_De_Pago)
