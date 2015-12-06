@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Domain;
+using AerolineaFrba.Utils;
 
 
 namespace AerolineaFrba.Abm_Aeronave
@@ -27,19 +28,22 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // validar campos vacios 
-            new AeronaveRepository().darDeAlta(
-                Convert.ToInt32( codigoAeronave.Text ),
-                matriculaAeronave.Text,
-                fechaAltaAeronave.Value,
-                ( Fabricante ) fabricanteAeronave.SelectedItem,
-                modeloAeronave.Text,
-                ( TipoServicio ) tipoServicio.SelectedItem,
-                Convert.ToInt32( kgAeronave ),
-                Convert.ToInt32( butacasPasillo),
-                Convert.ToInt32( butacasVentanilla )
-                );
-            MessageBox.Show("Aeronave exitosamente dada de Alta");
+            if (Validacion.validarInputs( this.Controls ) )
+            {
+                new AeronaveRepository().darDeAlta(
+                    Convert.ToInt32(codigoAeronave.Text),
+                    matriculaAeronave.Text,
+                    fechaAltaAeronave.Value,
+                    (Fabricante)fabricanteAeronave.SelectedItem,
+                    modeloAeronave.Text,
+                    (TipoServicio)tipoServicio.SelectedItem,
+                    Convert.ToInt32(kgAeronave),
+                    Convert.ToInt32(butacasPasillo),
+                    Convert.ToInt32(butacasVentanilla)
+                    );
+                MessageBox.Show("Aeronave exitosamente dada de Alta");
+                this.Close();
+            }
         }
 
         private void AltaAeronave_Load(object sender, EventArgs e)
@@ -51,5 +55,8 @@ namespace AerolineaFrba.Abm_Aeronave
 
 
         }
+
+       
+
     }
 }

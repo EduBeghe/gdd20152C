@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Abm_Ruta
 {
@@ -27,18 +28,20 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // validar campos vacios 
-            new RutaAereaRepository().darDeAlta(
-                new RutaAerea( 
-                    Convert.ToInt32( codigo ),
-                    ( Ciudad ) origen.SelectedItem,
-                    ( Ciudad ) destino.SelectedItem,
-                    ( TipoServicio ) servicio.SelectedItem,
-                    Convert.ToInt32( costoKg ),
-                    Convert.ToInt32( costoPasaje ),
-                    ( bool ) true // MIRAR! Agregar estado a la form 
-                    ));
-            MessageBox.Show("Ruta Aerea dada de alta exitosamente");
+            if (Validacion.validarInputs(this.Controls))
+            {
+                new RutaAereaRepository().darDeAlta(
+                    new RutaAerea(
+                        Convert.ToInt32(codigo),
+                        (Ciudad)origen.SelectedItem,
+                        (Ciudad)destino.SelectedItem,
+                        (TipoServicio)servicio.SelectedItem,
+                        Convert.ToInt32(costoKg),
+                        Convert.ToInt32(costoPasaje),
+                        (bool)true // MIRAR! Agregar estado a la form 
+                        ));
+                MessageBox.Show("Ruta Aerea dada de alta exitosamente");
+            }
         }
         
         private void AltaRuta_Load(object sender, EventArgs e)

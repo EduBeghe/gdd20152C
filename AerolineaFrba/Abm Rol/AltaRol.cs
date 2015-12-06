@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Abm_Rol
 {
@@ -28,7 +29,11 @@ namespace AerolineaFrba.Abm_Rol
         private void button1_Click(object sender, EventArgs e)
         {
             // Falta que ingresen como parametro las funcionalidades
-            new RolesRepository().agregarRol( nombre.Text );
+            if (Validacion.validarInputs(this.Controls))
+            { 
+                new RolesRepository().agregarRol(nombre.Text);
+                MessageBox.Show("Rol dato de alta exitosamente");
+            }
         }
     }
 }

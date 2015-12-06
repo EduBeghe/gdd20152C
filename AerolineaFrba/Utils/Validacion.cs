@@ -10,6 +10,17 @@ namespace AerolineaFrba.Utils
     class Validacion
     {
 
+        public static Boolean validarInputs(Control.ControlCollection controlCollection)
+        {
+            Boolean resultado = true;
+            foreach (Control control in controlCollection)
+            {
+                if (control is TextBox) resultado = resultado && !estaVacio(control, control.Name);
+                if (control is ComboBox) resultado = resultado && !noTieneSeleccion(control as ComboBox, control.Name);
+            }
+            return resultado;
+        }
+
         public static bool estaVacio(Control Box, string nombre)
         {
             if (Box.Text.Replace(" ", "") == "")
@@ -24,16 +35,6 @@ namespace AerolineaFrba.Utils
         {
             if (Box.Text.Replace(" ", "") == "") return true;
     
-            return false;
-        }
-
-        public static bool esMontoValido(Control Box, string nombre)
-        {
-            String monto = Box.Text;
-            monto = monto.Replace(',', '.');
-            
-            if (Regex.IsMatch(monto, @"^([1-9]{1}[\d]{0,2}(\,[\d]{3})*(\.[\d]{0,2})?|[1-9]{1}[\d]{0,}(\.[\d]{0,2})?|0(\.[\d]{0,2})?|(\.[\d]{1,2})?)$")) return true;
-            MessageBox.Show("El campo " + nombre + " no tiene un formato correcto, ej: 45,50 ó 45");
             return false;
         }
 
