@@ -44,15 +44,17 @@ namespace AerolineaFrba.Repositories {
 			));	
 		}
 
-		public void darDeAlta( Aeronave aeronave )
+		public void darDeAlta( int Cod_Aeronave, string Matricula, DateTime Fecha_Alta,  Fabricante fabricante, string Modelo, TipoServicio servicio, int Kgs_Disponibles, int butacasPasillo, int butacasVentanilla )
 		{
 			DBAdapter.executeProcedure("Alta_Aeronave", 
-			aeronave.Matricula,
-			aeronave.Fecha_Alta,
-			aeronave.fabricante.Nombre_Fabricante,
-			aeronave.Modelo,
-			aeronave.servicio.Descripcion_Servicio,
-			aeronave.Kgs_Disponibles	
+			Matricula,
+			Fecha_Alta,
+			fabricante.Nombre_Fabricante,
+			Modelo,
+			servicio.Descripcion_Servicio,
+			Kgs_Disponibles,
+			butacasPasillo,
+			butacasVentanilla
 			);
 		}
 

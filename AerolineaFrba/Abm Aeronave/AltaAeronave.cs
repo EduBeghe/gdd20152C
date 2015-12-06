@@ -29,7 +29,6 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             // validar campos vacios 
             new AeronaveRepository().darDeAlta(
-                new Aeronave( 
                 Convert.ToInt32( codigoAeronave.Text ),
                 matriculaAeronave.Text,
                 fechaAltaAeronave.Value,
@@ -37,8 +36,9 @@ namespace AerolineaFrba.Abm_Aeronave
                 modeloAeronave.Text,
                 ( TipoServicio ) tipoServicio.SelectedItem,
                 Convert.ToInt32( kgAeronave ),
-                Convert.ToInt32( butacasPasillo) + Convert.ToInt32( butacasVentanilla )
-                ));
+                Convert.ToInt32( butacasPasillo),
+                Convert.ToInt32( butacasVentanilla )
+                );
             MessageBox.Show("Aeronave exitosamente dada de Alta");
         }
 
