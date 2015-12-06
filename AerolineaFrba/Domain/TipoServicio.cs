@@ -18,5 +18,11 @@ namespace AerolineaFrba.Domain
             this.Descripcion_Servicio = Descripcion_Servicio;
             this.Precio_Servicio = Precio_Servicio;
         }
+
+        public override string ToString()
+        {
+            return Descripcion_Servicio;
+        }
+        
     }
 }

@@ -49,8 +49,8 @@ namespace AerolineaFrba.Abm_Ciudad
             this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new  AeronaveRepository().findAeronave(
                 matricula.Text, 
                 Convert.ToInt32( codigo.Text ), 
-                (Fabricante) fabricante.SelectedItem, //new FabricantesRepository().getFabricante( Convert.ToInt32( fabricante.SelectedItem )),
-                (TipoServicio) servicio.SelectedItem//new TipoServicioRepository().getTipoServicio( Convert.ToInt32( servicio.SelectedItem ))
+                (Fabricante) fabricante.SelectedItem, 
+                (TipoServicio) servicio.SelectedItem
                 )), null); 
         }
 
