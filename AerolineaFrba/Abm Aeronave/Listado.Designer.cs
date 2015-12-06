@@ -83,7 +83,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(296, 60);
+            this.label4.Location = new System.Drawing.Point(488, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 20);
             this.label4.TabIndex = 5;
@@ -92,7 +92,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(296, 120);
+            this.label5.Location = new System.Drawing.Point(488, 115);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 20);
             this.label5.TabIndex = 6;
@@ -101,10 +101,10 @@
             // aeronavesGrid
             // 
             this.aeronavesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.aeronavesGrid.Location = new System.Drawing.Point(12, 197);
+            this.aeronavesGrid.Location = new System.Drawing.Point(9, 197);
             this.aeronavesGrid.Name = "aeronavesGrid";
             this.aeronavesGrid.RowTemplate.Height = 28;
-            this.aeronavesGrid.Size = new System.Drawing.Size(525, 262);
+            this.aeronavesGrid.Size = new System.Drawing.Size(914, 262);
             this.aeronavesGrid.TabIndex = 7;
             // 
             // fabricantesBindingSource
@@ -122,7 +122,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(462, 158);
+            this.button2.Location = new System.Drawing.Point(848, 159);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 32);
             this.button2.TabIndex = 10;
@@ -134,7 +134,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(12, 465);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 32);
+            this.button3.Size = new System.Drawing.Size(259, 32);
             this.button3.TabIndex = 11;
             this.button3.Text = "Baja Por Vida Util";
             this.button3.UseVisualStyleBackColor = true;
@@ -142,9 +142,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(168, 465);
+            this.button4.Location = new System.Drawing.Point(287, 465);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(230, 32);
+            this.button4.Size = new System.Drawing.Size(303, 32);
             this.button4.TabIndex = 12;
             this.button4.Text = "Baja Por Problemas Tecnicos";
             this.button4.UseVisualStyleBackColor = true;
@@ -152,9 +152,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(406, 465);
+            this.button5.Location = new System.Drawing.Point(596, 465);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(130, 32);
+            this.button5.Size = new System.Drawing.Size(327, 32);
             this.button5.TabIndex = 13;
             this.button5.Text = "Modificar";
             this.button5.UseVisualStyleBackColor = true;
@@ -172,38 +172,38 @@
             // 
             this.fabricante.DataSource = this.fabricantesBindingSource;
             this.fabricante.FormattingEnabled = true;
-            this.fabricante.Location = new System.Drawing.Point(427, 52);
+            this.fabricante.Location = new System.Drawing.Point(612, 44);
             this.fabricante.Name = "fabricante";
-            this.fabricante.Size = new System.Drawing.Size(121, 28);
+            this.fabricante.Size = new System.Drawing.Size(309, 28);
             this.fabricante.TabIndex = 16;
             // 
             // servicio
             // 
             this.servicio.FormattingEnabled = true;
-            this.servicio.Location = new System.Drawing.Point(427, 115);
+            this.servicio.Location = new System.Drawing.Point(612, 107);
             this.servicio.Name = "servicio";
-            this.servicio.Size = new System.Drawing.Size(121, 28);
+            this.servicio.Size = new System.Drawing.Size(309, 28);
             this.servicio.TabIndex = 17;
             // 
             // codigo
             // 
             this.codigo.Location = new System.Drawing.Point(139, 52);
             this.codigo.Name = "codigo";
-            this.codigo.Size = new System.Drawing.Size(129, 26);
+            this.codigo.Size = new System.Drawing.Size(304, 26);
             this.codigo.TabIndex = 18;
             // 
             // matricula
             // 
-            this.matricula.Location = new System.Drawing.Point(139, 114);
+            this.matricula.Location = new System.Drawing.Point(139, 112);
             this.matricula.Name = "matricula";
-            this.matricula.Size = new System.Drawing.Size(129, 26);
+            this.matricula.Size = new System.Drawing.Size(304, 26);
             this.matricula.TabIndex = 19;
             // 
             // ListadoAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 509);
+            this.ClientSize = new System.Drawing.Size(935, 509);
             this.Controls.Add(this.matricula);
             this.Controls.Add(this.codigo);
             this.Controls.Add(this.servicio);

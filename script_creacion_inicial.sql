@@ -1752,7 +1752,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Aeronaves(@matricula nvarchar(255),@codAeronave int,@fabricante nvarchar(255), @servicio nvarchar(255))
 AS
 BEGIN
-	SELECT A.Cod_Aeronave as  'CODIGO AERONAVE',A.Matricula AS 'MATRICULA',A.Modelo AS 'MODELO',A.Cantidad_Butacas AS 'CANTIDAD DE BUTACAS',A.Kgs_Disponibles AS 'CANTIDAD DE KILOGRAMOS',F.Nombre_Fabricante AS 'NOMBRE FABRICANTE',T.Descripcion_Servicio AS 'SERVICIO'
+	SELECT A.*
 	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Fabricantes F ON(A.Cod_Fabricante=F.Cod_Fabricante)
 								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(T.Cod_Tipo_Servicio=A.Cod_Tipo_Servicio)
 	WHERE A.Matricula = @matricula OR
