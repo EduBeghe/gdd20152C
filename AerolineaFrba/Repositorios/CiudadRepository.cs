@@ -29,9 +29,9 @@ namespace AerolineaFrba.Repositories {
 			DBAdapter.executeProcedure("Baja_Ciudad", ciudad.Nombre_Ciudad );				
 		}
 
-		public Ciudad getCiudad( int Cod_Ciudad )
+		public Ciudad getCiudad( int codigo )
 		{
-			return parse ( DBAdapter.retrieveDataTable("GetCiudad" ).Rows[0]);
+			return parse ( DBAdapter.retrieveDataTable("GetCiudad", codigo  ).Rows[0]);
 		}
 
 		public List<Ciudad> getCiudades()

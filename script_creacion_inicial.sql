@@ -1287,7 +1287,7 @@ GO
  END
  GO
 /* ------------ PROCEDIMIENTOS GETTER TODOS LAS CIUDADES ------------ */
- CREATE PROCEDURE TODOX2LUCAS.GetCiudad(@codCiudad int)
+CREATE PROCEDURE TODOX2LUCAS.GetCiudad(@codCiudad int)
 AS
 BEGIN
 	SELECT * 
@@ -1765,7 +1765,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Roles(@rol nvarchar(255))
 AS
 BEGIN
-	SELECT Cod_Rol AS 'CODIGO ROL',Nombre_Rol AS 'NOMBRE ROL', Estado_Rol AS 'ESTADO ROL'
+	SELECT *
 	FROM TODOX2LUCAS.Roles
 	WHERE Nombre_Rol = @rol
 END
@@ -1774,7 +1774,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Ciudades(@nombre nvarchar(255))
 AS
 BEGIN
-	SELECT Cod_Ciudad AS 'CODIGO CIUDAD',Nombre_Ciudad AS 'NOMBRE CIUDAD',Estado_Ciudad AS 'ESTADO CIUDAD'
+	SELECT *
 	FROM TODOX2LUCAS.Ciudades
 	WHERE Nombre_Ciudad = @nombre
 END
@@ -1783,7 +1783,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Rutas(@codRuta numeric(18),@origen nvarchar(255),@destino nvarchar(255),@servicio nvarchar(255))
 AS
 BEGIN
-	SELECT r.Cod_Ruta AS 'CODIGO RUTA',c1.Nombre_Ciudad AS 'CIUDAD SALIDA',c2.Nombre_Ciudad AS 'CIUDAD ARRIBO',r.Precio_Base_Kg AS 'PRECIO BASE KILOGRAMOS',r.Precio_Base_Pasaje AS 'PRECIO BASE PASAJE'
+	SELECT 
 	FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
 									JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
 									JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)

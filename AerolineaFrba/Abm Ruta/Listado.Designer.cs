@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.codigo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,12 +54,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Filtros";
             // 
-            // textBox1
+            // codigo
             // 
-            this.textBox1.Location = new System.Drawing.Point(117, 51);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(312, 26);
-            this.textBox1.TabIndex = 1;
+            this.codigo.Location = new System.Drawing.Point(117, 51);
+            this.codigo.Name = "codigo";
+            this.codigo.Size = new System.Drawing.Size(312, 26);
+            this.codigo.TabIndex = 1;
             // 
             // label2
             // 
@@ -187,7 +187,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.codigo);
             this.Controls.Add(this.label1);
             this.Name = "ListadoRuta";
             this.Text = "Form1";
@@ -201,7 +201,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox codigo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

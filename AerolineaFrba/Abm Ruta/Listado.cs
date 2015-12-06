@@ -28,7 +28,17 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 
+
+            if (codigo.Text != "")
+            {
+                this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta(
+                Convert.ToInt32(codigo.Text), (Ciudad)origen.SelectedItem, (Ciudad)destino.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+            }
+            else
+            {
+                this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta(
+                null, (Ciudad)origen.SelectedItem, (Ciudad)destino.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -36,7 +46,8 @@ namespace AerolineaFrba.Abm_Ciudad
             var ruta = (RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem;
             new RutaAereaRepository().darDeBaja( ruta ) ;
             MessageBox.Show("Ruta dada de baja con exito");
-            this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 
+            //this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 
+            // GRID CLEAN? 
         }
 
         private void button5_Click(object sender, EventArgs e)

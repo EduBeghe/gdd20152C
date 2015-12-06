@@ -46,12 +46,13 @@ namespace AerolineaFrba.Abm_Ciudad
             var aeronave = (Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem;
             new AeronaveRepository().darDeBajaXVidaUtil(aeronave);
             MessageBox.Show("Aeronave dada de baja con exito");
-            this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new  AeronaveRepository().findAeronave(
-                matricula.Text, 
-                Convert.ToInt32( codigo.Text ), 
-                (Fabricante) fabricante.SelectedItem, 
-                (TipoServicio) servicio.SelectedItem
-                )), null); 
+            //this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new  AeronaveRepository().findAeronave(
+            //    matricula.Text, 
+            //    Convert.ToInt32( codigo.Text ), 
+            //    (Fabricante) fabricante.SelectedItem, 
+            //    (TipoServicio) servicio.SelectedItem
+            //    )), null); 
+            // GRID CLEAN ?
         }
 
         private void button4_Click(object sender, EventArgs e)
