@@ -52,7 +52,7 @@
             // 
             this.nombre.Location = new System.Drawing.Point(93, 46);
             this.nombre.Name = "nombre";
-            this.nombre.Size = new System.Drawing.Size(444, 26);
+            this.nombre.Size = new System.Drawing.Size(473, 26);
             this.nombre.TabIndex = 1;
             // 
             // label2
@@ -75,7 +75,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(462, 85);
+            this.button2.Location = new System.Drawing.Point(491, 85);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 33);
             this.button2.TabIndex = 10;
@@ -95,7 +95,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(406, 391);
+            this.button5.Location = new System.Drawing.Point(435, 389);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(131, 33);
             this.button5.TabIndex = 13;
@@ -108,14 +108,14 @@
             this.ciudadesGrid.Location = new System.Drawing.Point(12, 137);
             this.ciudadesGrid.Name = "ciudadesGrid";
             this.ciudadesGrid.RowTemplate.Height = 28;
-            this.ciudadesGrid.Size = new System.Drawing.Size(525, 238);
+            this.ciudadesGrid.Size = new System.Drawing.Size(554, 238);
             this.ciudadesGrid.TabIndex = 14;
             // 
             // ListadoCiudad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 434);
+            this.ClientSize = new System.Drawing.Size(578, 434);
             this.Controls.Add(this.ciudadesGrid);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);

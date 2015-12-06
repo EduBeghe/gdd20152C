@@ -11,9 +11,9 @@ namespace AerolineaFrba.Repositories {
 
 	class RolesRepository {
 
-		public void agregarRol( Rol rol )
+		public void agregarRol( string rol )
 		{
-			DBAdapter.executeProcedure("Agregar_Rol", rol.Nombre_Rol );
+			DBAdapter.executeProcedure("Agregar_Rol", rol );
 		}
 
 		// Esto deberia estar aca ? 

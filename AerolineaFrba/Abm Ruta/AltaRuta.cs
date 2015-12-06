@@ -27,6 +27,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // validar campos vacios 
             new RutaAereaRepository().darDeAlta(
                 new RutaAerea( 
                     Convert.ToInt32( codigo ),
@@ -37,6 +38,7 @@ namespace AerolineaFrba.Abm_Ruta
                     Convert.ToInt32( costoPasaje ),
                     ( bool ) true // MIRAR! Agregar estado a la form 
                     ));
+            MessageBox.Show("Ruta Aerea dada de alta exitosamente");
         }
         
         private void AltaRuta_Load(object sender, EventArgs e)

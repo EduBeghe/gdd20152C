@@ -27,7 +27,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Cargar los datos de los inputs box
+            // validar campos vacios 
             new AeronaveRepository().darDeAlta(
                 new Aeronave( 
                 Convert.ToInt32( codigoAeronave.Text ),
@@ -39,6 +39,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 Convert.ToInt32( kgAeronave ),
                 Convert.ToInt32( butacasPasillo) + Convert.ToInt32( butacasVentanilla )
                 ));
+            MessageBox.Show("Aeronave exitosamente dada de Alta");
         }
 
         private void AltaAeronave_Load(object sender, EventArgs e)
