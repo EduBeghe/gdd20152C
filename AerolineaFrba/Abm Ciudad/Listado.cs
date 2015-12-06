@@ -25,7 +25,8 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //this.ciudadesGrid.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().findCiudad()), null); 
+            if (nombre.Text != "") this.ciudadesGrid.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().findCiudad(nombre.Text)), null);
+            else this.ciudadesGrid.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null); 
         }
 
         private void button4_Click(object sender, EventArgs e)
