@@ -28,16 +28,19 @@ namespace AerolineaFrba.Repositories {
 			DBAdapter.executeProcedure("Modificar_Nombre_Rol", rol.Nombre_Rol);
 		}
 
-		public List<Rol> findRol( )
+		public List<Rol> findRol(  string nombre  )
 		{
-			// falta procedure findRol, verificar si es necesario 
-            //return parseRoles( DBAdapter.retrieveDataTable( "FindRol" ).Rows[0]);
-            return new List<Rol>();
+			return parseRoles( DBAdapter.retrieveDataTable("Filtrar_Roles", nombre ));	
 		}
 
 		public Rol getRol( int idRol )
 		{
 			return parse ( DBAdapter.retrieveDataTable("GetRol", idRol ).Rows[0]);
+		}
+
+		public List<Rol> getRoles()
+		{
+			return parseRoles( DBAdapter.retrieveDataTable( "Get_Roles" ));
 		}
 
 
@@ -66,6 +69,7 @@ namespace AerolineaFrba.Repositories {
         		Convert.ToInt32(dr["Cod_Rol"]),
         		dr["Nombre_Rol"] as string,
         		( bool ) dr["Estado_Rol"],
+        		// new RolesRepository().getRol()
         		new List<Funcionalidades>()// CORREGIR! donde sale esta lista ?
        		);
         }

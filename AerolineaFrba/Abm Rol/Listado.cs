@@ -27,7 +27,8 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().findRol()), null); 
+            if ( nombre.Text != "" ) this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().findRol( nombre.Text )), null);
+            else this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().getRoles()), null); 
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -35,7 +36,8 @@ namespace AerolineaFrba.Abm_Ciudad
             var rol = (Rol) rolGrid.SelectedRows[0].DataBoundItem;
             new RolesRepository().darDeBaja(rol);
             MessageBox.Show("Rol eliminada con exito");
-            this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().findRol()), null); 
+            //this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().findRol()), null); 
+            // CLEAN GRID ?
         }
 
         private void button5_Click(object sender, EventArgs e)
