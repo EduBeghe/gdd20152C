@@ -42,7 +42,7 @@ namespace AerolineaFrba.Abm_Rol
                 if (retorno == 0)
                 {
                     MessageBox.Show("Rol dato de alta exitosamente");
-                    this.close();
+                    this.Close();
                 }
                 else {
                     MessageBox.Show("El rol que quiere dar de alta ya existe");

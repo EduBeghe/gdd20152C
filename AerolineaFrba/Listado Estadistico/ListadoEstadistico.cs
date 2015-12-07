@@ -80,6 +80,7 @@ namespace AerolineaFrba.Listado_Estadistico
                     case 0:
                         {
                             this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Ciudad>( new Repositories.Estadísticos().destinosConMasPasajes(fechaInicial, fechaFinal)), null);
+                           
                         } 
                         break;
 
