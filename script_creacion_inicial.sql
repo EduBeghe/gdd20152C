@@ -1763,25 +1763,26 @@ END
 GO
 
 /* ------------ FILTROS PARA ABM AERONAVES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Filtrar_Aeronaves(@matricula nvarchar(255),@codAeronave int,@fabricante nvarchar(255), @servicio nvarchar(255))
+CREATE PROCEDURE TODOX2LUCAS.Filtrar_Aeronaves(@matricula nvarchar(255) = null,@codAeronave int = null,@fabricante nvarchar(255), @servicio nvarchar(255))
 AS
 BEGIN
 	SELECT A.*
 	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Fabricantes F ON(A.Cod_Fabricante=F.Cod_Fabricante)
 								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(T.Cod_Tipo_Servicio=A.Cod_Tipo_Servicio)
-	WHERE A.Matricula = @matricula OR
-			A.Cod_Aeronave = @codAeronave OR
-			f.Nombre_Fabricante = @fabricante OR
-			t.Descripcion_Servicio = @servicio
+	WHERE (A.Matricula LIKE '%' + @matricula + '%') OR
+			(A.Cod_Aeronave = @codAeronave ) OR
+			(f.Nombre_Fabricante = @fabricante ) OR
+			(t.Descripcion_Servicio = @servicio )
 END
 GO
+
 /* ------------ FILTROS PARA ABM ROL ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Roles(@rol nvarchar(255))
 AS
 BEGIN
 	SELECT *
 	FROM TODOX2LUCAS.Roles
-	WHERE Nombre_Rol = @rol
+	WHERE Nombre_Rol LIKE '%' + @rol + '%'
 END
 GO
 /* ------------ FILTROS PARA ABM CIUDADES ------------ */
@@ -1790,18 +1791,21 @@ AS
 BEGIN
 	SELECT *
 	FROM TODOX2LUCAS.Ciudades
-	WHERE Nombre_Ciudad = @nombre
+	WHERE Nombre_Ciudad LIKE '%' + @nombre + '%'
 END
 GO
 /* ------------ FILTROS PARA ABM RUTAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Filtrar_Rutas(@codRuta numeric(18),@origen nvarchar(255),@destino nvarchar(255),@servicio nvarchar(255))
+CREATE PROCEDURE TODOX2LUCAS.Filtrar_Rutas(@codRuta numeric(18) = NULL ,@origen nvarchar(255),@destino nvarchar(255),@servicio nvarchar(255))
 AS
 BEGIN
 	SELECT r.*
 	FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
 									JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
 									JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
-	WHERE R.Cod_Ruta = @codRuta OR C1.Nombre_Ciudad = @origen OR C2.Nombre_Ciudad = @destino OR  t.Descripcion_Servicio = @servicio
+	WHERE R.Cod_Ruta = @codRuta OR 
+			C1.Nombre_Ciudad = @origen OR 
+			C2.Nombre_Ciudad = @destino OR  
+			t.Descripcion_Servicio = @servicio
 END
 GO
 

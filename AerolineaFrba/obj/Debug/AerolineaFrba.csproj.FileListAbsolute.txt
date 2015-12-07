@@ -74,3 +74,5 @@ C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\Aero
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Reemplazar.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.AltaAeronave.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Motivo.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Reemplazar.resources
+C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Motivo.resources
