@@ -1715,9 +1715,9 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Cliente_Mayoria_Puntos
 AS
 BEGIN
-	SELECT TOP 5 Cant_Millas,Cliente_Apellido
-	FROM TODOX2LUCAS.Clientes
-	ORDER BY 1 DESC
+	SELECT TOP 5 *
+	FROM TODOX2LUCAS.Clientes C
+	ORDER BY C.Cant_Millas DESC
 END
 GO
 
@@ -1783,7 +1783,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Rutas(@codRuta numeric(18),@origen nvarchar(255),@destino nvarchar(255),@servicio nvarchar(255))
 AS
 BEGIN
-	SELECT 
+	SELECT *
 	FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
 									JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
 									JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)

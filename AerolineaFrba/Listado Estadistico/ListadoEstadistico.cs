@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Utils;
+using AerolineaFrba.Domain;
 
 namespace AerolineaFrba.Listado_Estadistico
 {
@@ -17,6 +18,12 @@ namespace AerolineaFrba.Listado_Estadistico
         {
             InitializeComponent();
         }
+
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
 
         private DateTime parsearFechaInicial()
         {
@@ -72,28 +79,28 @@ namespace AerolineaFrba.Listado_Estadistico
                 {
                     case 0:
                         {
-                            new Repositories.Estadísticos().destinosConMasPasajes(fechaInicial, fechaFinal);
+                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Ciudad>( new Repositories.Estadísticos().destinosConMasPasajes(fechaInicial, fechaFinal)), null);
                         } 
                         break;
 
                     case 1:
                         {
-                            new Repositories.Estadísticos().destinosConMasAeronavesVacias(fechaInicial, fechaFinal);
+                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Ciudad>(new Repositories.Estadísticos().destinosConMasAeronavesVacias(fechaInicial, fechaFinal)), null);
                         } break;
 
                     case 2:
                         {
-                            new Repositories.Estadísticos().clientesConMasPuntos();
+                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Cliente>(new Repositories.Estadísticos().clientesConMasPuntos()), null);
                         } break;
 
                     case 3:
                         {
-                            new Repositories.Estadísticos().destinosConMasPasajesCancelados(fechaInicial, fechaFinal);
+                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Ciudad>(new Repositories.Estadísticos().destinosConMasPasajesCancelados(fechaInicial, fechaFinal) ), null);
                         } break;
 
                     case 4:
                         {
-                            new Repositories.Estadísticos().aeronavesConMasDiasFueraDeServicio(fechaInicial, fechaFinal);
+                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Aeronave>(new Repositories.Estadísticos().aeronavesConMasDiasFueraDeServicio(fechaInicial, fechaFinal) ), null);
                         } break;
 
                 }

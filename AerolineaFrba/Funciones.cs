@@ -13,6 +13,7 @@ using AerolineaFrba.Abm_Ruta;
 using AerolineaFrba.Abm_Ciudad;
 using AerolineaFrba.Login;
 using AerolineaFrba.Abm_Aeronave;
+using AerolineaFrba.Listado_Estadistico;
 
 namespace AerolineaFrba
 {
@@ -76,7 +77,11 @@ namespace AerolineaFrba
         private void LoginButton_Click(object sender, EventArgs e)
         {
             new LoginScreen().ShowDialog(this);
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new ListadoEstadistico().ShowDialog(this);
         }
 
        

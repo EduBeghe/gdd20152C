@@ -50,9 +50,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(155, 11);
+            this.label1.Location = new System.Drawing.Point(232, 17);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(184, 13);
+            this.label1.Size = new System.Drawing.Size(269, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Seleccione la estadística a consultar:";
             // 
@@ -65,9 +66,10 @@
             "Clientes con mayoría de millas acumuladas",
             "Destinos de los pasajes mas cancelados",
             "Aeronaves con mayor cantidad de días  fuera de servicio"});
-            this.estadistica.Location = new System.Drawing.Point(12, 36);
+            this.estadistica.Location = new System.Drawing.Point(18, 55);
+            this.estadistica.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.estadistica.Name = "estadistica";
-            this.estadistica.Size = new System.Drawing.Size(489, 21);
+            this.estadistica.Size = new System.Drawing.Size(732, 28);
             this.estadistica.TabIndex = 1;
             // 
             // semestre
@@ -76,32 +78,36 @@
             this.semestre.Items.AddRange(new object[] {
             "1° Semestre",
             "2° Semestre"});
-            this.semestre.Location = new System.Drawing.Point(12, 98);
+            this.semestre.Location = new System.Drawing.Point(18, 147);
+            this.semestre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.semestre.Name = "semestre";
-            this.semestre.Size = new System.Drawing.Size(158, 21);
+            this.semestre.Size = new System.Drawing.Size(232, 28);
             this.semestre.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(39, 73);
+            this.label2.Location = new System.Drawing.Point(14, 112);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 13);
+            this.label2.Size = new System.Drawing.Size(177, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Seleccione el semestre:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(372, 73);
+            this.label3.Location = new System.Drawing.Point(277, 112);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 13);
+            this.label3.Size = new System.Drawing.Size(138, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Seleccione el año:";
             // 
             // anio
             // 
-            this.anio.Location = new System.Drawing.Point(343, 99);
+            this.anio.Location = new System.Drawing.Point(281, 149);
+            this.anio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.anio.Maximum = new decimal(new int[] {
             2020,
             0,
@@ -113,7 +119,7 @@
             0,
             0});
             this.anio.Name = "anio";
-            this.anio.Size = new System.Drawing.Size(158, 20);
+            this.anio.Size = new System.Drawing.Size(220, 26);
             this.anio.TabIndex = 6;
             this.anio.Value = new decimal(new int[] {
             2015,
@@ -123,28 +129,22 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(172, 127);
+            this.button1.Location = new System.Drawing.Point(915, 161);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(167, 23);
+            this.button1.Size = new System.Drawing.Size(250, 35);
             this.button1.TabIndex = 8;
             this.button1.Text = "Consultar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // gD2C2015DataSet
-            // 
-            // 
-            // gD2C2015DataSetBindingSource
-            // 
-            this.gD2C2015DataSetBindingSource.Position = 0;
-            // 
             // dataGridEstadistica
             // 
-            this.dataGridEstadistica.AutoGenerateColumns = false;
             this.dataGridEstadistica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridEstadistica.Location = new System.Drawing.Point(27, 156);
+            this.dataGridEstadistica.Location = new System.Drawing.Point(12, 204);
             this.dataGridEstadistica.Name = "dataGridEstadistica";
-            this.dataGridEstadistica.Size = new System.Drawing.Size(466, 150);
+            this.dataGridEstadistica.RowTemplate.Height = 28;
+            this.dataGridEstadistica.Size = new System.Drawing.Size(1154, 270);
             this.dataGridEstadistica.TabIndex = 9;
             // 
             // listadoEstadisticoBindingSource
@@ -157,9 +157,9 @@
             // 
             // ListadoEstadistico
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 316);
+            this.ClientSize = new System.Drawing.Size(1178, 486);
             this.Controls.Add(this.dataGridEstadistica);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.anio);
@@ -168,6 +168,7 @@
             this.Controls.Add(this.semestre);
             this.Controls.Add(this.estadistica);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ListadoEstadistico";
             this.Text = "Listado Estadistico";
             this.Load += new System.EventHandler(this.ListadoEstadistico_Load);
@@ -191,9 +192,9 @@
         private System.Windows.Forms.NumericUpDown anio;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource gD2C2015DataSetBindingSource;
-        private System.Windows.Forms.DataGridView dataGridEstadistica;
         private System.Windows.Forms.BindingSource listadoEstadisticoBindingSource;
         private System.Windows.Forms.BindingSource listadoEstadisticoBindingSource1;
+        private System.Windows.Forms.DataGridView dataGridEstadistica;
 
     }
 }
