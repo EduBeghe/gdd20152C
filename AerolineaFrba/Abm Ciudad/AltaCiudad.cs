@@ -29,8 +29,15 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             if (Validacion.validarInputs(this.Controls))
             { 
-                new CiudadRepository().darDeAlta(nombreCiudad.Text);
-                MessageBox.Show("Rol dato de alta exitosamente");
+                var retorno = new CiudadRepository().darDeAlta(nombreCiudad.Text);
+                if (retorno == 0)
+                {
+                    MessageBox.Show("Ciudad creada exitosamente");
+                }
+                else
+                {
+                    MessageBox.Show("La ciudad que quiere crear ya existe");
+                }
             }
         }
 

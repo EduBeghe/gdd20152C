@@ -11,9 +11,10 @@ namespace AerolineaFrba.Repositories {
 
 	class CiudadRepository {
 
-		public void darDeAlta(  string nombre )
+		public int darDeAlta(  string nombre )
 		{
-			DBAdapter.executeProcedure("Alta_Ciudad",  nombre );
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Ciudad",  nombre );
+            return retorno;
 		}
 
 		public void modificarNombre(  Ciudad ciudad, string nombre )

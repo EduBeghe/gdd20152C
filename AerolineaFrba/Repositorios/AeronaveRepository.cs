@@ -44,9 +44,9 @@ namespace AerolineaFrba.Repositories {
 			));	
 		}
 
-		public void darDeAlta( int Cod_Aeronave, string Matricula, DateTime Fecha_Alta,  Fabricante fabricante, string Modelo, TipoServicio servicio, int Kgs_Disponibles, int butacasPasillo, int butacasVentanilla )
+		public int darDeAlta(string Matricula, DateTime Fecha_Alta,  Fabricante fabricante, string Modelo, TipoServicio servicio, int Kgs_Disponibles, int butacasPasillo, int butacasVentanilla )
 		{
-			DBAdapter.executeProcedure("Alta_Aeronave", 
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Aeronave", 
 			Matricula,
 			Fecha_Alta,
 			fabricante.Nombre_Fabricante,
@@ -56,6 +56,7 @@ namespace AerolineaFrba.Repositories {
 			butacasPasillo,
 			butacasVentanilla
 			);
+            return retorno;
 		}
 
 		public List<Aeronave> parseAeronaves ( DataTable dataTable )
