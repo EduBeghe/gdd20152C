@@ -30,10 +30,11 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.nombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.funcionalidadesBox = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.estado = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -48,18 +49,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 85);
+            this.label2.Location = new System.Drawing.Point(14, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(118, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre del Rol";
             // 
-            // textBox1
+            // nombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(154, 79);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 26);
-            this.textBox1.TabIndex = 2;
+            this.nombre.Location = new System.Drawing.Point(156, 55);
+            this.nombre.Name = "nombre";
+            this.nombre.Size = new System.Drawing.Size(125, 26);
+            this.nombre.TabIndex = 2;
             // 
             // label3
             // 
@@ -70,13 +71,13 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Funcionabilidad";
             // 
-            // checkedListBox1
+            // funcionalidadesBox
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(159, 138);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(185, 130);
-            this.checkedListBox1.TabIndex = 4;
+            this.funcionalidadesBox.FormattingEnabled = true;
+            this.funcionalidadesBox.Location = new System.Drawing.Point(159, 138);
+            this.funcionalidadesBox.Name = "funcionalidadesBox";
+            this.funcionalidadesBox.Size = new System.Drawing.Size(185, 130);
+            this.funcionalidadesBox.TabIndex = 4;
             // 
             // button1
             // 
@@ -88,19 +89,31 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // estado
+            // 
+            this.estado.AutoSize = true;
+            this.estado.Location = new System.Drawing.Point(18, 99);
+            this.estado.Name = "estado";
+            this.estado.Size = new System.Drawing.Size(232, 24);
+            this.estado.TabIndex = 6;
+            this.estado.Text = "Estado ( tildar para activar ) ";
+            this.estado.UseVisualStyleBackColor = true;
+            // 
+            // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(356, 342);
+            this.Controls.Add(this.estado);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.funcionalidadesBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.nombre);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "ModificarRol";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.ModificarRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,9 +123,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox nombre;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox funcionalidadesBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox estado;
     }
 }

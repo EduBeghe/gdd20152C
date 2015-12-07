@@ -22,5 +22,10 @@ namespace AerolineaFrba.Domain
             this.Estado_Rol = Estado_Rol;
             this.funcionalidades = funcionalidades;
         }
+
+        public static Rol Copy(Rol r)
+        {
+            return new Rol( r.Cod_Rol, r.Nombre_Rol, r.Estado_Rol, r.funcionalidades );
+        }
     }
 }

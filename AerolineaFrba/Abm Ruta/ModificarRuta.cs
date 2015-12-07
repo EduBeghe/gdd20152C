@@ -29,29 +29,25 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-
-            
-            if (origenRuta != null && destinoRuta != null ) new RutaAereaRepository().modificarCiudades( 
-                ruta, 
-                ( Ciudad ) origenRuta.SelectedItem, 
-                ( Ciudad ) destinoRuta.SelectedItem );
-            if (servicioRuta != null) new RutaAereaRepository().modificarTipoServicio(ruta, ( TipoServicio ) servicioRuta.SelectedItem);
-            if (costoKgRuta != null && costoPasajeRuta != null) new RutaAereaRepository().modificarPrecio(
+            // If elementos no selected
+                //if (origen != null && destino != null ) new RutaAereaRepository().modificarCiudades( 
+                    //ruta, 
+                    //( Ciudad ) origen.SelectedItem, 
+                    //( Ciudad ) destino.SelectedItem );
+            //if (servicio != null) new RutaAereaRepository().modificarTipoServicio(ruta, ( TipoServicio ) servicio.SelectedItem);
+            if ( costoKgRuta.Text != "" && costoPasajeRuta.Text != "" ) new RutaAereaRepository().modificarPrecio(
                 ruta, 
                 Convert.ToInt32(costoKgRuta), 
                 Convert.ToInt32(costoPasajeRuta ));
             MessageBox.Show("Ruta modificada con exito");
-            // recargar info ? 
+            this.Close();
         }
 
         private void ModificarRuta_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet5.Tipos_De_Servicios' Puede moverla o quitarla según sea necesario.
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet4.Ciudades' Puede moverla o quitarla según sea necesario.
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet4.Tipos_De_Servicios' Puede moverla o quitarla según sea necesario.
-            
-
+            this.origen.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null);
+            this.destino.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null);
+            this.servicio.DataSource = new BindingSource(new BindingList<TipoServicio>(new TipoServicioRepository().getServicios()), null);
         }
     }
 }

@@ -39,7 +39,6 @@ namespace AerolineaFrba.Repositories {
 			));	
 		}
 
-		// Ingresa una ruta aerea ? 
 		public void modificarCiudades(  RutaAerea rutaAerea, Ciudad origen, Ciudad destino )
 		{
 			DBAdapter.executeProcedure("Modificar_Ciudades_Ruta_Aereas", 

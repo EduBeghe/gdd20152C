@@ -22,9 +22,9 @@ namespace AerolineaFrba.Repositories {
 			DBAdapter.executeProcedure("Agregar_Rol_Por_Funcionalidad", nombreRol,funcionalidad);				
 		}
 
-		public void modificarNombre( Rol rol )
+		public void modificarNombre( Rol rol, string nombre )
 		{
-			DBAdapter.executeProcedure("Modificar_Nombre_Rol", rol.Nombre_Rol);
+			DBAdapter.executeProcedure("Modificar_Nombre_Rol", rol.Nombre_Rol, nombre );
 		}
 
 		public List<Rol> findRol(  string nombre  )
@@ -43,11 +43,11 @@ namespace AerolineaFrba.Repositories {
 		}
 
 
-		public void modificarEstado( Rol rol )
+		public void modificarEstado( Rol rol, Boolean estado )
 		{
 			DBAdapter.executeProcedure("Modificar_Estado_Rol", 
 			rol.Nombre_Rol,
-			rol.Estado_Rol
+			estado
 			);
 		}
 
