@@ -11,16 +11,15 @@ namespace AerolineaFrba.Repositories {
 
 	class RolesRepository {
 
-		public void agregarRol( string rol )
+		public int agregarRol( string rol )
 		{
-			DBAdapter.executeProcedure("Agregar_Rol", rol );
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Agregar_Rol", rol );
+            return retorno;
 		}
 
-		// Esto deberia estar aca ? 
-		// o Rol tiene una lista de funcionabilidades como atributos y ya esta
-		public void relacionRolFuncionabilidad()
+		public void relacionRolFuncionabilidad(String nombreRol,String funcionalidad)
 		{
-			//DBAdapter.executeProcedure("XXXXX", cliente.idCliente);				
+			DBAdapter.executeProcedure("Agregar_Rol_Por_Funcionalidad", nombreRol,funcionalidad);				
 		}
 
 		public void modificarNombre( Rol rol )

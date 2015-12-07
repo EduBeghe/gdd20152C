@@ -30,17 +30,22 @@ namespace AerolineaFrba.Abm_Ruta
         {
             if (Validacion.validarInputs(this.Controls))
             {
-                new RutaAereaRepository().darDeAlta(
-                    new RutaAerea(
-                        Convert.ToInt32(codigo),
+               var retorno = new RutaAereaRepository().darDeAlta(
                         (Ciudad)origen.SelectedItem,
                         (Ciudad)destino.SelectedItem,
                         (TipoServicio)servicio.SelectedItem,
-                        Convert.ToInt32(costoKg),
-                        Convert.ToInt32(costoPasaje),
-                        (bool)true // MIRAR! Agregar estado a la form 
-                        ));
-                MessageBox.Show("Ruta Aerea dada de alta exitosamente");
+                        Convert.ToInt32(costoKg.Text),
+                        Convert.ToInt32(costoPasaje.Text)
+                        //(bool)true // MIRAR! Agregar estado a la form 
+                        );
+               if (retorno == 0)
+               {
+                   MessageBox.Show("Ruta Aerea dada de alta exitosamente");
+               }
+               else
+               {
+                   MessageBox.Show("La ruta aerea que quiere dar de alta ya existe");
+               }
             }
         }
         

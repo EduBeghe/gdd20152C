@@ -12,15 +12,16 @@ namespace AerolineaFrba.Repositories {
 
 	class RutaAereaRepository {
 
-		public void darDeAlta(  RutaAerea rutaAerea )
+		public int darDeAlta( Ciudad origen,Ciudad destino, TipoServicio servicio, int Precio_Base_Kg,int Precio_Base_Pasaje )
 		{
-			DBAdapter.executeProcedure("Alta_Ruta_Aerea", 
-			rutaAerea.origen.Cod_Ciudad,
-			rutaAerea.destino.Cod_Ciudad,
-			rutaAerea.servicio.Cod_Tipo_Servicio,
-			rutaAerea.Precio_Base_Kg,
-			rutaAerea.Precio_Base_Pasaje
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Ruta_Aerea", 
+			origen.Nombre_Ciudad,
+			destino.Nombre_Ciudad,
+			servicio.Descripcion_Servicio,
+			Precio_Base_Kg,
+			Precio_Base_Pasaje
 			);
+            return retorno;
 		}
 
 		public RutaAerea getRuta( int idRuta, Ciudad origen, Ciudad destino )
