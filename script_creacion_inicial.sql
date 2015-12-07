@@ -802,35 +802,22 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA DAR DE BAJA UNA RUTA AEREA ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Baja_Ruta_Aerea(@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255),
-												@servicio nvarchar(255),@preciobasekg numeric(18,2),@preciobasepasaje numeric(18,2),@motivo nvarchar(255))
+CREATE PROCEDURE TODOX2LUCAS.Baja_Ruta_Aerea(@codRuta numeric(18),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255),
+												@motivo nvarchar(255))
 AS
 BEGIN
-	DECLARE @codOrigen int,@codDestino int,@codServicio int, @codRuta numeric(18);
+	DECLARE @codOrigen int,@codDestino int,@fecha datetime;
 	SET @codOrigen = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadOrigen);
 	SET @codDestino = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadDestino);
-	SET @codServicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio=@servicio);
-	SET @codRuta = (SELECT r.Cod_Ruta FROM TODOX2LUCAS.RutasAereas r WHERE r.Cod_Ciudad_Origen=@codOrigen AND r.Cod_Ciudad_Destino=@codDestino AND r.Cod_Tipo_Servicio=@codServicio AND r.Precio_Base_Kg=@preciobasekg AND r.Precio_Base_Pasaje=@preciobasepasaje)
+	SET @fecha = getdate();
 	
-	IF EXISTS ((SELECT r.Cod_Ruta FROM TODOX2LUCAS.RutasAereas r WHERE r.Cod_Ciudad_Origen=@codOrigen AND r.Cod_Ciudad_Destino=@codDestino AND r.Cod_Tipo_Servicio=@codServicio AND r.Precio_Base_Kg=@preciobasekg AND r.Precio_Base_Pasaje=@preciobasepasaje))
-	BEGIN
-		DECLARE @fecha datetime;
-		SET @fecha = getdate();
-		--El estado si esta en 1 esta activa, en 0 esta desactivada
-		UPDATE TODOX2LUCAS.RutasAereas
-		SET Estado_Ruta = 0
-		WHERE Cod_Ruta = @codRuta
-	
-		EXEC TODOX2LUCAS.Cancelar_Pasajes @fecha,NULL,@codRuta,@motivo
+	--El estado si esta en 1 esta activa, en 0 esta desactivada
+	UPDATE TODOX2LUCAS.RutasAereas
+	SET Estado_Ruta = 0
+	WHERE Cod_Ruta = @codRuta AND Cod_Ciudad_Origen = @codOrigen AND Cod_Ciudad_Destino = @codDestino
 
-		EXEC TODOX2LUCAS.Cancelar_Paquetes @fecha,NULL,@codRuta,@motivo
-
-	END
-	ELSE
-	BEGIN
-		print 'La ruta que quiere dar de baja no existe'
-		RETURN -1;
-	END
+	EXEC TODOX2LUCAS.Cancelar_Pasajes @fecha,NULL,@codRuta,@motivo
+	EXEC TODOX2LUCAS.Cancelar_Paquetes @fecha,NULL,@codRuta,@motivo
 END
 GO
 
@@ -1763,7 +1750,7 @@ END
 GO
 
 /* ------------ FILTROS PARA ABM AERONAVES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Filtrar_Aeronaves(@matricula nvarchar(255) = null,@codAeronave int = null,@fabricante nvarchar(255), @servicio nvarchar(255))
+CREATE PROCEDURE TODOX2LUCAS.Filtrar_Aeronaves(@matricula nvarchar(255) = null,@codAeronave int = null,@fabricante nvarchar(255) = NULL, @servicio nvarchar(255) = NULL)
 AS
 BEGIN
 	SELECT A.*
@@ -1795,17 +1782,34 @@ BEGIN
 END
 GO
 /* ------------ FILTROS PARA ABM RUTAS ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Filtrar_Rutas(@codRuta numeric(18) = NULL ,@origen nvarchar(255),@destino nvarchar(255),@servicio nvarchar(255))
+CREATE PROCEDURE TODOX2LUCAS.Filtrar_Rutas(@codRuta numeric(18) = NULL ,@origen nvarchar(255) = NULL,@destino nvarchar(255) = NULL,@servicio nvarchar(255) = NULL)
 AS
 BEGIN
-	SELECT r.*
-	FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
-									JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
-									JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
-	WHERE R.Cod_Ruta = @codRuta OR 
-			C1.Nombre_Ciudad = @origen OR 
-			C2.Nombre_Ciudad = @destino OR  
-			t.Descripcion_Servicio = @servicio
+	IF ((@origen IS NULL) AND (@destino IS NOT NULL))
+	BEGIN
+		SELECT r.*
+		FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
+										JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
+										JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
+		WHERE R.Cod_Ruta = @codRuta OR t.Descripcion_Servicio = @servicio OR C2.Nombre_Ciudad = @destino 
+	END
+	IF ((@origen IS NOT NULL) AND (@destino IS NULL))
+	BEGIN
+		SELECT r.*
+		FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
+										JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
+										JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
+		WHERE R.Cod_Ruta = @codRuta OR t.Descripcion_Servicio = @servicio OR C1.Nombre_Ciudad = @origen 
+	END
+	IF ((@origen IS NOT NULL) AND (@destino IS NOT NULL))
+	BEGIN
+		SELECT r.*
+		FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
+										JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
+										JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
+		WHERE R.Cod_Ruta = @codRuta OR t.Descripcion_Servicio = @servicio OR (C1.Nombre_Ciudad = @origen AND C2.Nombre_Ciudad = @destino) 
+	END
+
 END
 GO
 
