@@ -234,6 +234,10 @@ IF OBJECT_ID('TODOX2LUCAS.GetCancelacion') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetCancelacion;
 IF OBJECT_ID('TODOX2LUCAS.Get_Cancelaciones') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Get_Cancelaciones;
+IF OBJECT_ID('TODOX2LUCAS.Modificar_Aeronave') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Modificar_Aeronave;
+IF OBJECT_ID('TODOX2LUCAS.Quitar_Funcionalidad_A_Rol') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Quitar_Funcionalidad_A_Rol;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -521,21 +525,24 @@ BEGIN
 END
 ; 
 GO
+/* ------------ PROCEDIMIENTO PARA QUITAR FUNCIONALIDADES ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Quitar_Funcionalidad_A_Rol(@funcionalidad nvarchar(255), @codRol int)
+AS
+BEGIN
+	DELETE FROM TODOX2LUCAS.Rol_Por_Funcionalidad 
+	WHERE Cod_Rol = @codRol AND 
+			Cod_Funcionalidad = (SELECT Cod_Funcionalidad FROM TODOX2LUCAS.Funcionalidades WHERE Nombre_Funcionalidad = @funcionalidad)
 
-/* ------------ PROCEDIMIENTO PARA MODIFICAR ROLES Y SUS FUNCIONALIDADES ------------ */
+END
+GO
+
+/* ------------ PROCEDIMIENTO PARA MODIFICAR ROLES  ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Nombre_Rol(@rol nvarchar(255),@nuevoNombreRol nvarchar(255))
 AS
 BEGIN
-	IF EXISTS (SELECT Cod_Rol FROM TODOX2LUCAS.Roles WHERE Nombre_Rol=@rol)
-	BEGIN 
 		UPDATE TODOX2LUCAS.Roles
 		SET Nombre_Rol = @nuevoNombreRol
 		WHERE Nombre_Rol=@rol
-	END
-	ELSE
-	BEGIN
-		print 'El rol a modificar no existe'
-	END
 END
 GO
 
@@ -1024,6 +1031,27 @@ BEGIN
 	BEGIN
 		print 'La matricula ya existe'
 		RETURN -1;
+	END
+END
+GO
+/* ------------ PROCEDIMIENTO PARA MODIFICAR UNA AERONAVE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Modificar_Aeronave(@codAeronave int,@Fecha_Alta datetime,@fabricante nvarchar(255),@modelo nvarchar(255),
+												@servicio nvarchar(255),@rehabilitar bit)
+AS
+BEGIN
+	UPDATE TODOX2LUCAS.Aeronaves
+	SET	Fecha_Alta = @Fecha_Alta,
+		Cod_Fabricante = (SELECT Cod_Fabricante FROM TODOX2LUCAS.Fabricantes WHERE Nombre_Fabricante = @fabricante)	,
+		Modelo = @modelo,
+		Cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio)
+	WHERE Cod_Aeronave = @codAeronave
+
+	IF (@rehabilitar = 1)
+	BEGIN
+		IF EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave AND Fuera_De_Servicio = 1)
+		BEGIN
+			DELETE FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave
+		END
 	END
 END
 GO
