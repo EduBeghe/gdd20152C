@@ -19,13 +19,12 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
-		public void darDeBajaXProblemasTecnicos( Aeronave aeronave, DateTime fechaReinicio )
+		public void darDeBajaXProblemasTecnicos( Aeronave aeronave, Boolean cancelaciones , DateTime fechaReinicio )
 		{
 			DBAdapter.executeProcedure("Baja_Por_Fuera_De_Servicio", 
 			aeronave.Cod_Aeronave,
-			// @cancelaciones bit 
+			cancelaciones,
 			fechaReinicio
-			// fecha actual ?
 			);	
 		}
 

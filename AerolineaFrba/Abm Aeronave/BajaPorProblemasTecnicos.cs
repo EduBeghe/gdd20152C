@@ -30,10 +30,10 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //var aeronave = (Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem;
-            new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, fechaProblemasTecnicos.Value );
+            if ( reemplazarCheckbox.Checked ) new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, false , fechaProblemasTecnicos.Value );
+            else new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, true, fechaProblemasTecnicos.Value);
             MessageBox.Show("Aeronave dada de baja con exito");
-            //this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave()), null); 
+            this.Close();
         }
     }
 }
