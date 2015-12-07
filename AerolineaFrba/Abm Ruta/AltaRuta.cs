@@ -36,7 +36,6 @@ namespace AerolineaFrba.Abm_Ruta
                         (TipoServicio)servicio.SelectedItem,
                         Convert.ToInt32(costoKg.Text),
                         Convert.ToInt32(costoPasaje.Text)
-                        //(bool)true // MIRAR! Agregar estado a la form 
                         );
                if (retorno == 0)
                {
