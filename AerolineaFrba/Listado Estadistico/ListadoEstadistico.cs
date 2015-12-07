@@ -79,12 +79,7 @@ namespace AerolineaFrba.Listado_Estadistico
                 {
                     case 0:
                         {
-<<<<<<< HEAD
-                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Ciudad>( new Repositories.Estadísticos().destinosConMasPasajes(fechaInicial, fechaFinal)), null);
-                           
-=======
                             this.dataGridEstadistica.DataSource = DBAdapter.retrieveDataTable("Pasajes_Mas_Comprados", fechaInicial, fechaFinal );
->>>>>>> 0ef25ba242e73672da8454e53c4c05be6c2be20d
                         } 
                         break;
 
