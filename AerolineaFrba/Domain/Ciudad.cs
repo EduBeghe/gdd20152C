@@ -20,6 +20,11 @@ namespace AerolineaFrba
             return Nombre_Ciudad;
         }
 
+        public static Ciudad Copy(Ciudad a)
+        {
+            return new Ciudad( a.Nombre_Ciudad, a.Cod_Ciudad, a.Estado_Ciudad );
+        }
+
 	}
 }
 

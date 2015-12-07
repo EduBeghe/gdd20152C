@@ -101,6 +101,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "Modificar";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // ciudadesGrid
             // 
