@@ -79,29 +79,33 @@ namespace AerolineaFrba.Listado_Estadistico
                 {
                     case 0:
                         {
+<<<<<<< HEAD
                             this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Ciudad>( new Repositories.Estadísticos().destinosConMasPasajes(fechaInicial, fechaFinal)), null);
                            
+=======
+                            this.dataGridEstadistica.DataSource = DBAdapter.retrieveDataTable("Pasajes_Mas_Comprados", fechaInicial, fechaFinal );
+>>>>>>> 0ef25ba242e73672da8454e53c4c05be6c2be20d
                         } 
                         break;
 
                     case 1:
                         {
-                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Ciudad>(new Repositories.Estadísticos().destinosConMasAeronavesVacias(fechaInicial, fechaFinal)), null);
+                            this.dataGridEstadistica.DataSource = DBAdapter.retrieveDataTable("Aeronaves_Mas_Vacias", fechaInicial, fechaFinal);
                         } break;
 
                     case 2:
                         {
-                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Cliente>(new Repositories.Estadísticos().clientesConMasPuntos()), null);
+                            this.dataGridEstadistica.DataSource = DBAdapter.retrieveDataTable("Cliente_Mayoria_Puntos");
                         } break;
 
                     case 3:
                         {
-                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Ciudad>(new Repositories.Estadísticos().destinosConMasPasajesCancelados(fechaInicial, fechaFinal) ), null);
+                            this.dataGridEstadistica.DataSource = DBAdapter.retrieveDataTable("Destinos_Mas_Cancelados", fechaInicial, fechaFinal);
                         } break;
 
                     case 4:
                         {
-                            this.dataGridEstadistica.DataSource = new BindingSource(new BindingList<Aeronave>(new Repositories.Estadísticos().aeronavesConMasDiasFueraDeServicio(fechaInicial, fechaFinal) ), null);
+                            this.dataGridEstadistica.DataSource = DBAdapter.retrieveDataTable("Aeronave_Mayoria_Fuera_Servicio", fechaInicial, fechaFinal);
                         } break;
 
                 }
