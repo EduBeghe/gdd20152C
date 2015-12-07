@@ -41,6 +41,7 @@ namespace AerolineaFrba.Abm_Ruta
                if (retorno == 0)
                {
                    MessageBox.Show("Ruta Aerea dada de alta exitosamente");
+                   this.Close();
                }
                else
                {
