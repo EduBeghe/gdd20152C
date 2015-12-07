@@ -14,14 +14,14 @@ namespace AerolineaFrba.Repositories {
 
 		public int darDeAlta( Ciudad origen,Ciudad destino, TipoServicio servicio, int Precio_Base_Kg,int Precio_Base_Pasaje )
 		{
-			var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Ruta_Aerea", 
+			return DBAdapter.executeProcedureWithReturnValue("Alta_Ruta_Aerea", 
 			origen.Nombre_Ciudad,
 			destino.Nombre_Ciudad,
 			servicio.Descripcion_Servicio,
 			Precio_Base_Kg,
 			Precio_Base_Pasaje
 			);
-            return retorno;
+
 		}
 
 		public RutaAerea getRuta( int idRuta, Ciudad origen, Ciudad destino )
@@ -74,8 +74,8 @@ namespace AerolineaFrba.Repositories {
 			rutaAerea.destino.Cod_Ciudad,
 			rutaAerea.servicio.Cod_Tipo_Servicio,
 			rutaAerea.Precio_Base_Kg,
-			rutaAerea.Precio_Base_Pasaje
-			// motivo? ( entra por la form ? )
+			rutaAerea.Precio_Base_Pasaje,
+			"XXXXXXXXXXX" // AGregar motivo a la form 
 			);				
 		}
 

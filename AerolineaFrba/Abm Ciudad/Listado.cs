@@ -33,7 +33,7 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             var ciudad = (Ciudad)ciudadesGrid.SelectedRows[0].DataBoundItem;
             new CiudadRepository().darDeBaja(ciudad);
-            MessageBox.Show("Rol eliminada con exito");
+            MessageBox.Show("Ciudad eliminada con exito");
             //this.ciudadesGrid.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().findCiudad()), null); 
         }
 

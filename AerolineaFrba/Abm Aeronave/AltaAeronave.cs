@@ -43,12 +43,13 @@ namespace AerolineaFrba.Abm_Aeronave
                 if (retorno == 0)
                 {
                     MessageBox.Show("Aeronave exitosamente dada de Alta");
+                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("La aeronave que quiere dar de alta ya existe");
                 }
-                this.Close();
+                
             }
         }
 
