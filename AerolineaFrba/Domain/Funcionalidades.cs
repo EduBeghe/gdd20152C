@@ -17,5 +17,11 @@ namespace AerolineaFrba.Domain
             this.Cod_Funcionalidad = Cod_Funcionalidad;
             this.Nombre_Funcionalidad = Nombre_Funcionalidad;
         }
+
+        public override string ToString()
+        {
+            return Nombre_Funcionalidad;
+        }
+
     }
 }

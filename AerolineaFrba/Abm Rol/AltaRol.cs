@@ -34,14 +34,15 @@ namespace AerolineaFrba.Abm_Rol
             { 
                 var retorno = new RolesRepository().agregarRol(nombre.Text);
 
-                for (int i = listaFuncionalidades.Items.Count - 1; i >= 0; i--)
+                foreach (Funcionalidades itemChecked in funcionalidadesBox.CheckedItems)
                 {
-                    new RolesRepository().relacionRolFuncionabilidad(nombre.Text, listaFuncionalidades.Items[i].ToString());
+                    new RolesRepository().relacionRolFuncionabilidad(nombre.Text, itemChecked.Nombre_Funcionalidad );
                 }
 
                 if (retorno == 0)
                 {
                     MessageBox.Show("Rol dato de alta exitosamente");
+                    this.close();
                 }
                 else {
                     MessageBox.Show("El rol que quiere dar de alta ya existe");
@@ -52,18 +53,9 @@ namespace AerolineaFrba.Abm_Rol
 
         private void AltaRol_Load(object sender, EventArgs e)
         {
-            //BindingSource funcionalidades = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
-            //this.funcionabilidad.DataSource = funcionalidades;
+            this.funcionalidadesBox.DataSource = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            listaFuncionalidades.Items.Add(funcionabilidad.SelectedItem);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            listaFuncionalidades.Items.Remove(listaFuncionalidades.SelectedItem);
-        }
+        
     }
 }
