@@ -1718,8 +1718,8 @@ BEGIN
 								JOIN TODOX2LUCAS.Aeronaves A ON(A.Cod_Aeronave=V.Cod_Aeronave)
 								JOIN TODOX2LUCAS.Butacas B ON(A.Cod_Aeronave=B.Cod_Aeronave AND P.Butaca_Asociada=B.Cod_Butaca)
 								JOIN TODOX2LUCAS.Ciudades C ON (V.Cod_Ciudad_Destino = C.Cod_Ciudad)
-	WHERE V.Fecha_Llegada BETWEEN @fecha_inicio AND @fecha_fin
-	GROUP BY C.Nombre_Ciudad,B.Cod_Butaca,A.Cod_Aeronave
+	WHERE V.Fecha_Salida BETWEEN @fecha_inicio AND @fecha_fin
+	GROUP BY c.Nombre_Ciudad
 	ORDER BY 2 DESC
 END
 GO
@@ -1738,11 +1738,11 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Destinos_Mas_Cancelados(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
-	SELECT TOP 5 CIU.Nombre_Ciudad,COUNT(C.Cod_Pasaje) as 'CANT_CANCELACIONES'
+	SELECT DISTINCT TOP 5 CIU.Nombre_Ciudad,COUNT(C.Cod_Pasaje) as 'CANT_CANCELACIONES'
 	FROM TODOX2LUCAS.Cancelaciones C JOIN TODOX2LUCAS.Pasajes P ON (C.Cod_Pasaje=P.Cod_Pasaje)
 									JOIN TODOX2LUCAS.Viajes V ON (P.Cod_Viaje=V.Cod_Viaje)
 									JOIN TODOX2LUCAS.Ciudades CIU ON (V.Cod_Ciudad_Destino=CIU.Cod_Ciudad)
-	WHERE V.Fecha_Llegada BETWEEN @fecha_inicio AND @fecha_fin
+	WHERE V.Fecha_Salida BETWEEN @fecha_inicio AND @fecha_fin
 	GROUP BY CIU.Nombre_Ciudad
 	ORDER BY 2 DESC
 
