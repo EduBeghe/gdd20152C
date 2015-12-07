@@ -11,11 +11,11 @@ namespace AerolineaFrba.Repositories {
 
 	class AeronaveRepository {
 
-		public void darDeBajaXVidaUtil( Aeronave aeronave ) 
+		public void darDeBajaXVidaUtil( Aeronave aeronave, Boolean cancelaciones ) 
 		{
 			DBAdapter.executeProcedure("Baja_Por_Vida_Util", 
 			aeronave.Cod_Aeronave,
-			false // MODIFICAR, DEBERIA SE ALGO EN LA FORM
+			cancelaciones
 			);
 		}
 

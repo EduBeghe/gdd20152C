@@ -59,7 +59,6 @@ C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Listado_Estadistico.ListadoEstadistico.resources
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegada.resources
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.AltaAeronave.resources
-C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.AltaAeronave.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.BajaPorProblemasTecnicos.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ListadoAeronave.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ListadoCiudad.resources
@@ -72,3 +71,6 @@ C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\Aero
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.canjeMillas.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Listado_Estadistico.ListadoEstadistico.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegada.resources
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Reemplazar.resources
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.AltaAeronave.resources
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Motivo.resources

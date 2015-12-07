@@ -69,6 +69,18 @@
     <Compile Include="Abm Aeronave\Listado.Designer.cs">
       <DependentUpon>Listado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Aeronave\Reemplazar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\Reemplazar.Designer.cs">
+      <DependentUpon>Reemplazar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\Motivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\Motivo.Designer.cs">
+      <DependentUpon>Motivo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ciudad\AltaCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -259,6 +271,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Aeronave\Listado.resx">
       <DependentUpon>Listado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\Reemplazar.resx">
+      <DependentUpon>Reemplazar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\Motivo.resx">
+      <DependentUpon>Motivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\AltaCiudad.resx">
       <DependentUpon>AltaCiudad.cs</DependentUpon>

@@ -67,7 +67,7 @@ namespace AerolineaFrba.Repositories {
 		}
 
 		// El motivo no lo tengo en ningun lado asi que deberia ingresar como param.
-		public void darDeBaja(  RutaAerea rutaAerea )
+		public void darDeBaja(  RutaAerea rutaAerea, string motivo )
 		{
 			DBAdapter.executeProcedure("Baja_Ruta_Aerea", 
 			rutaAerea.origen.Cod_Ciudad,
@@ -75,7 +75,7 @@ namespace AerolineaFrba.Repositories {
 			rutaAerea.servicio.Cod_Tipo_Servicio,
 			rutaAerea.Precio_Base_Kg,
 			rutaAerea.Precio_Base_Pasaje,
-			"XXXXXXXXXXX" // AGregar motivo a la form 
+			motivo
 			);				
 		}
 

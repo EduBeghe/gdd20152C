@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Abm_Ciudad;
+using AerolineaFrba.Abm_Aeronave;
+using AerolineaFrba.Abm_Aeronave;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -43,21 +45,11 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var aeronave = (Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem;
-            new AeronaveRepository().darDeBajaXVidaUtil(aeronave);
-            MessageBox.Show("Aeronave dada de baja con exito");
-            //this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new  AeronaveRepository().findAeronave(
-            //    matricula.Text, 
-            //    Convert.ToInt32( codigo.Text ), 
-            //    (Fabricante) fabricante.SelectedItem, 
-            //    (TipoServicio) servicio.SelectedItem
-            //    )), null); 
-            // GRID CLEAN ?
+            new Reemplazar().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-           // necesario el import de las otras forms?
             new BajaPorProblemasTecnicos().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
         }
 

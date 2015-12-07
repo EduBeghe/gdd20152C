@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Abm_Ruta;
+using AerolineaFrba.Abm_Aeronave;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -43,11 +44,7 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var ruta = (RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem;
-            new RutaAereaRepository().darDeBaja( ruta ) ;
-            MessageBox.Show("Ruta dada de baja con exito");
-            //this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta()), null); 
-            // GRID CLEAN? 
+            new Motivo().ShowDialog((RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem);
         }
 
         private void button5_Click(object sender, EventArgs e)
