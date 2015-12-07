@@ -1699,12 +1699,13 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Pasajes_Mas_Comprados(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
-	SELECT TOP 5 C.*
+	SELECT TOP 5  COUNT(V.Cod_Ciudad_Destino) as 'Cantidad Pasajes',V.Cod_Ciudad_Destino as 'Codigo Ciudad',C.Nombre_Ciudad as 'Nombre Ciudad'
 	FROM TODOX2LUCAS.Pasajes P JOIN TODOX2LUCAS.Viajes V ON (P.Cod_Viaje=V.Cod_Viaje)
 								JOIN TODOX2LUCAS.Ciudades C ON (V.Cod_Ciudad_Destino = C.Cod_Ciudad)
-	WHERE V.Fecha_Llegada BETWEEN @fecha_inicio AND @fecha_fin
-	GROUP BY C.Cod_Ciudad, C.Nombre_Ciudad, C.Estado_Ciudad
-	ORDER BY COUNT(V.Cod_Ciudad_Destino) DESC
+	WHERE V.Fecha_Salida BETWEEN @fecha_inicio AND @fecha_fin
+	GROUP BY V.Cod_Ciudad_Destino, C.Nombre_Ciudad
+	ORDER BY 1 DESC
+	
 END
 GO
 
@@ -1712,15 +1713,14 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Aeronaves_Mas_Vacias(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
-	SELECT TOP 5 C.*
+	SELECT TOP 5 C.Nombre_Ciudad,COUNT(B.Cod_Butaca) AS 'CANT_BUTACAS_VACIAS'
 	FROM TODOX2LUCAS.Pasajes P JOIN TODOX2LUCAS.Viajes V ON (P.Cod_Viaje=V.Cod_Viaje)
 								JOIN TODOX2LUCAS.Aeronaves A ON(A.Cod_Aeronave=V.Cod_Aeronave)
 								JOIN TODOX2LUCAS.Butacas B ON(A.Cod_Aeronave=B.Cod_Aeronave AND P.Butaca_Asociada=B.Cod_Butaca)
 								JOIN TODOX2LUCAS.Ciudades C ON (V.Cod_Ciudad_Destino = C.Cod_Ciudad)
 	WHERE V.Fecha_Llegada BETWEEN @fecha_inicio AND @fecha_fin
-	GROUP BY C.Cod_Ciudad, C.Nombre_Ciudad, C.Estado_Ciudad
-	ORDER BY COUNT(B.Cod_Butaca) DESC
-
+	GROUP BY C.Nombre_Ciudad,B.Cod_Butaca,A.Cod_Aeronave
+	ORDER BY 2 DESC
 END
 GO
 
@@ -1728,9 +1728,9 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Cliente_Mayoria_Puntos
 AS
 BEGIN
-	SELECT TOP 5 *
-	FROM TODOX2LUCAS.Clientes C
-	ORDER BY C.Cant_Millas DESC
+	SELECT TOP 5 Cant_Millas,Cliente_Apellido
+	FROM TODOX2LUCAS.Clientes
+	ORDER BY 1 DESC
 END
 GO
 
@@ -1738,13 +1738,13 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Destinos_Mas_Cancelados(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
-	SELECT TOP 5 CIU.*
+	SELECT TOP 5 CIU.Nombre_Ciudad,COUNT(C.Cod_Pasaje) as 'CANT_CANCELACIONES'
 	FROM TODOX2LUCAS.Cancelaciones C JOIN TODOX2LUCAS.Pasajes P ON (C.Cod_Pasaje=P.Cod_Pasaje)
 									JOIN TODOX2LUCAS.Viajes V ON (P.Cod_Viaje=V.Cod_Viaje)
 									JOIN TODOX2LUCAS.Ciudades CIU ON (V.Cod_Ciudad_Destino=CIU.Cod_Ciudad)
 	WHERE V.Fecha_Llegada BETWEEN @fecha_inicio AND @fecha_fin
-	GROUP BY CIU.Cod_Ciudad, CIU.Nombre_Ciudad, CIU.Estado_Ciudad
-	ORDER BY COUNT(C.Cod_Pasaje) DESC
+	GROUP BY CIU.Nombre_Ciudad
+	ORDER BY 2 DESC
 
 END
 GO
@@ -1753,11 +1753,12 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Aeronave_Mayoria_Fuera_Servicio(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
-	SELECT TOP 5 A.*
+	SELECT TOP 5 A.Cod_Aeronave,(DATEDIFF(DAY,E.Fecha_Reinicio_Servicio,E.Fecha_Fuera_Servicio)) AS 'DIAS FUERA DE SERVICIO'
 	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Estados_Aeronaves E ON(A.Cod_Aeronave=E.Cod_Aeronave)
 	WHERE E.Fecha_Fuera_Servicio BETWEEN @fecha_inicio AND @fecha_fin
-	--GROUP BY A.Cod_Aeronave, E.Fecha_Reinicio_Servicio,E.Fecha_Fuera_Servicio
-	ORDER BY (DATEDIFF(DAY,E.Fecha_Reinicio_Servicio,E.Fecha_Fuera_Servicio))  DESC							
+	GROUP BY A.Cod_Aeronave, E.Fecha_Reinicio_Servicio,E.Fecha_Fuera_Servicio
+	ORDER BY 2 DESC							
+			
 END
 GO
 
@@ -2106,4 +2107,3 @@ SELECT DISTINCT e.Cod_Encomiendas,m.Paquete_FechaCompra,c.Nro_Dni,c.Cliente_Apel
 FROM TODOX2LUCAS.Encomiendas e JOIN TODOX2LUCAS.Clientes c ON (e.Nro_Dni=c.Nro_Dni AND e.Cliente_Apellido=c.Cliente_Apellido)
 							JOIN gd_esquema.Maestra m ON (m.Paquete_Codigo=e.Cod_Encomiendas)
 GO
-
