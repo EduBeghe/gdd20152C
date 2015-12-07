@@ -29,6 +29,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // if ( todos en null ) falla 
             // If elementos no selected
                 //if (origen != null && destino != null ) new RutaAereaRepository().modificarCiudades( 
                     //ruta, 
