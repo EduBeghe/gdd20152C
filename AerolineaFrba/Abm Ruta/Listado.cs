@@ -47,12 +47,14 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button3_Click(object sender, EventArgs e)
         {
-            new Motivo().ShowDialog((RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem);
+            if (rutasGrid.SelectedRows.Count != 0)  new Motivo().ShowDialog((RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem);
+            else MessageBox.Show("Debe seleccionar una fila para dar de baja");
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            new ModificarRuta().ShowDialog( (RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem);
+            if (rutasGrid.SelectedRows.Count != 0) new ModificarRuta().ShowDialog((RutaAerea)rutasGrid.SelectedRows[0].DataBoundItem);
+            else MessageBox.Show("Debe seleccionar una fila para modificar");
         }
 
         private void destino_SelectedIndexChanged(object sender, EventArgs e)

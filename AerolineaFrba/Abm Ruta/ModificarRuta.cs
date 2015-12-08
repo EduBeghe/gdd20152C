@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Abm_Ruta
 {
@@ -35,10 +36,14 @@ namespace AerolineaFrba.Abm_Ruta
                     ( Ciudad ) origen.SelectedItem, 
                     ( Ciudad ) destino.SelectedItem );
             if (servicio.SelectedItem != null) new RutaAereaRepository().modificarTipoServicio(ruta, ( TipoServicio ) servicio.SelectedItem);
-            if ( costoKgRuta.Text != "" && costoPasajeRuta.Text != "" ) new RutaAereaRepository().modificarPrecio(
-                ruta, 
-                Convert.ToInt32(costoKgRuta), 
-                Convert.ToInt32(costoPasajeRuta ));
+            if (costoKgRuta.Text != "" && costoPasajeRuta.Text != "")
+            {
+                if ( Validacion.soloNumeros( costoKgRuta, costoKgRuta.Name ) && Validacion.soloNumeros( costoPasajeRuta, costoPasajeRuta.Name ) )
+                new RutaAereaRepository().modificarPrecio(
+                ruta,
+                Convert.ToInt32(costoKgRuta.Text),
+                Convert.ToInt32(costoPasajeRuta.Text));
+            }
             MessageBox.Show("Ruta modificada con exito");
             this.Close();
         }
