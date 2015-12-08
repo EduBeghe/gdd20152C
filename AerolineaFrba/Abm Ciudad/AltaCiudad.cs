@@ -33,6 +33,7 @@ namespace AerolineaFrba.Abm_Ciudad
                 if (retorno == 0)
                 {
                     MessageBox.Show("Ciudad creada exitosamente");
+                    this.Close();
                 }
                 else
                 {

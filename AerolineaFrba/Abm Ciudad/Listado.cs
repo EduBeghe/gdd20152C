@@ -31,12 +31,19 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var ciudad = (Ciudad)ciudadesGrid.SelectedRows[0].DataBoundItem;
-            if ( Convert.ToBoolean(ciudadesGrid.SelectedRows[0].Cells[3].Value) == true ) new CiudadRepository().darDeBaja(ciudad);
-
-            else { MessageBox.Show("No puede dar de baja una ciudad deshabilitada"); }
-            MessageBox.Show("Ciudad eliminada con exito");
-            this.Close();
+            if (ciudadesGrid.SelectedRows.Count != 0)
+            {
+                var ciudad = (Ciudad)ciudadesGrid.SelectedRows[0].DataBoundItem;
+                if (Convert.ToBoolean(ciudadesGrid.SelectedRows[0].Cells[2].Value) == true)
+                {
+                    new CiudadRepository().darDeBaja(ciudad);
+                    MessageBox.Show("Ciudad eliminada con exito");
+                    this.Close();
+                }
+                else { MessageBox.Show("No puede dar de baja una ciudad deshabilitada"); }
+                
+            }
+            else MessageBox.Show("Debe seleccionar una ciudad para dar de baja");
         }
 
         private void ListadoCiudad_Load(object sender, EventArgs e)
@@ -46,7 +53,8 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button5_Click(object sender, EventArgs e)
         {
-            new ModificarCiudad().ShowDialog((Ciudad)ciudadesGrid.SelectedRows[0].DataBoundItem);
+            if (ciudadesGrid.SelectedRows.Count != 0) new ModificarCiudad().ShowDialog((Ciudad)ciudadesGrid.SelectedRows[0].DataBoundItem);
+            else MessageBox.Show("Debe seleccionar una ciudad para modificar");
         }
     }
 }
