@@ -108,6 +108,7 @@
             this.ciudadesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ciudadesGrid.Location = new System.Drawing.Point(12, 137);
             this.ciudadesGrid.Name = "ciudadesGrid";
+            this.ciudadesGrid.ReadOnly = true;
             this.ciudadesGrid.RowTemplate.Height = 28;
             this.ciudadesGrid.Size = new System.Drawing.Size(554, 238);
             this.ciudadesGrid.TabIndex = 14;
