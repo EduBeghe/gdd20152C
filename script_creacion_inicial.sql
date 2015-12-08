@@ -934,9 +934,17 @@ BEGIN
 	DECLARE @fecha datetime,@motivo nvarchar(255);
 	SET @fecha = GETDATE();
 	SET @motivo = 'Baja por vida util completa';
-	
-	INSERT INTO TODOX2LUCAS.Estados_Aeronaves (Cod_Aeronave,Vida_Util,Fecha_Baja_Definitiva)
-	VALUES(@codAeronave,1,@fecha)
+
+	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave)
+	BEGIN	
+		INSERT INTO TODOX2LUCAS.Estados_Aeronaves (Cod_Aeronave,Vida_Util,Fecha_Baja_Definitiva)
+		VALUES(@codAeronave,1,@fecha)
+	END
+	ELSE
+	BEGIN
+		PRINT 'La aeronave ya esta dada de baja'
+		RETURN -1;
+	END
 
 	IF (@cancelaciones = 0)
 	BEGIN
