@@ -232,14 +232,20 @@ IF OBJECT_ID('TODOX2LUCAS.GetTransaccionPaquete') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetTransaccionPaquete;
 IF OBJECT_ID('TODOX2LUCAS.Get_TransacionesPaquetes') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Get_TransacionesPaquetes;
-IF OBJECT_ID('TODOX2LUCAS.GetCancelacion') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.GetCancelacion;
-IF OBJECT_ID('TODOX2LUCAS.Get_Cancelaciones') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Get_Cancelaciones;
 IF OBJECT_ID('TODOX2LUCAS.Modificar_Aeronave') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Modificar_Aeronave;
 IF OBJECT_ID('TODOX2LUCAS.Quitar_Funcionalidad_A_Rol') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Quitar_Funcionalidad_A_Rol;
+IF OBJECT_ID('TODOX2LUCAS.Get_Funcionalidades_De_Rol') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Get_Funcionalidades_De_Rol;
+IF OBJECT_ID('TODOX2LUCAS.GetCancelacionPasaje') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetCancelacionPasaje;
+IF OBJECT_ID('TODOX2LUCAS.Get_CancelacionesPasajes') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Get_CancelacionesPasajes;
+IF OBJECT_ID('TODOX2LUCAS.GetCancelacionPaquete') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetCancelacionPaquete;
+IF OBJECT_ID('TODOX2LUCAS.Get_CancelacionesPaquetes') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Get_CancelacionesPaquetes;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1477,6 +1483,15 @@ BEGIN
 	FROM TODOX2LUCAS.Rol_Por_Funcionalidad
 END
 GO
+/* ------------ PROCEDIMIENTOS GETTER TODAS LOS ROLES POR FUNCIONALIDADES ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Get_Funcionalidades_De_Rol(@codRol int)
+AS
+BEGIN 
+	SELECT *
+	FROM TODOX2LUCAS.Rol_Por_Funcionalidad
+	WHERE Cod_Rol = @codRol 
+END
+GO
 ------------------------------------------------- TABLA CLIENTES ---------------------------------------------------------------
 /* ------------ PROCEDIMIENTOS GETTER CLIENTE ------------ */
  CREATE PROCEDURE TODOX2LUCAS.GetCliente(@dni numeric(18),@apellido nvarchar(255))
@@ -1715,23 +1730,39 @@ BEGIN
 	FROM TODOX2LUCAS.TransaccionesPaquetes
 END
 GO
-
-------------------------------------------------- TABLA CANCELACIONES---------------------------------------------------------------
-/* ------------ PROCEDIMIENTOS GETTER CANCELACIONES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.GetCancelacion(@codDevolucion int,@codPasaje numeric(18),@codEncomienda numeric(18))
+------------------------------------------------- TABLAS CANCELACIONES ---------------------------------------------------------------
+/* ------------ PROCEDIMIENTOS GETTER CANCELACIONES PASAJE------------ */
+CREATE PROCEDURE TODOX2LUCAS.GetCancelacionPasaje(@codDevolucion int,@codPasaje numeric(18))
 AS
 BEGIN
 	SELECT *
-	FROM TODOX2LUCAS.Cancelaciones
-	WHERE Codigo_Devolucion = @codDevolucion AND Cod_Pasaje = @codPasaje AND Cod_Encomiendas = @codEncomienda
+	FROM TODOX2LUCAS.CancelacionesPasajes
+	WHERE Codigo_Devolucion = @codDevolucion AND Cod_Pasaje = @codPasaje 
 END
 GO
-/* ------------ PROCEDIMIENTOS GETTER TODAS LAS CANCELACIONES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Get_Cancelaciones
+/* ------------ PROCEDIMIENTOS GETTER TODAS LAS CANCELACIONES PASAJES ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Get_CancelacionesPasajes
 AS
 BEGIN
 	SELECT *
-	FROM TODOX2LUCAS.Cancelaciones
+	FROM TODOX2LUCAS.CancelacionesPasajes
+END
+GO
+/* ------------ PROCEDIMIENTOS GETTER CANCELACIONES PAQUETE------------ */
+CREATE PROCEDURE TODOX2LUCAS.GetCancelacionPaquete(@codDevolucion int,@codEncomienda numeric(18))
+AS
+BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.CancelacionesPaquetes
+	WHERE Codigo_Devolucion = @codDevolucion AND Cod_Encomiendas = @codEncomienda
+END
+GO
+/* ------------ PROCEDIMIENTOS GETTER TODAS LAS CANCELACIONES PAQUETES ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Get_CancelacionesPaquetes
+AS
+BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.CancelacionesPaquetes
 END
 GO
 /* ------------ PROCEDIMIENTOS PARA LOS LISTADOS ESTADISTICOS ------------ */
