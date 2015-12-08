@@ -19,9 +19,9 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
-		public void modificarAeronave( int codAeronave, DateTime fechaAlta, Fabricante fabricante, string modelo, TipoServicio servicio, Boolean rehabilitar ) 
+		public int modificarAeronave( int codAeronave, DateTime fechaAlta, Fabricante fabricante, string modelo, TipoServicio servicio, Boolean rehabilitar ) 
 		{
-			DBAdapter.executeProcedure("Modificar_Aeronave", 
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Aeronave", 
 			codAeronave,
 			fechaAlta,
 			fabricante.Nombre_Fabricante,
@@ -29,6 +29,7 @@ namespace AerolineaFrba.Repositories {
 			servicio.Descripcion_Servicio,
 			rehabilitar
 			);
+            return retorno;
 		}
 
 

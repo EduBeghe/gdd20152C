@@ -24,7 +24,7 @@ namespace AerolineaFrba.Repositories
 
         public List<Funcionalidades> getFuncionalidadesByRol(int codRol )
         {
-            return parseFuncionalidades(DBAdapter.retrieveDataTable("Get_FuncionalidadesByRol", codRol ));
+            return parseFuncionalidades(DBAdapter.retrieveDataTable("Get_Funcionalidades_De_Rol", codRol));
         }
 
         public List<Funcionalidades> parseFuncionalidad(DataTable dataTable)

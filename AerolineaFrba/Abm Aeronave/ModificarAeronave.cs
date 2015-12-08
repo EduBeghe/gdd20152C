@@ -32,9 +32,10 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             if (Validacion.validarInputs(this.Controls))
             {
+                var retorno = 0;
                 if (rehabilitar.Checked)
                 {
-                    new AeronaveRepository().modificarAeronave(
+                    retorno = new AeronaveRepository().modificarAeronave(
                         aeronave.Cod_Aeronave,
                         Convert.ToDateTime(fechaAlta.Value),
                         (Fabricante)fabricanteAeronave.SelectedItem,
@@ -43,7 +44,7 @@ namespace AerolineaFrba.Abm_Ciudad
                         true);
                 }
                 else {
-                    new AeronaveRepository().modificarAeronave(
+                    retorno = new AeronaveRepository().modificarAeronave(
                         aeronave.Cod_Aeronave,
                         Convert.ToDateTime(fechaAlta.Value),
                         (Fabricante)fabricanteAeronave.SelectedItem,
@@ -51,7 +52,14 @@ namespace AerolineaFrba.Abm_Ciudad
                         (TipoServicio)tipoServicio.SelectedItem,
                         false);
                 }
-                MessageBox.Show("Modificacion de Aeronave exitosa");
+                if (retorno == 0)
+                {
+                    MessageBox.Show("Modificacion de Aeronave exitosa");
+                }
+                else
+                {
+                    MessageBox.Show("No se cumplieron los dias fuera de servicio de la aeronave");
+                }
                 this.Close();
                } else { MessageBox.Show("Debe llenar todos los campos"); }
                     
