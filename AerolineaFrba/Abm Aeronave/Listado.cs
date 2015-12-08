@@ -57,7 +57,8 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button5_Click(object sender, EventArgs e)
         {
-            new ModificarAeronave().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+            if (aeronavesGrid.SelectedRows.Count != 0 ) new ModificarAeronave().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+            else MessageBox.Show("Debe seleccionar una fila para poder editar");
         }
 
         private void ListadoAeronave_Load(object sender, EventArgs e)
