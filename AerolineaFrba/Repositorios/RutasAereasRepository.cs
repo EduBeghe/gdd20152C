@@ -70,8 +70,8 @@ namespace AerolineaFrba.Repositories {
 		{
 			DBAdapter.executeProcedure("Baja_Ruta_Aerea", 
             rutaAerea.Cod_Ruta,
-			rutaAerea.origen.Cod_Ciudad,
-			rutaAerea.destino.Cod_Ciudad,
+			rutaAerea.origen.Nombre_Ciudad,
+			rutaAerea.destino.Nombre_Ciudad,
 			motivo
 			);				
 		}
