@@ -832,16 +832,23 @@ BEGIN
 	SET @codDestino = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadDestino);
 	SET @fecha = getdate();
 	
-	--El estado si esta en 1 esta activa, en 0 esta desactivada
-	UPDATE TODOX2LUCAS.RutasAereas
-	SET Estado_Ruta = 0
-	WHERE Cod_Ruta = @codRuta AND Cod_Ciudad_Origen = @codOrigen AND Cod_Ciudad_Destino = @codDestino
-
-	EXEC TODOX2LUCAS.Cancelar_Pasajes @fecha,NULL,@codRuta,@motivo
-	EXEC TODOX2LUCAS.Cancelar_Paquetes @fecha,NULL,@codRuta,@motivo
+	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.RutasAereas WHERE Cod_Ruta = @codRuta AND Cod_Ciudad_Origen = @codOrigen AND Cod_Ciudad_Destino = @codDestino AND Estado_Ruta = 0)
+	BEGIN
+		--El estado si esta en 1 esta activa, en 0 esta desactivada
+		UPDATE TODOX2LUCAS.RutasAereas
+		SET Estado_Ruta = 0
+		WHERE Cod_Ruta = @codRuta AND Cod_Ciudad_Origen = @codOrigen AND Cod_Ciudad_Destino = @codDestino
+			
+		EXEC TODOX2LUCAS.Cancelar_Pasajes @fecha,NULL,@codRuta,@motivo
+		EXEC TODOX2LUCAS.Cancelar_Paquetes @fecha,NULL,@codRuta,@motivo
+	END 
+	ELSE
+	BEGIN
+		print 'La ruta aerea ya se dio de baja'
+		RETURN -1;
+	END
 END
 GO
-
 /* ------------ PROCEDIMIENTO PARA MODIFICAR DATOS DE RUTAS AEREAS ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Ciudades_Ruta_Aereas(@codRuta numeric(18),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255))
 AS
