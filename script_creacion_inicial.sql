@@ -973,8 +973,16 @@ BEGIN
 	SET @fecha = GETDATE();
 	SET @motivo = 'Baja por fuera de servicio';
 	
-	INSERT INTO TODOX2LUCAS.Estados_Aeronaves (Cod_Aeronave,Fuera_De_Servicio,Fecha_Fuera_Servicio,Fecha_Reinicio_Servicio)
-	VALUES(@codAeronave,1,@fecha,@fechaReinicio)
+	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave)
+	BEGIN	
+		INSERT INTO TODOX2LUCAS.Estados_Aeronaves (Cod_Aeronave,Fuera_De_Servicio,Fecha_Fuera_Servicio,Fecha_Reinicio_Servicio)
+		VALUES(@codAeronave,1,@fecha,@fechaReinicio)
+	END
+	ELSE
+	BEGIN
+		PRINT 'La aeronave ya esta dada de baja'
+		RETURN -1;
+	END
 
 	IF (@cancelaciones = 0)
 	BEGIN
@@ -1809,8 +1817,8 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Destinos_Mas_Cancelados(@fecha_inicio datetime, @fecha_fin datetime)
 AS
 BEGIN
-	SELECT DISTINCT TOP 5 CIU.Nombre_Ciudad,COUNT(C.Cod_Pasaje) as 'CANT_CANCELACIONES'
-	FROM TODOX2LUCAS.Cancelaciones C JOIN TODOX2LUCAS.Pasajes P ON (C.Cod_Pasaje=P.Cod_Pasaje)
+	SELECT DISTINCT TOP 5 CIU.Nombre_Ciudad,COUNT(CP.Cod_Pasaje) as 'CANT_CANCELACIONES'
+	FROM TODOX2LUCAS.CancelacionesPasajes CP JOIN TODOX2LUCAS.Pasajes P ON (CP.Cod_Pasaje=P.Cod_Pasaje)
 									JOIN TODOX2LUCAS.Viajes V ON (P.Cod_Viaje=V.Cod_Viaje)
 									JOIN TODOX2LUCAS.Ciudades CIU ON (V.Cod_Ciudad_Destino=CIU.Cod_Ciudad)
 	WHERE V.Fecha_Salida BETWEEN @fecha_inicio AND @fecha_fin
@@ -1840,10 +1848,10 @@ BEGIN
 	SELECT A.*
 	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Fabricantes F ON(A.Cod_Fabricante=F.Cod_Fabricante)
 								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(T.Cod_Tipo_Servicio=A.Cod_Tipo_Servicio)
-	WHERE (A.Matricula LIKE '%' + @matricula + '%') OR
-			(A.Cod_Aeronave = @codAeronave ) OR
-			(f.Nombre_Fabricante = @fabricante ) OR
-			(t.Descripcion_Servicio = @servicio )
+	WHERE (A.Matricula LIKE '%' + @matricula + '%' OR @matricula IS NULL) AND
+			(f.Nombre_Fabricante = @fabricante OR @fabricante IS NULL) AND
+			(t.Descripcion_Servicio = @servicio OR @servicio IS NULL) AND 
+			(A.Cod_Aeronave = @codAeronave  OR @codAeronave IS NULL) 
 END
 GO
 
@@ -1869,34 +1877,16 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Filtrar_Rutas(@codRuta numeric(18) = NULL ,@origen nvarchar(255) = NULL,@destino nvarchar(255) = NULL,@servicio nvarchar(255) = NULL)
 AS
 BEGIN
-	IF ((@origen IS NULL) AND (@destino IS NOT NULL))
-	BEGIN
-		SELECT r.*
-		FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
-										JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
-										JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
-		WHERE R.Cod_Ruta = @codRuta OR t.Descripcion_Servicio = @servicio OR C2.Nombre_Ciudad = @destino 
-	END
-	IF ((@origen IS NOT NULL) AND (@destino IS NULL))
-	BEGIN
-		SELECT r.*
-		FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
-										JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
-										JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
-		WHERE R.Cod_Ruta = @codRuta OR t.Descripcion_Servicio = @servicio OR C1.Nombre_Ciudad = @origen 
-	END
-	IF ((@origen IS NOT NULL) AND (@destino IS NOT NULL))
-	BEGIN
-		SELECT r.*
-		FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
-										JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
-										JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
-		WHERE R.Cod_Ruta = @codRuta OR t.Descripcion_Servicio = @servicio OR (C1.Nombre_Ciudad = @origen AND C2.Nombre_Ciudad = @destino) 
-	END
-
+	SELECT r.*
+	FROM TODOX2LUCAS.RutasAereas R JOIN TODOX2LUCAS.Ciudades C1 ON(C1.Cod_Ciudad = R.Cod_Ciudad_Origen)
+									JOIN TODOX2LUCAS.Ciudades C2 ON (C2.Cod_Ciudad = R.Cod_Ciudad_Destino)
+									JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(R.Cod_Tipo_Servicio =T.Cod_Tipo_Servicio)
+	WHERE (R.Cod_Ruta = @codRuta OR @codRuta IS NULL )AND 
+			(t.Descripcion_Servicio = @servicio OR @servicio IS NULL) AND 
+			(C1.Nombre_Ciudad = @origen OR @origen IS NULL)AND 
+			(C2.Nombre_Ciudad = @destino OR @destino IS NULL)
 END
 GO
-
 /***************************************  TRIGGERS ***********************************************/
 -- TRIGGER QUE ACTUALIZA EL ATRIBUTO DE LA TABLA CLIENTES(CANT_MILLAS) ANTE UN INSERT EN LA TABLA DE PASAJES--
 GO
