@@ -33,6 +33,7 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             var ciudad = (Ciudad)ciudadesGrid.SelectedRows[0].DataBoundItem;
             if ( Convert.ToBoolean(ciudadesGrid.SelectedRows[0].Cells[3].Value) == true ) new CiudadRepository().darDeBaja(ciudad);
+
             else { MessageBox.Show("No puede dar de baja una ciudad deshabilitada"); }
             MessageBox.Show("Ciudad eliminada con exito");
             this.Close();
