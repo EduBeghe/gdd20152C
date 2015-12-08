@@ -1518,8 +1518,8 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Get_Funcionalidades_De_Rol(@codRol int)
 AS
 BEGIN 
-	SELECT *
-	FROM TODOX2LUCAS.Rol_Por_Funcionalidad
+	SELECT f.*
+	FROM TODOX2LUCAS.Rol_Por_Funcionalidad R JOIN TODOX2LUCAS.Funcionalidades F ON (R.Cod_Funcionalidad = f.Cod_Funcionalidad)
 	WHERE Cod_Rol = @codRol 
 END
 GO
