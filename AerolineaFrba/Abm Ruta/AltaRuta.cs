@@ -28,7 +28,9 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Validacion.validarInputs(this.Controls))
+            if (Validacion.validarInputs(this.Controls) &&
+                Validacion.soloNumeros( this.costoKg, costoKg.Name) &&
+                Validacion.soloNumeros( this.costoPasaje, costoPasaje.Name ) )
             {
                var retorno = new RutaAereaRepository().darDeAlta(
                         (Ciudad)origen.SelectedItem,
