@@ -139,6 +139,7 @@
             this.rutasGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.rutasGrid.Location = new System.Drawing.Point(12, 197);
             this.rutasGrid.Name = "rutasGrid";
+            this.rutasGrid.ReadOnly = true;
             this.rutasGrid.RowTemplate.Height = 28;
             this.rutasGrid.Size = new System.Drawing.Size(911, 261);
             this.rutasGrid.TabIndex = 14;

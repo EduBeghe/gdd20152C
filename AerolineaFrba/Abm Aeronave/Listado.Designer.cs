@@ -102,6 +102,7 @@
             this.aeronavesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.aeronavesGrid.Location = new System.Drawing.Point(9, 197);
             this.aeronavesGrid.Name = "aeronavesGrid";
+            this.aeronavesGrid.ReadOnly = true;
             this.aeronavesGrid.RowTemplate.Height = 28;
             this.aeronavesGrid.Size = new System.Drawing.Size(914, 262);
             this.aeronavesGrid.TabIndex = 7;

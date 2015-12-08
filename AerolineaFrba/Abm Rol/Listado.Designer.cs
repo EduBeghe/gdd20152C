@@ -98,6 +98,7 @@
             this.rolGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.rolGrid.Location = new System.Drawing.Point(10, 148);
             this.rolGrid.Name = "rolGrid";
+            this.rolGrid.ReadOnly = true;
             this.rolGrid.RowTemplate.Height = 28;
             this.rolGrid.Size = new System.Drawing.Size(525, 239);
             this.rolGrid.TabIndex = 14;
