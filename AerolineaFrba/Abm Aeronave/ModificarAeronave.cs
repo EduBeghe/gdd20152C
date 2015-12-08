@@ -35,26 +35,34 @@ namespace AerolineaFrba.Abm_Ciudad
                 if (rehabilitar.Checked)
                 {
                     new AeronaveRepository().modificarAeronave(
-                        Convert.ToInt32(codigo.Text),
+                        aeronave.Cod_Aeronave,
                         Convert.ToDateTime(fechaAlta.Value),
-                        (Fabricante)fabricante.SelectedItem,
+                        (Fabricante)fabricanteAeronave.SelectedItem,
                         modelo.Text,
-                        (TipoServicio)servicio.SelectedItem,
+                        (TipoServicio)tipoServicio.SelectedItem,
                         true);
                 }
                 else {
                     new AeronaveRepository().modificarAeronave(
-                        Convert.ToInt32(codigo.Text),
+                        aeronave.Cod_Aeronave,
                         Convert.ToDateTime(fechaAlta.Value),
-                        (Fabricante)fabricante.SelectedItem,
+                        (Fabricante)fabricanteAeronave.SelectedItem,
                         modelo.Text,
-                        (TipoServicio)servicio.SelectedItem,
+                        (TipoServicio)tipoServicio.SelectedItem,
                         false);
                 }
                 MessageBox.Show("Modificacion de Aeronave exitosa");
                 this.Close();
                } else { MessageBox.Show("Debe llenar todos los campos"); }
                     
+        }
+
+        private void ModificarAeronave_Load(object sender, EventArgs e)
+        {
+            BindingSource servicioSource = new BindingSource(new BindingList<TipoServicio>(new TipoServicioRepository().getServicios()), null);
+            this.tipoServicio.DataSource = servicioSource;
+            BindingSource fabricanteSource = new BindingSource(new BindingList<Fabricante>(new FabricantesRepository().getFabricantes()), null);
+            this.fabricanteAeronave.DataSource = fabricanteSource;
         }
     }
 }

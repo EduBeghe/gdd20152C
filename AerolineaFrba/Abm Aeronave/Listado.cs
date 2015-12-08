@@ -47,12 +47,14 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button3_Click(object sender, EventArgs e)
         {
-            new Reemplazar().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+            if (aeronavesGrid.SelectedRows.Count != 0)  new Reemplazar().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+            else MessageBox.Show("Debe seleccionar una fila para poder dar de baja");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            new BajaPorProblemasTecnicos().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+            if (aeronavesGrid.SelectedRows.Count != 0 ) new BajaPorProblemasTecnicos().ShowDialog((Aeronave)aeronavesGrid.SelectedRows[0].DataBoundItem);
+            else MessageBox.Show("Debe seleccionar una fila para poder dar de baja");
         }
 
         private void button5_Click(object sender, EventArgs e)
