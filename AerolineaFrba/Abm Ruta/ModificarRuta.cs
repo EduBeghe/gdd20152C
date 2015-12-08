@@ -30,12 +30,11 @@ namespace AerolineaFrba.Abm_Ruta
         private void button1_Click(object sender, EventArgs e)
         {
             // if ( todos en null ) falla 
-            // If elementos no selected
-                //if (origen != null && destino != null ) new RutaAereaRepository().modificarCiudades( 
-                    //ruta, 
-                    //( Ciudad ) origen.SelectedItem, 
-                    //( Ciudad ) destino.SelectedItem );
-            //if (servicio != null) new RutaAereaRepository().modificarTipoServicio(ruta, ( TipoServicio ) servicio.SelectedItem);
+            if (origen.SelectedItem != null && destino.SelectedItem != null ) new RutaAereaRepository().modificarCiudades( 
+                    ruta, 
+                    ( Ciudad ) origen.SelectedItem, 
+                    ( Ciudad ) destino.SelectedItem );
+            if (servicio.SelectedItem != null) new RutaAereaRepository().modificarTipoServicio(ruta, ( TipoServicio ) servicio.SelectedItem);
             if ( costoKgRuta.Text != "" && costoPasajeRuta.Text != "" ) new RutaAereaRepository().modificarPrecio(
                 ruta, 
                 Convert.ToInt32(costoKgRuta), 

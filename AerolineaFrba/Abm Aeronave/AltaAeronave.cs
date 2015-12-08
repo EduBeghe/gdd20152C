@@ -28,7 +28,12 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Validacion.validarInputs( this.Controls ) )
+            if (Validacion.validarInputs( this.Controls ) && 
+                Validacion.soloNumeros( this.kgAeronave, kgAeronave.Name ) &&
+                Validacion.soloNumeros( this.butacasPasillo, butacasPasillo.Name ) &&
+                    Validacion.soloNumeros( this.butacasVentanilla, butacasVentanilla.Name )
+            ) 
+
             {
                 int retorno = new AeronaveRepository().darDeAlta(
                     matriculaAeronave.Text,

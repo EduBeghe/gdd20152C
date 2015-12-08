@@ -12,6 +12,7 @@ using AerolineaFrba.Domain;
 using AerolineaFrba.Abm_Ciudad;
 using AerolineaFrba.Abm_Aeronave;
 using AerolineaFrba.Abm_Aeronave;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -30,16 +31,17 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-
-            if (codigo.Text != "")
-            {
-                this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave(
-                matricula.Text, Convert.ToInt32(codigo.Text), (Fabricante)fabricante.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
-            }
-            else
-            {
-                this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave(
-                matricula.Text, null, (Fabricante)fabricante.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+            if ( Validacion.soloNumeros( this.codigo, codigo.Name ) ){
+                if (codigo.Text != "")
+                {
+                    this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave(
+                    matricula.Text, Convert.ToInt32(codigo.Text), (Fabricante)fabricante.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+                }
+                else
+                {
+                    this.aeronavesGrid.DataSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().findAeronave(
+                    matricula.Text, null, (Fabricante)fabricante.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+                }
             }
         }
 

@@ -11,6 +11,7 @@ using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Abm_Ruta;
 using AerolineaFrba.Abm_Aeronave;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -29,16 +30,18 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            if (codigo.Text != "")
+            if (Validacion.soloNumeros(this.codigo, codigo.Name))
             {
-                this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta(
-                Convert.ToInt32(codigo.Text), (Ciudad)origen.SelectedItem, (Ciudad)destino.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
-            }
-            else
-            {
-                this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta(
-                null, (Ciudad)origen.SelectedItem, (Ciudad)destino.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+                if (codigo.Text != "")
+                {
+                    this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta(
+                    Convert.ToInt32(codigo.Text), (Ciudad)origen.SelectedItem, (Ciudad)destino.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+                }
+                else
+                {
+                    this.rutasGrid.DataSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().findRuta(
+                    null, (Ciudad)origen.SelectedItem, (Ciudad)destino.SelectedItem, (TipoServicio)servicio.SelectedItem)), null);
+                }
             }
         }
 
