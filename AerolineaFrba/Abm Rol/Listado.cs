@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Domain;
+using AerolineaFrba.Abm_Rol;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -45,8 +46,9 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (rolGrid.SelectedRows.Count != 0) {}
+            if (rolGrid.SelectedRows.Count != 0) { new ModificarRol().ShowDialog((Rol)rolGrid.SelectedRows[0].DataBoundItem); }
             else MessageBox.Show("Debe seleccionar un rol para modificar");
+
             
         }
     }

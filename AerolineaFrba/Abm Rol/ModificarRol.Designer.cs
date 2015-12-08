@@ -74,16 +74,16 @@
             // funcionalidadesBox
             // 
             this.funcionalidadesBox.FormattingEnabled = true;
-            this.funcionalidadesBox.Location = new System.Drawing.Point(159, 138);
+            this.funcionalidadesBox.Location = new System.Drawing.Point(18, 161);
             this.funcionalidadesBox.Name = "funcionalidadesBox";
-            this.funcionalidadesBox.Size = new System.Drawing.Size(185, 130);
+            this.funcionalidadesBox.Size = new System.Drawing.Size(332, 361);
             this.funcionalidadesBox.TabIndex = 4;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(115, 274);
+            this.button1.Location = new System.Drawing.Point(18, 538);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 56);
+            this.button1.Size = new System.Drawing.Size(332, 34);
             this.button1.TabIndex = 5;
             this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = true;
@@ -103,7 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 342);
+            this.ClientSize = new System.Drawing.Size(362, 584);
             this.Controls.Add(this.estado);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.funcionalidadesBox);

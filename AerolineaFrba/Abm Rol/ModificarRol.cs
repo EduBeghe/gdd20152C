@@ -29,9 +29,18 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (nombre.Text != "") new RolesRepository().modificarNombre( rol, nombre.Text);
-            if (estado.Checked) new RolesRepository().modificarEstado( rol, true );
-            else new RolesRepository().modificarEstado(rol, false);
+            if (nombre.Text != "")
+            {
+                new RolesRepository().modificarNombre(rol, nombre.Text);
+            }
+            if (estado.Checked)
+            {
+                new RolesRepository().modificarEstado(rol, true);
+            }
+            else
+            {
+                new RolesRepository().modificarEstado(rol, false);
+            }
             foreach ( Object item in funcionalidadesBox.Items)
             {
                 if (funcionalidadesBox.CheckedItems.Contains(item)
@@ -39,7 +48,8 @@ namespace AerolineaFrba.Abm_Rol
                 if (!funcionalidadesBox.CheckedItems.Contains(item) &&
                     rol.funcionalidades.Contains(item)) { new RolesRepository().quitarFuncionabilidad(rol.Cod_Rol, (Funcionalidades)item); }
             }
-            
+            MessageBox.Show("Rol modificado con exito");
+            this.Close();
         }
 
         private void ModificarRol_Load(object sender, EventArgs e)
@@ -47,7 +57,9 @@ namespace AerolineaFrba.Abm_Rol
             this.funcionalidadesBox.DataSource = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
             
             foreach( Funcionalidades item in funcionalidadesBox.Items ) {
-                if (rol.funcionalidades.Contains(item)) { funcionalidadesBox.SetItemCheckState(funcionalidadesBox.Items.IndexOf(item), CheckState.Checked); }
+                if (rol.funcionalidades.Contains(item)) {
+                    MessageBox.Show(item.Nombre_Funcionalidad);
+                    funcionalidadesBox.SetItemCheckState(funcionalidadesBox.Items.IndexOf(item), CheckState.Checked); }
             }
         }
     }
