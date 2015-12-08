@@ -69,11 +69,9 @@ namespace AerolineaFrba.Repositories {
 		public void darDeBaja(  RutaAerea rutaAerea, string motivo )
 		{
 			DBAdapter.executeProcedure("Baja_Ruta_Aerea", 
+            rutaAerea.Cod_Ruta,
 			rutaAerea.origen.Cod_Ciudad,
 			rutaAerea.destino.Cod_Ciudad,
-			rutaAerea.servicio.Cod_Tipo_Servicio,
-			rutaAerea.Precio_Base_Kg,
-			rutaAerea.Precio_Base_Pasaje,
 			motivo
 			);				
 		}
