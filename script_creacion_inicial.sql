@@ -1319,7 +1319,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Alta_Ciudad(@ciudad nvarchar(255))
 AS
 BEGIN
-	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudad)
+	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad LIKE '%' + @ciudad + '%')
 	BEGIN
 		INSERT INTO TODOX2LUCAS.Ciudades(Nombre_Ciudad,Estado_Ciudad)
 		VALUES(@ciudad,1)
@@ -1335,9 +1335,17 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Nombre_Ciudad(@ciudad nvarchar(255),@nuevoNombre nvarchar(255))
 AS
 BEGIN
-	UPDATE TODOX2LUCAS.Ciudades
-	SET Nombre_Ciudad = @nuevoNombre
-	WHERE Nombre_Ciudad = @ciudad
+	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad LIKE '%' + @nuevoNombre + '%')
+	BEGIN
+		UPDATE TODOX2LUCAS.Ciudades
+		SET Nombre_Ciudad = @nuevoNombre
+		WHERE Nombre_Ciudad = @ciudad
+	END
+	ELSE
+	BEGIN
+		print 'El nombre de la ciudad ingresado ya existe'
+		RETURN -1;
+	END
 END
 GO
 /* ------------ PROCEDIMIENTO PARA DAR DE BAJA UNA CIUDAD ------------ */
