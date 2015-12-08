@@ -36,7 +36,7 @@ namespace AerolineaFrba.Abm_Rol
 
                 foreach (Funcionalidades itemChecked in funcionalidadesBox.CheckedItems)
                 {
-                    new RolesRepository().relacionRolFuncionabilidad(nombre.Text, itemChecked.Nombre_Funcionalidad );
+                    new RolesRepository().relacionRolFuncionabilidad(nombre.Text, itemChecked );
                 }
 
                 if (retorno == 0)

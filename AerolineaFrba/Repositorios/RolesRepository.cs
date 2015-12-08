@@ -17,10 +17,15 @@ namespace AerolineaFrba.Repositories {
             return retorno;
 		}
 
-		public void relacionRolFuncionabilidad(String nombreRol,String funcionalidad)
+		public void relacionRolFuncionabilidad(String nombreRol,Funcionalidades funcionalidad)
 		{
-			DBAdapter.executeProcedure("Agregar_Rol_Por_Funcionalidad", nombreRol,funcionalidad);				
+			DBAdapter.executeProcedure("Agregar_Rol_Por_Funcionalidad", nombreRol,funcionalidad.Nombre_Funcionalidad);				
 		}
+
+        public void quitarFuncionabilidad( int codRol, Funcionalidades funcionalidad)
+        {
+            DBAdapter.executeProcedure("Quitar_Funcionalidad_A_Rol", funcionalidad.Nombre_Funcionalidad, codRol) ;
+        }
 
 		public void modificarNombre( Rol rol, string nombre )
 		{
@@ -72,6 +77,5 @@ namespace AerolineaFrba.Repositories {
        		);
         }
 
-
-	}
+    }
 }
