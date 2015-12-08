@@ -33,16 +33,21 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var rol = (Rol) rolGrid.SelectedRows[0].DataBoundItem;
-            new RolesRepository().darDeBaja(rol);
-            MessageBox.Show("Rol eliminada con exito");
-            //this.rolGrid.DataSource = new BindingSource(new BindingList<Rol>(new RolesRepository().findRol()), null); 
-            // CLEAN GRID ?
+            if (rolGrid.SelectedRows.Count != 0)
+            {
+                var rol = (Rol)rolGrid.SelectedRows[0].DataBoundItem;
+                new RolesRepository().darDeBaja(rol);
+                MessageBox.Show("Rol eliminada con exito");
+                this.Close();
+            }
+            else MessageBox.Show("Debe seleccionar un rol para dar de baja");
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            if (rolGrid.SelectedRows.Count != 0) {}
+            else MessageBox.Show("Debe seleccionar un rol para modificar");
+            
         }
     }
 }
