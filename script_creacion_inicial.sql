@@ -6,8 +6,10 @@ BEGIN
 END
 GO 
 /**************************************************  DROP TRABLES  ***************************************************/
-IF OBJECT_ID('TODOX2LUCAS.Cancelaciones') IS NOT NULL
-DROP TABLE TODOX2LUCAS.Cancelaciones;
+IF OBJECT_ID('TODOX2LUCAS.CancelacionesPasajes') IS NOT NULL
+DROP TABLE TODOX2LUCAS.CancelacionesPasajes;
+IF OBJECT_ID('TODOX2LUCAS.CancelacionesPaquetes') IS NOT NULL
+DROP TABLE TODOX2LUCAS.CancelacionesPaquetes;
 IF OBJECT_ID('TODOX2LUCAS.TransaccionesPasajes') IS NOT NULL
 DROP TABLE TODOX2LUCAS.TransaccionesPasajes;
 IF OBJECT_ID('TODOX2LUCAS.TransaccionesPaquetes') IS NOT NULL
@@ -453,20 +455,29 @@ CREATE TABLE TODOX2LUCAS.TransaccionesPaquetes (
 )
 ;
 
---CREACION TABLA CANCELACIONES-- 
-CREATE TABLE TODOX2LUCAS.Cancelaciones ( 
+--CREACION TABLA CANCELACIONES PASAJES-- 
+CREATE TABLE TODOX2LUCAS.CancelacionesPasajes ( 
 	Codigo_Devolucion int IDENTITY,
 	Fecha_Devolucion datetime,
 	Numero_Compra_Pasajes int ,
 	Cod_Pasaje numeric(18) ,
 	Motivo nvarchar(255),
+	PRIMARY KEY CLUSTERED (Codigo_Devolucion, Cod_Pasaje),
+	FOREIGN KEY (Numero_Compra_Pasajes,Cod_Pasaje) REFERENCES TODOX2LUCAS.TransaccionesPasajes (Numero_Compra,Cod_Pasaje),
+)
+;
+--CREACION TABLA CANCELACIONES PAQUETES -- 
+CREATE TABLE TODOX2LUCAS.CancelacionesPaquetes ( 
+	Codigo_Devolucion int IDENTITY,
+	Fecha_Devolucion datetime,
 	Numero_Compra_Paquetes int ,
 	Cod_Encomiendas numeric(18),
-	PRIMARY KEY CLUSTERED (Codigo_Devolucion, Cod_Pasaje, Cod_Encomiendas),
-	FOREIGN KEY (Numero_Compra_Pasajes,Cod_Pasaje) REFERENCES TODOX2LUCAS.TransaccionesPasajes (Numero_Compra,Cod_Pasaje),
+	Motivo nvarchar(255),
+	PRIMARY KEY CLUSTERED (Codigo_Devolucion, Cod_Encomiendas),
 	FOREIGN KEY (Numero_Compra_Paquetes,Cod_Encomiendas) REFERENCES TODOX2LUCAS.TransaccionesPaquetes (Numero_Compra,Cod_Encomiendas)
 )
 ;
+
 GO
 /************************************************** PROCEDIMIENTOS Y TRIGGERS ***************************************************/
 /* ------------ PROCEDIMIENTO PARA AGREGAR FUNCIONALIDADES ------------ */
@@ -785,13 +796,11 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Cancelar_Pasajes(@fecha datetime,@codAeronave int,@codRuta numeric(18),@motivo nvarchar(255))
 AS
 BEGIN
-	INSERT INTO TODOX2LUCAS.Cancelaciones(Fecha_Devolucion,Numero_Compra_Pasajes,Cod_Pasaje,Motivo)
+	INSERT INTO TODOX2LUCAS.CancelacionesPasajes(Fecha_Devolucion,Numero_Compra_Pasajes,Cod_Pasaje,Motivo)
 	SELECT @fecha,t.Numero_Compra,p.Cod_Pasaje,@motivo
 	FROM TODOX2LUCAS.Pasajes p JOIN TODOX2LUCAS.Viajes v ON (p.Cod_Viaje=v.Cod_Viaje)
 								JOIN TODOX2LUCAS.TransaccionesPasajes t ON (T.Cod_Pasaje=P.Cod_Pasaje)
-	WHERE v.Cod_Aeronave = @codAeronave OR
-			v.Cod_Ruta = @codRuta
-	
+	WHERE (v.Cod_Aeronave = @codAeronave OR v.Cod_Ruta = @codRuta) AND v.Fecha_Salida > @fecha
 END
 GO
 
@@ -799,12 +808,11 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Cancelar_Paquetes(@fecha datetime,@codAeronave int,@codRuta numeric(18),@motivo nvarchar(255))
 AS
 BEGIN
-	INSERT INTO TODOX2LUCAS.Cancelaciones(Fecha_Devolucion,Numero_Compra_Paquetes,Cod_Encomiendas,Motivo)
+	INSERT INTO TODOX2LUCAS.CancelacionesPaquetes(Fecha_Devolucion,Numero_Compra_Paquetes,Cod_Encomiendas,Motivo)
 	SELECT @fecha,t.Numero_Compra,e.Cod_Encomiendas,@motivo
 	FROM TODOX2LUCAS.Encomiendas e JOIN TODOX2LUCAS.Viajes v ON (e.Cod_Viaje=v.Cod_Viaje)
 								JOIN TODOX2LUCAS.TransaccionesPaquetes t ON (T.Cod_Encomiendas=e.Cod_Encomiendas)
-	WHERE v.Cod_Aeronave = @codAeronave OR
-			v.Cod_Ruta = @codRuta
+	WHERE (v.Cod_Aeronave = @codAeronave OR v.Cod_Ruta = @codRuta) AND v.Fecha_Salida > @fecha
 END
 GO
 
@@ -929,7 +937,7 @@ BEGIN
 		DECLARE @aeronaveSuplente int;
 		EXEC TODOX2LUCAS.Aeronave_Para_Reemplazar @codAeronave ,@aeronaveSuplente;
 		
-		IF (@aeronaveSuplente = NULL)
+		IF (@aeronaveSuplente IS NOT NULL)
 		BEGIN
 			UPDATE TODOX2LUCAS.Viajes
 			SET Cod_Aeronave = @aeronaveSuplente
@@ -949,6 +957,7 @@ BEGIN
 	END
 END
 GO
+
 /* AERONAVES QUE LIBRES DE VUELO DADA UNA FECHA*/
 /* ------------ PROCEDMIENTO PARA DAR DE BAJA UNA AERONAVE POR FUERA DE SERVICIO ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Baja_Por_Fuera_De_Servicio(@codAeronave int,@cancelaciones bit,@fechaReinicio datetime)
@@ -966,7 +975,7 @@ BEGIN
 		DECLARE @aeronaveSuplente int;
 		EXEC TODOX2LUCAS.Aeronave_Para_Reemplazar @codAeronave ,@aeronaveSuplente;
 		
-		IF (@aeronaveSuplente = NULL)
+		IF (@aeronaveSuplente IS NOT NULL)
 		BEGIN
 			UPDATE TODOX2LUCAS.Viajes
 			SET Cod_Aeronave = @aeronaveSuplente
@@ -977,8 +986,6 @@ BEGIN
 		BEGIN
 			RETURN -2;
 		END
-
-		
 	END
 	ELSE
 	BEGIN
@@ -1050,7 +1057,17 @@ BEGIN
 	BEGIN
 		IF EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave AND Fuera_De_Servicio = 1)
 		BEGIN
-			DELETE FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave
+			DECLARE @fechaactual datetime;
+			SET @fechaactual = GETDATE();
+			IF (@fechaactual > (SELECT Fecha_Reinicio_Servicio FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave))
+			BEGIN
+				DELETE FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave
+			END
+			ELSE
+			BEGIN 
+				print 'Todavia la aeronave se encuentra fuera de servicio'
+				RETURN -1;
+			END
 		END
 	END
 END
@@ -1069,7 +1086,6 @@ BEGIN
 
 		INSERT INTO TODOX2LUCAS.Viajes(Cod_Ruta,Cod_Ciudad_Origen,Cod_Ciudad_Destino,Cod_Aeronave,Fecha_Salida,Fecha_Llegada_Estimada)
 		VALUES(@codRuta,@codOrigen,@codDestino,@cod_Aeronave,@fechaSalida,@fechaLlegadestimada)
-
 	END
 	ELSE
 	BEGIN
@@ -1077,8 +1093,7 @@ BEGIN
 		RETURN -1;
 	END
 END
-GO
-
+GO 
 /* ------------ PROCEDIMIENTO PARA EL REGISTRO DE LLEGADAS A DESTINO DE LAS AERONAVES ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Registrar_Llegada(@matricula nvarchar(255),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255),@fechaLlegada datetime)
 AS
@@ -1089,7 +1104,7 @@ BEGIN
 
 	IF EXISTS (SELECT A.Cod_Aeronave
 				FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON (A.Cod_Aeronave=V.Cod_Aeronave)
-				WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND Fecha_Llegada_Estimada  <= GETDATE() )
+				WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND Fecha_Llegada_Estimada  <= GETDATE())
 	BEGIN
 		DECLARE @codAeronave int;
 		SELECT @codAeronave = A.Cod_Aeronave
@@ -1098,8 +1113,7 @@ BEGIN
 		
 		UPDATE TODOX2LUCAS.Viajes
 		SET Fecha_Llegada = @fechaLlegada
-		WHERE Cod_Aeronave = @codAeronave AND Cod_Ciudad_Origen = @codOrigen AND Cod_Ciudad_Destino = @codDestino
-	
+		WHERE Cod_Aeronave = @codAeronave AND Cod_Ciudad_Origen = @codOrigen AND Cod_Ciudad_Destino = @codDestino AND Fecha_Llegada_Estimada  <= GETDATE() 
 	END
 	ELSE
 	BEGIN
@@ -1108,7 +1122,7 @@ BEGIN
 	END
 	
 END
-GO
+GO 
 
 /* ------------ PROCEDIMIENTO PARA CANJES CON LAS MILLAS DE UN CLIENTE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Canjear_Millas(@dni numeric(18),@cliente nvarchar(255),@producto nvarchar(255),@cantidad int)
@@ -1125,16 +1139,28 @@ BEGIN
 		SELECT @codProducto = Cod_Producto, @precioMillas = PrecioEnMillas
 		FROM TODOX2LUCAS.Productos 
 		WHERE Descripcion_Producto = @producto
+		IF ((SELECT Cant_Millas FROM TODOX2LUCAS.Clientes WHERE Nro_Dni=@dni AND Cliente_Apellido =@cliente) > (@precioMillas * @cantidad))
+		BEGIN
+			INSERT INTO TODOX2LUCAS.Canjes(Nro_Dni,Cliente_Apellido,Cod_Producto,Fecha)
+			VALUES (@dni,@cliente,@codProducto,GETDATE())
 		
-		INSERT INTO TODOX2LUCAS.Canjes(Nro_Dni,Cliente_Apellido,Cod_Producto,Fecha)
-		VALUES (@dni,@cliente,@codProducto,GETDATE())
-		
-		UPDATE TODOX2LUCAS.Clientes
-		SET Cant_Millas = Cant_Millas - @precioMillas
-		WHERE Nro_Dni = @dni AND Cliente_Apellido = @cliente
+			UPDATE TODOX2LUCAS.Clientes
+			SET Cant_Millas = Cant_Millas - @precioMillas
+			WHERE Nro_Dni = @dni AND Cliente_Apellido = @cliente
+
+			UPDATE TODOX2LUCAS.Productos
+			SET Cantidad = Cantidad - @cantidad
+			WHERE Cod_Producto = @codProducto
+		END
+		ELSE
+		BEGIN
+			print 'No tiene la cantidad de millas necesarias para realizar el canje'
+			RETURN -2;
+		END
 	END
 END
 GO
+
 /* ------------ PROCEDIMIENTOS PARA MOSTRAR LOS PASAJES DISPONIBLES SEGUN FECHA Y CIUDADES INGRESADOS ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Mostrar_Viajes_Disponibles(@fechaSalida datetime,@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255))
 AS
@@ -1164,7 +1190,6 @@ BEGIN
 	GROUP BY A.Cod_Aeronave,v.Cod_Viaje,A.Cantidad_Butacas,V.Fecha_Salida,kilogramos.[Kilogramos Disponibles],T.Descripcion_Servicio,C1.Nombre_Ciudad,C2.Nombre_Ciudad
 	
 END
-
 GO
 /* ------------ PROCEDIMIENTOS PARA COMPRAR PASAJES  ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Comprar_Pasajes(@butaca int,@codViaje int,@apellido nvarchar(255),@nro_dni numeric(18),
@@ -1902,23 +1927,22 @@ BEGIN
 END
 GO
 
-CREATE TRIGGER TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones
-ON TODOX2LUCAS.Cancelaciones
+CREATE TRIGGER TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones_Paquetes
+ON TODOX2LUCAS.CancelacionesPaquetes
 AFTER INSERT
 AS
 BEGIN
-	DECLARE @codDevolucion int, @codPasaje numeric(18),@codEncomiendas numeric(18);
+	DECLARE @codDevolucion int,@codEncomiendas numeric(18);
 	DECLARE cursor_cancelar CURSOR FOR	
-	SELECT I.Codigo_Devolucion,I.Cod_Pasaje,I.Cod_Encomiendas
+	SELECT I.Codigo_Devolucion,I.Cod_Encomiendas
 	FROM inserted I
 	
 	OPEN cursor_cancelar
-	FETCH NEXT FROM cursor_cancelar INTO @codDevolucion,@codPasaje,@codEncomiendas
+	FETCH NEXT FROM cursor_cancelar INTO @codDevolucion,@codEncomiendas
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		IF (@codPasaje) IS NULL 
-		BEGIN
 			DECLARE @millasEncomienda int,@Nro_Dni_Encomienda numeric(18),@apellido_Encomienda nvarchar(255),@precio_Encomienda numeric(18,2);
+			
 			SELECT @Nro_Dni_Encomienda = Nro_Dni,@apellido_Encomienda=Cliente_Apellido,@precio_Encomienda = Precio_Encomienda
 			FROM TODOX2LUCAS.Encomiendas
 			WHERE Cod_Encomiendas = @codEncomiendas
@@ -1928,9 +1952,29 @@ BEGIN
 			UPDATE TODOX2LUCAS.Clientes
 			SET	Cant_Millas = Cant_Millas - @millasEncomienda
 			WHERE Nro_Dni = @Nro_Dni_Encomienda AND Cliente_Apellido = @apellido_Encomienda
-		END
-		IF (@codEncomiendas) IS NULL
-		BEGIN
+	
+			FETCH NEXT FROM cursor_cancelar INTO @codDevolucion,@codEncomiendas
+	END
+	CLOSE cursor_cancelar
+	DEALLOCATE cursor_cancelar
+
+END
+GO
+
+CREATE TRIGGER TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones_Pasajes
+ON TODOX2LUCAS.CancelacionesPasajes
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @codDevolucion int, @codPasaje numeric(18);
+	DECLARE cursor_cancelar CURSOR FOR	
+	SELECT I.Codigo_Devolucion,I.Cod_Pasaje
+	FROM inserted I
+	
+	OPEN cursor_cancelar
+	FETCH NEXT FROM cursor_cancelar INTO @codDevolucion,@codPasaje
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
 			DECLARE @millasPasaje int,@Nro_Dni_Pasaje numeric(18),@apellido_Pasaje nvarchar(255),@precio_Pasaje numeric(18,2);
 			SELECT @Nro_Dni_Pasaje = Nro_Dni , @apellido_Pasaje = Cliente_Apellido , @precio_Pasaje = Pasaje_Precio
 			FROM TODOX2LUCAS.Pasajes
@@ -1940,16 +1984,16 @@ BEGIN
 			
 			UPDATE TODOX2LUCAS.Clientes
 			SET	Cant_Millas = Cant_Millas - @millasPasaje
-			WHERE Nro_Dni = @Nro_Dni_Pasaje AND Cliente_Apellido = @apellido_Pasaje
-			
-		END
-		FETCH NEXT FROM cursor_cancelar INTO @codDevolucion,@codPasaje,@codEncomiendas
+			WHERE Nro_Dni = @Nro_Dni_Pasaje AND Cliente_Apellido = @apellido_Pasaje			
+
+			FETCH NEXT FROM cursor_cancelar INTO @codDevolucion,@codPasaje
 	END
 	CLOSE cursor_cancelar
 	DEALLOCATE cursor_cancelar
 
 END
 GO
+		
 /***************************************  MIGRACIONES DE DATOS ***********************************************/
 --MIGRACINON TABLA CIUDADES--
 INSERT INTO TODOX2LUCAS.Ciudades(Nombre_Ciudad,Estado_Ciudad)
