@@ -68,8 +68,7 @@ namespace AerolineaFrba.Repositories {
         		Convert.ToInt32(dr["Cod_Rol"]),
         		dr["Nombre_Rol"] as string,
         		( bool ) dr["Estado_Rol"],
-        		// new RolesRepository().getRol()
-        		new List<Funcionalidades>()// CORREGIR! donde sale esta lista ?
+                new FuncionalidadRepository().getFuncionalidadesByRol( Convert.ToInt32(dr["Cod_Rol"]) )
        		);
         }
 

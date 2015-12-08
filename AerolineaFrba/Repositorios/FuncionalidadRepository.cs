@@ -22,7 +22,17 @@ namespace AerolineaFrba.Repositories
             return parseFuncionalidad(DBAdapter.retrieveDataTable("Get_Funcionalidades"));
         }
 
+        public List<Funcionalidades> getFuncionalidadesByRol(int codRol )
+        {
+            return parseFuncionalidades(DBAdapter.retrieveDataTable("Get_FuncionalidadesByRol", codRol ));
+        }
+
         public List<Funcionalidades> parseFuncionalidad(DataTable dataTable)
+        {
+            return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+        }
+        
+        public List<Funcionalidades> parseFuncionalidades(DataTable dataTable)
         {
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
         }

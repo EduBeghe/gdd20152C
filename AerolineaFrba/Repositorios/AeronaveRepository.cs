@@ -19,6 +19,19 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
+		public void modificarAeronave( int codAeronave, DateTime fechaAlta, Fabricante fabricante, string modelo, TipoServicio servicio, Boolean rehabilitar ) 
+		{
+			DBAdapter.executeProcedure("Modificar_Aeronave", 
+			codAeronave,
+			fechaAlta,
+			fabricante.Nombre_Fabricante,
+			modelo,
+			servicio.Descripcion_Servicio,
+			rehabilitar
+			);
+		}
+
+
 		public void darDeBajaXProblemasTecnicos( Aeronave aeronave, Boolean cancelaciones , DateTime fechaReinicio )
 		{
 			DBAdapter.executeProcedure("Baja_Por_Fuera_De_Servicio", 
