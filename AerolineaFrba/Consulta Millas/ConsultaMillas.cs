@@ -34,7 +34,14 @@ namespace AerolineaFrba.Abm_Ciudad
             {
 
                 int millas = clientesRepository.getMillas(clientesRepository.getCliente(Convert.ToInt32(dni.Text), apellido.Text));
-                MessageBox.Show("Sus millas son : " + millas);
+                if (millas == -1)
+                {
+                    MessageBox.Show("Los datos del cliente ingresado no existen");
+                }
+                else
+                {
+                    MessageBox.Show("Sus millas son : " + millas);
+                }
                 this.Close();
             }
         }

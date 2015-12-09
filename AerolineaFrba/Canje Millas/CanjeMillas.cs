@@ -40,13 +40,17 @@ namespace AerolineaFrba.Abm_Ciudad
                     (ProductoCanje)producto.SelectedItem,
                     Convert.ToInt32(cantidad.Text)
                     );
+
+                if (retorno == -1) MessageBox.Show("Los datos del cliente ingresado no existen");
+                else if (retorno == -2) MessageBox.Show("No hay stock del producto elegido");
+                else if (retorno == -3) MessageBox.Show("No tiene millas sufieciente para realizar el canje");
+                else
+                {
+                    MessageBox.Show("Producto comprado con exito");
+                    this.Close();
+                }
             }
-            if (retorno == -1) MessageBox.Show("No hay stock del producto elegido");
-            else if (retorno == -2) MessageBox.Show("No tiene millas sufieciente para el producto elegido");
-            else {
-                MessageBox.Show("Producto comprado con exito");
-                this.Close();
-            }
+           
             
         }
 
