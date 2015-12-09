@@ -29,9 +29,17 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new RutaAereaRepository().darDeBaja(ruta, motivoTextBox.Text );
-            MessageBox.Show("Ruta dada de baja con exito");
-            this.Close();
+            var retorno = new RutaAereaRepository().darDeBaja(ruta, motivoTextBox.Text );
+            if (retorno == 0)
+            {
+                MessageBox.Show("Ruta dada de baja con exito");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("La ruta que quiere dar de baja ya ha sido dado de baja anteriormente");
+                this.Close();
+            }
         }
     }
 }

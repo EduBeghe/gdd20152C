@@ -11,12 +11,13 @@ namespace AerolineaFrba.Repositories {
 
 	class AeronaveRepository {
 
-		public void darDeBajaXVidaUtil( Aeronave aeronave, Boolean cancelaciones ) 
+		public int darDeBajaXVidaUtil( Aeronave aeronave, Boolean cancelaciones ) 
 		{
-			DBAdapter.executeProcedure("Baja_Por_Vida_Util", 
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Baja_Por_Vida_Util", 
 			aeronave.Cod_Aeronave,
 			cancelaciones
 			);
+            return retorno;
 		}
 
 		public int modificarAeronave( int codAeronave, DateTime fechaAlta, Fabricante fabricante, string modelo, TipoServicio servicio, Boolean rehabilitar ) 
@@ -33,13 +34,14 @@ namespace AerolineaFrba.Repositories {
 		}
 
 
-		public void darDeBajaXProblemasTecnicos( Aeronave aeronave, Boolean cancelaciones , DateTime fechaReinicio )
+		public int darDeBajaXProblemasTecnicos( Aeronave aeronave, Boolean cancelaciones , DateTime fechaReinicio )
 		{
-			DBAdapter.executeProcedure("Baja_Por_Fuera_De_Servicio", 
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Baja_Por_Fuera_De_Servicio", 
 			aeronave.Cod_Aeronave,
 			cancelaciones,
 			fechaReinicio
-			);	
+			);
+            return retorno;
 		}
 
 		public Aeronave getAeronave( int idAeronave )

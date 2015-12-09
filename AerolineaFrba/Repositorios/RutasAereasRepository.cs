@@ -71,14 +71,15 @@ namespace AerolineaFrba.Repositories {
 		}
 
 		// El motivo no lo tengo en ningun lado asi que deberia ingresar como param.
-		public void darDeBaja(  RutaAerea rutaAerea, string motivo )
+		public int darDeBaja(  RutaAerea rutaAerea, string motivo )
 		{
-			DBAdapter.executeProcedure("Baja_Ruta_Aerea", 
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Baja_Ruta_Aerea", 
             rutaAerea.Cod_Ruta,
 			rutaAerea.origen.Nombre_Ciudad,
 			rutaAerea.destino.Nombre_Ciudad,
 			motivo
 			);
+            return retorno;
             
 		}
 

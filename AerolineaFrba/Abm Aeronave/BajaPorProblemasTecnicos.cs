@@ -30,10 +30,26 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if ( reemplazarCheckbox.Checked ) new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, false , fechaProblemasTecnicos.Value );
-            else new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, true, fechaProblemasTecnicos.Value);
-            MessageBox.Show("Aeronave dada de baja con exito");
-            this.Close();
+            int retorno;
+            if (reemplazarCheckbox.Checked)
+            {
+                 retorno =  new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, false, fechaProblemasTecnicos.Value);
+            }
+            else
+            {
+               retorno = new AeronaveRepository().darDeBajaXProblemasTecnicos(aeronave, true, fechaProblemasTecnicos.Value);
+            }
+            if (retorno == 0)
+            {
+                MessageBox.Show("Aeronave dada de baja con exito");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("La aeronave que desea dar de baja ya estaba dada de baja");
+                this.Close();
+            }
+            
         }
     }
 }

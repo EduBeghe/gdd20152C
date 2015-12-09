@@ -29,10 +29,25 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void confirmar_Click(object sender, EventArgs e)
         {
-            if ( reemplazarCheckbox.Checked ) new AeronaveRepository().darDeBajaXVidaUtil(aeronave, false );
-            else new AeronaveRepository().darDeBajaXVidaUtil(aeronave, true);
-            MessageBox.Show("Aeronave dada de baja con exito");
-            this.Close();
+            int retorno;
+            if (reemplazarCheckbox.Checked)
+            {
+                retorno = new AeronaveRepository().darDeBajaXVidaUtil(aeronave, false);
+            }
+            else
+            {
+               retorno = new AeronaveRepository().darDeBajaXVidaUtil(aeronave, true);
+            }
+            if (retorno == 0)
+            {
+                MessageBox.Show("Aeronave dada de baja con exito");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("La aeronave que desea dar de baja ya estaba dada de baja");
+                this.Close();
+            }
         }
     }
 }

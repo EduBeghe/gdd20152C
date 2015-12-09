@@ -988,7 +988,6 @@ BEGIN
 END
 GO
 
-/* AERONAVES QUE LIBRES DE VUELO DADA UNA FECHA*/
 /* ------------ PROCEDMIENTO PARA DAR DE BAJA UNA AERONAVE POR FUERA DE SERVICIO ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Baja_Por_Fuera_De_Servicio(@codAeronave int,@cancelaciones bit,@fechaReinicio datetime)
 AS
