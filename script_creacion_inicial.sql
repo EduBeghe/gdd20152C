@@ -250,6 +250,8 @@ IF OBJECT_ID('TODOX2LUCAS.Kilogramos_Libres_Aeronave') IS NOT NULL
 DROP FUNCTION TODOX2LUCAS.Kilogramos_Libres_Aeronave;
 IF OBJECT_ID('TODOX2LUCAS.Butacas_Libres_Aeronave') IS NOT NULL
 DROP FUNCTION TODOX2LUCAS.Butacas_Libres_Aeronave;
+IF OBJECT_ID('TODOX2LUCAS.Butacas_Libres') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Butacas_Libres;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1255,6 +1257,23 @@ BEGIN
 	RETURN @butacasLibres;
 END
 GO
+/* ------------ PROCEDIMIENTO QUE RETORNA (LA TABLA BUTACAS) DE TODAS LAS BUTACA LIBRES DADO UN VIAJE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Butacas_Libres(@codViaje int)
+AS
+BEGIN
+	SELECT B.Cod_Butaca,B.Pos_Butaca
+	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
+							JOIN TODOX2LUCAS.Butacas B ON (B.Cod_Aeronave=A.Cod_Aeronave)
+	WHERE V.Cod_Viaje = @codViaje
+	EXCEPT
+	SELECT B.Cod_Butaca,B.Pos_Butaca
+	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
+							JOIN TODOX2LUCAS.Pasajes P ON (P.Cod_Viaje=V.Cod_Viaje)
+							JOIN TODOX2LUCAS.Butacas B ON (B.Cod_Aeronave=A.Cod_Aeronave AND B.Cod_Butaca = P.Butaca_Asociada)
+	WHERE V.Cod_Viaje = @codViaje
+END
+GO
+
 /* ------------ PROCEDIMIENTOS PARA COMPRAR PASAJES  ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Comprar_Pasajes(@butaca int,@codViaje int,@apellido nvarchar(255),@nro_dni numeric(18),
 												@formaDePago nvarchar(250),@numero_tarjeta numeric(16),@cod_seg numeric(3),@fecha_vencimiento datetime,
@@ -2275,3 +2294,5 @@ SELECT DISTINCT e.Cod_Encomiendas,m.Paquete_FechaCompra,c.Nro_Dni,c.Cliente_Apel
 FROM TODOX2LUCAS.Encomiendas e JOIN TODOX2LUCAS.Clientes c ON (e.Nro_Dni=c.Nro_Dni AND e.Cliente_Apellido=c.Cliente_Apellido)
 							JOIN gd_esquema.Maestra m ON (m.Paquete_Codigo=e.Cod_Encomiendas)
 GO
+
+
