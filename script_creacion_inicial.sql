@@ -563,9 +563,17 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Nombre_Rol(@rol nvarchar(255),@nuevoNombreRol nvarchar(255))
 AS
 BEGIN
+	IF NOT EXISTS(SELECT * FROM TODOX2LUCAS.Roles WHERE Nombre_Rol = @nuevoNombreRol)
+	BEGIN
 		UPDATE TODOX2LUCAS.Roles
 		SET Nombre_Rol = @nuevoNombreRol
 		WHERE Nombre_Rol=@rol
+	END
+	ELSE
+	BEGIN
+		PRINT 'El nombre de rol al que quiere modificar ya existe'
+		RETURN -1;
+	END
 END
 GO
 

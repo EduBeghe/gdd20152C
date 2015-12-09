@@ -31,7 +31,8 @@ namespace AerolineaFrba.Abm_Rol
         {
             if (nombre.Text != "")
             {
-                new RolesRepository().modificarNombre(rol, nombre.Text);
+                var retornoNombre = new RolesRepository().modificarNombre(rol, nombre.Text);
+                if (retornoNombre == -1) MessageBox.Show("El nombre de rol al que quiere modificar ya existe");
             }
             if (estado.Checked)
             {
@@ -61,6 +62,11 @@ namespace AerolineaFrba.Abm_Rol
                     MessageBox.Show(item.Nombre_Funcionalidad);
                     funcionalidadesBox.SetItemCheckState(funcionalidadesBox.Items.IndexOf(item), CheckState.Checked); }
             }
+        }
+
+        private void funcionalidadesBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

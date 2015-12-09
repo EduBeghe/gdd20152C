@@ -53,7 +53,11 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (ciudadesGrid.SelectedRows.Count != 0) new ModificarCiudad().ShowDialog((Ciudad)ciudadesGrid.SelectedRows[0].DataBoundItem);
+            
+            if (ciudadesGrid.SelectedRows.Count != 0)
+            {
+               new ModificarCiudad().ShowDialog((Ciudad)ciudadesGrid.SelectedRows[0].DataBoundItem);
+            }
             else MessageBox.Show("Debe seleccionar una ciudad para modificar");
         }
     }

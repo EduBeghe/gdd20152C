@@ -29,9 +29,19 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new CiudadRepository().modificarNombre(ciudad, nombre.Text);
-            MessageBox.Show("Nombre de Ciudad modificada con exito");
-            this.Close();
+            var retorno = new CiudadRepository().modificarNombre(ciudad, nombre.Text);
+            if (retorno == 0)
+            {
+                MessageBox.Show("Nombre de Ciudad modificada con exito");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("El nombre que ingreso ya existe");
+                this.Close();
+            }
+
+            
         }
     }
 }

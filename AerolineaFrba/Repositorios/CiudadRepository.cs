@@ -17,12 +17,13 @@ namespace AerolineaFrba.Repositories {
             return retorno;
 		}
 
-		public void modificarNombre(  Ciudad ciudad, string nombre )
+		public int modificarNombre(  Ciudad ciudad, string nombre )
 		{
-			DBAdapter.executeProcedure("Modificar_Nombre_Ciudad", 
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Nombre_Ciudad", 
 			ciudad.Nombre_Ciudad,
 			nombre 
-			);				
+			);
+            return retorno;
 		}
 
 		public void darDeBaja(  Ciudad ciudad )
