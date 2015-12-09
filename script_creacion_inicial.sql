@@ -126,8 +126,10 @@ IF OBJECT_ID('TODOX2LUCAS.Modificar_Datos_Cliente') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Modificar_Datos_Cliente;
 IF OBJECT_ID('TODOX2LUCAS.Baja_Por_Fuera_De_Servicio') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Baja_Por_Fuera_De_Servicio;
-IF OBJECT_ID('TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones;
+IF OBJECT_ID('TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones_Paquetes') IS NOT NULL
+DROP TRIGGER TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones_Paquetes;
+IF OBJECT_ID('TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones_Pasajes') IS NOT NULL
+DROP TRIGGER TODOX2LUCAS.Restar_Millas_Ante_Cancelaciones_Pasajes;
 IF OBJECT_ID('TODOX2LUCAS.Comprar_Encomienda') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Comprar_Encomienda;
 IF OBJECT_ID('TODOX2LUCAS.Aeronave_Para_Reemplazar') IS NOT NULL
@@ -144,8 +146,6 @@ IF OBJECT_ID('TODOX2LUCAS.Filtrar_Roles') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Filtrar_Roles;
 IF OBJECT_ID('TODOX2LUCAS.Filtrar_Ciudades') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Filtrar_Ciudades;
-IF OBJECT_ID('TODOX2LUCAS.Alta_Ciudad') IS NOT NULL
-DROP PROCEDURE TODOX2LUCAS.Alta_Ciudad;
 IF OBJECT_ID('TODOX2LUCAS.Filtrar_Rutas') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Filtrar_Rutas;
 IF OBJECT_ID('TODOX2LUCAS.GetCiudades') IS NOT NULL
@@ -246,6 +246,10 @@ IF OBJECT_ID('TODOX2LUCAS.GetCancelacionPaquete') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetCancelacionPaquete;
 IF OBJECT_ID('TODOX2LUCAS.Get_CancelacionesPaquetes') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Get_CancelacionesPaquetes;
+IF OBJECT_ID('TODOX2LUCAS.Kilogramos_Libres_Aeronave') IS NOT NULL
+DROP FUNCTION TODOX2LUCAS.Kilogramos_Libres_Aeronave;
+IF OBJECT_ID('TODOX2LUCAS.Butacas_Libres_Aeronave') IS NOT NULL
+DROP FUNCTION TODOX2LUCAS.Butacas_Libres_Aeronave;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1220,6 +1224,37 @@ BEGIN
 	
 END
 GO
+/* ------------ FUNCION QUE RETORNA LA CANTIDAD DE KILOGRAMOS LIBRES EN UNA AERONAVE DADO UN VIAJE------------ */
+CREATE FUNCTION TODOX2LUCAS.Kilogramos_Libres_Aeronave(@codViaje int)
+RETURNS int
+AS
+BEGIN
+	DECLARE @kilogramosLibres int;
+	SELECT @kilogramosLibres =	(A.Kgs_Disponibles - SUM(E.Kgs_A_Enviar)) 
+	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
+							JOIN TODOX2LUCAS.Encomiendas E ON (E.Cod_Viaje=V.Cod_Viaje)
+	WHERE V.Cod_Viaje = @codViaje
+	GROUP BY A.Cod_Aeronave,V.Cod_Viaje,A.Kgs_Disponibles
+
+	RETURN @kilogramosLibres;
+END
+GO
+/* ------------ FUNCION QUE RETORNA LA CANTIDAD DE BUTACAS LIBRES EN UNA AERONAVE DADO UN VIAJE------------ */
+CREATE FUNCTION TODOX2LUCAS.Butacas_Libres_Aeronave(@codViaje int)
+RETURNS int
+AS
+BEGIN
+	DECLARE @butacasLibres int;
+	SELECT @butacasLibres =	(A.Cantidad_Butacas - COUNT(B.Cod_Butaca)) 
+	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
+							JOIN TODOX2LUCAS.Pasajes P ON (P.Cod_Viaje=V.Cod_Viaje)
+							JOIN TODOX2LUCAS.Butacas B ON (B.Cod_Aeronave=A.Cod_Aeronave AND B.Cod_Butaca=P.Butaca_Asociada)
+	WHERE V.Cod_Viaje = @codViaje
+	GROUP BY A.Cod_Aeronave,V.Cod_Viaje,a.Cantidad_Butacas
+
+	RETURN @butacasLibres;
+END
+GO
 /* ------------ PROCEDIMIENTOS PARA COMPRAR PASAJES  ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Comprar_Pasajes(@butaca int,@codViaje int,@apellido nvarchar(255),@nro_dni numeric(18),
 												@formaDePago nvarchar(250),@numero_tarjeta numeric(16),@cod_seg numeric(3),@fecha_vencimiento datetime,
@@ -1256,29 +1291,36 @@ CREATE PROCEDURE TODOX2LUCAS.Comprar_Encomienda(@kgs_a_enviar int,@codViaje int,
 AS
 BEGIN
 	DECLARE @fecha datetime, @precioEncomienda numeric(18,2),@precioBaseEncomienda numeric(18,2),@precioServicio numeric(18),@codEncomienda numeric(18) ;
-
-	SELECT  @fecha = Fecha_Salida , @precioBaseEncomienda = r.Precio_Base_Kg ,@precioServicio = t.Precio_Servicio
-	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.RutasAereas R ON (V.Cod_Ruta=R.Cod_Ruta)
-								JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(t.Cod_Tipo_Servicio=r.Cod_Tipo_Servicio)
-	WHERE V.Cod_Viaje = @codViaje
-
-	SET @precioEncomienda = (@precioBaseEncomienda * @precioServicio)
-
-	INSERT INTO TODOX2LUCAS.Encomiendas(Fecha_Compra,Cod_Viaje,Kgs_A_Enviar,Nro_Dni,Precio_Encomienda,Cliente_Apellido)
-	VALUES(@fecha,@codViaje,@kgs_a_enviar,@nro_dni,@precioEncomienda,@apellido)
-
-	SET @codEncomienda = (SELECT DISTINCT @@IDENTITY FROM TODOX2LUCAS.Pasajes);
-
-	INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Nro_Dni,Cliente_Apellido,Cod_Encomiendas,Fecha_Transaccion,Forma_De_Pago)
-	VALUES (@nro_dni,@apellido,@codEncomienda,GETDATE(),@formaDePago)
-
-	IF (@formaDePago = 'Tarjeta')
+	IF ((SELECT TODOX2LUCAS.Kilogramos_Libres_Aeronave(@codViaje)) > = @kgs_a_enviar)
 	BEGIN
-		INSERT INTO TODOX2LUCAS.Tarjetas(Numero_Tarjeta,Cod_Seg,Fecha_Vencimiento,Tipo_Tarjeta,Nro_Dni,Cliente_Apellido)
-		VALUES(@numero_tarjeta,@cod_seg,@fecha_vencimiento,@tipo_tarjeta,@nro_dni,@apellido)
+		SELECT  @fecha = Fecha_Salida , @precioBaseEncomienda = r.Precio_Base_Kg ,@precioServicio = t.Precio_Servicio
+		FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.RutasAereas R ON (V.Cod_Ruta=R.Cod_Ruta)
+									JOIN TODOX2LUCAS.Tipos_De_Servicios T ON(t.Cod_Tipo_Servicio=r.Cod_Tipo_Servicio)
+		WHERE V.Cod_Viaje = @codViaje
+	
+		SET @precioEncomienda = (@precioBaseEncomienda * @precioServicio * @kgs_a_enviar)
+	
+		INSERT INTO TODOX2LUCAS.Encomiendas(Fecha_Compra,Cod_Viaje,Kgs_A_Enviar,Nro_Dni,Precio_Encomienda,Cliente_Apellido)
+		VALUES(@fecha,@codViaje,@kgs_a_enviar,@nro_dni,@precioEncomienda,@apellido)
+	
+		SET @codEncomienda = (SELECT DISTINCT @@IDENTITY FROM TODOX2LUCAS.Pasajes);
+	
+		INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Nro_Dni,Cliente_Apellido,Cod_Encomiendas,Fecha_Transaccion,Forma_De_Pago)
+		VALUES (@nro_dni,@apellido,@codEncomienda,GETDATE(),@formaDePago)
+	
+		IF (@formaDePago = 'Tarjeta')
+		BEGIN
+			INSERT INTO TODOX2LUCAS.Tarjetas(Numero_Tarjeta,Cod_Seg,Fecha_Vencimiento,Tipo_Tarjeta,Nro_Dni,Cliente_Apellido)
+			VALUES(@numero_tarjeta,@cod_seg,@fecha_vencimiento,@tipo_tarjeta,@nro_dni,@apellido)
+		END
+	END
+	ELSE
+	BEGIN
+		print 'No hay disponibilidad para la cantidad de kilogramos ingresada'
+		RETURN -1;
 	END
 END
-GO
+GO 
 
 /* ------------ PROCEDIMIENTOS PARA DAR DE ALTA UN  CLIENTE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Alta_Cliente(@nro_dni numeric(18),@apellido nvarchar(255),@nombre nvarchar(255),
@@ -1361,9 +1403,11 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Consulta_Millas(@dni numeric(18),@apellido nvarchar(255))
 AS
 BEGIN
-	SELECT Cant_Millas
+	DECLARE @millas int;
+	SELECT @millas = Cant_Millas
 	FROM TODOX2LUCAS.Clientes
 	WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
+	RETURN @millas;
 END
 GO
 ----------------------------------------- GETTERS TABLAS DE TODOS SUS DATOS Y CON FILTRO POR PK------------------------------------------------
@@ -2151,9 +2195,9 @@ GO
 
 --MIGRACION TABLA TIPOS DE SERVICIOS--
 
-EXEC TODOX2LUCAS.Agregar_Tipo_De_Servicio 'Primera Clase' , 2000
-EXEC TODOX2LUCAS.Agregar_Tipo_De_Servicio 'Ejecutivo', 1000
-EXEC TODOX2LUCAS.Agregar_Tipo_De_Servicio 'Turista', 500
+EXEC TODOX2LUCAS.Agregar_Tipo_De_Servicio 'Primera Clase' , 1.7
+EXEC TODOX2LUCAS.Agregar_Tipo_De_Servicio 'Ejecutivo', 1.5
+EXEC TODOX2LUCAS.Agregar_Tipo_De_Servicio 'Turista', 1.1
 
 GO
 --MIGRACION TABLA AERONAVES--
