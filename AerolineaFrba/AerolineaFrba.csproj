@@ -153,6 +153,12 @@
     <Compile Include="Compra\CancelarPasaje.Designer.cs">
       <DependentUpon>CancelarPasaje.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\CargarDatos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\CargarDatos.Designer.cs">
+      <DependentUpon>CargarDatos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Consulta Millas\ConsultaMillas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,12 +176,6 @@
     </Compile>
     <Compile Include="Compra\ListadoButacas.Designer.cs">
       <DependentUpon>ListadoButacas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra\Disponibilidad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\Disponibilidad.Designer.cs">
-      <DependentUpon>Disponibilidad.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Millas\CanjeMillas.cs">
       <SubType>Form</SubType>
@@ -314,6 +314,9 @@
     <EmbeddedResource Include="Compra\CancelarPasaje.resx">
       <DependentUpon>CancelarPasaje.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\CargarDatos.resx">
+      <DependentUpon>CargarDatos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\ConsultaMillas.resx">
       <DependentUpon>ConsultaMillas.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,9 +325,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\ListadoButacas.resx">
       <DependentUpon>ListadoButacas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Compra\Disponibilidad.resx">
-      <DependentUpon>Disponibilidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Canje Millas\CanjeMillas.resx">
       <DependentUpon>CanjeMillas.cs</DependentUpon>

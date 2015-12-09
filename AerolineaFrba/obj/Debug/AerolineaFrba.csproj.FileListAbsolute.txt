@@ -67,7 +67,6 @@ C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\Aero
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.CancelarPasaje.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ConsultaMillas.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.ListadoButacas.resources
-C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.Disponibilidad.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.canjeMillas.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Listado_Estadistico.ListadoEstadistico.resources
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.RegistroLlegada.resources
@@ -76,3 +75,4 @@ C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\Aero
 C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Motivo.resources
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Reemplazar.resources
 C:\Users\Sofía\Downloads\Facu Lucas\Gestion\Tp-Git\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Motivo.resources
+C:\Users\mujic\OneDrive\Documentos\GitHub\gdd20152C\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.CargarDatos.resources
