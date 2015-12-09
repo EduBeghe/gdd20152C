@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Domain;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Compra
 {
@@ -30,8 +32,8 @@ namespace AerolineaFrba.Compra
 
         private void Compra_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet4.Ciudades' Puede moverla o quitarla según sea necesario.
-
+            this.origen.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null);
+            this.destino.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null);
         }
     }
 }

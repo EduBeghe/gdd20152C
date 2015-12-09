@@ -16,6 +16,7 @@ using AerolineaFrba.Abm_Aeronave;
 using AerolineaFrba.Listado_Estadistico;
 using AerolineaFrba.Generacion_Viaje;
 using AerolineaFrba.Registro_Llegada_Destino;
+using AerolineaFrba.Compra;
 
 namespace AerolineaFrba
 {
@@ -94,6 +95,11 @@ namespace AerolineaFrba
         private void button3_Click(object sender, EventArgs e)
         {
             new RegistroLlegada().ShowDialog(this);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new Compra.Compra().ShowDialog(this);
         }
 
        

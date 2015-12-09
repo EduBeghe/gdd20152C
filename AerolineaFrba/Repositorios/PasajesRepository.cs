@@ -12,9 +12,6 @@ namespace AerolineaFrba.Repositories {
 
 	class PasajesRepository {
 
-		// Forma de pago ?
-		// Deberia entrar como parametro la tarjeta o cliente tiene una forma
-		// de referenciar su propia tarjeta ?
 		public void comprarPasajes( Pasaje pasaje, Cliente cliente, TarjetaDeCredito tarjeta )
 		{
 			DBAdapter.executeProcedure("Comprar_Pasajes",
