@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Compra
 {
@@ -27,7 +28,10 @@ namespace AerolineaFrba.Compra
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Ciudad ciudadOrigen = ( Ciudad ) origen.SelectedItem;
+            Ciudad ciudadDestino = (Ciudad) destino.SelectedItem;
+            this.disponibilidad.DataSource = DBAdapter.retrieveDataTable("Mostrar_Viajes_Disponibles", Convert.ToDateTime( fecha.Value ), ciudadOrigen.Nombre_Ciudad, ciudadDestino.Nombre_Ciudad );
+            
         }
 
         private void Compra_Load(object sender, EventArgs e)

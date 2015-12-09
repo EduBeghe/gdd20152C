@@ -38,13 +38,15 @@
             this.ciudadesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.destino = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.disponibilidad = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.disponibilidad)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(164, 29);
+            this.label1.Location = new System.Drawing.Point(26, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 20);
             this.label1.TabIndex = 0;
@@ -61,7 +63,8 @@
             // 
             // fecha
             // 
-            this.fecha.Location = new System.Drawing.Point(192, 72);
+            this.fecha.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.fecha.Location = new System.Drawing.Point(168, 72);
             this.fecha.Name = "fecha";
             this.fecha.Size = new System.Drawing.Size(200, 26);
             this.fecha.TabIndex = 2;
@@ -69,7 +72,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 132);
+            this.label3.Location = new System.Drawing.Point(408, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 20);
             this.label3.TabIndex = 3;
@@ -78,7 +81,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 182);
+            this.label4.Location = new System.Drawing.Point(810, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(118, 20);
             this.label4.TabIndex = 4;
@@ -87,7 +90,7 @@
             // origen
             // 
             this.origen.FormattingEnabled = true;
-            this.origen.Location = new System.Drawing.Point(192, 125);
+            this.origen.Location = new System.Drawing.Point(549, 70);
             this.origen.Name = "origen";
             this.origen.Size = new System.Drawing.Size(200, 28);
             this.origen.TabIndex = 5;
@@ -99,14 +102,14 @@
             // destino
             // 
             this.destino.FormattingEnabled = true;
-            this.destino.Location = new System.Drawing.Point(192, 174);
+            this.destino.Location = new System.Drawing.Point(948, 69);
             this.destino.Name = "destino";
             this.destino.Size = new System.Drawing.Size(200, 28);
             this.destino.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(28, 234);
+            this.button1.Location = new System.Drawing.Point(12, 151);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(185, 58);
             this.button1.TabIndex = 7;
@@ -114,11 +117,24 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // disponibilidad
+            // 
+            this.disponibilidad.AllowUserToAddRows = false;
+            this.disponibilidad.AllowUserToDeleteRows = false;
+            this.disponibilidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.disponibilidad.Location = new System.Drawing.Point(12, 215);
+            this.disponibilidad.Name = "disponibilidad";
+            this.disponibilidad.ReadOnly = true;
+            this.disponibilidad.RowTemplate.Height = 28;
+            this.disponibilidad.Size = new System.Drawing.Size(1148, 334);
+            this.disponibilidad.TabIndex = 8;
+            // 
             // Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 329);
+            this.ClientSize = new System.Drawing.Size(1172, 561);
+            this.Controls.Add(this.disponibilidad);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.destino);
             this.Controls.Add(this.origen);
@@ -131,6 +147,7 @@
             this.Text = "Compra Pasajes";
             this.Load += new System.EventHandler(this.Compra_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.disponibilidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,5 +164,6 @@
         private System.Windows.Forms.ComboBox destino;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
+        private System.Windows.Forms.DataGridView disponibilidad;
     }
 }
