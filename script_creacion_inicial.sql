@@ -719,10 +719,8 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO DE LOGIN - SOLO PUEDEN UTILIZARLOS LOS ADMINISTRATIVOS ------------ */
-
-
 /* ------------ ACTUALIZA INTENTOS DE LOGIN	------------ */
-CREATE PROCEDURE TODOX2LUCAS.actualizarIntentos(@username nvarchar(255),@Cantidad int) 
+CREATE PROCEDURE TODOX2LUCAS.actualizarIntentos(@username nvarchar(255),@Cantidad int ) 
 AS
 BEGIN
 	IF (@Cantidad = 0 )
@@ -736,15 +734,15 @@ BEGIN
 		FROM TODOX2LUCAS.Usuarios
 		WHERE Usuario_Nombre = @username
 
-		IF (@IntentosActuales) >= 3
+		INSERT INTO TODOX2LUCAS.Auditoria_Login(Usuario_Nombre,Estado,Numero_De_Intento)
+		VALUES((SELECT Usuario_Nombre FROM TODOX2LUCAS.Usuarios WHERE Usuario_Nombre = @username),0,@IntentosActuales)
+
+		IF (@IntentosActuales >= 3)
 		BEGIN	
 			UPDATE TODOX2LUCAS.Usuarios 
 			SET Estado_Usuario = 0 
 			WHERE Usuario_Nombre = @username
 		END
-
-		INSERT INTO TODOX2LUCAS.Auditoria_Login(Usuario_Nombre,Estado,Numero_De_Intento)
-		VALUES((SELECT Usuario_Nombre FROM TODOX2LUCAS.Usuarios WHERE Usuario_Nombre = @username),0,@IntentosActuales)
 	END
 	ELSE
 	BEGIN
@@ -756,27 +754,32 @@ BEGIN
 		VALUES((SELECT Usuario_Nombre FROM TODOX2LUCAS.Usuarios WHERE Usuario_Nombre= @username),1)
 	END
 END
-
 GO
-
-
 /* ------------ PROCEDIMIENTO PARA VALIDAR EL LOGIN ------------ */
-
 CREATE PROCEDURE TODOX2LUCAS.Validar_Login(@username varchar(255),@password varchar(255)) 
 AS
 BEGIN
 	DECLARE @Cantidad int;
-	
+
 	SELECT @Cantidad = COUNT(Usuario_Nombre) 
 	FROM TODOX2LUCAS.Usuarios
 	WHERE Estado_Usuario = 1 AND
 		  Usuario_Nombre = @username AND
-		  Contraseña = @password
+		  Contraseña = CONVERT(nvarchar(255),@password)
 	
 	EXEC TODOX2LUCAS.actualizarIntentos @username,@Cantidad
-	
-	RETURN @Cantidad
+	IF (SELECT Estado_Usuario FROM TODOX2LUCAS.Usuarios WHERE Usuario_Nombre = @username) = 1	
+	BEGIN
+		RETURN @Cantidad
+	END
+	ELSE
+	BEGIN
+		RETURN -1;
+	END
 END
+DECLARE @clave nvarchar(255);
+SET @clave = 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7';
+exec TODOX2LUCAS.Validar_Login 'Eduardo',@clave
 
 GO
 
@@ -2161,7 +2164,7 @@ GO
 --DATOS INICIALES PARA LA TABLA USUARIOS--
 /* ------------ SET DE USUSARIOS PARA EL TP (EL ABM DE USUARIO NO SE DEBE IMPLEMENTAR) ------------ */
 DECLARE @clave nvarchar(255);
-SET @clave = HASHBYTES('SHA2_256','w23e');
+SET @clave = 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7';
 INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
 VALUES('Lucas',@clave,2,1)
 INSERT INTO TODOX2LUCAS.Usuarios(Usuario_Nombre,Contraseña,Cod_Rol,Estado_Usuario)
