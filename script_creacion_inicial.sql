@@ -252,6 +252,8 @@ IF OBJECT_ID('TODOX2LUCAS.Butacas_Libres_Aeronave') IS NOT NULL
 DROP FUNCTION TODOX2LUCAS.Butacas_Libres_Aeronave;
 IF OBJECT_ID('TODOX2LUCAS.Butacas_Libres') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Butacas_Libres;
+IF OBJECT_ID('TODOX2LUCAS.Aeronaves_Segun_Ruta') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Aeronaves_Segun_Ruta;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1139,6 +1141,17 @@ BEGIN
 	END
 END
 GO 
+/* ------------ PROCEDIMIENTO QUE DEVUELVE LAS AERONAVES DISPONIBLES SEGUN UNA RUTA ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Aeronaves_Segun_Ruta(@codRuta numeric(18),@origen int,@destino int)
+AS
+BEGIN
+	SELECT A.*
+	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.RutasAereas R ON (R.Cod_Tipo_Servicio = A.Cod_Tipo_Servicio)
+	WHERE A.Cod_Aeronave NOT IN (SELECT Cod_Aeronave FROM TODOX2LUCAS.Estados_Aeronaves) AND
+			R.Cod_Ruta = @codRuta AND R.Cod_Ciudad_Origen = @origen AND R.Cod_Ciudad_Destino = @destino
+
+END
+GO
 /* ------------ PROCEDIMIENTO PARA EL REGISTRO DE LLEGADAS A DESTINO DE LAS AERONAVES ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Registrar_Llegada(@matricula nvarchar(255),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255),@fechaLlegada datetime)
 AS
