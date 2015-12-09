@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Utils;
+using AerolineaFrba.Abm_Ciudad;
 
 namespace AerolineaFrba.Compra
 {
@@ -38,6 +39,12 @@ namespace AerolineaFrba.Compra
         {
             this.origen.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null);
             this.destino.DataSource = new BindingSource(new BindingList<Ciudad>(new CiudadRepository().getCiudades()), null);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (disponibilidad.SelectedRows.Count != 0) new ListadoButacas().ShowDialog( disponibilidad.SelectedRows[0].Cells[0].Value );
+            else MessageBox.Show("Debe seleccionar un vuelo para seleccionar butacas");
         }
     }
 }
