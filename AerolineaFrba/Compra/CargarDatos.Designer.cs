@@ -45,8 +45,8 @@
             this.fecha = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.formaDePago = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.tarjeta = new System.Windows.Forms.CheckBox();
+            this.datosTarjeta = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -174,7 +174,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(144, 435);
+            this.button1.Location = new System.Drawing.Point(328, 435);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 39);
             this.button1.TabIndex = 15;
@@ -191,30 +191,35 @@
             this.label9.TabIndex = 16;
             this.label9.Text = "Al ingresar su Apellido y Dni se cargaron sus datos si ya es cliente";
             // 
-            // formaDePago
+            // tarjeta
             // 
-            this.formaDePago.FormattingEnabled = true;
-            this.formaDePago.Location = new System.Drawing.Point(275, 388);
-            this.formaDePago.Name = "formaDePago";
-            this.formaDePago.Size = new System.Drawing.Size(200, 28);
-            this.formaDePago.TabIndex = 17;
+            this.tarjeta.AutoSize = true;
+            this.tarjeta.Location = new System.Drawing.Point(16, 396);
+            this.tarjeta.Name = "tarjeta";
+            this.tarjeta.Size = new System.Drawing.Size(156, 24);
+            this.tarjeta.TabIndex = 17;
+            this.tarjeta.Text = "Pagar con tarjeta";
+            this.tarjeta.UseVisualStyleBackColor = true;
+            this.tarjeta.CheckedChanged += new System.EventHandler(this.tarjeta_CheckedChanged);
             // 
-            // label10
+            // datosTarjeta
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 396);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(118, 20);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "Forma de Pago";
+            this.datosTarjeta.Location = new System.Drawing.Point(16, 435);
+            this.datosTarjeta.Name = "datosTarjeta";
+            this.datosTarjeta.Size = new System.Drawing.Size(204, 39);
+            this.datosTarjeta.TabIndex = 18;
+            this.datosTarjeta.Text = "Cargar datos de tarjeta";
+            this.datosTarjeta.UseVisualStyleBackColor = true;
+            this.datosTarjeta.Visible = false;
+            this.datosTarjeta.Click += new System.EventHandler(this.button2_Click);
             // 
             // CargarDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 486);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.formaDePago);
+            this.Controls.Add(this.datosTarjeta);
+            this.Controls.Add(this.tarjeta);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.fecha);
@@ -259,7 +264,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DateTimePicker fecha;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox formaDePago;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox tarjeta;
+        private System.Windows.Forms.Button datosTarjeta;
     }
 }

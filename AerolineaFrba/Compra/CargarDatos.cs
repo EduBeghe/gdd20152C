@@ -61,5 +61,14 @@ namespace AerolineaFrba.Compra
         {
             //formaDePago.Items.Add( 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tarjeta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.tarjeta.Checked) this.datosTarjeta.Visible = true;
+        }
     }
 }
