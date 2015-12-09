@@ -47,12 +47,14 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tarjeta = new System.Windows.Forms.CheckBox();
             this.datosTarjeta = new System.Windows.Forms.Button();
+            this.tarjetaCheckbox = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(173, 9);
+            this.label1.Location = new System.Drawing.Point(172, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(118, 20);
             this.label1.TabIndex = 0;
@@ -78,7 +80,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 159);
+            this.label3.Location = new System.Drawing.Point(12, 158);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 20);
             this.label3.TabIndex = 4;
@@ -86,7 +88,7 @@
             // 
             // Nombre
             // 
-            this.Nombre.Location = new System.Drawing.Point(279, 153);
+            this.Nombre.Location = new System.Drawing.Point(279, 152);
             this.Nombre.Name = "Nombre";
             this.Nombre.Size = new System.Drawing.Size(196, 26);
             this.Nombre.TabIndex = 3;
@@ -102,7 +104,7 @@
             // 
             // Apellido
             // 
-            this.Apellido.Location = new System.Drawing.Point(279, 56);
+            this.Apellido.Location = new System.Drawing.Point(279, 55);
             this.Apellido.Name = "Apellido";
             this.Apellido.Size = new System.Drawing.Size(196, 26);
             this.Apellido.TabIndex = 5;
@@ -110,7 +112,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 207);
+            this.label5.Location = new System.Drawing.Point(12, 208);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 20);
             this.label5.TabIndex = 8;
@@ -118,7 +120,7 @@
             // 
             // Direccion
             // 
-            this.Direccion.Location = new System.Drawing.Point(279, 201);
+            this.Direccion.Location = new System.Drawing.Point(279, 202);
             this.Direccion.Name = "Direccion";
             this.Direccion.Size = new System.Drawing.Size(196, 26);
             this.Direccion.TabIndex = 7;
@@ -167,16 +169,16 @@
             // 
             // fecha
             // 
-            this.fecha.Location = new System.Drawing.Point(275, 343);
+            this.fecha.Location = new System.Drawing.Point(274, 343);
             this.fecha.Name = "fecha";
             this.fecha.Size = new System.Drawing.Size(200, 26);
             this.fecha.TabIndex = 14;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(328, 435);
+            this.button1.Location = new System.Drawing.Point(328, 436);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 39);
+            this.button1.Size = new System.Drawing.Size(147, 38);
             this.button1.TabIndex = 15;
             this.button1.Text = "Comprar";
             this.button1.UseVisualStyleBackColor = true;
@@ -194,30 +196,53 @@
             // tarjeta
             // 
             this.tarjeta.AutoSize = true;
-            this.tarjeta.Location = new System.Drawing.Point(16, 396);
+            this.tarjeta.Location = new System.Drawing.Point(24, 609);
+            this.tarjeta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tarjeta.Name = "tarjeta";
             this.tarjeta.Size = new System.Drawing.Size(156, 24);
             this.tarjeta.TabIndex = 17;
             this.tarjeta.Text = "Pagar con tarjeta";
             this.tarjeta.UseVisualStyleBackColor = true;
-            this.tarjeta.CheckedChanged += new System.EventHandler(this.tarjeta_CheckedChanged);
             // 
             // datosTarjeta
             // 
-            this.datosTarjeta.Location = new System.Drawing.Point(16, 435);
+            this.datosTarjeta.Location = new System.Drawing.Point(24, 669);
+            this.datosTarjeta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.datosTarjeta.Name = "datosTarjeta";
-            this.datosTarjeta.Size = new System.Drawing.Size(204, 39);
+            this.datosTarjeta.Size = new System.Drawing.Size(306, 60);
             this.datosTarjeta.TabIndex = 18;
             this.datosTarjeta.Text = "Cargar datos de tarjeta";
             this.datosTarjeta.UseVisualStyleBackColor = true;
             this.datosTarjeta.Visible = false;
-            this.datosTarjeta.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // tarjetaCheckbox
+            // 
+            this.tarjetaCheckbox.AutoSize = true;
+            this.tarjetaCheckbox.Location = new System.Drawing.Point(16, 391);
+            this.tarjetaCheckbox.Name = "tarjetaCheckbox";
+            this.tarjetaCheckbox.Size = new System.Drawing.Size(156, 24);
+            this.tarjetaCheckbox.TabIndex = 19;
+            this.tarjetaCheckbox.Text = "Pagar con tarjeta";
+            this.tarjetaCheckbox.UseVisualStyleBackColor = true;
+            this.tarjetaCheckbox.CheckedChanged += new System.EventHandler(this.tarjetaCheckbox_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(16, 436);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(214, 38);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "Cargar datos de tarjeta";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // CargarDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 486);
+            this.ClientSize = new System.Drawing.Size(488, 486);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.tarjetaCheckbox);
             this.Controls.Add(this.datosTarjeta);
             this.Controls.Add(this.tarjeta);
             this.Controls.Add(this.label9);
@@ -239,7 +264,6 @@
             this.Controls.Add(this.label1);
             this.Name = "CargarDatos";
             this.Text = "CargarDatos";
-            this.Load += new System.EventHandler(this.CargarDatos_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,5 +290,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox tarjeta;
         private System.Windows.Forms.Button datosTarjeta;
+        private System.Windows.Forms.CheckBox tarjetaCheckbox;
+        private System.Windows.Forms.Button button2;
     }
 }

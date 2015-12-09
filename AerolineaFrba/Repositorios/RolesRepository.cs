@@ -27,9 +27,10 @@ namespace AerolineaFrba.Repositories {
             DBAdapter.executeProcedure("Quitar_Funcionalidad_A_Rol", funcionalidad.Nombre_Funcionalidad, codRol) ;
         }
 
-		public void modificarNombre( Rol rol, string nombre )
+		public int modificarNombre( Rol rol, string nombre )
 		{
-			DBAdapter.executeProcedure("Modificar_Nombre_Rol", rol.Nombre_Rol, nombre );
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Nombre_Rol", rol.Nombre_Rol, nombre );
+            return retorno;
 		}
 
 		public List<Rol> findRol(  string nombre  )

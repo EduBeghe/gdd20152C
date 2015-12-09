@@ -57,18 +57,23 @@ namespace AerolineaFrba.Compra
                 ) {  }
         }
 
-        private void CargarDatos_Load(object sender, EventArgs e)
+        private void tarjetaCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            //formaDePago.Items.Add( 
+            if (this.tarjetaCheckbox.Checked) this.datosTarjeta.Visible = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-        }
-
-        private void tarjeta_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.tarjeta.Checked) this.datosTarjeta.Visible = true;
+            new datosTarjeta().ShowDialog( 
+                Apellido.Text, 
+                Convert.ToInt32( dni.Text ), 
+                Nombre.Text, 
+                Direccion.Text, 
+                Convert.ToInt32( Telefono.Text ), 
+                Mail.Text, 
+                Convert.ToDateTime( fecha ), 
+                butaca, 
+                codAeronave );
         }
     }
 }

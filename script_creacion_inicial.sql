@@ -252,6 +252,8 @@ IF OBJECT_ID('TODOX2LUCAS.Butacas_Libres_Aeronave') IS NOT NULL
 DROP FUNCTION TODOX2LUCAS.Butacas_Libres_Aeronave;
 IF OBJECT_ID('TODOX2LUCAS.Butacas_Libres') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Butacas_Libres;
+IF OBJECT_ID('TODOX2LUCAS.Aeronaves_Segun_Ruta') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Aeronaves_Segun_Ruta;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -412,6 +414,7 @@ CREATE TABLE TODOX2LUCAS.Canjes (
 	Cliente_Apellido nvarchar(255) ,
 	Cod_Producto int REFERENCES TODOX2LUCAS.Productos (Cod_Producto),
 	Fecha datetime,
+	Cantidad_Comprada int,
 	FOREIGN KEY (Nro_Dni,Cliente_Apellido) REFERENCES TODOX2LUCAS.Clientes (Nro_Dni,Cliente_Apellido)
 )
 ;
@@ -563,9 +566,17 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Nombre_Rol(@rol nvarchar(255),@nuevoNombreRol nvarchar(255))
 AS
 BEGIN
+	IF NOT EXISTS(SELECT * FROM TODOX2LUCAS.Roles WHERE Nombre_Rol = @nuevoNombreRol)
+	BEGIN
 		UPDATE TODOX2LUCAS.Roles
 		SET Nombre_Rol = @nuevoNombreRol
 		WHERE Nombre_Rol=@rol
+	END
+	ELSE
+	BEGIN
+		PRINT 'El nombre de rol al que quiere modificar ya existe'
+		RETURN -1;
+	END
 END
 GO
 
@@ -1131,6 +1142,17 @@ BEGIN
 	END
 END
 GO 
+/* ------------ PROCEDIMIENTO QUE DEVUELVE LAS AERONAVES DISPONIBLES SEGUN UNA RUTA ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Aeronaves_Segun_Ruta(@codRuta numeric(18),@origen int,@destino int)
+AS
+BEGIN
+	SELECT A.*
+	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.RutasAereas R ON (R.Cod_Tipo_Servicio = A.Cod_Tipo_Servicio)
+	WHERE A.Cod_Aeronave NOT IN (SELECT Cod_Aeronave FROM TODOX2LUCAS.Estados_Aeronaves) AND
+			R.Cod_Ruta = @codRuta AND R.Cod_Ciudad_Origen = @origen AND R.Cod_Ciudad_Destino = @destino
+
+END
+GO
 /* ------------ PROCEDIMIENTO PARA EL REGISTRO DE LLEGADAS A DESTINO DE LAS AERONAVES ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Registrar_Llegada(@matricula nvarchar(255),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255),@fechaLlegada datetime)
 AS
@@ -1165,10 +1187,12 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Canjear_Millas(@dni numeric(18),@cliente nvarchar(255),@producto nvarchar(255),@cantidad int)
 AS
 BEGIN
+IF EXISTS(SELECT * FROM TODOX2LUCAS.Clientes WHERE Nro_Dni = @dni AND Cliente_Apellido = @cliente)
+BEGIN
 	IF ((SELECT Cantidad FROM TODOX2LUCAS.Productos p WHERE Descripcion_Producto = @producto) < @cantidad)
 	BEGIN
 		print 'No hay disponibilidad de stock'
-		RETURN -1;
+		RETURN -2;
 	END
 	ELSE 
 	BEGIN
@@ -1178,8 +1202,8 @@ BEGIN
 		WHERE Descripcion_Producto = @producto
 		IF ((SELECT Cant_Millas FROM TODOX2LUCAS.Clientes WHERE Nro_Dni=@dni AND Cliente_Apellido =@cliente) > (@precioMillas * @cantidad))
 		BEGIN
-			INSERT INTO TODOX2LUCAS.Canjes(Nro_Dni,Cliente_Apellido,Cod_Producto,Fecha)
-			VALUES (@dni,@cliente,@codProducto,GETDATE())
+			INSERT INTO TODOX2LUCAS.Canjes(Nro_Dni,Cliente_Apellido,Cod_Producto,Fecha,Cantidad_Comprada)
+			VALUES (@dni,@cliente,@codProducto,GETDATE(),@cantidad)
 		
 			UPDATE TODOX2LUCAS.Clientes
 			SET Cant_Millas = Cant_Millas - @precioMillas
@@ -1192,9 +1216,15 @@ BEGIN
 		ELSE
 		BEGIN
 			print 'No tiene la cantidad de millas necesarias para realizar el canje'
-			RETURN -2;
+			RETURN -3;
 		END
 	END
+END
+ELSE
+BEGIN
+	PRINT 'El cliente ingresado no existe'
+	RETURN -1;
+END
 END
 GO
 
@@ -1424,11 +1454,19 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Consulta_Millas(@dni numeric(18),@apellido nvarchar(255))
 AS
 BEGIN
-	DECLARE @millas int;
-	SELECT @millas = Cant_Millas
-	FROM TODOX2LUCAS.Clientes
-	WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
-	RETURN @millas;
+	IF EXISTS (SELECT * FROM TODOX2LUCAS.Clientes WHERE Nro_Dni=@dni AND Cliente_Apellido=@apellido)
+	BEGIN
+		DECLARE @millas int;
+		SELECT @millas = Cant_Millas
+		FROM TODOX2LUCAS.Clientes
+		WHERE Nro_Dni = @dni AND Cliente_Apellido = @apellido
+		RETURN @millas;
+	END
+	ELSE
+	BEGIN
+		PRINT 'El cliente ingresado no existe'
+		RETURN -1;
+	END
 END
 GO
 ----------------------------------------- GETTERS TABLAS DE TODOS SUS DATOS Y CON FILTRO POR PK------------------------------------------------
