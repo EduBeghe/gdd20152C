@@ -14,6 +14,7 @@ using AerolineaFrba.Abm_Ciudad;
 using AerolineaFrba.Login;
 using AerolineaFrba.Abm_Aeronave;
 using AerolineaFrba.Listado_Estadistico;
+using AerolineaFrba.Generacion_Viaje;
 
 namespace AerolineaFrba
 {
@@ -82,6 +83,11 @@ namespace AerolineaFrba
         private void button1_Click(object sender, EventArgs e)
         {
             new ListadoEstadistico().ShowDialog(this);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new AltaViaje().ShowDialog(this);
         }
 
        

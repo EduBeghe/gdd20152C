@@ -25,6 +25,11 @@ namespace AerolineaFrba
             this.Estado_Ruta = Estado_Ruta;
 		}
 
+        public override string ToString()
+        {
+            return origen.Nombre_Ciudad + "-" + destino.Nombre_Ciudad + "(" + servicio.Descripcion_Servicio + ")";
+        }
+
         public static RutaAerea Copy(RutaAerea a)
         {
             // Boolean copyEstdo = c.estado;

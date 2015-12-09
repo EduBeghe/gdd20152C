@@ -51,7 +51,6 @@ namespace AerolineaFrba.Repositories
 
         internal int getMillas( Cliente cliente )
         {
-            // Verificar tipo de retorno y que llamada a DBA
             return DBAdapter.executeProcedureWithReturnValue("Consulta_Millas",
                 cliente.Nro_Dni,
                 cliente.Cliente_Apellido
@@ -59,9 +58,9 @@ namespace AerolineaFrba.Repositories
         }
 
         // 
-        public void canjeMillas( Cliente cliente, ProductoCanje producto, int cantidad  )
+        public int canjeMillas( Cliente cliente, ProductoCanje producto, int cantidad  )
         {
-            DBAdapter.executeProcedure( "Canjear_Millas", 
+            return DBAdapter.executeProcedureWithReturnValue( "Canjear_Millas", 
             cliente.Nro_Dni,
             cliente.Cliente_Apellido,
             producto.Descripcion_Producto,

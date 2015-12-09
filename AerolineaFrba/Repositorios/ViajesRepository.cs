@@ -12,14 +12,14 @@ namespace AerolineaFrba.Repositories {
 
 	class ViajesRepository {
 
-		// Ingresa un viaje o los datos sueltos ?
-		public void generarViaje( Viaje viaje )
+		
+		public int generarViaje( RutaAerea ruta, Aeronave aeronave, DateTime fechaSalida, DateTime llegadaEstimada )
 		{
-			DBAdapter.executeProcedure("Generar_Viaje", 
-			viaje.rutaAerea.Cod_Ruta,
-			viaje.aeronave.Cod_Aeronave,
-			viaje.Fecha_Salida,
-			viaje.Fecha_Llegada_Estimada
+			return DBAdapter.executeProcedureWithReturnValue("Generar_Viaje", 
+			ruta.Cod_Ruta,
+			aeronave.Cod_Aeronave,
+            fechaSalida,
+            llegadaEstimada
 			);
 		}		
 

@@ -16,7 +16,7 @@ namespace AerolineaFrba.Domain
         public TipoServicio servicio { get; set; }
         public int Kgs_Disponibles { get; set; }
         public int Cantidad_Butacas { get; set; }
-        // public EstadoAeronave estadoAeronave { get; set; }
+      
 
         public Aeronave(int Cod_Aeronave, string Matricula, DateTime Fecha_Alta,  Fabricante fabricante, string Modelo, TipoServicio servicio, int Kgs_Disponibles, int Cantidad_Butacas )
         {
@@ -30,9 +30,13 @@ namespace AerolineaFrba.Domain
             this.Cantidad_Butacas = Cantidad_Butacas;
         }
 
+        public override string ToString()
+        {
+            return Matricula + "(" + servicio.Descripcion_Servicio + ")";
+        }
+
         public static Aeronave Copy(Aeronave a)
         {
-            // Boolean copyEstdo = c.estado;
             return new Aeronave ( 
                 a.Cod_Aeronave,
                 a.Matricula,

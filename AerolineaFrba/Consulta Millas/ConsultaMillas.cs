@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -28,8 +29,14 @@ namespace AerolineaFrba.Abm_Ciudad
         private void button2_Click(object sender, EventArgs e)
         {
             var clientesRepository = new ClientesRepository();
-            int millas = clientesRepository.getMillas( clientesRepository.getCliente( Convert.ToInt32(dni.Text), apellido.Text ));
-            MessageBox.Show("Sus millas son : " + millas );
+            if (Validacion.validarInputs(this.Controls) &&
+                Validacion.soloNumeros(this.dni, dni.Name) && Validacion.soloLetras( this.apellido, apellido.Name ))
+            {
+
+                int millas = clientesRepository.getMillas(clientesRepository.getCliente(Convert.ToInt32(dni.Text), apellido.Text));
+                MessageBox.Show("Sus millas son : " + millas);
+                this.Close();
+            }
         }
 
 

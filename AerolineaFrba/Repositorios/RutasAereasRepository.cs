@@ -29,6 +29,11 @@ namespace AerolineaFrba.Repositories {
 			return parse ( DBAdapter.retrieveDataTable("GetRuta", idRuta, origen, destino ).Rows[0]);
 		}
 
+        public List<RutaAerea> getRutas()
+        { 
+            return parseRutas( DBAdapter.retrieveDataTable( "Get_Rutas" ));
+        }
+
 		public List<RutaAerea> findRuta(  int? codigo, Ciudad origen, Ciudad destino, TipoServicio servicio  )
 		{
 			return parseRutas( DBAdapter.retrieveDataTable("Filtrar_Rutas",
