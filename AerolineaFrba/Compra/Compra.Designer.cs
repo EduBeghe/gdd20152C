@@ -39,6 +39,7 @@
             this.destino = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.disponibilidad = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.disponibilidad)).BeginInit();
             this.SuspendLayout();
@@ -129,11 +130,21 @@
             this.disponibilidad.Size = new System.Drawing.Size(1148, 334);
             this.disponibilidad.TabIndex = 8;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(214, 151);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(179, 58);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Seleccionar butaca";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 561);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.disponibilidad);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.destino);
@@ -165,5 +176,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
         private System.Windows.Forms.DataGridView disponibilidad;
+        private System.Windows.Forms.Button button2;
     }
 }
