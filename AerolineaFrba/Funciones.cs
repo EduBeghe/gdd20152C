@@ -15,6 +15,7 @@ using AerolineaFrba.Login;
 using AerolineaFrba.Abm_Aeronave;
 using AerolineaFrba.Listado_Estadistico;
 using AerolineaFrba.Generacion_Viaje;
+using AerolineaFrba.Registro_Llegada_Destino;
 
 namespace AerolineaFrba
 {
@@ -88,6 +89,11 @@ namespace AerolineaFrba
         private void button2_Click(object sender, EventArgs e)
         {
             new AltaViaje().ShowDialog(this);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new RegistroLlegada().ShowDialog(this);
         }
 
        
