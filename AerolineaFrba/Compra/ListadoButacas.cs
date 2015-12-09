@@ -21,10 +21,11 @@ namespace AerolineaFrba.Abm_Ciudad
             InitializeComponent();
         }
 
-        internal void ShowDialog(object func)
+        internal int  ShowDialog(object func)
         {
             this.aeronave = Convert.ToInt32(func);
             this.ShowDialog();
+            return aeronave;
         }
      
         private void label1_Click(object sender, EventArgs e)
@@ -32,22 +33,20 @@ namespace AerolineaFrba.Abm_Ciudad
 
         }
 
-        private string button3_Click(object sender, EventArgs e)
-        {
-            string butacaSeleccionda = "";
-            if (butacas.SelectedRows.Count != 0)
-            {
-                butacaSeleccionda = butacas.SelectedRows[0].Cells[0].Value.ToString();
-                return butacaSeleccionda;
-                this.Close();
-            }
-            else return butacaSeleccionda = "Butaca sin seleccionar";
-
-        }
-
         private void ListadoButacas_Load(object sender, EventArgs e)
         {
             this.butacas.DataSource = DBAdapter.retrieveDataTable("Butacas_Libres", aeronave );
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+           aeronave = -1;
+            if (butacas.SelectedRows.Count != 0)
+            {
+                aeronave = Convert.ToInt32( butacas.SelectedRows[0].Cells[0].Value ) ;
+                this.Close();
+            }
+            
         }
 
       

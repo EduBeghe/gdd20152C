@@ -16,6 +16,8 @@ namespace AerolineaFrba.Compra
 {
     public partial class Compra : Form
     {
+        int butaca;
+
         public Compra()
         {
             InitializeComponent();
@@ -43,7 +45,7 @@ namespace AerolineaFrba.Compra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (disponibilidad.SelectedRows.Count != 0) new ListadoButacas().ShowDialog( disponibilidad.SelectedRows[0].Cells[0].Value );
+            if (disponibilidad.SelectedRows.Count != 0) butaca = new ListadoButacas().ShowDialog( disponibilidad.SelectedRows[0].Cells[0].Value );
             else MessageBox.Show("Debe seleccionar un vuelo para seleccionar butacas");
         }
     }
