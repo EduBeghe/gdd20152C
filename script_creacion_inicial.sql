@@ -918,16 +918,18 @@ BEGIN
 	DECLARE @codOrigen int,@codDestino int;
 	SET @codOrigen = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadOrigen);
 	SET @codDestino = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadDestino);
-	IF (@codDestino = NULL OR @codOrigen = NULL)
-	BEGIN
-		print 'Las ciudades ingresadas no existen'
-		RETURN -1;
-	END
 
-	UPDATE TODOX2LUCAS.RutasAereas
-	SET Cod_Ciudad_Origen = @codOrigen,
-		Cod_Ciudad_Destino = @codDestino
-	WHERE Cod_Ruta = @codRuta
+	IF NOT EXISTS (SELECT Cod_Viaje FROM TODOX2LUCAS.Viajes WHERE Cod_Ruta=@codRuta)
+	BEGIN
+		UPDATE TODOX2LUCAS.RutasAereas
+		SET Cod_Ciudad_Origen = @codOrigen,
+			Cod_Ciudad_Destino = @codDestino
+		WHERE Cod_Ruta = @codRuta
+	END
+	ELSE
+	BEGIN
+		return -1;
+	END
 	
 END
 GO
@@ -938,16 +940,18 @@ AS
 BEGIN
 	DECLARE @codServicio int;
 	SET @codServicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio=@servicio);
-	IF (@codServicio = NULL) 
-	BEGIN 
-		print 'El servicio ingresado no existe'
-		RETURN -1;
+
+	IF NOT EXISTS (SELECT Cod_Viaje FROM TODOX2LUCAS.Viajes WHERE Cod_Ruta=@codRuta)
+	BEGIN
+		UPDATE TODOX2LUCAS.RutasAereas
+		SET Cod_Tipo_Servicio = @codServicio
+		WHERE Cod_Ruta = @codRuta
 	END
-	
-	UPDATE TODOX2LUCAS.RutasAereas
-	SET Cod_Tipo_Servicio = @codServicio
-	WHERE Cod_Ruta = @codRuta
-	
+	ELSE 
+	BEGIN
+		print 'La ruta tiene viajes asignados'
+		return -1;
+	END
 END
 GO
 
@@ -961,6 +965,10 @@ BEGIN
 		SET Precio_Base_Kg = @precioKgs,
 			Precio_Base_Pasaje = @precioPasaje
 		WHERE Cod_Ruta = @codRuta
+	END
+	ELSE
+	BEGIN
+		return -1;
 	END
 	
 END
