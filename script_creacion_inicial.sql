@@ -268,6 +268,8 @@ IF OBJECT_ID('TODOX2LUCAS.Get_Butacas_Por_Tipo') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Get_Butacas_Por_Tipo ;
 IF OBJECT_ID('TODOX2LUCAS.GetModelo') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetModelo;
+IF OBJECT_ID('TODOX2LUCAS.GetModelos') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetModelos;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1808,6 +1810,13 @@ BEGIN
 	SELECT *
 	FROM TODOX2LUCAS.Modelo_Aeronave
 	WHERE Cod_Modelo = @codModelo
+END
+GO
+CREATE PROCEDURE TODOX2LUCAS.GetModelos
+AS
+BEGIN
+	SELECT * 
+	FROM TODOX2LUCAS.Modelo_Aeronave
 END
 GO
 ------------------------------------------------- TABLA ROL POR FUNCIONALIDAD---------------------------------------------------------------
