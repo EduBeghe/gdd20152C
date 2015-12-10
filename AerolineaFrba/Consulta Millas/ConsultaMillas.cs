@@ -44,5 +44,15 @@ namespace AerolineaFrba.Abm_Ciudad
         {
 
         }
+
+        private void ConsultaMillas_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new Consulta_Millas.HistorialMillas().Show(this);
+        }
     }
 }

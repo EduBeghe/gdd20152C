@@ -254,6 +254,10 @@ IF OBJECT_ID('TODOX2LUCAS.Butacas_Libres') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Butacas_Libres;
 IF OBJECT_ID('TODOX2LUCAS.Aeronaves_Segun_Ruta') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Aeronaves_Segun_Ruta;
+IF OBJECT_ID('TODOX2LUCAS.Listado_Consulta_Millas') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Listado_Consulta_Millas;
+IF OBJECT_ID('TODOX2LUCAS.Cancelar_Pasajes_Encomiendas') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -841,6 +845,27 @@ BEGIN
 	WHERE (v.Cod_Aeronave = @codAeronave OR v.Cod_Ruta = @codRuta) AND v.Fecha_Salida > @fecha
 END
 GO
+/* ------------ PROCEDIMIENTO PARA CANCELACIONES POR ADMINISTRADOR ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas(@fechaDevolucion datetime,@numeroCompra int,@codigo numeric(18),@motivo nvarchar(255))
+AS
+BEGIN
+	IF EXISTS (SELECT * FROM TODOX2LUCAS.TransaccionesPasajes T WHERE T.Numero_Compra =@numeroCompra AND T.Cod_Pasaje=@codigo)
+	BEGIN
+		INSERT INTO TODOX2LUCAS.CancelacionesPasajes(Cod_Pasaje,Fecha_Devolucion,Motivo,Numero_Compra_Pasajes)
+		VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
+	END
+	IF EXISTS (SELECT * FROM TODOX2LUCAS.TransaccionesPaquetes T WHERE T.Numero_Compra =@numeroCompra AND T.Cod_Encomiendas=@codigo)
+	BEGIN
+		INSERT INTO TODOX2LUCAS.CancelacionesPaquetes(Cod_Encomiendas,Fecha_Devolucion,Motivo,Numero_Compra_Paquetes)
+		VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
+	END
+	ELSE
+	BEGIN
+		print 'No son validos los codigos ingresados'
+		RETURN -1;
+	END
+END
+GO
 
 /* ------------ PROCEDIMIENTO PARA DAR DE BAJA UNA RUTA AEREA ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Baja_Ruta_Aerea(@codRuta numeric(18),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255),
@@ -1263,22 +1288,31 @@ CREATE FUNCTION TODOX2LUCAS.Kilogramos_Libres_Aeronave(@codViaje int)
 RETURNS int
 AS
 BEGIN
-	DECLARE @kilogramosLibres int;
+	DECLARE @kilogramosLibres int,@kilogramosCancelados int;
 	SELECT @kilogramosLibres =	(A.Kgs_Disponibles - SUM(E.Kgs_A_Enviar)) 
 	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
 							JOIN TODOX2LUCAS.Encomiendas E ON (E.Cod_Viaje=V.Cod_Viaje)
 	WHERE V.Cod_Viaje = @codViaje
 	GROUP BY A.Cod_Aeronave,V.Cod_Viaje,A.Kgs_Disponibles
 
-	RETURN @kilogramosLibres;
+	SELECT @kilogramosCancelados = SUM(E.Kgs_A_Enviar)
+	FROM TODOX2LUCAS.Encomiendas E JOIN TODOX2LUCAS.CancelacionesPaquetes CE ON (E.Cod_Encomiendas = CE.Cod_Encomiendas)
+									JOIN TODOX2LUCAS.Viajes V ON (V.Cod_Viaje = E.Cod_Viaje)
+	WHERE V.Cod_Viaje = @codViaje
+
+	SET @kilogramosLibres = @kilogramosLibres - @kilogramosCancelados;
+
+	RETURN @kilogramosLibres ;
 END
 GO
+
 /* ------------ FUNCION QUE RETORNA LA CANTIDAD DE BUTACAS LIBRES EN UNA AERONAVE DADO UN VIAJE------------ */
 CREATE FUNCTION TODOX2LUCAS.Butacas_Libres_Aeronave(@codViaje int)
 RETURNS int
 AS
 BEGIN
-	DECLARE @butacasLibres int;
+	DECLARE @butacasLibres int,@butacasCancelados int;
+	
 	SELECT @butacasLibres =	(A.Cantidad_Butacas - COUNT(B.Cod_Butaca)) 
 	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
 							JOIN TODOX2LUCAS.Pasajes P ON (P.Cod_Viaje=V.Cod_Viaje)
@@ -1286,6 +1320,12 @@ BEGIN
 	WHERE V.Cod_Viaje = @codViaje
 	GROUP BY A.Cod_Aeronave,V.Cod_Viaje,a.Cantidad_Butacas
 
+	SELECT @butacasCancelados = COUNT(P.Butaca_Asociada)
+	FROM TODOX2LUCAS.Pasajes P JOIN TODOX2LUCAS.CancelacionesPasajes CP ON (P.Cod_Pasaje = CP.Cod_Pasaje)
+								JOIN TODOX2LUCAS.Viajes V ON(V.Cod_Viaje = P.Cod_Viaje)
+	WHERE V.Cod_Viaje = @codViaje
+	SET @butacasLibres = @butacasLibres - @butacasCancelados;
+	
 	RETURN @butacasLibres;
 END
 GO
@@ -1303,6 +1343,14 @@ BEGIN
 							JOIN TODOX2LUCAS.Pasajes P ON (P.Cod_Viaje=V.Cod_Viaje)
 							JOIN TODOX2LUCAS.Butacas B ON (B.Cod_Aeronave=A.Cod_Aeronave AND B.Cod_Butaca = P.Butaca_Asociada)
 	WHERE V.Cod_Viaje = @codViaje
+	UNION
+	SELECT B.Cod_Butaca,B.Pos_Butaca
+	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
+							JOIN TODOX2LUCAS.Pasajes P ON (P.Cod_Viaje=V.Cod_Viaje)
+							JOIN TODOX2LUCAS.Butacas B ON (B.Cod_Aeronave=A.Cod_Aeronave AND B.Cod_Butaca = P.Butaca_Asociada)
+							JOIN TODOX2LUCAS.CancelacionesPasajes CP ON (CP.Cod_Pasaje = P.Cod_Pasaje)
+	WHERE V.Cod_Viaje = @codViaje
+	
 END
 GO
 
@@ -1469,6 +1517,41 @@ BEGIN
 	END
 END
 GO
+/* ------------ PROCEDIMIENTOS PARA MOSTRAR LISTADO DETALLE MILLAS DE UN CLIENTE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Listado_Consulta_Millas(@nroDni numeric(18),@apellido nvarchar(255))
+AS
+BEGIN
+	select  C.Cliente_Apellido,C.Nro_Dni,P.Cod_Pasaje as 'Pasajes/Encomiendas/Canjes',FLOOR(p.Pasaje_Precio/10) as 'Millas Acumuladas'  
+	from TODOX2LUCAS.TransaccionesPasajes TP JOIN TODOX2LUCAS.Clientes C ON (C.Cliente_Apellido=TP.Cliente_Apellido AND C.Nro_Dni=TP.Nro_Dni)
+											JOIN  TODOX2LUCAS.Pasajes P ON (C.Cliente_Apellido = P.Cliente_Apellido AND C.Nro_Dni = P.Nro_Dni)
+	WHERE C.Cliente_Apellido = @apellido AND C.Nro_Dni = @nroDni
+	GROUP BY P.Cod_Pasaje,C.Cliente_Apellido,C.Nro_Dni,P.Pasaje_Precio	
+	UNION ALL
+	select  C.Cliente_Apellido,C.Nro_Dni,E.Cod_Encomiendas,FLOOR(e.Precio_Encomienda/10)
+	from TODOX2LUCAS.Clientes C JOIN TODOX2LUCAS.Encomiendas E ON (E.Cliente_Apellido=C.Cliente_Apellido AND E.Nro_Dni = C.Nro_Dni)
+								JOIN TODOX2LUCAS.TransaccionesPaquetes TE ON (TE.Cliente_Apellido=C.Cliente_Apellido AND C.Nro_Dni = TE.Nro_Dni)
+	WHERE C.Cliente_Apellido = @apellido AND C.Nro_Dni = @nroDni
+	GROUP BY E.Cod_Encomiendas,C.Cliente_Apellido,C.Nro_Dni,E.Precio_Encomienda
+	UNION
+	select  C.Cliente_Apellido,C.Nro_Dni,E.Cod_Encomiendas,(FLOOR(e.Precio_Encomienda/10) * -1)
+	from TODOX2LUCAS.Clientes C JOIN TODOX2LUCAS.Encomiendas E ON (E.Cliente_Apellido=C.Cliente_Apellido AND E.Nro_Dni = C.Nro_Dni)
+								JOIN TODOX2LUCAS.CancelacionesPaquetes CP ON (CP.Cod_Encomiendas=E.Cod_Encomiendas)
+	WHERE C.Cliente_Apellido = @apellido AND C.Nro_Dni = @nroDni
+	GROUP BY E.Cod_Encomiendas,C.Cliente_Apellido,C.Nro_Dni,E.Precio_Encomienda
+	UNION
+	select  C.Cliente_Apellido,C.Nro_Dni,P.Cod_Pasaje,(FLOOR(P.Pasaje_Precio/10) * -1)
+	from TODOX2LUCAS.Clientes C JOIN TODOX2LUCAS.Pasajes P ON (P.Cliente_Apellido=C.Cliente_Apellido AND P.Nro_Dni = C.Nro_Dni)
+								JOIN TODOX2LUCAS.CancelacionesPasajes CP ON (CP.Cod_Pasaje=P.Cod_Pasaje)
+	WHERE C.Cliente_Apellido = @apellido AND C.Nro_Dni = @nroDni
+	GROUP BY P.Cod_Pasaje,C.Cliente_Apellido,C.Nro_Dni,P.Pasaje_Precio
+	UNION
+	select  C.Cliente_Apellido,C.Nro_Dni,CA.Cod_Canje,(FLOOR(CA.Cantidad_Comprada * P.PrecioEnMillas) * -1)
+	from TODOX2LUCAS.Clientes C JOIN TODOX2LUCAS.Canjes CA ON (CA.Cliente_Apellido=C.Cliente_Apellido AND CA.Nro_Dni = C.Nro_Dni)
+								JOIN TODOX2LUCAS.Productos P ON (P.Cod_Producto = CA.Cod_Producto)
+	WHERE C.Cliente_Apellido = @apellido AND C.Nro_Dni = @nroDni
+	GROUP BY CA.Cod_Canje,C.Cliente_Apellido,C.Nro_Dni,CA.Cantidad_Comprada,P.PrecioEnMillas
+END
+GO 
 ----------------------------------------- GETTERS TABLAS DE TODOS SUS DATOS Y CON FILTRO POR PK------------------------------------------------
 ------------------------------------------------- TABLA CIUDADES ---------------------------------------------------------------
  /* ------------ PROCEDIMIENTOS GETTER TODOS LAS CIUDADES ------------ */
@@ -2334,5 +2417,6 @@ SELECT DISTINCT e.Cod_Encomiendas,m.Paquete_FechaCompra,c.Nro_Dni,c.Cliente_Apel
 FROM TODOX2LUCAS.Encomiendas e JOIN TODOX2LUCAS.Clientes c ON (e.Nro_Dni=c.Nro_Dni AND e.Cliente_Apellido=c.Cliente_Apellido)
 							JOIN gd_esquema.Maestra m ON (m.Paquete_Codigo=e.Cod_Encomiendas)
 GO
+
 
 

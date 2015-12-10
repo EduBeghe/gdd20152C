@@ -21,13 +21,19 @@ namespace AerolineaFrba
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new Funciones().ShowDialog(this);
+            new FuncionesAdmin().ShowDialog(this);
             this.Close();
         }
 
         private void BienvenidaWindow_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new FuncionesInvitado().ShowDialog(this);
+            this.Close();
         }
         
     }

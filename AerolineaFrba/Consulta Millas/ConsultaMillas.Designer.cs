@@ -34,6 +34,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.apellido = new System.Windows.Forms.TextBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -50,7 +51,7 @@
             // dni
             // 
             this.dni.Location = new System.Drawing.Point(143, 32);
-            this.dni.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dni.Margin = new System.Windows.Forms.Padding(2);
             this.dni.Name = "dni";
             this.dni.Size = new System.Drawing.Size(68, 20);
             this.dni.TabIndex = 1;
@@ -68,7 +69,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(102, 81);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(78, 21);
             this.button2.TabIndex = 10;
@@ -89,25 +90,38 @@
             // apellido
             // 
             this.apellido.Location = new System.Drawing.Point(143, 55);
-            this.apellido.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.apellido.Margin = new System.Windows.Forms.Padding(2);
             this.apellido.Name = "apellido";
             this.apellido.Size = new System.Drawing.Size(68, 20);
             this.apellido.TabIndex = 12;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(197, 94);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(63, 13);
+            this.linkLabel1.TabIndex = 13;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Ver Historial";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // ConsultaMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(273, 116);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.apellido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dni);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ConsultaMillas";
             this.Text = "Consulta Millas";
+            this.Load += new System.EventHandler(this.ConsultaMillas_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +136,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox apellido;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

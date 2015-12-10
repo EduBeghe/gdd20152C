@@ -28,13 +28,13 @@ namespace AerolineaFrba.Listado_Estadistico
         private DateTime parsearFechaInicial()
         {
 
-            DateTime fecha;
+            DateTime fecha = default(DateTime);
             switch (semestre.SelectedIndex)
             {
                 case 0: 
                     fecha = Convert.ToDateTime("01/01/" + Convert.ToString(anio.Value));
                     break;
-                default:
+                case 1:
                     fecha = Convert.ToDateTime("01/07/" + Convert.ToString(anio.Value + 1));
                     break;
             }
@@ -46,13 +46,13 @@ namespace AerolineaFrba.Listado_Estadistico
         private DateTime parsearFechaFinal()
         {
 
-            DateTime fecha;
+            DateTime fecha = default(DateTime);
             switch (semestre.SelectedIndex)
             {
                 case 0: 
                     fecha = Convert.ToDateTime("01/07/" + Convert.ToString(anio.Value)); 
                     break;
-                default:
+                case 1:
                     fecha = Convert.ToDateTime("01/01/" + Convert.ToString(anio.Value + 1));
                     break;
             }

@@ -20,9 +20,9 @@ using AerolineaFrba.Compra;
 
 namespace AerolineaFrba
 {
-    public partial class Funciones : Form
+    public partial class FuncionesAdmin : Form
     {
-        public Funciones()
+        public FuncionesAdmin()
         {
             InitializeComponent();
         }
@@ -100,6 +100,11 @@ namespace AerolineaFrba
         private void button5_Click(object sender, EventArgs e)
         {
             new Compra.Compra().ShowDialog(this);
+        }
+
+        private void FuncionesAdmin_Load(object sender, EventArgs e)
+        {
+
         }
 
        

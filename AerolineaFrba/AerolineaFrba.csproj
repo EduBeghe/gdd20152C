@@ -189,6 +189,12 @@
     <Compile Include="Canje Millas\CanjeMillas.Designer.cs">
       <DependentUpon>CanjeMillas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Consulta Millas\HistorialMillas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consulta Millas\HistorialMillas.Designer.cs">
+      <DependentUpon>HistorialMillas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Devolucion\RegistroDevolucion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,11 +222,17 @@
     <Compile Include="Domain\TipoTarjeta.cs" />
     <Compile Include="Domain\Usuario.cs" />
     <Compile Include="Domain\Viaje.cs" />
-    <Compile Include="Funciones.cs">
+    <Compile Include="FuncionesInvitado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Funciones.Designer.cs">
-      <DependentUpon>Funciones.cs</DependentUpon>
+    <Compile Include="FuncionesInvitado.Designer.cs">
+      <DependentUpon>FuncionesInvitado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FuncionesAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuncionesAdmin.Designer.cs">
+      <DependentUpon>FuncionesAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Generacion Viaje\AltaViaje.cs">
       <SubType>Form</SubType>
@@ -338,11 +350,17 @@
     <EmbeddedResource Include="Canje Millas\CanjeMillas.resx">
       <DependentUpon>CanjeMillas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Consulta Millas\HistorialMillas.resx">
+      <DependentUpon>HistorialMillas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Devolucion\RegistroDevolucion.resx">
       <DependentUpon>RegistroDevolucion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Funciones.resx">
-      <DependentUpon>Funciones.cs</DependentUpon>
+    <EmbeddedResource Include="FuncionesAdmin.resx">
+      <DependentUpon>FuncionesAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuncionesInvitado.resx">
+      <DependentUpon>FuncionesInvitado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\AltaViaje.resx">
       <DependentUpon>AltaViaje.cs</DependentUpon>
