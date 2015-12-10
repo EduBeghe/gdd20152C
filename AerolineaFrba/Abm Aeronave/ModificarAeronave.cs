@@ -57,10 +57,9 @@ namespace AerolineaFrba.Abm_Ciudad
                         Convert.ToInt32(kgs.Text)
                         );
                 }
-                if (retorno == 0)
-                {
-                    MessageBox.Show("Modificacion de Aeronave exitosa");
-                }
+                if (retorno == 0) MessageBox.Show("Modificacion de Aeronave exitosa");
+                else if (retorno == -1) MessageBox.Show("La matricula ingrsada ya existe");
+                else if (retorno == -2) MessageBox.Show("La aeronave tiene viajes asignados");
                 else
                 {
                     MessageBox.Show("No se cumplieron los dias fuera de servicio de la aeronave");
