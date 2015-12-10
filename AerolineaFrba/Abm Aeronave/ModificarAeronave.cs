@@ -38,7 +38,6 @@ namespace AerolineaFrba.Abm_Ciudad
                 {
                     retorno = new AeronaveRepository().modificarAeronave(
                         aeronave.Cod_Aeronave,
-                        Convert.ToDateTime(fechaAlta.Value),
                         (Fabricante)fabricanteAeronave.SelectedItem,
                         modelo.Text,
                         (TipoServicio)tipoServicio.SelectedItem,
@@ -47,7 +46,6 @@ namespace AerolineaFrba.Abm_Ciudad
                 else {
                     retorno = new AeronaveRepository().modificarAeronave(
                         aeronave.Cod_Aeronave,
-                        Convert.ToDateTime(fechaAlta.Value),
                         (Fabricante)fabricanteAeronave.SelectedItem,
                         modelo.Text,
                         (TipoServicio)tipoServicio.SelectedItem,
