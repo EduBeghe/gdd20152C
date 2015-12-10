@@ -260,6 +260,12 @@ IF OBJECT_ID('TODOX2LUCAS.Listado_Consulta_Millas') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Listado_Consulta_Millas;
 IF OBJECT_ID('TODOX2LUCAS.Cancelar_Pasajes_Encomiendas') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas;
+IF OBJECT_ID('TODOX2LUCAS.Modificar_Agregar_Butaca') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Modificar_Agregar_Butaca;
+IF OBJECT_ID('TODOX2LUCAS.Modificar_Quitar_Butaca ') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Modificar_Quitar_Butaca ;
+IF OBJECT_ID('TODOX2LUCAS.Get_Butacas_Por_Tipo ') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Get_Butacas_Por_Tipo ;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1161,7 +1167,7 @@ BEGIN
 			RETURN -2;
 		END
 	END
-
+	
 	IF (@rehabilitar = 1)
 	BEGIN
 		IF EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave AND Fuera_De_Servicio = 1)
@@ -1180,8 +1186,57 @@ BEGIN
 		END
 	END
 END
-GO
+GO 
+/* ------------ PROCEDIMIENTO PARA AGREGAR BUTACA BUTACA------------ */
+CREATE PROCEDURE TODOX2LUCAS.Modificar_Agregar_Butaca(@codAeronave int,@posButaca nvarchar(255))
+AS
+BEGIN
+	UPDATE TODOX2LUCAS.Aeronaves
+	SET Cantidad_Butacas = Cantidad_Butacas + 1
+	WHERE Cod_Aeronave  = @codAeronave
 
+	DECLARE @ultima_butaca numeric(18);
+	SELECT TOP 1 @ultima_butaca = Cod_Butaca
+	FROM TODOX2LUCAS.Butacas
+	WHERE Cod_Aeronave = @codAeronave AND Pos_Butaca = @posButaca
+	ORDER BY Cod_Butaca DESC
+
+	INSERT INTO TODOX2LUCAS.Butacas(Cod_Aeronave,Cod_Butaca,Piso_Butaca,Pos_Butaca)
+	VALUES(@codAeronave,(@ultima_butaca + 1),1,@posButaca)
+
+END
+GO 
+/* ------------ PROCEDIMIENTO PARA AGREGAR BUTACA BUTACA------------ */
+CREATE PROCEDURE TODOX2LUCAS.Modificar_Quitar_Butaca(@codAeronave int,@posButaca nvarchar(255))
+AS
+BEGIN
+	UPDATE TODOX2LUCAS.Aeronaves
+	SET Cantidad_Butacas = Cantidad_Butacas - 1
+	WHERE Cod_Aeronave  = @codAeronave
+
+	DECLARE @ultima_butaca numeric(18);
+	SELECT TOP 1 @ultima_butaca = Cod_Butaca
+	FROM TODOX2LUCAS.Butacas
+	WHERE Cod_Aeronave = @codAeronave AND Pos_Butaca = @posButaca
+	ORDER BY Cod_Butaca DESC
+
+	DELETE FROM TODOX2LUCAS.Butacas 
+	WHERE Cod_Butaca = @ultima_butaca AND Cod_Aeronave = @codAeronave AND Pos_Butaca = @posButaca
+
+END
+GO
+/* ------------ PROCEDIMIENTO PARA OBTENER LAS CANTIDADES TOTALES DE LAS AERONAVES PASILLO - VENTANILLA ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Get_Butacas_Por_Tipo(@codAeronave int,@tipo nvarchar(255))
+AS
+BEGIN
+	DECLARE @cantidad int;
+	SELECT @cantidad = COUNT(*) 
+	FROM TODOX2LUCAS.Butacas
+	WHERE Cod_Aeronave = @codAeronave AND Pos_Butaca = @tipo
+
+	RETURN @cantidad;
+END
+GO
 /* ------------ PROCEDIMIENTO PARA GENERAR UN VIAJE ------------ */
 CREATE PROCEDURE  TODOX2LUCAS.Generar_Viaje(@codRuta numeric(18),@cod_Aeronave int,@fechaSalida datetime,@fechaLlegadestimada datetime)
 AS 
