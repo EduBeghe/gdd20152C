@@ -17,14 +17,17 @@ namespace AerolineaFrba.Compra
     public partial class Compra : Form
     {
         int butaca = -1;
+        int encomienda = -1;
+        Boolean esAdministrador;
 
         public Compra()
         {
             InitializeComponent();
         }
 
-        internal void ShowDialog()
+        internal void ShowDialog( Boolean administrador )
         {
+            this.esAdministrador = administrador;
             this.ShowDialog();
         }
 
@@ -52,12 +55,18 @@ namespace AerolineaFrba.Compra
         private void button3_Click(object sender, EventArgs e)
         {
             if (disponibilidad.SelectedRows.Count != 0 ){
-                if (butaca == -1) MessageBox.Show("Debe seleccionar una butaca para comprar el pasaje");
+                if (butaca == -1 ) MessageBox.Show("Debe seleccionar una butaca para comprar el pasaje");
                 else 
                 {
-                    new CargarDatos().ShowDialog( disponibilidad.SelectedRows[0].Cells[0].Value, butaca );
+                    new CargarDatos().ShowDialog( disponibilidad.SelectedRows[0].Cells[0].Value, butaca, encomienda, esAdministrador );
                 } 
             } else MessageBox.Show("Debe seleccionar una vuelo para comprar el pasaje");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (disponibilidad.SelectedRows.Count != 0) encomienda = new Encomienda().ShowDialog();
+            else MessageBox.Show("Debe seleccionar un vuelo para cargar su encomienda");
         }
     }
 }

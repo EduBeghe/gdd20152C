@@ -47,8 +47,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tarjeta = new System.Windows.Forms.CheckBox();
             this.datosTarjeta = new System.Windows.Forms.Button();
-            this.tarjetaCheckbox = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.efectivo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -215,34 +215,33 @@
             this.datosTarjeta.UseVisualStyleBackColor = true;
             this.datosTarjeta.Visible = false;
             // 
-            // tarjetaCheckbox
-            // 
-            this.tarjetaCheckbox.AutoSize = true;
-            this.tarjetaCheckbox.Location = new System.Drawing.Point(16, 391);
-            this.tarjetaCheckbox.Name = "tarjetaCheckbox";
-            this.tarjetaCheckbox.Size = new System.Drawing.Size(156, 24);
-            this.tarjetaCheckbox.TabIndex = 19;
-            this.tarjetaCheckbox.Text = "Pagar con tarjeta";
-            this.tarjetaCheckbox.UseVisualStyleBackColor = true;
-            this.tarjetaCheckbox.CheckedChanged += new System.EventHandler(this.tarjetaCheckbox_CheckedChanged);
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(16, 436);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(214, 38);
+            this.button2.Size = new System.Drawing.Size(198, 38);
             this.button2.TabIndex = 20;
             this.button2.Text = "Cargar datos de tarjeta";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // efectivo
+            // 
+            this.efectivo.Location = new System.Drawing.Point(16, 390);
+            this.efectivo.Name = "efectivo";
+            this.efectivo.Size = new System.Drawing.Size(198, 40);
+            this.efectivo.TabIndex = 21;
+            this.efectivo.Text = "Pagar en Efectivo";
+            this.efectivo.UseVisualStyleBackColor = true;
+            this.efectivo.Visible = false;
             // 
             // CargarDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(488, 486);
+            this.Controls.Add(this.efectivo);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.tarjetaCheckbox);
             this.Controls.Add(this.datosTarjeta);
             this.Controls.Add(this.tarjeta);
             this.Controls.Add(this.label9);
@@ -264,6 +263,7 @@
             this.Controls.Add(this.label1);
             this.Name = "CargarDatos";
             this.Text = "CargarDatos";
+            this.Load += new System.EventHandler(this.CargarDatos_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,7 +290,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox tarjeta;
         private System.Windows.Forms.Button datosTarjeta;
-        private System.Windows.Forms.CheckBox tarjetaCheckbox;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button efectivo;
     }
 }

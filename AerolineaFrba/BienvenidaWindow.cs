@@ -32,7 +32,7 @@ namespace AerolineaFrba
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new FuncionesInvitado().ShowDialog(this);
+            new FuncionesInvitado().ShowDialog(false);
             this.Close();
         }
         

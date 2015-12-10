@@ -37,7 +37,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(53, 20);
+            this.label1.Location = new System.Drawing.Point(109, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(154, 20);
             this.label1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(12, 383);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(320, 32);
+            this.button3.Size = new System.Drawing.Size(356, 32);
             this.button3.TabIndex = 11;
             this.button3.Text = "Seleccionar";
             this.button3.UseVisualStyleBackColor = true;
@@ -63,14 +63,14 @@
             this.butacas.Name = "butacas";
             this.butacas.ReadOnly = true;
             this.butacas.RowTemplate.Height = 28;
-            this.butacas.Size = new System.Drawing.Size(320, 334);
+            this.butacas.Size = new System.Drawing.Size(356, 334);
             this.butacas.TabIndex = 12;
             // 
             // ListadoButacas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 427);
+            this.ClientSize = new System.Drawing.Size(380, 427);
             this.Controls.Add(this.butacas);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);

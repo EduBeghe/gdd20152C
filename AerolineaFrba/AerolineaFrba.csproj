@@ -165,6 +165,12 @@
     <Compile Include="Compra\datosTarjeta.Designer.cs">
       <DependentUpon>datosTarjeta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\Encomienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\Encomienda.Designer.cs">
+      <DependentUpon>Encomienda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Consulta Millas\ConsultaMillas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -337,6 +343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\datosTarjeta.resx">
       <DependentUpon>datosTarjeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\Encomienda.resx">
+      <DependentUpon>Encomienda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\ConsultaMillas.resx">
       <DependentUpon>ConsultaMillas.cs</DependentUpon>

@@ -22,9 +22,17 @@ namespace AerolineaFrba
 {
     public partial class FuncionesAdmin : Form
     {
+        Boolean esAdministrador;
+
         public FuncionesAdmin()
         {
             InitializeComponent();
+        }
+
+        internal void ShowDialog( Boolean administrador )
+        {
+            this.esAdministrador = administrador;
+            this.ShowDialog();
         }
 
         private void AltaAeronaveButton_Click(object sender, EventArgs e)
@@ -99,7 +107,7 @@ namespace AerolineaFrba
 
         private void button5_Click(object sender, EventArgs e)
         {
-            new Compra.Compra().ShowDialog(this);
+            new Compra.Compra().ShowDialog( esAdministrador );
         }
 
         private void FuncionesAdmin_Load(object sender, EventArgs e)

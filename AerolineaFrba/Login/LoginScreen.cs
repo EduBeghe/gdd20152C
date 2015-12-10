@@ -33,7 +33,7 @@ namespace AerolineaFrba.Login
                 {
                     repo.iniciarSesion(usuarioTextbox.Text);
                     MessageBox.Show("Bienvenido " + CLC_SessionManager.currentUser.Usuario_Nombre, "Login exitoso");
-                    new FuncionesAdmin().ShowDialog(this);
+                    new FuncionesAdmin().ShowDialog( true );
                     this.Close();
                 }
                 else if (valido == -1) {

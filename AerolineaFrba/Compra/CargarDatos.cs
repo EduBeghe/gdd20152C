@@ -15,18 +15,22 @@ namespace AerolineaFrba.Compra
 {
     public partial class CargarDatos : Form
     {
+        Boolean esAdministrador;
         int codAeronave;
         int butaca;
+        int encomienda;
 
         public CargarDatos()
         {
             InitializeComponent();
         }
         
-        internal void ShowDialog(object codAeronave, int butaca)
+        internal void ShowDialog(object codAeronave, int butaca, int encomienda, Boolean administrador )
         {
             this.codAeronave = Convert.ToInt32(codAeronave);
             this.butaca = butaca;
+            this.encomienda = encomienda;
+            this.esAdministrador = administrador;
             this.ShowDialog();
         }
 
@@ -54,12 +58,13 @@ namespace AerolineaFrba.Compra
                 Validacion.soloNumeros(this.Telefono, Telefono.Name) &&
                 Validacion.emailValido( this.Mail ) &&
                 Validacion.fechaMenorAlDiaDeHoy( fecha, "Fecha de Nacimiento" )
+                // validar butaca y encomienda ?
                 ) {  }
         }
 
         private void tarjetaCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.tarjetaCheckbox.Checked) this.datosTarjeta.Visible = true;
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -74,6 +79,12 @@ namespace AerolineaFrba.Compra
                 Convert.ToDateTime( fecha ), 
                 butaca, 
                 codAeronave );
+        }
+
+        private void CargarDatos_Load(object sender, EventArgs e)
+        {
+            if (esAdministrador) this.efectivo.Visible = true;
+
         }
     }
 }
