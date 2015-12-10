@@ -37,19 +37,25 @@ namespace AerolineaFrba.Abm_Ciudad
                 if (rehabilitar.Checked)
                 {
                     retorno = new AeronaveRepository().modificarAeronave(
+                        matricula.Text,
                         aeronave.Cod_Aeronave,
                         (Fabricante)fabricanteAeronave.SelectedItem,
                         modelo.Text,
                         (TipoServicio)tipoServicio.SelectedItem,
-                        true);
+                        true,
+                        Convert.ToInt32( kgs.Text )
+                        );
                 }
                 else {
                     retorno = new AeronaveRepository().modificarAeronave(
+                        matricula.Text,
                         aeronave.Cod_Aeronave,
                         (Fabricante)fabricanteAeronave.SelectedItem,
                         modelo.Text,
                         (TipoServicio)tipoServicio.SelectedItem,
-                        false);
+                        false,
+                        Convert.ToInt32(kgs.Text)
+                        );
                 }
                 if (retorno == 0)
                 {
