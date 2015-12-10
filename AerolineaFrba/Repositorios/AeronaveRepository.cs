@@ -21,7 +21,7 @@ namespace AerolineaFrba.Repositories {
             return retorno;
 		}
 
-		public int modificarAeronave( string matricula, int codAeronave, Fabricante fabricante, string modelo, TipoServicio servicio, Boolean rehabilitar, int kgs ) 
+		public int modificarAeronave( string matricula, int codAeronave, Fabricante fabricante, Modelo modelo, TipoServicio servicio, Boolean rehabilitar, int kgs ) 
 		{
 			var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Aeronave", 
             matricula,

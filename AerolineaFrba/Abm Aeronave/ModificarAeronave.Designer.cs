@@ -32,7 +32,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.modelo = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tipoServicio = new System.Windows.Forms.ComboBox();
             this.fabricanteAeronave = new System.Windows.Forms.ComboBox();
@@ -49,6 +48,7 @@
             this.labelKgs = new System.Windows.Forms.Label();
             this.kgs = new System.Windows.Forms.TextBox();
             this.rehabilitar = new System.Windows.Forms.CheckBox();
+            this.modelo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -86,13 +86,6 @@
             this.label7.Size = new System.Drawing.Size(120, 20);
             this.label7.TabIndex = 7;
             this.label7.Text = "Tipo de Servicio";
-            // 
-            // modelo
-            // 
-            this.modelo.Location = new System.Drawing.Point(190, 68);
-            this.modelo.Name = "modelo";
-            this.modelo.Size = new System.Drawing.Size(100, 26);
-            this.modelo.TabIndex = 12;
             // 
             // button1
             // 
@@ -238,11 +231,20 @@
             this.rehabilitar.Text = "Rehabilitar";
             this.rehabilitar.UseVisualStyleBackColor = true;
             // 
+            // modelo
+            // 
+            this.modelo.FormattingEnabled = true;
+            this.modelo.Location = new System.Drawing.Point(160, 61);
+            this.modelo.Name = "modelo";
+            this.modelo.Size = new System.Drawing.Size(130, 28);
+            this.modelo.TabIndex = 44;
+            // 
             // ModificarAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 383);
+            this.Controls.Add(this.modelo);
             this.Controls.Add(this.kgs);
             this.Controls.Add(this.labelKgs);
             this.Controls.Add(this.restarPasillo);
@@ -259,7 +261,6 @@
             this.Controls.Add(this.rehabilitar);
             this.Controls.Add(this.tipoServicio);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.modelo);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
@@ -278,7 +279,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox modelo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox tipoServicio;
         private System.Windows.Forms.ComboBox fabricanteAeronave;
@@ -295,5 +295,6 @@
         private System.Windows.Forms.Label labelKgs;
         private System.Windows.Forms.TextBox kgs;
         private System.Windows.Forms.CheckBox rehabilitar;
+        private System.Windows.Forms.ComboBox modelo;
     }
 }
