@@ -21,7 +21,7 @@ namespace AerolineaFrba
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FuncionesAdmin().ShowDialog(this);
+            new LoginScreen().ShowDialog(this);
             this.Close();
         }
 

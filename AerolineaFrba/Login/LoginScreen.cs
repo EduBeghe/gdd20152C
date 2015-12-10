@@ -26,17 +26,21 @@ namespace AerolineaFrba.Login
         private void loginButton_Click(object sender, EventArgs e)
         {
             var repo = new UsuarioRepository();            
-            var valido = repo.ValidarLogin(usuarioTextbox.Text, passwordTextbox.Text);
-            if (valido == 1)
-            {
-                repo.iniciarSesion(usuarioTextbox.Text);
-                MessageBox.Show("Bienvenido " + CLC_SessionManager.currentUser.Usuario_Nombre, "Login exitoso");
-                this.Close();
+            if ( Validacion.validarInputs( this.Controls )) {
+                
+                var valido = repo.ValidarLogin(usuarioTextbox.Text, passwordTextbox.Text);
+                if (valido == 1)
+                {
+                    repo.iniciarSesion(usuarioTextbox.Text);
+                    MessageBox.Show("Bienvenido " + CLC_SessionManager.currentUser.Usuario_Nombre, "Login exitoso");
+                    new FuncionesAdmin().ShowDialog(this);
+                    this.Close();
+                }
+                else if (valido == -1) {
+                    MessageBox.Show("Se dio de baja su usuario por exceder la cantidad de intentos de logueo");
+                }
+                else MessageBox.Show("Datos Incorrectos");
             }
-            else if (valido == -1) {
-                MessageBox.Show("Se dio de baja su usuario por exceder la cantidad de intentos de logueo");
-            }else MessageBox.Show("Datos Incorrectos");
-            
         }
 
     }
