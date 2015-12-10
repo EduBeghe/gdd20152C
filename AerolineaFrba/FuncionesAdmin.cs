@@ -17,6 +17,7 @@ using AerolineaFrba.Listado_Estadistico;
 using AerolineaFrba.Generacion_Viaje;
 using AerolineaFrba.Registro_Llegada_Destino;
 using AerolineaFrba.Compra;
+using AerolineaFrba.Utils;
 
 namespace AerolineaFrba
 {
@@ -37,77 +38,101 @@ namespace AerolineaFrba
 
         private void AltaAeronaveButton_Click(object sender, EventArgs e)
         {
-            new AltaAeronave().ShowDialog(this);
+
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Alta Aeronave")) new AltaAeronave().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void BuscarAeronaveButton_Click(object sender, EventArgs e)
         {
             new ListadoAeronave().ShowDialog(this);
+            
         }
 
         private void AltaRutaButton_Click(object sender, EventArgs e)
         {
-            new AltaRuta().ShowDialog(this);
+
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Alta Ruta")) new AltaRuta().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void BuscarRutaButton_Click(object sender, EventArgs e)
         {
             new ListadoRuta().ShowDialog(this);
+            
         }
 
         private void AltaRolButton_Click(object sender, EventArgs e)
         {
-            new AltaRol().ShowDialog(this);
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Alta Rol")) new AltaRol().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void BuscarRolButton_Click(object sender, EventArgs e)
         {
             new ListadoRol().ShowDialog(this);
+            MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void AltaCiudadButton_Click(object sender, EventArgs e)
         {
-            new AltaCiudad().ShowDialog(this);
+
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Alta Ciudad")) new AltaCiudad().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void BuscarCiudadButton_Click(object sender, EventArgs e)
         {
+
             new ListadoCiudad().ShowDialog(this);
+            
         }
 
         private void CanjeMillasButton_Click(object sender, EventArgs e)
         {
-            new canjeMillas().ShowDialog(this);
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Canje Millas")) new canjeMillas().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void ConsultarMillasButton_Click(object sender, EventArgs e)
         {
-            new ConsultaMillas().ShowDialog(this);
+
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Consulta Millas")) new ConsultaMillas().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
             new LoginScreen().ShowDialog(this);
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new ListadoEstadistico().ShowDialog(this);
+
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Listado Estadístico")) new ListadoEstadistico().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new AltaViaje().ShowDialog(this);
+
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Generación Viaje")) new AltaViaje().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            new RegistroLlegada().ShowDialog(this);
+
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Registro Llegada Destino")) new RegistroLlegada().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            new Compra.Compra().ShowDialog( esAdministrador );
+
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Compra Pasajes" || x.Nombre_Funcionalidad == "Compra Encomiendas")) new Compra.Compra().ShowDialog(esAdministrador);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void FuncionesAdmin_Load(object sender, EventArgs e)
