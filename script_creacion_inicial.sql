@@ -400,7 +400,7 @@ CREATE TABLE TODOX2LUCAS.Butacas (
 	Pos_Butaca nvarchar(255),
 	Piso_Butaca numeric(18),
 	Estado_Butaca bit,
-	PRIMARY KEY CLUSTERED(Cod_Aeronave,Cod_Butaca,Piso_Butaca)
+	PRIMARY KEY CLUSTERED(Cod_Aeronave,Cod_Butaca,Pos_Butaca)
 )
 ; 
 --CREACION TABLA RUTASAEREAS--
