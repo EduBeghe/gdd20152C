@@ -1171,6 +1171,24 @@ BEGIN
 			Cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio),
 			Kgs_Disponibles = Kgs_Disponibles + @kgs
 		WHERE Cod_Aeronave = @codAeronave
+
+		IF (@rehabilitar = 1)
+		BEGIN
+			IF EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave AND Fuera_De_Servicio = 1)
+			BEGIN
+				DECLARE @fechaactual datetime;
+				SET @fechaactual = GETDATE();
+				IF (@fechaactual > (SELECT Fecha_Reinicio_Servicio FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave))
+				BEGIN
+					DELETE FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave
+				END
+				ELSE
+				BEGIN 
+					print 'Todavia la aeronave se encuentra fuera de servicio'
+					RETURN -1;
+				END
+			END
+
 	END
 	ELSE
 	BEGIN
@@ -1178,29 +1196,13 @@ BEGIN
 		RETURN -2;
 	END
 	
-	IF (@rehabilitar = 1)
-	BEGIN
-		IF EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave AND Fuera_De_Servicio = 1)
-		BEGIN
-			DECLARE @fechaactual datetime;
-			SET @fechaactual = GETDATE();
-			IF (@fechaactual > (SELECT Fecha_Reinicio_Servicio FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave))
-			BEGIN
-				DELETE FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave
-			END
-			ELSE
-			BEGIN 
-				print 'Todavia la aeronave se encuentra fuera de servicio'
-				RETURN -1;
-			END
-		END
 END
 GO 
 /* ------------ PROCEDIMIENTO PARA AGREGAR BUTACA BUTACA------------ */
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Agregar_Butaca(@codAeronave int,@posButaca nvarchar(255))
 AS
 BEGIN
-IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave AND Fecha_Salida > GETDATE() )
+IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave )
 BEGIN
 	UPDATE TODOX2LUCAS.Aeronaves
 	SET Cantidad_Butacas = Cantidad_Butacas + 1
@@ -1227,7 +1229,7 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Quitar_Butaca(@codAeronave int,@posButaca nvarchar(255))
 AS
 BEGIN
-IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave AND Fecha_Salida > GETDATE() )
+IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave )
 BEGIN
 
 	UPDATE TODOX2LUCAS.Aeronaves
