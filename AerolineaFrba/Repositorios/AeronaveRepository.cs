@@ -70,13 +70,13 @@ namespace AerolineaFrba.Repositories {
 			));	
 		}
 
-		public int darDeAlta(string Matricula, DateTime Fecha_Alta,  Fabricante fabricante, string Modelo, TipoServicio servicio, int Kgs_Disponibles, int butacasPasillo, int butacasVentanilla )
+		public int darDeAlta(string Matricula, DateTime Fecha_Alta,  Fabricante fabricante, Modelo Modelo, TipoServicio servicio, int Kgs_Disponibles, int butacasPasillo, int butacasVentanilla )
 		{
 			return DBAdapter.executeProcedureWithReturnValue("Alta_Aeronave", 
 			Matricula,
 			Fecha_Alta,
 			fabricante.Nombre_Fabricante,
-			Modelo,
+			Modelo.Cod_Modelo,
 			servicio.Descripcion_Servicio,
 			Kgs_Disponibles,
 			butacasPasillo,

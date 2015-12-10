@@ -39,7 +39,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     matriculaAeronave.Text,
                     fechaAltaAeronave.Value,
                     (Fabricante)fabricanteAeronave.SelectedItem,
-                    modeloAeronave.Text,
+                    (Modelo) modelo.SelectedItem,
                     (TipoServicio)tipoServicio.SelectedItem,
                     Convert.ToInt32(kgAeronave.Text),
                     Convert.ToInt32(butacasPasillo.Text),
