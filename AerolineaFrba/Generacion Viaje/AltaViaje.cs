@@ -43,9 +43,7 @@ namespace AerolineaFrba.Generacion_Viaje
         private void AltaViaje_Load(object sender, EventArgs e)
         {
             
-            BindingSource aeronaveSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().getAeronaves()), null);
-            this.aeronave.DataSource = aeronaveSource;
-            this.aeronave.DisplayMember = "Matricula";
+           
             BindingSource rutaAereaSource = new BindingSource(new BindingList<RutaAerea>(new RutaAereaRepository().getRutas()), null);
             this.ruta.DataSource = rutaAereaSource;
             
@@ -54,6 +52,15 @@ namespace AerolineaFrba.Generacion_Viaje
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ruta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RutaAerea rutaSeleccionada = (RutaAerea) ruta.SelectedItem;
+            BindingSource aeronaveSource = new BindingSource(new BindingList<Aeronave>(new AeronaveRepository().getAeronaveByRuta( 
+            rutaSeleccionada.Cod_Ruta, rutaSeleccionada.origen.Cod_Ciudad, rutaSeleccionada.destino.Cod_Ciudad )), null);
+            this.aeronave.DataSource = aeronaveSource;
+            this.aeronave.DisplayMember = "Matricula";
         }
     }
 }

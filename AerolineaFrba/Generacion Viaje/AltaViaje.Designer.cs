@@ -88,6 +88,7 @@
             this.ruta.Name = "ruta";
             this.ruta.Size = new System.Drawing.Size(376, 28);
             this.ruta.TabIndex = 4;
+            this.ruta.SelectedIndexChanged += new System.EventHandler(this.ruta_SelectedIndexChanged);
             // 
             // rutasAereasBindingSource
             // 

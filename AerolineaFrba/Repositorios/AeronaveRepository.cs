@@ -33,9 +33,9 @@ namespace AerolineaFrba.Repositories {
             return retorno;
 		}
 
-        public List<Aeronave> getAeronaveByRuta(int codRuta, string origen, string destino)
+        public List<Aeronave> getAeronaveByRuta(int codRuta, int origen, int destino)
         {
-            return parseAeronaves(DBAdapter.retrieveDataTable("", codRuta, origen, destino ));
+            return parseAeronaves(DBAdapter.retrieveDataTable("Aeronaves_Segun_Ruta", codRuta, origen, destino));
         }
 
 		public int darDeBajaXProblemasTecnicos( Aeronave aeronave, Boolean cancelaciones , DateTime fechaReinicio )
