@@ -64,7 +64,7 @@ namespace AerolineaFrba.Abm_Ciudad
                 {
                     MessageBox.Show("No se cumplieron los dias fuera de servicio de la aeronave");
                 }
-                this.Close();
+                 this.Close();
                } else { MessageBox.Show("Debe llenar todos los campos"); }
                     
         }

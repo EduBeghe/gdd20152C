@@ -36,7 +36,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.modeloAeronave = new System.Windows.Forms.TextBox();
             this.matriculaAeronave = new System.Windows.Forms.TextBox();
             this.kgAeronave = new System.Windows.Forms.TextBox();
             this.butacasPasillo = new System.Windows.Forms.TextBox();
@@ -49,6 +48,7 @@
             this.fabricanteAeronave = new System.Windows.Forms.ComboBox();
             this.gD2C2015DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label6 = new System.Windows.Forms.Label();
+            this.modelo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.tiposDeServiciosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -113,13 +113,6 @@
             this.label10.Size = new System.Drawing.Size(122, 20);
             this.label10.TabIndex = 10;
             this.label10.Text = "Cantidad de Kg ";
-            // 
-            // modeloAeronave
-            // 
-            this.modeloAeronave.Location = new System.Drawing.Point(128, 188);
-            this.modeloAeronave.Name = "modeloAeronave";
-            this.modeloAeronave.Size = new System.Drawing.Size(181, 26);
-            this.modeloAeronave.TabIndex = 12;
             // 
             // matriculaAeronave
             // 
@@ -210,11 +203,20 @@
             this.label6.TabIndex = 30;
             this.label6.Text = "Fabricante";
             // 
+            // modelo
+            // 
+            this.modelo.FormattingEnabled = true;
+            this.modelo.Location = new System.Drawing.Point(126, 184);
+            this.modelo.Name = "modelo";
+            this.modelo.Size = new System.Drawing.Size(181, 28);
+            this.modelo.TabIndex = 31;
+            // 
             // AltaAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 497);
+            this.Controls.Add(this.modelo);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.fabricanteAeronave);
             this.Controls.Add(this.tipoServicio);
@@ -225,7 +227,6 @@
             this.Controls.Add(this.butacasPasillo);
             this.Controls.Add(this.kgAeronave);
             this.Controls.Add(this.matriculaAeronave);
-            this.Controls.Add(this.modeloAeronave);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
@@ -252,7 +253,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox modeloAeronave;
         private System.Windows.Forms.TextBox matriculaAeronave;
         private System.Windows.Forms.TextBox kgAeronave;
         private System.Windows.Forms.TextBox butacasPasillo;
@@ -265,5 +265,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.BindingSource gD2C2015DataSetBindingSource;
         private System.Windows.Forms.BindingSource tiposDeServiciosBindingSource;
+        private System.Windows.Forms.ComboBox modelo;
     }
 }

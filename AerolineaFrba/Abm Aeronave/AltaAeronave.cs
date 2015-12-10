@@ -64,6 +64,8 @@ namespace AerolineaFrba.Abm_Aeronave
             this.tipoServicio.DataSource = servicioSource;
             BindingSource fabricanteSource = new BindingSource(new BindingList<Fabricante>(new FabricantesRepository().getFabricantes()), null);
             this.fabricanteAeronave.DataSource = fabricanteSource;
+            BindingSource modelosSource = new BindingSource(new BindingList<Modelo>(new ModeloRepository().getModelos()), null);
+            this.modelo.DataSource = modelosSource;
 
 
         }

@@ -17,6 +17,11 @@ namespace AerolineaFrba.Repositories
             return parse(DBAdapter.retrieveDataTable("GetModelo", idModelo).Rows[0]);
         }
 
+        public List<Modelo> getModelos(DataTable dataTable)
+        {
+            return parseModelos(DBAdapter.retrieveDataTable("GetModelos"));
+        }
+
         public List<Modelo> parseModelos(DataTable dataTable)
         {
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
