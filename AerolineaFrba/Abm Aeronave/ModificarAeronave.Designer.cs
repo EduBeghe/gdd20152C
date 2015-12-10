@@ -34,10 +34,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.modelo = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.fechaAlta = new System.Windows.Forms.DateTimePicker();
             this.tipoServicio = new System.Windows.Forms.ComboBox();
-            this.rehabilitar = new System.Windows.Forms.CheckBox();
             this.fabricanteAeronave = new System.Windows.Forms.ComboBox();
             this.matricula = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,10 +48,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.labelKgs = new System.Windows.Forms.Label();
             this.kgs = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.fechaBaja = new System.Windows.Forms.DateTimePicker();
-            this.fechaFueraServicio = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
+            this.rehabilitar = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -102,29 +96,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(246, 470);
+            this.button1.Location = new System.Drawing.Point(246, 310);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(146, 55);
             this.button1.TabIndex = 19;
             this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 244);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 20);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "Fecha de Alta";
-            // 
-            // fechaAlta
-            // 
-            this.fechaAlta.Location = new System.Drawing.Point(392, 239);
-            this.fechaAlta.Name = "fechaAlta";
-            this.fechaAlta.Size = new System.Drawing.Size(200, 26);
-            this.fechaAlta.TabIndex = 24;
             // 
             // tipoServicio
             // 
@@ -133,16 +111,6 @@
             this.tipoServicio.Name = "tipoServicio";
             this.tipoServicio.Size = new System.Drawing.Size(130, 28);
             this.tipoServicio.TabIndex = 29;
-            // 
-            // rehabilitar
-            // 
-            this.rehabilitar.AutoSize = true;
-            this.rehabilitar.Location = new System.Drawing.Point(29, 244);
-            this.rehabilitar.Name = "rehabilitar";
-            this.rehabilitar.Size = new System.Drawing.Size(111, 24);
-            this.rehabilitar.TabIndex = 30;
-            this.rehabilitar.Text = "Rehabilitar";
-            this.rehabilitar.UseVisualStyleBackColor = true;
             // 
             // fabricanteAeronave
             // 
@@ -171,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 377);
+            this.label5.Location = new System.Drawing.Point(25, 217);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(232, 20);
             this.label5.TabIndex = 34;
@@ -180,7 +148,7 @@
             // cantidadVentanilla
             // 
             this.cantidadVentanilla.AutoSize = true;
-            this.cantidadVentanilla.Location = new System.Drawing.Point(25, 429);
+            this.cantidadVentanilla.Location = new System.Drawing.Point(25, 269);
             this.cantidadVentanilla.Name = "cantidadVentanilla";
             this.cantidadVentanilla.Size = new System.Drawing.Size(18, 20);
             this.cantidadVentanilla.TabIndex = 35;
@@ -188,7 +156,7 @@
             // 
             // sumarVentanilla
             // 
-            this.sumarVentanilla.Location = new System.Drawing.Point(101, 416);
+            this.sumarVentanilla.Location = new System.Drawing.Point(101, 256);
             this.sumarVentanilla.Name = "sumarVentanilla";
             this.sumarVentanilla.Size = new System.Drawing.Size(65, 33);
             this.sumarVentanilla.TabIndex = 36;
@@ -198,7 +166,7 @@
             // 
             // restarVentanilla
             // 
-            this.restarVentanilla.Location = new System.Drawing.Point(192, 416);
+            this.restarVentanilla.Location = new System.Drawing.Point(192, 256);
             this.restarVentanilla.Name = "restarVentanilla";
             this.restarVentanilla.Size = new System.Drawing.Size(65, 33);
             this.restarVentanilla.TabIndex = 37;
@@ -208,7 +176,7 @@
             // 
             // restarPasillo
             // 
-            this.restarPasillo.Location = new System.Drawing.Point(527, 419);
+            this.restarPasillo.Location = new System.Drawing.Point(527, 259);
             this.restarPasillo.Name = "restarPasillo";
             this.restarPasillo.Size = new System.Drawing.Size(65, 33);
             this.restarPasillo.TabIndex = 41;
@@ -218,7 +186,7 @@
             // 
             // sumarPasillo
             // 
-            this.sumarPasillo.Location = new System.Drawing.Point(436, 419);
+            this.sumarPasillo.Location = new System.Drawing.Point(436, 259);
             this.sumarPasillo.Name = "sumarPasillo";
             this.sumarPasillo.Size = new System.Drawing.Size(65, 33);
             this.sumarPasillo.TabIndex = 40;
@@ -229,7 +197,7 @@
             // cantidadPasillo
             // 
             this.cantidadPasillo.AutoSize = true;
-            this.cantidadPasillo.Location = new System.Drawing.Point(360, 432);
+            this.cantidadPasillo.Location = new System.Drawing.Point(360, 272);
             this.cantidadPasillo.Name = "cantidadPasillo";
             this.cantidadPasillo.Size = new System.Drawing.Size(18, 20);
             this.cantidadPasillo.TabIndex = 39;
@@ -238,7 +206,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(360, 380);
+            this.label10.Location = new System.Drawing.Point(360, 220);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(207, 20);
             this.label10.TabIndex = 38;
@@ -260,47 +228,21 @@
             this.kgs.Size = new System.Drawing.Size(66, 26);
             this.kgs.TabIndex = 43;
             // 
-            // label8
+            // rehabilitar
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(261, 287);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(112, 20);
-            this.label8.TabIndex = 44;
-            this.label8.Text = "Fecha de Baja";
-            // 
-            // fechaBaja
-            // 
-            this.fechaBaja.Location = new System.Drawing.Point(392, 281);
-            this.fechaBaja.Name = "fechaBaja";
-            this.fechaBaja.Size = new System.Drawing.Size(200, 26);
-            this.fechaBaja.TabIndex = 45;
-            // 
-            // fechaFueraServicio
-            // 
-            this.fechaFueraServicio.Location = new System.Drawing.Point(392, 322);
-            this.fechaFueraServicio.Name = "fechaFueraServicio";
-            this.fechaFueraServicio.Size = new System.Drawing.Size(200, 26);
-            this.fechaFueraServicio.TabIndex = 47;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(178, 328);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(195, 20);
-            this.label9.TabIndex = 46;
-            this.label9.Text = "Fecha de fuera de servicio";
+            this.rehabilitar.AutoSize = true;
+            this.rehabilitar.Location = new System.Drawing.Point(319, 160);
+            this.rehabilitar.Name = "rehabilitar";
+            this.rehabilitar.Size = new System.Drawing.Size(111, 24);
+            this.rehabilitar.TabIndex = 30;
+            this.rehabilitar.Text = "Rehabilitar";
+            this.rehabilitar.UseVisualStyleBackColor = true;
             // 
             // ModificarAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 539);
-            this.Controls.Add(this.fechaFueraServicio);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.fechaBaja);
-            this.Controls.Add(this.label8);
+            this.ClientSize = new System.Drawing.Size(617, 383);
             this.Controls.Add(this.kgs);
             this.Controls.Add(this.labelKgs);
             this.Controls.Add(this.restarPasillo);
@@ -316,8 +258,6 @@
             this.Controls.Add(this.fabricanteAeronave);
             this.Controls.Add(this.rehabilitar);
             this.Controls.Add(this.tipoServicio);
-            this.Controls.Add(this.fechaAlta);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.modelo);
             this.Controls.Add(this.label7);
@@ -340,10 +280,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox modelo;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker fechaAlta;
         private System.Windows.Forms.ComboBox tipoServicio;
-        private System.Windows.Forms.CheckBox rehabilitar;
         private System.Windows.Forms.ComboBox fabricanteAeronave;
         private System.Windows.Forms.TextBox matricula;
         private System.Windows.Forms.Label label3;
@@ -357,9 +294,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label labelKgs;
         private System.Windows.Forms.TextBox kgs;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker fechaBaja;
-        private System.Windows.Forms.DateTimePicker fechaFueraServicio;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox rehabilitar;
     }
 }
