@@ -262,10 +262,12 @@ IF OBJECT_ID('TODOX2LUCAS.Cancelar_Pasajes_Encomiendas') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas;
 IF OBJECT_ID('TODOX2LUCAS.Modificar_Agregar_Butaca') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Modificar_Agregar_Butaca;
-IF OBJECT_ID('TODOX2LUCAS.Modificar_Quitar_Butaca ') IS NOT NULL
+IF OBJECT_ID('TODOX2LUCAS.Modificar_Quitar_Butaca') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Modificar_Quitar_Butaca ;
-IF OBJECT_ID('TODOX2LUCAS.Get_Butacas_Por_Tipo ') IS NOT NULL
+IF OBJECT_ID('TODOX2LUCAS.Get_Butacas_Por_Tipo') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Get_Butacas_Por_Tipo ;
+IF OBJECT_ID('TODOX2LUCAS.GetModelo') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.GetModelo;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -871,16 +873,20 @@ BEGIN
 		INSERT INTO TODOX2LUCAS.CancelacionesPasajes(Cod_Pasaje,Fecha_Devolucion,Motivo,Numero_Compra_Pasajes)
 		VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
 	END
-	IF EXISTS (SELECT * FROM TODOX2LUCAS.TransaccionesPaquetes T WHERE T.Numero_Compra =@numeroCompra AND T.Cod_Encomiendas=@codigo)
-	BEGIN
-		INSERT INTO TODOX2LUCAS.CancelacionesPaquetes(Cod_Encomiendas,Fecha_Devolucion,Motivo,Numero_Compra_Paquetes)
-		VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
-	END
 	ELSE
 	BEGIN
-		print 'No son validos los codigos ingresados'
-		RETURN -1;
+		IF EXISTS (SELECT * FROM TODOX2LUCAS.TransaccionesPaquetes T WHERE T.Numero_Compra =@numeroCompra AND T.Cod_Encomiendas=@codigo)
+		BEGIN
+			INSERT INTO TODOX2LUCAS.CancelacionesPaquetes(Cod_Encomiendas,Fecha_Devolucion,Motivo,Numero_Compra_Paquetes)
+			VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
+		END
+		ELSE
+		BEGIN
+			print 'Datos invalidos'
+			return -1;
+		END
 	END
+	
 END
 GO
 
@@ -1165,7 +1171,6 @@ BEGIN
 			Cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio),
 			Kgs_Disponibles = Kgs_Disponibles + @kgs
 		WHERE Cod_Aeronave = @codAeronave
-
 	END
 	ELSE
 	BEGIN
@@ -1189,7 +1194,6 @@ BEGIN
 				RETURN -1;
 			END
 		END
-	END
 END
 GO 
 /* ------------ PROCEDIMIENTO PARA AGREGAR BUTACA BUTACA------------ */
@@ -1794,7 +1798,16 @@ BEGIN
 	FROM TODOX2LUCAS.Auditoria_Login
 END
 GO
-
+------------------------------------------------- TABLA MODELO AERONAVE---------------------------------------------------------------
+/* ------------ PROCEDIMIENTOS GETTER MODELO AERONAVE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.GetModelo(@codModelo int)
+AS
+BEGIN
+	SELECT *
+	FROM TODOX2LUCAS.Modelo_Aeronave
+	WHERE Cod_Modelo = @codModelo
+END
+GO
 ------------------------------------------------- TABLA ROL POR FUNCIONALIDAD---------------------------------------------------------------
 /* ------------ PROCEDIMIENTOS GETTER ROL FUNCIONALIDAD ------------ */
 CREATE PROCEDURE TODOX2LUCAS.GetRolPorFuncionalidad(@codRol int,@codFuncionalidad int)
