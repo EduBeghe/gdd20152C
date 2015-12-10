@@ -38,33 +38,37 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 51);
+            this.label2.Location = new System.Drawing.Point(8, 33);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(217, 20);
+            this.label2.Size = new System.Drawing.Size(149, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Fecha de Reinicio de Servicio";
             // 
             // fechaProblemasTecnicos
             // 
-            this.fechaProblemasTecnicos.Location = new System.Drawing.Point(268, 45);
+            this.fechaProblemasTecnicos.Location = new System.Drawing.Point(179, 29);
+            this.fechaProblemasTecnicos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fechaProblemasTecnicos.Name = "fechaProblemasTecnicos";
-            this.fechaProblemasTecnicos.Size = new System.Drawing.Size(200, 26);
+            this.fechaProblemasTecnicos.Size = new System.Drawing.Size(135, 20);
             this.fechaProblemasTecnicos.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(140, 9);
+            this.label3.Location = new System.Drawing.Point(93, 6);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(214, 20);
+            this.label3.Size = new System.Drawing.Size(145, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Baja por Problemas Tecnicos";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 109);
+            this.button1.Location = new System.Drawing.Point(8, 71);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(456, 36);
+            this.button1.Size = new System.Drawing.Size(304, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = "Dar de baja";
             this.button1.UseVisualStyleBackColor = true;
@@ -73,25 +77,27 @@
             // reemplazarCheckbox
             // 
             this.reemplazarCheckbox.AutoSize = true;
-            this.reemplazarCheckbox.Location = new System.Drawing.Point(16, 79);
+            this.reemplazarCheckbox.Location = new System.Drawing.Point(11, 51);
+            this.reemplazarCheckbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.reemplazarCheckbox.Name = "reemplazarCheckbox";
-            this.reemplazarCheckbox.Size = new System.Drawing.Size(272, 24);
+            this.reemplazarCheckbox.Size = new System.Drawing.Size(184, 17);
             this.reemplazarCheckbox.TabIndex = 6;
             this.reemplazarCheckbox.Text = "Reemplazar la Aeronave por otra ";
             this.reemplazarCheckbox.UseVisualStyleBackColor = true;
             // 
             // BajaPorProblemasTecnicos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 157);
+            this.ClientSize = new System.Drawing.Size(320, 102);
             this.Controls.Add(this.reemplazarCheckbox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.fechaProblemasTecnicos);
             this.Controls.Add(this.label2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "BajaPorProblemasTecnicos";
-            this.Text = "Form1";
+            this.Text = "Probelmas Tecnicos";
             this.ResumeLayout(false);
             this.PerformLayout();
 

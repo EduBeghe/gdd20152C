@@ -1142,38 +1142,35 @@ END
 GO
 /* ------------ PROCEDIMIENTO PARA MODIFICAR UNA AERONAVE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Aeronave(@matricula nvarchar(255),@codAeronave int,@fabricante nvarchar(255),@modelo nvarchar(255),
-												@servicio nvarchar(255),@rehabilitar bit)
+												@servicio nvarchar(255),@rehabilitar bit,@kgs int)
 AS
 BEGIN
-	IF (@matricula IS NOT NULL)
+	IF NOT EXISTS (SELECT Matricula FROM TODOX2LUCAS.Aeronaves WHERE Matricula = @matricula)
 	BEGIN
-		IF NOT EXISTS (SELECT Matricula FROM TODOX2LUCAS.Aeronaves WHERE Matricula = @matricula)
-		BEGIN
-			UPDATE TODOX2LUCAS.Aeronaves 
-			SET Matricula = @matricula 
-			WHERE Cod_Aeronave = @codAeronave
-		END
-		ELSE
-		BEGIN
+		UPDATE TODOX2LUCAS.Aeronaves 
+		SET Matricula = @matricula 
+		WHERE Cod_Aeronave = @codAeronave
+	END
+	ELSE
+	BEGIN
 			PRINT 'La matricula ingrsada ya existe'
 			RETURN -1;
 		END
 	END
-	IF (@fabricante IS NOT NULL OR @modelo IS NOT NULL OR @servicio IS NOT NULL)
+	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave AND Fecha_Salida > GETDATE() )
 	BEGIN
-		IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave AND Fecha_Salida > GETDATE() )
-		BEGIN
-			UPDATE TODOX2LUCAS.Aeronaves
-			SET Cod_Fabricante = (SELECT Cod_Fabricante FROM TODOX2LUCAS.Fabricantes WHERE Nombre_Fabricante = @fabricante)	,
-				Cod_Modelo = (SELECT Cod_Modelo FROM TODOX2LUCAS.Modelo_Aeronave WHERE Descricpion_Modelo= @modelo),
-				Cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio)
-			WHERE Cod_Aeronave = @codAeronave
-		END
-		ELSE
-		BEGIN
-			PRINT 'La aeronave tiene viajes asignados'
-			RETURN -2;
-		END
+		UPDATE TODOX2LUCAS.Aeronaves
+		SET Cod_Fabricante = (SELECT Cod_Fabricante FROM TODOX2LUCAS.Fabricantes WHERE Nombre_Fabricante = @fabricante)	,
+			Cod_Modelo = (SELECT Cod_Modelo FROM TODOX2LUCAS.Modelo_Aeronave WHERE Descricpion_Modelo= @modelo),
+			Cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio),
+			Kgs_Disponibles = Kgs_Disponibles + @kgs
+		WHERE Cod_Aeronave = @codAeronave
+
+	END
+	ELSE
+	BEGIN
+		PRINT 'La aeronave tiene viajes asignados'
+		RETURN -2;
 	END
 	
 	IF (@rehabilitar = 1)

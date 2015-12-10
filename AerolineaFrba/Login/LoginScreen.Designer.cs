@@ -38,10 +38,9 @@
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(236, 144);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.loginButton.Location = new System.Drawing.Point(157, 94);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(136, 42);
+            this.loginButton.Size = new System.Drawing.Size(91, 27);
             this.loginButton.TabIndex = 10;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
@@ -50,64 +49,58 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(18, 112);
-            this.passwordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.passwordLabel.Location = new System.Drawing.Point(12, 73);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(92, 20);
+            this.passwordLabel.Size = new System.Drawing.Size(61, 13);
             this.passwordLabel.TabIndex = 9;
             this.passwordLabel.Text = "Contraseña";
             // 
             // usuarioLabel
             // 
             this.usuarioLabel.AutoSize = true;
-            this.usuarioLabel.Location = new System.Drawing.Point(45, 52);
-            this.usuarioLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.usuarioLabel.Location = new System.Drawing.Point(30, 34);
             this.usuarioLabel.Name = "usuarioLabel";
-            this.usuarioLabel.Size = new System.Drawing.Size(64, 20);
+            this.usuarioLabel.Size = new System.Drawing.Size(43, 13);
             this.usuarioLabel.TabIndex = 8;
             this.usuarioLabel.Text = "Usuario";
             // 
             // passwordTextbox
             // 
-            this.passwordTextbox.Location = new System.Drawing.Point(144, 108);
-            this.passwordTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.passwordTextbox.Location = new System.Drawing.Point(96, 70);
             this.passwordTextbox.Name = "passwordTextbox";
             this.passwordTextbox.PasswordChar = '●';
-            this.passwordTextbox.Size = new System.Drawing.Size(228, 26);
+            this.passwordTextbox.Size = new System.Drawing.Size(153, 20);
             this.passwordTextbox.TabIndex = 7;
             // 
             // usuarioTextbox
             // 
-            this.usuarioTextbox.Location = new System.Drawing.Point(144, 48);
-            this.usuarioTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.usuarioTextbox.Location = new System.Drawing.Point(96, 31);
             this.usuarioTextbox.Name = "usuarioTextbox";
-            this.usuarioTextbox.Size = new System.Drawing.Size(228, 26);
+            this.usuarioTextbox.Size = new System.Drawing.Size(153, 20);
             this.usuarioTextbox.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(214, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(143, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 11;
             this.label1.Text = "Login";
             // 
             // LoginScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 200);
+            this.ClientSize = new System.Drawing.Size(253, 130);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usuarioLabel);
             this.Controls.Add(this.passwordTextbox);
             this.Controls.Add(this.usuarioTextbox);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "LoginScreen";
-            this.Text = "Form1";
+            this.Text = "Inicio de Sesion";
             this.ResumeLayout(false);
             this.PerformLayout();
 

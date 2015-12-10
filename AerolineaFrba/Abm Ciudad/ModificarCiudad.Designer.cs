@@ -37,33 +37,37 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 9);
+            this.label1.Location = new System.Drawing.Point(38, 6);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 20);
+            this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Modificar Ciudad";
             // 
             // nombre
             // 
-            this.nombre.Location = new System.Drawing.Point(124, 65);
+            this.nombre.Location = new System.Drawing.Point(83, 42);
+            this.nombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nombre.Name = "nombre";
-            this.nombre.Size = new System.Drawing.Size(100, 26);
+            this.nombre.Size = new System.Drawing.Size(68, 20);
             this.nombre.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 71);
+            this.label2.Location = new System.Drawing.Point(8, 46);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 20);
+            this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Nombre";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(72, 117);
+            this.button1.Location = new System.Drawing.Point(48, 76);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 56);
+            this.button1.Size = new System.Drawing.Size(67, 36);
             this.button1.TabIndex = 3;
             this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,15 +75,16 @@
             // 
             // ModificarCiudad
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(260, 185);
+            this.ClientSize = new System.Drawing.Size(173, 120);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nombre);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ModificarCiudad";
-            this.Text = "Form1";
+            this.Text = "Modificar Ciudad";
             this.ResumeLayout(false);
             this.PerformLayout();
 

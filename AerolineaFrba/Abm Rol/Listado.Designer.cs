@@ -41,33 +41,37 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 13);
+            this.label1.Location = new System.Drawing.Point(7, 8);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 20);
+            this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Filtros";
             // 
             // nombre
             // 
-            this.nombre.Location = new System.Drawing.Point(108, 46);
+            this.nombre.Location = new System.Drawing.Point(72, 30);
+            this.nombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nombre.Name = "nombre";
-            this.nombre.Size = new System.Drawing.Size(427, 26);
+            this.nombre.Size = new System.Drawing.Size(286, 20);
             this.nombre.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 52);
+            this.label2.Location = new System.Drawing.Point(7, 34);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 20);
+            this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Nombre";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(460, 98);
+            this.button2.Location = new System.Drawing.Point(307, 64);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 33);
+            this.button2.Size = new System.Drawing.Size(50, 21);
             this.button2.TabIndex = 10;
             this.button2.Text = "buscar";
             this.button2.UseVisualStyleBackColor = true;
@@ -75,9 +79,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(10, 404);
+            this.button3.Location = new System.Drawing.Point(7, 263);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 33);
+            this.button3.Size = new System.Drawing.Size(100, 21);
             this.button3.TabIndex = 11;
             this.button3.Text = "Dar de Baja Rol";
             this.button3.UseVisualStyleBackColor = true;
@@ -85,9 +90,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(404, 404);
+            this.button5.Location = new System.Drawing.Point(269, 263);
+            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(131, 33);
+            this.button5.Size = new System.Drawing.Size(87, 21);
             this.button5.TabIndex = 13;
             this.button5.Text = "Modificar";
             this.button5.UseVisualStyleBackColor = true;
@@ -96,18 +102,19 @@
             // rolGrid
             // 
             this.rolGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.rolGrid.Location = new System.Drawing.Point(10, 148);
+            this.rolGrid.Location = new System.Drawing.Point(7, 96);
+            this.rolGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rolGrid.Name = "rolGrid";
             this.rolGrid.ReadOnly = true;
             this.rolGrid.RowTemplate.Height = 28;
-            this.rolGrid.Size = new System.Drawing.Size(525, 239);
+            this.rolGrid.Size = new System.Drawing.Size(350, 155);
             this.rolGrid.TabIndex = 14;
             // 
             // ListadoRol
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(546, 446);
+            this.ClientSize = new System.Drawing.Size(364, 290);
             this.Controls.Add(this.rolGrid);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button3);
@@ -115,8 +122,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nombre);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ListadoRol";
-            this.Text = "Form1";
+            this.Text = "Listado";
             ((System.ComponentModel.ISupportInitialize)(this.rolGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
