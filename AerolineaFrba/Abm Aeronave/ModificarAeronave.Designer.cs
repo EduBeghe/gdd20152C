@@ -194,6 +194,7 @@
             this.sumarVentanilla.TabIndex = 36;
             this.sumarVentanilla.Text = "+";
             this.sumarVentanilla.UseVisualStyleBackColor = true;
+            this.sumarVentanilla.Click += new System.EventHandler(this.sumarVentanilla_Click);
             // 
             // restarVentanilla
             // 
@@ -203,6 +204,7 @@
             this.restarVentanilla.TabIndex = 37;
             this.restarVentanilla.Text = "-";
             this.restarVentanilla.UseVisualStyleBackColor = true;
+            this.restarVentanilla.Click += new System.EventHandler(this.restarVentanilla_Click);
             // 
             // restarPasillo
             // 
@@ -212,6 +214,7 @@
             this.restarPasillo.TabIndex = 41;
             this.restarPasillo.Text = "-";
             this.restarPasillo.UseVisualStyleBackColor = true;
+            this.restarPasillo.Click += new System.EventHandler(this.restarPasillo_Click);
             // 
             // sumarPasillo
             // 
@@ -221,6 +224,7 @@
             this.sumarPasillo.TabIndex = 40;
             this.sumarPasillo.Text = "+";
             this.sumarPasillo.UseVisualStyleBackColor = true;
+            this.sumarPasillo.Click += new System.EventHandler(this.sumarPasillo_Click);
             // 
             // cantidadPasillo
             // 

@@ -30,7 +30,8 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Validacion.validarInputs(this.Controls))
+            if (Validacion.validarInputs(this.Controls)
+                && Validacion.soloNumeros( this.kgs, "Kgs para encomienda" ))
             {
                 var retorno = 0;
                 if (rehabilitar.Checked)
@@ -71,6 +72,32 @@ namespace AerolineaFrba.Abm_Ciudad
             this.tipoServicio.DataSource = servicioSource;
             BindingSource fabricanteSource = new BindingSource(new BindingList<Fabricante>(new FabricantesRepository().getFabricantes()), null);
             this.fabricanteAeronave.DataSource = fabricanteSource;
+            this.cantidadPasillo.Text = DBAdapter.executeProcedureWithReturnValue("Get_Butacas_Por_Tipo", aeronave.Cod_Aeronave, "Pasillo").ToString();
+            this.cantidadVentanilla.Text = DBAdapter.executeProcedureWithReturnValue("Get_Butacas_Por_Tipo", aeronave.Cod_Aeronave, "Ventanilla").ToString();
+        }
+
+        private void sumarVentanilla_Click(object sender, EventArgs e)
+        {
+            this.cantidadVentanilla.Text = (Convert.ToInt32(this.cantidadVentanilla.Text) + 1).ToString();
+            DBAdapter.executeProcedure("Modificar_Agregar_Butaca", aeronave.Cod_Aeronave, "Ventanilla");
+        }
+
+        private void sumarPasillo_Click(object sender, EventArgs e)
+        {
+            this.cantidadPasillo.Text = (Convert.ToInt32(this.cantidadPasillo.Text) + 1).ToString();
+            DBAdapter.executeProcedure("Modificar_Agregar_Butaca", aeronave.Cod_Aeronave, "Pasillo");
+        }
+
+        private void restarVentanilla_Click(object sender, EventArgs e)
+        {
+            this.cantidadVentanilla.Text = (Convert.ToInt32(this.cantidadVentanilla.Text) -1 ).ToString();
+            DBAdapter.executeProcedure("Modificar_Quitar_Butaca", aeronave.Cod_Aeronave, "Ventanilla");
+        }
+
+        private void restarPasillo_Click(object sender, EventArgs e)
+        {
+            this.cantidadPasillo.Text = (Convert.ToInt32(this.cantidadPasillo.Text) - 1).ToString();
+            DBAdapter.executeProcedure("Modificar_Quitar_Butaca", aeronave.Cod_Aeronave, "Pasillo");
         }
     }
 }
