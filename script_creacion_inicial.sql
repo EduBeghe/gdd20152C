@@ -1173,30 +1173,31 @@ BEGIN
 			Cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio),
 			Kgs_Disponibles = Kgs_Disponibles + @kgs
 		WHERE Cod_Aeronave = @codAeronave
-
-		IF (@rehabilitar = 1)
-		BEGIN
-			IF EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave AND Fuera_De_Servicio = 1)
-			BEGIN
-				DECLARE @fechaactual datetime;
-				SET @fechaactual = GETDATE();
-				IF (@fechaactual > (SELECT Fecha_Reinicio_Servicio FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave))
-				BEGIN
-					DELETE FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave
-				END
-				ELSE
-				BEGIN 
-					print 'Todavia la aeronave se encuentra fuera de servicio'
-					RETURN -1;
-				END
-			END
-
 	END
 	ELSE
 	BEGIN
 		PRINT 'La aeronave tiene viajes asignados'
 		RETURN -2;
 	END
+
+	IF (@rehabilitar = 1)
+	BEGIN
+		IF EXISTS (SELECT * FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave AND Fuera_De_Servicio = 1)
+		BEGIN
+			DECLARE @fechaactual datetime;
+			SET @fechaactual = GETDATE();
+			IF (@fechaactual > (SELECT Fecha_Reinicio_Servicio FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave))
+			BEGIN
+				DELETE FROM TODOX2LUCAS.Estados_Aeronaves WHERE Cod_Aeronave = @codAeronave
+			END
+			ELSE
+			BEGIN 
+				print 'Todavia la aeronave se encuentra fuera de servicio'
+				RETURN -3;
+			
+		END
+	END
+
 	
 END
 GO 
