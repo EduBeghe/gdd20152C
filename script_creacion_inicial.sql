@@ -1191,6 +1191,8 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Agregar_Butaca(@codAeronave int,@posButaca nvarchar(255))
 AS
 BEGIN
+IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave AND Fecha_Salida > GETDATE() )
+BEGIN
 	UPDATE TODOX2LUCAS.Aeronaves
 	SET Cantidad_Butacas = Cantidad_Butacas + 1
 	WHERE Cod_Aeronave  = @codAeronave
@@ -1203,6 +1205,12 @@ BEGIN
 
 	INSERT INTO TODOX2LUCAS.Butacas(Cod_Aeronave,Cod_Butaca,Piso_Butaca,Pos_Butaca)
 	VALUES(@codAeronave,(@ultima_butaca + 1),1,@posButaca)
+END
+ELSE
+BEGIN
+	print 'La aeronave ya tiene vuelos asignados'
+	return -1;
+END
 
 END
 GO 
@@ -1210,6 +1218,9 @@ GO
 CREATE PROCEDURE TODOX2LUCAS.Modificar_Quitar_Butaca(@codAeronave int,@posButaca nvarchar(255))
 AS
 BEGIN
+IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave AND Fecha_Salida > GETDATE() )
+BEGIN
+
 	UPDATE TODOX2LUCAS.Aeronaves
 	SET Cantidad_Butacas = Cantidad_Butacas - 1
 	WHERE Cod_Aeronave  = @codAeronave
@@ -1222,6 +1233,12 @@ BEGIN
 
 	DELETE FROM TODOX2LUCAS.Butacas 
 	WHERE Cod_Butaca = @ultima_butaca AND Cod_Aeronave = @codAeronave AND Pos_Butaca = @posButaca
+END
+ELSE
+BEGIN
+	print 'La aeronave ya tiene vuelos asignados'
+	return -1;
+END
 
 END
 GO
