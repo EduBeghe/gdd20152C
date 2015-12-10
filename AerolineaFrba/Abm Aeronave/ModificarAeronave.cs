@@ -40,7 +40,7 @@ namespace AerolineaFrba.Abm_Ciudad
                         matricula.Text,
                         aeronave.Cod_Aeronave,
                         (Fabricante)fabricanteAeronave.SelectedItem,
-                        modelo.Text,
+                        (Modelo) modelo.SelectedItem,
                         (TipoServicio)tipoServicio.SelectedItem,
                         true,
                         Convert.ToInt32( kgs.Text )
@@ -51,7 +51,7 @@ namespace AerolineaFrba.Abm_Ciudad
                         matricula.Text,
                         aeronave.Cod_Aeronave,
                         (Fabricante)fabricanteAeronave.SelectedItem,
-                        modelo.Text,
+                        (Modelo) modelo.SelectedItem,
                         (TipoServicio)tipoServicio.SelectedItem,
                         false,
                         Convert.ToInt32(kgs.Text)
@@ -77,6 +77,8 @@ namespace AerolineaFrba.Abm_Ciudad
             this.fabricanteAeronave.DataSource = fabricanteSource;
             this.cantidadPasillo.Text = DBAdapter.executeProcedureWithReturnValue("Get_Butacas_Por_Tipo", aeronave.Cod_Aeronave, "Pasillo").ToString();
             this.cantidadVentanilla.Text = DBAdapter.executeProcedureWithReturnValue("Get_Butacas_Por_Tipo", aeronave.Cod_Aeronave, "Ventanilla").ToString();
+            BindingSource modeloSource = new BindingSource(new BindingList<Modelo>(new ModeloRepository().getModelos()), null);
+            this.modelo.DataSource = modeloSource;
         }
 
         private void sumarVentanilla_Click(object sender, EventArgs e)
