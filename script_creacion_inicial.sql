@@ -382,12 +382,13 @@ CREATE TABLE TODOX2LUCAS.Butacas (
 	Pos_Butaca nvarchar(255),
 	Piso_Butaca numeric(18),
 	Estado_Butaca bit,
-	PRIMARY KEY CLUSTERED(Cod_Aeronave,Cod_Butaca)
+	PRIMARY KEY CLUSTERED(Cod_Aeronave,Cod_Butaca,Piso_Butaca)
 )
 ;
 --CREACION TABLA RUTASAEREAS--
 CREATE TABLE TODOX2LUCAS.RutasAereas ( 
 	Cod_Ruta numeric(18) IDENTITY(65805158,1),
+	Cod_Ruta_Maestra_Inconsistencia numeric(18),
 	Cod_Ciudad_Origen int  REFERENCES TODOX2LUCAS.Ciudades (Cod_Ciudad),
 	Cod_Ciudad_Destino int REFERENCES TODOX2LUCAS.Ciudades (Cod_Ciudad),
 	Cod_Tipo_Servicio int REFERENCES TODOX2LUCAS.Tipos_De_Servicios (Cod_Tipo_Servicio),
@@ -722,8 +723,8 @@ BEGIN
 					WHERE m.Ruta_Codigo=@codRuta AND m.Ruta_Ciudad_Origen=@nombreOrigen AND
 						m.Ruta_Ciudad_Destino=@nombreDestino AND Ruta_Precio_BaseKG != 0)
 
-		INSERT INTO TODOX2LUCAS.RutasAereas(Cod_Ciudad_Origen,Cod_Ciudad_Destino,Cod_Tipo_Servicio,Precio_Base_Pasaje,Precio_Base_Kg,Estado_Ruta)
-		VALUES (@codOrigen,@codDestino,@codServicio,@precioPasaje,@precioKg,1)
+		INSERT INTO TODOX2LUCAS.RutasAereas(Cod_Ruta_Maestra_Inconsistencia,Cod_Ciudad_Origen,Cod_Ciudad_Destino,Cod_Tipo_Servicio,Precio_Base_Pasaje,Precio_Base_Kg,Estado_Ruta)
+		VALUES (@codRuta,@codOrigen,@codDestino,@codServicio,@precioPasaje,@precioKg,1)
 		
 		FETCH NEXT FROM  cursor_rutas INTO @codRuta,@nombreOrigen,@nombreDestino,@servicio,@precioPasaje
 	END
@@ -2351,15 +2352,13 @@ GO
 INSERT INTO TODOX2LUCAS.Butacas(Cod_Aeronave,Cod_Butaca,Pos_Butaca,Piso_Butaca,Estado_Butaca)
 SELECT DISTINCT A.Cod_Aeronave,Butaca_Nro,Butaca_Tipo, Butaca_Piso,1
 FROM gd_esquema.Maestra M JOIN TODOX2LUCAS.Aeronaves A ON (A.Matricula = M.Aeronave_Matricula)
-WHERE Butaca_Piso!=0 AND Butaca_Tipo !='0'
 ORDER BY A.Cod_Aeronave,Butaca_Nro
-
 GO
+
 EXEC TODOX2LUCAS.Cargar_Butacas
 GO
 --MIGRACION TABLA RUTASAEREAS--
 EXEC TODOX2LUCAS.Migrar_Rutas_Aereas
-
 GO
 --MIGRACION TABLA VIAJES
 
