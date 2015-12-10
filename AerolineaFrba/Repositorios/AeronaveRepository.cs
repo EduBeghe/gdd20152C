@@ -27,7 +27,7 @@ namespace AerolineaFrba.Repositories {
             matricula,
 			codAeronave,
 			fabricante.Nombre_Fabricante,
-			modelo,
+			modelo.Descricpion_Modelo,
 			servicio.Descripcion_Servicio,
 			rehabilitar,
             kgs
@@ -76,7 +76,7 @@ namespace AerolineaFrba.Repositories {
 			Matricula,
 			Fecha_Alta,
 			fabricante.Nombre_Fabricante,
-			Modelo,
+			Modelo.Descricpion_Modelo,
 			servicio.Descripcion_Servicio,
 			Kgs_Disponibles,
 			butacasPasillo,
