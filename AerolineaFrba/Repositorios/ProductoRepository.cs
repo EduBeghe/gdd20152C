@@ -8,7 +8,7 @@ using AerolineaFrba.Utils;
 using System.Data;
 
 
-namespace AerolineaFrba.Repositorios
+namespace AerolineaFrba.Repositories
 {
     class ProductoRepository
     {

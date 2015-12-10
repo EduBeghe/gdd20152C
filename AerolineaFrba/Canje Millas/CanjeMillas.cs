@@ -54,7 +54,7 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void canjeMillas_Load(object sender, EventArgs e)
         {
-            this.producto.DataSource = new BindingSource(new BindingList<ProductoCanje>(new Repositorios.ProductoRepository().getProductos()), null);
+            this.producto.DataSource = new BindingSource(new BindingList<ProductoCanje>(new Repositories.ProductoRepository().getProductos()), null);
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Data;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 
+
 namespace AerolineaFrba.Repositories {
 
 	class AeronaveRepository {
@@ -88,6 +89,7 @@ namespace AerolineaFrba.Repositories {
 			return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
 		}
 
+
 		public Aeronave parse(DataRow dr)
         {
        		return new Aeronave( 
@@ -95,7 +97,7 @@ namespace AerolineaFrba.Repositories {
        			dr["Matricula"] as string,
        			Convert.ToDateTime(dr["Fecha_Alta"]),
        			new FabricantesRepository().getFabricante( Convert.ToInt32(dr["Cod_Fabricante"]) ),
-       			dr["Modelo"] as string,
+       			new ModeloRepository().getModelo( Convert.ToInt32( dr["Cod_Modelo"]) ),
        			new TipoServicioRepository().getTipoServicio( Convert.ToInt32(dr["Cod_Tipo_Servicio"])),
        			Convert.ToInt32(dr["Kgs_Disponibles"]),
        			Convert.ToInt32(dr["Cantidad_Butacas"])

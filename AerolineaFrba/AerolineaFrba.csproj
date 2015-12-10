@@ -219,6 +219,7 @@
     <Compile Include="Domain\LogCanjes.cs" />
     <Compile Include="Domain\LogLogin.cs" />
     <Compile Include="Domain\LogPasajes.cs" />
+    <Compile Include="Domain\Modelo.cs" />
     <Compile Include="Domain\Pasaje.cs" />
     <Compile Include="Domain\ProductoCanje.cs" />
     <Compile Include="Domain\Rol.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Repositorios\CiudadRepository.cs" />
     <Compile Include="Repositorios\DevolucionRepository.cs" />
     <Compile Include="Repositorios\FuncionalidadRepository.cs" />
+    <Compile Include="Repositorios\ModeloRepository.cs" />
     <Compile Include="Repositorios\ProductoRepository.cs" />
     <Compile Include="Repositorios\ClientesRepository.cs" />
     <Compile Include="Repositorios\Estadisticos.cs" />
