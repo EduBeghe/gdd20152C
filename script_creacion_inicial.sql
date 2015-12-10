@@ -36,6 +36,8 @@ IF OBJECT_ID('TODOX2LUCAS.Viajes') IS NOT NULL
 DROP TABLE TODOX2LUCAS.Viajes;
 IF OBJECT_ID('TODOX2LUCAS.RutasAereas') IS NOT NULL
 DROP TABLE TODOX2LUCAS.RutasAereas;
+IF OBJECT_ID('TODOX2LUCAS.Modelo_Aeronave') IS NOT NULL
+DROP TABLE TODOX2LUCAS.Modelo_Aeronave;
 IF OBJECT_ID('TODOX2LUCAS.Aeronaves') IS NOT NULL
 DROP TABLE TODOX2LUCAS.Aeronaves;
 IF OBJECT_ID('TODOX2LUCAS.Tipos_De_Servicios') IS NOT NULL
@@ -357,7 +359,7 @@ CREATE TABLE TODOX2LUCAS.Aeronaves (
 	Matricula nvarchar(255) UNIQUE,
 	Fecha_Alta datetime,
 	Cod_Fabricante int REFERENCES TODOX2LUCAS.Fabricantes (Cod_Fabricante),
-	Modelo nvarchar(255),
+	Cod_Modelo int,
 	Cod_Tipo_Servicio int REFERENCES TODOX2LUCAS.Tipos_De_Servicios (Cod_Tipo_Servicio),
 	Kgs_Disponibles numeric(18),
 	Cantidad_Butacas int
@@ -375,6 +377,12 @@ CREATE TABLE TODOX2LUCAS.Estados_Aeronaves (
 	PRIMARY KEY CLUSTERED (Cod_Estado, Cod_Aeronave)
 )
 ;
+--CREACION TABLA MODELO--
+CREATE TABLE TODOX2LUCAS.Modelo_Aeronave (
+	Cod_Modelo int IDENTITY PRIMARY KEY,
+	Descricpion_Modelo nvarchar(255)
+)
+;
 --CREACION TABLA BUTACAS--
 CREATE TABLE TODOX2LUCAS.Butacas ( 
 	Cod_Aeronave int REFERENCES TODOX2LUCAS.Aeronaves(Cod_Aeronave),
@@ -384,7 +392,7 @@ CREATE TABLE TODOX2LUCAS.Butacas (
 	Estado_Butaca bit,
 	PRIMARY KEY CLUSTERED(Cod_Aeronave,Cod_Butaca,Piso_Butaca)
 )
-;
+; 
 --CREACION TABLA RUTASAEREAS--
 CREATE TABLE TODOX2LUCAS.RutasAereas ( 
 	Cod_Ruta numeric(18) IDENTITY(65805158,1),
@@ -397,7 +405,7 @@ CREATE TABLE TODOX2LUCAS.RutasAereas (
 	Estado_Ruta bit,
 	PRIMARY KEY(Cod_Ruta,Cod_Ciudad_Origen,Cod_Ciudad_Destino)
 )
-;
+; 
 --CREACION TABLA VIAJES-- 
 
 CREATE TABLE TODOX2LUCAS.Viajes ( 
@@ -638,7 +646,7 @@ CREATE PROCEDURE TODOX2LUCAS.Migrar_Aeronaves
 AS
 BEGIN
 	DECLARE @matricula nvarchar(255),@fecha datetime,@modelo nvarchar(255),@kgs numeric(18),
-			@codServicio  int, @codFabricante int, @fabricante nvarchar(255),@servicio nvarchar(255);
+			@codServicio  int, @codFabricante int, @fabricante nvarchar(255),@servicio nvarchar(255),@codModelo int;
 	
 	DECLARE fila_Aeronave CURSOR FOR
 	SELECT DISTINCT Aeronave_Matricula,GETDATE(),
@@ -653,8 +661,10 @@ BEGIN
 		
 		SET @codServicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio =@servicio)
 		SET @codFabricante = (SELECT Cod_Fabricante FROM TODOX2LUCAS.Fabricantes WHERE Nombre_Fabricante = @fabricante);
-		INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Modelo,Cod_Tipo_Servicio,Kgs_Disponibles)
-		VALUES (@matricula,@fecha,@codFabricante,@modelo,@codServicio,@kgs)
+		SET @codModelo = (SELECT Cod_Modelo FROM TODOX2LUCAS.Modelo_Aeronave WHERE Descricpion_Modelo = @modelo)
+		
+		INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Cod_Modelo,Cod_Tipo_Servicio,Kgs_Disponibles)
+		VALUES (@matricula,@fecha,@codFabricante,@codModelo,@codServicio,@kgs)
 		
 		FETCH NEXT FROM fila_Aeronave INTO @matricula,@fecha, @fabricante,@modelo,@kgs,@servicio
 
@@ -956,7 +966,7 @@ BEGIN
 	DECLARE @fecha datetime,@codfabricante int ,@codServicio int,@modelo nvarchar(255),@fechaSalida datetime,@fechaLlegadaEstimada datetime,@codViaje int;
 	SET @fecha = GETDATE();
 	
-	SELECT DISTINCT @codfabricante = a.Cod_Fabricante, @modelo = A.Modelo, @codServicio = a.Cod_Tipo_Servicio
+	SELECT DISTINCT @codfabricante = a.Cod_Fabricante, @modelo = A.Cod_Modelo, @codServicio = a.Cod_Tipo_Servicio
 	FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes v ON (A.Cod_Aeronave=v.Cod_Aeronave)
 									JOIN TODOX2LUCAS.Pasajes P ON (V.Cod_Viaje=P.Cod_Viaje)
 									JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
@@ -969,7 +979,7 @@ BEGIN
 									JOIN TODOX2LUCAS.Encomiendas E ON (V.Cod_Viaje=E.Cod_Viaje)
 	WHERE A1.Cod_Aeronave != 2	 AND
 			A1.Cod_Fabricante =	@codfabricante  AND
-			A1.Modelo =@modelo  AND
+			A1.Cod_Modelo =@modelo  AND
 			A1.Cod_Tipo_Servicio = @codServicio  AND
 			v.Fecha_Salida != ALL (SELECT DISTINCT Fecha_Salida 
 									FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes v ON (A.Cod_Aeronave=v.Cod_Aeronave)
@@ -1076,14 +1086,15 @@ CREATE PROCEDURE TODOX2LUCAS.Alta_Aeronave(@matricula nvarchar(255),@fecha_Alta 
 											@cantButacasPasillo int,@cantButacasVentanilla int)
 AS
 BEGIN
-	DECLARE @cod_Fabricante int,@cod_Tipo_Servicio int;
+	DECLARE @cod_Fabricante int,@cod_Tipo_Servicio int,@codModelo int;
 	SET @cod_Fabricante = (SELECT Cod_Fabricante FROM TODOX2LUCAS.Fabricantes WHERE Nombre_Fabricante=@fabricante);
 	SET @cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio);
+	SET @codModelo = (SELECT Cod_Modelo FROM TODOX2LUCAS.Modelo_Aeronave WHERE Descricpion_Modelo = @modelo)
 	
 	IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Aeronaves WHERE Matricula = @matricula)
 	BEGIN
-		INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Modelo,Cod_Tipo_Servicio,Kgs_Disponibles,Cantidad_Butacas )
-		VALUES(@matricula,@fecha_Alta,@cod_Fabricante,@modelo,@cod_Tipo_Servicio,@kgs_Disponibles,(@cantButacasPasillo + @cantButacasVentanilla))
+		INSERT INTO TODOX2LUCAS.Aeronaves(Matricula,Fecha_Alta,Cod_Fabricante,Cod_Modelo,Cod_Tipo_Servicio,Kgs_Disponibles,Cantidad_Butacas )
+		VALUES(@matricula,@fecha_Alta,@cod_Fabricante,@codModelo,@cod_Tipo_Servicio,@kgs_Disponibles,(@cantButacasPasillo + @cantButacasVentanilla))
 	
 		DECLARE @codAeronave int;
 		SET @codAeronave = (SELECT DISTINCT @@IDENTITY FROM TODOX2LUCAS.Aeronaves);
@@ -1116,16 +1127,40 @@ BEGIN
 END
 GO
 /* ------------ PROCEDIMIENTO PARA MODIFICAR UNA AERONAVE ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Modificar_Aeronave(@codAeronave int,@Fecha_Alta datetime,@fabricante nvarchar(255),@modelo nvarchar(255),
+CREATE PROCEDURE TODOX2LUCAS.Modificar_Aeronave(@matricula nvarchar(255),@codAeronave int,@fabricante nvarchar(255),@modelo nvarchar(255),
 												@servicio nvarchar(255),@rehabilitar bit)
 AS
 BEGIN
-	UPDATE TODOX2LUCAS.Aeronaves
-	SET	Fecha_Alta = @Fecha_Alta,
-		Cod_Fabricante = (SELECT Cod_Fabricante FROM TODOX2LUCAS.Fabricantes WHERE Nombre_Fabricante = @fabricante)	,
-		Modelo = @modelo,
-		Cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio)
-	WHERE Cod_Aeronave = @codAeronave
+	IF (@matricula IS NOT NULL)
+	BEGIN
+		IF NOT EXISTS (SELECT Matricula FROM TODOX2LUCAS.Aeronaves WHERE Matricula = @matricula)
+		BEGIN
+			UPDATE TODOX2LUCAS.Aeronaves 
+			SET Matricula = @matricula 
+			WHERE Cod_Aeronave = @codAeronave
+		END
+		ELSE
+		BEGIN
+			PRINT 'La matricula ingrsada ya existe'
+			RETURN -1;
+		END
+	END
+	IF (@fabricante IS NOT NULL OR @modelo IS NOT NULL OR @servicio IS NOT NULL)
+	BEGIN
+		IF NOT EXISTS (SELECT * FROM TODOX2LUCAS.Viajes WHERE Cod_Aeronave = @codAeronave AND Fecha_Salida > GETDATE() )
+		BEGIN
+			UPDATE TODOX2LUCAS.Aeronaves
+			SET Cod_Fabricante = (SELECT Cod_Fabricante FROM TODOX2LUCAS.Fabricantes WHERE Nombre_Fabricante = @fabricante)	,
+				Cod_Modelo = (SELECT Cod_Modelo FROM TODOX2LUCAS.Modelo_Aeronave WHERE Descricpion_Modelo= @modelo),
+				Cod_Tipo_Servicio = (SELECT Cod_Tipo_Servicio FROM TODOX2LUCAS.Tipos_De_Servicios WHERE Descripcion_Servicio = @servicio)
+			WHERE Cod_Aeronave = @codAeronave
+		END
+		ELSE
+		BEGIN
+			PRINT 'La aeronave tiene viajes asignados'
+			RETURN -2;
+		END
+	END
 
 	IF (@rehabilitar = 1)
 	BEGIN
@@ -2343,6 +2378,11 @@ EXEC TODOX2LUCAS.Agregar_Tipo_De_Servicio 'Ejecutivo', 1.5
 EXEC TODOX2LUCAS.Agregar_Tipo_De_Servicio 'Turista', 1.1
 
 GO
+--MIGRACION TABLA MODELOS--
+INSERT INTO TODOX2LUCAS.Modelo_Aeronave(Descricpion_Modelo)
+SELECT DISTINCT Aeronave_Modelo
+FROM gd_esquema.Maestra
+GO
 --MIGRACION TABLA AERONAVES--
 EXEC TODOX2LUCAS.Migrar_Aeronaves
 
@@ -2370,10 +2410,8 @@ FROM gd_esquema.Maestra m JOIN TODOX2LUCAS.Ciudades c1 ON(m.Ruta_Ciudad_Origen=c
 							JOIN TODOX2LUCAS.Aeronaves a ON (m.Aeronave_Matricula = a.Matricula)
 
 GO
---MIGRACION TABLA CANJES--
 
 --MIGRACION TABLA ENCOMIENDAS--
---tiene q dar 135.658
 SET IDENTITY_INSERT TODOX2LUCAS.Encomiendas ON
 INSERT INTO TODOX2LUCAS.Encomiendas(Cod_Encomiendas,Precio_Encomienda,Kgs_A_Enviar,Fecha_Compra,Cod_Viaje,Nro_Dni,Cliente_Apellido)
 SELECT DISTINCT M.Paquete_Codigo,M.Paquete_Precio,M.Paquete_KG,M.Paquete_FechaCompra,v.Cod_Viaje,C.Nro_Dni,c.Cliente_Apellido
@@ -2388,7 +2426,6 @@ WHERE M.Paquete_Codigo != 0
 SET IDENTITY_INSERT TODOX2LUCAS.Encomiendas OFF
 GO 
 --MIGRACION TABLA PASAJES--
--- tendria que dar 265.646
 SET IDENTITY_INSERT TODOX2LUCAS.Pasajes ON
 INSERT INTO TODOX2LUCAS.Pasajes(Cod_Pasaje,Fecha_Viaje,Cod_Viaje,Butaca_Asociada,Nro_Dni,Pasaje_Precio,Cliente_Apellido)
 SELECT DISTINCT m.Pasaje_Codigo,m.Pasaje_FechaCompra,v.Cod_Viaje,b.Cod_Butaca,c.Nro_Dni,m.Pasaje_Precio,c.Cliente_Apellido
