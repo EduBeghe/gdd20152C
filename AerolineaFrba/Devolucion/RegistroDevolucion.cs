@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AerolineaFrba.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,13 @@ namespace AerolineaFrba.Devolucion
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (Validacion.validarInputs(this.Controls) &&
+                Validacion.soloNumeros(this.pnr, "PNR") &&
+                Validacion.soloNumeros(this.codigo, "Codigo"
+                // && Validacion.fechaMayorMenos 
+                )) {  }
+            
+                
 
         }
     }
