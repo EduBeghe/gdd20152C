@@ -71,7 +71,6 @@ namespace AerolineaFrba
         private void BuscarRolButton_Click(object sender, EventArgs e)
         {
             new ListadoRol().ShowDialog(this);
-            MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
         private void AltaCiudadButton_Click(object sender, EventArgs e)

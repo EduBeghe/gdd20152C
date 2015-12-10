@@ -44,9 +44,9 @@ namespace AerolineaFrba.Abm_Rol
             foreach ( Object item in funcionalidadesBox.Items)
             {
                 if (funcionalidadesBox.CheckedItems.Contains(item)
-                    && !rol.funcionalidades.Contains(item)) { new RolesRepository().relacionRolFuncionabilidad(rol.Nombre_Rol, (Funcionalidades) item ); }
+                    && !rol.funcionalidades.Exists( x => x.Nombre_Funcionalidad == item.ToString() ) ) { new RolesRepository().relacionRolFuncionabilidad(rol.Nombre_Rol, (Funcionalidades) item ); }
                 if (!funcionalidadesBox.CheckedItems.Contains(item) &&
-                    rol.funcionalidades.Contains(item)) { new RolesRepository().quitarFuncionabilidad(rol.Cod_Rol, (Funcionalidades)item); }
+                    rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == item.ToString())) { new RolesRepository().quitarFuncionabilidad(rol.Cod_Rol, (Funcionalidades)item); }
             }
             MessageBox.Show("Rol modificado con exito");
             this.Close();
@@ -56,10 +56,10 @@ namespace AerolineaFrba.Abm_Rol
         {
             this.funcionalidadesBox.DataSource = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
             
-            foreach( Funcionalidades item in funcionalidadesBox.Items ) {
-                if (rol.funcionalidades.Contains(item)) {
-                    MessageBox.Show(item.Nombre_Funcionalidad);
-                    funcionalidadesBox.SetItemCheckState(funcionalidadesBox.Items.IndexOf(item), CheckState.Checked); }
+            for(int i = funcionalidadesBox.Items.Count - 1; i >= 0 ; i--) {
+                if (rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == funcionalidadesBox.Items[i].ToString() ))
+                {
+                    funcionalidadesBox.SetItemCheckState(i, CheckState.Checked); }
             }
         }
     }
