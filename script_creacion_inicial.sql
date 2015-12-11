@@ -272,6 +272,9 @@ IF OBJECT_ID('TODOX2LUCAS.GetModelos') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetModelos;
 IF OBJECT_ID('TODOX2LUCAS.Verificar_Cliente') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.Verificar_Cliente;
+IF OBJECT_ID('TODOX2LUCAS.Get_Transacciones') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Get_Transacciones;
+
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -2149,6 +2152,25 @@ BEGIN
 	FROM TODOX2LUCAS.TransaccionesPaquetes
 END
 GO
+/* ------------ PROCEDIMIENTOS QUE OBTIENE LOS CODIGOS DE PASAJES O ENCOMIENDAS DE LA TABLA TRANSACCIONES ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Get_Transacciones(@numerocompra int,@tipo int)
+AS
+BEGIN
+	IF (@tipo = 0)
+	BEGIN
+		SELECT Cod_Encomiendas 
+		FROM TODOX2LUCAS.TransaccionesPaquetes
+		WHERE Numero_Compra = @numerocompra
+	END
+	ELSE
+	BEGIN
+		SELECT Cod_Pasaje
+		FROM TODOX2LUCAS.TransaccionesPasajes
+		WHERE Numero_Compra = @numerocompra
+	END
+	
+END
+GO
 ------------------------------------------------- TABLAS CANCELACIONES ---------------------------------------------------------------
 /* ------------ PROCEDIMIENTOS GETTER CANCELACIONES PASAJE------------ */
 CREATE PROCEDURE TODOX2LUCAS.GetCancelacionPasaje(@codDevolucion int,@codPasaje numeric(18))
@@ -2276,7 +2298,7 @@ BEGIN
 END
 GO
 /* ------------ FILTROS PARA ABM CIUDADES ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Filtrar_Ciudades(@nombre nvarchar(255))
+CREATE PROCEDURE TODOX2LUCAS.Filtrar_Ciudades(@nombre nvarchar(255))	
 AS
 BEGIN
 	SELECT *
