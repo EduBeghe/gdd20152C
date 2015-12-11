@@ -106,6 +106,7 @@
             this.Apellido.Name = "Apellido";
             this.Apellido.Size = new System.Drawing.Size(196, 26);
             this.Apellido.TabIndex = 5;
+            this.Apellido.TextChanged += new System.EventHandler(this.Apellido_TextChanged);
             // 
             // label5
             // 

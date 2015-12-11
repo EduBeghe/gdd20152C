@@ -108,5 +108,21 @@ namespace AerolineaFrba.Compra
         private void CargarDatos_Load(object sender, EventArgs e)
         {
         }
+
+        private void Apellido_TextChanged(object sender, EventArgs e)
+        {
+            if (dni.Text.Length == 7 && Apellido.Text != "")
+            {
+                cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text);
+                if (cl != null)
+                {
+                    Nombre.Text = cl.Cliente_Nombre;
+                    Direccion.Text = cl.Cliente_Direccion;
+                    Telefono.Text = cl.Cliente_Telefono.ToString();
+                    Mail.Text = cl.Cliente_Mail;
+                    fecha.Value = cl.Cliente_Fecha_Nacimiento;
+                }
+            }
+        }
     }
 }
