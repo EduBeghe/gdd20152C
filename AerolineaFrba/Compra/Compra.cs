@@ -64,7 +64,16 @@ namespace AerolineaFrba.Compra
         private void button3_Click(object sender, EventArgs e)
         {
             if (pasajes.Count == 0 && encomiendas.Count == 0 ) MessageBox.Show("Debe comprar un pasaje o encomienda para pagar");
-            new datosTarjeta().ShowDialog( pasajes, encomiendas, esAdministrador );
+            else 
+            {
+                int resultado = new datosTarjeta().ShowDialog( pasajes, encomiendas, esAdministrador );
+                if ( resultado == 0 ) 
+                {
+                    encomiendas.Clear();
+                    pasajes.Clear();
+                }
+            }
+            
         }
 
         private void button4_Click(object sender, EventArgs e)

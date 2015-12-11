@@ -14,7 +14,7 @@ namespace AerolineaFrba
 {
     public partial class FuncionesInvitado : Form
     {
-        Boolean esAdministrador;
+        Boolean esAdministrador = false;
 
         public FuncionesInvitado()
         {

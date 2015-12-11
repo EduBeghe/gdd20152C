@@ -46,7 +46,7 @@ namespace AerolineaFrba.Compra
 
         private void dni_TextChanged(object sender, EventArgs e)
         {
-            if ( dni.Text.Length == 7 )
+            if ( dni.Text.Length == 7 && Apellido.Text != "")
             {
                 cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text );
                 if (cl != null)

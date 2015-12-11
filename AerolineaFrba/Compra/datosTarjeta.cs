@@ -24,12 +24,13 @@ namespace AerolineaFrba.Compra
             InitializeComponent();
         }
 
-        internal void ShowDialog( List<Pasaje> pasajes, List<Domain.Encomienda> encomiendas ,Boolean esAdministrador )
+        internal int ShowDialog( List<Pasaje> pasajes, List<Domain.Encomienda> encomiendas ,Boolean esAdministrador )
         {
             this.pasajes = pasajes;
             this.encomiendas = encomiendas;
             this.esAdministrador = esAdministrador;
             this.ShowDialog();
+            return 0;
         }
 
         private void datosTarjeta_Load(object sender, EventArgs e)
