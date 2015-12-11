@@ -270,6 +270,8 @@ IF OBJECT_ID('TODOX2LUCAS.GetModelo') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetModelo;
 IF OBJECT_ID('TODOX2LUCAS.GetModelos') IS NOT NULL
 DROP PROCEDURE TODOX2LUCAS.GetModelos;
+IF OBJECT_ID('TODOX2LUCAS.Verificar_Cliente') IS NOT NULL
+DROP PROCEDURE TODOX2LUCAS.Verificar_Cliente;
 GO
 
 /************************************************** CREACION DE TABLAS CON SUS CONSTRAINS ***************************************************/
@@ -1575,6 +1577,21 @@ BEGIN
 	END
 END
 GO 
+/* ------------ PROCEDIMIENTOS PARA VERIFICAR EXISTENCIA DE UN CLIENTE ------------ */
+CREATE PROCEDURE TODOX2LUCAS.Verificar_Cliente(@nro numeric(18),@apellido nvarchar(255))
+AS
+BEGIN
+	IF EXISTS (SELECT * FROM TODOX2LUCAS.Clientes WHERE Nro_Dni = @nro AND Cliente_Apellido = @apellido)
+	BEGIN
+		RETURN -1; --EXISTE
+	END
+	ELSE
+	BEGIN
+		RETURN -2; --NOEXISTE
+	END
+END
+GO
+
 /* ------------ PROCEDIMIENTOS PARA DAR DE ALTA UN  CLIENTE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Alta_Cliente(@nro_dni numeric(18),@apellido nvarchar(255),@nombre nvarchar(255),
 											@direccion nvarchar(255),@mail nvarchar(255),@fechaNacimiento datetime,@telefono numeric(18))
