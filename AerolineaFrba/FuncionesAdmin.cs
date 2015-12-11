@@ -18,6 +18,7 @@ using AerolineaFrba.Generacion_Viaje;
 using AerolineaFrba.Registro_Llegada_Destino;
 using AerolineaFrba.Compra;
 using AerolineaFrba.Utils;
+using AerolineaFrba.Devolucion;
 
 namespace AerolineaFrba
 {
@@ -137,6 +138,12 @@ namespace AerolineaFrba
         private void FuncionesAdmin_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (CLC_SessionManager.currentUser.rol.funcionalidades.Exists(x => x.Nombre_Funcionalidad == "Devolución" || x.Nombre_Funcionalidad == "Compra Encomiendas")) new RegistroDevolucion().ShowDialog(this);
+            else MessageBox.Show("No tiene permisos para realizar esta funcion");
         }
 
        
