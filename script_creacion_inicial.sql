@@ -1308,18 +1308,19 @@ BEGIN
 	DECLARE @codOrigen int, @codDestino int;
 	SET @codOrigen = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadOrigen);
 	SET @codDestino = (SELECT Cod_Ciudad FROM TODOX2LUCAS.Ciudades WHERE Nombre_Ciudad = @ciudadDestino);
-
+	
 	IF EXISTS (SELECT A.Cod_Aeronave
 				FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON (A.Cod_Aeronave=V.Cod_Aeronave)
 				WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND v.Fecha_Llegada IS NULL )
 	BEGIN
 		DECLARE @codAeronave int,@fechaSalida datetime,@codViaje int;
-		SELECT TOP 1 @codViaje=v.Cod_Viaje, @codAeronave = A.Cod_Aeronave, @fechaSalida = v.Fecha_Salida
+		SELECT @codViaje = .Cod_Viaje,@codAeronave = a.Cod_Aeronave,@fechaSalida = v.Fecha_Salida
 		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON (A.Cod_Aeronave=V.Cod_Aeronave)
-		WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND v.Fecha_Llegada IS NULL AND v.Fecha_Salida > GETDATE()
-		ORDER BY v.Fecha_Salida 
-
-		IF (@fechaLlegada > GETDATE())
+		WHERE a.Cod_Aeronave = (SELECT Cod_Aeronave FROM TODOX2LUCAS.Aeronaves WHERE Matricula = @matricula) AND
+				 V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND v.Fecha_Llegada IS NULL 
+				AND DATEDIFF(HOUR,@fechaLlegada,v.Fecha_Salida)<24
+		
+		IF (@fechaSalida < @fechaLlegada)
 		BEGIN
 			UPDATE TODOX2LUCAS.Viajes
 			SET Fecha_Llegada = @fechaLlegada
