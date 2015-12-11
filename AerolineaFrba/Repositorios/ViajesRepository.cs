@@ -48,18 +48,35 @@ namespace AerolineaFrba.Repositories {
 		public Viaje parse(DataRow dr)
         {
         	// Verificar parametros de gets
-       		return new Viaje( 
-       		Convert.ToInt32(dr["Cod_Viaje"] ),
-       		new RutaAereaRepository().getRuta( 
-       			Convert.ToInt32(dr["Cod_Ruta"] ),
-       			new CiudadRepository().getCiudad( Convert.ToInt32( dr["Cod_Ciudad_Origen"]) ),
-       			new CiudadRepository().getCiudad( Convert.ToInt32( dr["Cod_Ciudad_Destino"]) )
-       		),
-       		new AeronaveRepository().getAeronave( Convert.ToInt32(dr["Cod_Aeronave"])),
-			Convert.ToDateTime(dr["Fecha_Salida"]),
-			Convert.ToDateTime(dr["Fecha_Llegada"]),
-			Convert.ToDateTime(dr["Fecha_Llegada_Estimada"])
-			);
+            string a = dr["Fecha_Llegada"].ToString() ;
+            if ( a != "")
+            {
+                return new Viaje(
+                Convert.ToInt32(dr["Cod_Viaje"]),
+                new RutaAereaRepository().getRuta(Convert.ToInt32(dr["Cod_Ruta"]),
+                    new CiudadRepository().getCiudad(Convert.ToInt32(dr["Cod_Ciudad_Origen"])),
+                    new CiudadRepository().getCiudad(Convert.ToInt32(dr["Cod_Ciudad_Destino"]))
+                    ),
+                new AeronaveRepository().getAeronave(Convert.ToInt32(dr["Cod_Aeronave"])),
+                Convert.ToDateTime(dr["Fecha_Salida"]),
+                Convert.ToDateTime(dr["Fecha_Llegada"]),
+                Convert.ToDateTime(dr["Fecha_Llegada_Estimada"])
+                );
+            }
+            else
+            {
+                return new Viaje(
+               Convert.ToInt32(dr["Cod_Viaje"]),
+               new RutaAereaRepository().getRuta(Convert.ToInt32(dr["Cod_Ruta"]),
+                   new CiudadRepository().getCiudad(Convert.ToInt32(dr["Cod_Ciudad_Origen"])),
+                   new CiudadRepository().getCiudad(Convert.ToInt32(dr["Cod_Ciudad_Destino"]))
+                   ),
+               new AeronaveRepository().getAeronave(Convert.ToInt32(dr["Cod_Aeronave"])),
+               Convert.ToDateTime(dr["Fecha_Salida"]),
+               null,
+               Convert.ToDateTime(dr["Fecha_Llegada_Estimada"])
+               );
+            }
         }
 
 

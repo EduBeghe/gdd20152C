@@ -11,15 +11,19 @@ namespace AerolineaFrba.Repositories {
 
 	class EncomiendasRepository {
 
-		public void cancelarPaquete(  Encomienda encomienda )
+		public void cancelarPaquete(  Encomienda encomienda, string motivo )
 		{
 			DBAdapter.executeProcedure("Cancelar_Paquetes",
-				//Fecha actual,
 				encomienda.viaje.aeronave.Cod_Aeronave,
-				encomienda.viaje.rutaAerea.Cod_Ruta
-				// motivo ( sale de la form ?)
+				encomienda.viaje.rutaAerea.Cod_Ruta,
+				motivo
 			);
 		}
 
+        public int comprarPaquete(int kgs, int codViaje, string apellido, int dni, string formaPago, int numeroTarjeta, int codSeg, DateTime vencimiendo, string tipoTarjeta)
+        {
+            return DBAdapter.executeProcedureWithReturnValue("Comprar_Encomienda",
+                kgs, codViaje, apellido, dni, formaPago, numeroTarjeta, codSeg, vencimiendo, tipoTarjeta);
+        }
 	}
 }

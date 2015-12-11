@@ -16,12 +16,12 @@ namespace AerolineaFrba.Domain
         public RutaAerea rutaAerea { get; set; }
         public Aeronave aeronave { get; set; }
         public DateTime Fecha_Salida { get; set; }
-        public DateTime Fecha_Llegada { get; set; }
+        public DateTime? Fecha_Llegada { get; set; }
         public DateTime Fecha_Llegada_Estimada { get; set; }
 
 
 
-        public Viaje(int Cod_Viaje, RutaAerea rutaAerea, Aeronave aeronave, DateTime Fecha_Salida, DateTime Fecha_Llegada, DateTime Fecha_Llegada_Estimada)
+        public Viaje(int Cod_Viaje, RutaAerea rutaAerea, Aeronave aeronave, DateTime Fecha_Salida, DateTime? Fecha_Llegada, DateTime Fecha_Llegada_Estimada)
         {
             this.Cod_Viaje = Cod_Viaje;
             this.rutaAerea = rutaAerea;

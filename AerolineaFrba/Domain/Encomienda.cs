@@ -15,6 +15,7 @@ namespace AerolineaFrba.Domain
         public DateTime Fecha_Compra { get; set; }
         public Viaje viaje { get; set; }
         public Cliente cliente { get; set; }
+        public int codViaje { get; set; }
 
         public Encomienda(int Cod_Encomiendas, int Precio_Encomienda, int Kgs_A_Enviar, DateTime Fecha_Compra, Viaje viaje, Cliente cliente )
         {
@@ -23,6 +24,13 @@ namespace AerolineaFrba.Domain
             this.Kgs_A_Enviar = Kgs_A_Enviar;
             this.Fecha_Compra = Fecha_Compra;
             this.viaje = viaje;
+            this.cliente = cliente;
+        }
+
+        public Encomienda(int Kgs_A_Enviar, int codViaje, Cliente cliente )
+        {
+            this.Kgs_A_Enviar = Kgs_A_Enviar;
+            this.codViaje = codViaje;
             this.cliente = cliente;
         }
     }

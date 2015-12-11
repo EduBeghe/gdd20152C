@@ -17,8 +17,9 @@ namespace AerolineaFrba.Compra
     {
         int codViaje;
         int butaca;
-        int encomienda;
+        int kgs;
         Pasaje pasaje;
+        Domain.Encomienda encomienda;
         DateTime fechaSalida;
         Cliente cl = null ;
 
@@ -27,14 +28,15 @@ namespace AerolineaFrba.Compra
             InitializeComponent();
         }
         
-        internal Pasaje ShowDialog(int codViaje, DateTime fechaSalida , int butaca, int encomienda )
+        internal Object ShowDialog(int codViaje, DateTime fechaSalida , int butaca, int kgs )
         {
             this.codViaje = codViaje;
             this.fechaSalida = fechaSalida;
             this.butaca = butaca;
-            this.encomienda = encomienda;
+            this.kgs = kgs;
             this.ShowDialog();
-            return pasaje;
+            if (butaca != -1) return pasaje;
+            else return encomienda;
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -44,14 +46,17 @@ namespace AerolineaFrba.Compra
 
         private void dni_TextChanged(object sender, EventArgs e)
         {
-            cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text );
-            if (cl != null)
+            if ( dni.Text.Length == 7 )
             {
-                Nombre.Text = cl.Cliente_Nombre;
-                Direccion.Text = cl.Cliente_Direccion;
-                Telefono.Text = cl.Cliente_Telefono.ToString();
-                Mail.Text = cl.Cliente_Mail;
-                fecha.Value = cl.Cliente_Fecha_Nacimiento;
+                cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text );
+                if (cl != null)
+                {
+                    Nombre.Text = cl.Cliente_Nombre;
+                    Direccion.Text = cl.Cliente_Direccion;
+                    Telefono.Text = cl.Cliente_Telefono.ToString();
+                    Mail.Text = cl.Cliente_Mail;
+                    fecha.Value = cl.Cliente_Fecha_Nacimiento;
+                }
             }
         }
 
@@ -62,8 +67,8 @@ namespace AerolineaFrba.Compra
                 Validacion.soloNumeros(this.dni, dni.Name) &&
                 Validacion.soloLetras(this.Nombre, Nombre.Name) &&
                 Validacion.soloNumeros(this.Telefono, Telefono.Name) &&
-                Validacion.emailValido( this.Mail ) &&
-                Validacion.fechaMenorAlDiaDeHoy( fecha, "Fecha de Nacimiento" )
+                Validacion.emailValido( this.Mail )
+                // && Validacion.fechaMenorAlDiaDeHoy( fecha, "Fecha de Nacimiento" )
                 // validar butaca y encomienda ?
                 ) 
                 { 
@@ -76,14 +81,21 @@ namespace AerolineaFrba.Compra
                         Mail.Text,
                         Convert.ToDateTime( fecha.Value ),
                         0 );
-                    pasaje = new Pasaje( 
-                        codViaje, 
-                        fechaSalida, 
-                        new ViajesRepository().getViaje( codViaje ),
-                        butaca,
-                        cl,
-                        0 // Precio 
+                    if (butaca != -1)
+                    {
+                        pasaje = new Pasaje(
+                            codViaje,
+                            fechaSalida,
+                            new ViajesRepository().getViaje(codViaje),
+                            butaca,
+                            cl,
+                            0 // Precio 
                         );
+                    }
+                    if (kgs != -1)
+                    {
+                        encomienda = new Domain.Encomienda( codViaje, kgs, cl );
+                    }
                     this.Close();
                 }
         }

@@ -49,8 +49,7 @@ namespace AerolineaFrba.Abm_Ciudad
             if (butacas.SelectedRows.Count != 0)
             {
                 butaca = Convert.ToInt32( butacas.SelectedRows[0].Cells[0].Value ) ;
-                // MIRAR ENCOMIENDA
-                pasaje = new CargarDatos().ShowDialog(codViaje, fechaSalida , butaca, 0);
+                pasaje = ( Pasaje ) new CargarDatos().ShowDialog(codViaje, fechaSalida , butaca, -1);
                 this.Close();
             }
             

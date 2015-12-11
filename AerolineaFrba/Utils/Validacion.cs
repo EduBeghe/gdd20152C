@@ -105,31 +105,13 @@ namespace AerolineaFrba.Utils
             return false;
         }
 
-        public static bool fechaMenorAlDiaDeHoy(DateTimePicker fecha,String queFecha)
-        {
-            if (fecha.Value > AerolineaFrba.Utils.CLC_SessionManager.getFecha())
-            {
-                MessageBox.Show("Usted ingreso mal la fecha de " + queFecha);
-                return false;
-            }
-            return true;
-        }
+       
 
         public static bool fechaMenorAFecha(DateTimePicker fecha, DateTimePicker otraFecha,string fecha1,string fecha2)
         {
             if (fecha.Value > otraFecha.Value)
             {
                 MessageBox.Show("La fecha de  " + fecha1 + " es mayor a la de " + fecha2);
-                return false;
-            }
-            return true;
-        }
-
-        public static bool fechaMayorAlDiaDeHoy(DateTimePicker fecha,String queFecha)
-        {
-            if (fecha.Value < AerolineaFrba.Utils.CLC_SessionManager.getFecha())
-            {
-                MessageBox.Show("Usted ingreso mal la fecha de " + queFecha);
                 return false;
             }
             return true;

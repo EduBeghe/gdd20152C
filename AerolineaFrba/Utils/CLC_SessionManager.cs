@@ -16,10 +16,6 @@ namespace AerolineaFrba.Utils
         public static Usuario currentUser { get { if (_administrador == null) throw new NoOpenSessionException(); else  return _administrador; } set { _administrador = value; } }
         public static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GD2C2015"].ConnectionString;      
         // public static bool esAdministrador = false;
-        
-        public static DateTime getFecha() {
-            return DateTime.Parse(System.Configuration.ConfigurationManager.AppSettings["fechaSistema"]);
-        }
 
         public static void setCurrentUser(Usuario u)
         {

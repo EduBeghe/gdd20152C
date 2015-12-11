@@ -13,17 +13,20 @@ namespace AerolineaFrba.Compra
 {
     public partial class Encomienda : Form
     {
+        int codViaje;
         int kgs = -1;
+        Domain.Encomienda encomienda;
 
         public Encomienda()
         {
             InitializeComponent();
         }
 
-        internal int ShowDialog()
+        internal Domain.Encomienda ShowDialog(object func)
         {
+            this.codViaje = Convert.ToInt32(func);
             this.ShowDialog();
-            return kgs;
+            return encomienda;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,6 +34,7 @@ namespace AerolineaFrba.Compra
             if (Validacion.validarInputs(this.Controls) && Validacion.soloNumeros( this.kgsTextBox, "Kgs a enviar"))
             { 
                 kgs = Convert.ToInt32(kgsTextBox.Text);
+                encomienda = ( Domain.Encomienda ) new CargarDatos().ShowDialog(codViaje, new DateTime(), -1, kgs);
                 this.Close();
             }
             else MessageBox.Show("Debe cargar los kgs a enviar para confirmar");

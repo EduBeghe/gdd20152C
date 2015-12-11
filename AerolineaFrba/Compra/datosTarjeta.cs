@@ -16,6 +16,7 @@ namespace AerolineaFrba.Compra
     public partial class datosTarjeta : Form
     {
         List<Pasaje> pasajes;
+        List<Domain.Encomienda> encomiendas;
         Boolean esAdministrador;
 
         public datosTarjeta()
@@ -23,9 +24,10 @@ namespace AerolineaFrba.Compra
             InitializeComponent();
         }
 
-        internal void ShowDialog( List<Pasaje> pasajes, Boolean esAdministrador )
+        internal void ShowDialog( List<Pasaje> pasajes, List<Domain.Encomienda> encomiendas ,Boolean esAdministrador )
         {
             this.pasajes = pasajes;
+            this.encomiendas = encomiendas;
             this.esAdministrador = esAdministrador;
             this.ShowDialog();
         }
@@ -39,7 +41,7 @@ namespace AerolineaFrba.Compra
         private void button1_Click(object sender, EventArgs e)
         {
             if (Validacion.validarInputs(this.Controls) && Validacion.soloNumeros(this.numeroTarjeta, "Numero de Tarjeta")
-                && Validacion.soloNumeros(this.codSeg, "Codigo de Seguridad") && Validacion.fechaMayorAlDiaDeHoy(vencimiento, "Vencimiento"))
+                && Validacion.soloNumeros(this.codSeg, "Codigo de Seguridad") )
             {
                 foreach (Pasaje pasaje in pasajes)
                 {
@@ -47,17 +49,40 @@ namespace AerolineaFrba.Compra
                         pasaje.Butaca_Asociada, 
                         pasaje.viaje.Cod_Viaje, 
                         pasaje.cliente.Cliente_Apellido, 
-                        pasaje.cliente.Nro_Dni, 
-                        // forma de pago ,
+                        pasaje.cliente.Nro_Dni,
+                        "Tarjeta",
                         Convert.ToInt32( numeroTarjeta.Text ),
                         Convert.ToInt32( codSeg.Text ),
-                        Convert.ToDateTime( vencimiento.Value )
-                        // , tipo de tarjeta
+                        Convert.ToDateTime( vencimiento.Value ),
+                        tipoTarjeta.SelectedItem.ToString()
                         );
                 }
+                foreach (Domain.Encomienda encomienda in encomiendas)
+                {
+                   int retorno = new EncomiendasRepository().comprarPaquete(
+                        encomienda.Kgs_A_Enviar,
+                        encomienda.codViaje,
+                        encomienda.cliente.Cliente_Apellido,
+                        encomienda.cliente.Nro_Dni,
+                        "Tarjeta",
+                        Convert.ToInt32(numeroTarjeta.Text),
+                        Convert.ToInt32(codSeg.Text),
+                        Convert.ToDateTime(vencimiento.Value),
+                        tipoTarjeta.SelectedItem.ToString()
+                        );
+                   if (retorno == -1) MessageBox.Show("No hay disponibilidad para la cantidad de kilogramos ingresada");
+
+                }
+                this.Close();
                 
             }
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!esAdministrador) MessageBox.Show("Debe ser administrador para poder pagar en efectivo");
+            else { } // Pago en efecivo 
         }
 
       

@@ -11,6 +11,7 @@ using AerolineaFrba.Domain;
 using AerolineaFrba.Repositories;
 using AerolineaFrba.Utils;
 using AerolineaFrba.Abm_Ciudad;
+using System.Collections;
 
 namespace AerolineaFrba.Compra
 {
@@ -18,7 +19,9 @@ namespace AerolineaFrba.Compra
     {
         int butaca = -1;
         int encomienda = -1;
+
         Boolean esAdministrador;
+        List<Domain.Encomienda> encomiendas;
         List<Pasaje> pasajes;
         Boolean vueloSeleccionado = false;
 
@@ -29,6 +32,9 @@ namespace AerolineaFrba.Compra
 
         internal void ShowDialog( Boolean administrador )
         {
+            encomiendas = new List<Domain.Encomienda>();
+            pasajes = new List<Pasaje>();
+
             this.esAdministrador = administrador;
             this.disponibilidad.DataSource = null;
             this.ShowDialog();
@@ -57,13 +63,18 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (pasajes.Count == 0) MessageBox.Show("Debe comprar un pasaje para pagar");
-            new datosTarjeta().ShowDialog( pasajes, esAdministrador );
+            if (pasajes.Count == 0 && encomiendas.Count == 0 ) MessageBox.Show("Debe comprar un pasaje o encomienda para pagar");
+            new datosTarjeta().ShowDialog( pasajes, encomiendas, esAdministrador );
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (disponibilidad.SelectedRows.Count != 0) encomienda = new Encomienda().ShowDialog();
+            if (disponibilidad.SelectedRows.Count != 0)
+            {
+                vueloSeleccionado = true;
+                Domain.Encomienda encomiendax = new Encomienda().ShowDialog(disponibilidad.SelectedRows[0].Cells[0].Value);
+                encomiendas.Add( encomiendax ); 
+            }
             else MessageBox.Show("Debe seleccionar un vuelo para cargar su encomienda");
         }
 
@@ -72,7 +83,8 @@ namespace AerolineaFrba.Compra
             if (disponibilidad.SelectedRows.Count != 0)
             {
                 vueloSeleccionado = true;
-                pasajes.Add(new ListadoButacas().ShowDialog(disponibilidad.SelectedRows[0].Cells[0].Value, disponibilidad.SelectedRows[0].Cells[3].Value));
+                Pasaje pasaje = new ListadoButacas().ShowDialog(disponibilidad.SelectedRows[0].Cells[0].Value, disponibilidad.SelectedRows[0].Cells[3].Value);
+                pasajes.Add( pasaje );
             }
             else MessageBox.Show("Debe seleccionar un vuelo para seleccionar butacas");
         }
