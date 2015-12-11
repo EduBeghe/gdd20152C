@@ -817,10 +817,6 @@ BEGIN
 		RETURN -1;
 	END
 END
-DECLARE @clave nvarchar(255);
-SET @clave = 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7';
-exec TODOX2LUCAS.Validar_Login 'Eduardo',@clave
-
 GO
 
 
