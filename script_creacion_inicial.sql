@@ -469,7 +469,7 @@ CREATE TABLE TODOX2LUCAS.Pasajes (
 ;
 --CREACION TABLA TRANSACCIONES PASAJES--
 CREATE TABLE TODOX2LUCAS.TransaccionesPasajes ( 
-	Numero_Compra int  IDENTITY,
+	Numero_Compra int IDENTITY,
 	Cod_Pasaje numeric(18) REFERENCES TODOX2LUCAS.Pasajes (Cod_Pasaje) ,
 	Fecha_Transaccion datetime,
 	Nro_Dni numeric(18),
@@ -480,9 +480,8 @@ CREATE TABLE TODOX2LUCAS.TransaccionesPasajes (
 )
 ;
 --CREACION TABLA TRANSACCIONES PAQUETES--
-
 CREATE TABLE TODOX2LUCAS.TransaccionesPaquetes ( 
-	Numero_Compra int  IDENTITY,
+	Numero_Compra int IDENTITY,
 	Cod_Encomiendas numeric(18) REFERENCES TODOX2LUCAS.Encomiendas (Cod_Encomiendas),
 	Fecha_Transaccion datetime,
 	Nro_Dni numeric(18),
@@ -1477,6 +1476,7 @@ END
 GO
 
 /* ------------ PROCEDIMIENTOS PARA COMPRAR PASAJES  ------------ */
+--DROP PROCEDURE TODOX2LUCAS.Comprar_Pasajes
 CREATE PROCEDURE TODOX2LUCAS.Comprar_Pasajes(@butaca int,@codViaje int,@apellido nvarchar(255),@nro_dni numeric(18),
 												@formaDePago nvarchar(250),@numero_tarjeta numeric(16),@cod_seg numeric(3),@fecha_vencimiento datetime,
 												@tipo_tarjeta nvarchar(200))
@@ -1495,9 +1495,27 @@ BEGIN
 	VALUES(@fecha,@codViaje,@butaca,@nro_dni,@precioPasaje,@apellido)
 
 	SET @codPasaje = (SELECT DISTINCT @@IDENTITY FROM TODOX2LUCAS.Pasajes);
+	
+	DECLARE @PNR int,@ultimoDni numeric(18);
+	SELECT DISTINCT TOP 1 @ultimoDni = Nro_Dni,@PNR = Numero_Compra FROM TODOX2LUCAS.TransaccionesPasajes ORDER BY Numero_Compra DESC
 
-	INSERT INTO TODOX2LUCAS.TransaccionesPasajes(Nro_Dni,Cliente_Apellido,Cod_Pasaje,Fecha_Transaccion,Forma_De_Pago)
-	VALUES (@nro_dni,@apellido,@codPasaje,GETDATE(),@formaDePago)
+	IF (@nro_dni != @ultimoDni )
+	BEGIN
+		SET @PNR = @PNR + 1;
+		SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes ON
+			INSERT INTO TODOX2LUCAS.TransaccionesPasajes(Numero_Compra,Nro_Dni,Cliente_Apellido,Cod_Pasaje,Fecha_Transaccion,Forma_De_Pago)
+			VALUES (@PNR,@nro_dni,@apellido,@codPasaje,GETDATE(),@formaDePago)
+		SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes OFF
+	END
+	ELSE
+	BEGIN
+		SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes ON
+			INSERT INTO TODOX2LUCAS.TransaccionesPasajes(Numero_Compra,Nro_Dni,Cliente_Apellido,Cod_Pasaje,Fecha_Transaccion,Forma_De_Pago)
+			VALUES (@PNR,@nro_dni,@apellido,@codPasaje,GETDATE(),@formaDePago)
+		SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes OFF
+
+	END
+
 	IF (@formaDePago = 'Tarjeta')
 	BEGIN
 		INSERT INTO TODOX2LUCAS.Tarjetas(Numero_Tarjeta,Cod_Seg,Fecha_Vencimiento,Tipo_Tarjeta,Nro_Dni,Cliente_Apellido)
@@ -1526,9 +1544,24 @@ BEGIN
 	
 		SET @codEncomienda = (SELECT DISTINCT @@IDENTITY FROM TODOX2LUCAS.Pasajes);
 	
-		INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Nro_Dni,Cliente_Apellido,Cod_Encomiendas,Fecha_Transaccion,Forma_De_Pago)
-		VALUES (@nro_dni,@apellido,@codEncomienda,GETDATE(),@formaDePago)
+		DECLARE @PNR int,@ultimoDni numeric(18);
+		SELECT DISTINCT TOP 1 @ultimoDni = Nro_Dni,@PNR = Numero_Compra FROM TODOX2LUCAS.TransaccionesPasajes ORDER BY Numero_Compra DESC
 	
+		IF (@nro_dni = @ultimoDni)
+		BEGIN
+			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes ON
+			INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Numero_Compra,Nro_Dni,Cliente_Apellido,Cod_Encomiendas,Fecha_Transaccion,Forma_De_Pago)
+			VALUES (@PNR,@nro_dni,@apellido,@codEncomienda,GETDATE(),@formaDePago)
+			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes OFF
+		END
+		ELSE
+		BEGIN
+			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes ON
+			INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Numero_Compra,Nro_Dni,Cliente_Apellido,Cod_Encomiendas,Fecha_Transaccion,Forma_De_Pago)
+			VALUES ((@PNR + 1),@nro_dni,@apellido,@codEncomienda,GETDATE(),@formaDePago)
+			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes OFF
+		END
+
 		IF (@formaDePago = 'Tarjeta')
 		BEGIN
 			INSERT INTO TODOX2LUCAS.Tarjetas(Numero_Tarjeta,Cod_Seg,Fecha_Vencimiento,Tipo_Tarjeta,Nro_Dni,Cliente_Apellido)
@@ -1542,7 +1575,6 @@ BEGIN
 	END
 END
 GO 
-
 /* ------------ PROCEDIMIENTOS PARA DAR DE ALTA UN  CLIENTE ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Alta_Cliente(@nro_dni numeric(18),@apellido nvarchar(255),@nombre nvarchar(255),
 											@direccion nvarchar(255),@mail nvarchar(255),@fechaNacimiento datetime,@telefono numeric(18))
@@ -2543,13 +2575,15 @@ SET IDENTITY_INSERT TODOX2LUCAS.Pasajes OFF
 GO
 
 --MIGRACION TABLA TRANSACCIONES PASAJES--
+
 INSERT INTO TODOX2LUCAS.TransaccionesPasajes(Cod_Pasaje,Fecha_Transaccion,Nro_Dni,Cliente_Apellido,Forma_De_Pago)
 SELECT DISTINCT p.Cod_Pasaje,m.Pasaje_FechaCompra,c.Nro_Dni,c.Cliente_Apellido,'Efectivo'
 FROM TODOX2LUCAS.Pasajes p JOIN TODOX2LUCAS.Clientes c ON (p.Nro_Dni=c.Nro_Dni AND p.Cliente_Apellido=c.Cliente_Apellido)
 							JOIN gd_esquema.Maestra m ON (m.Pasaje_Codigo=p.Cod_Pasaje)
-							
+	
 GO
 --MIGRACION TABLA TRANSACCIONES PAQUETES--
+
 INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Cod_Encomiendas,Fecha_Transaccion,Nro_Dni,Cliente_Apellido,Forma_De_Pago)
 SELECT DISTINCT e.Cod_Encomiendas,m.Paquete_FechaCompra,c.Nro_Dni,c.Cliente_Apellido,'Efectivo'
 FROM TODOX2LUCAS.Encomiendas e JOIN TODOX2LUCAS.Clientes c ON (e.Nro_Dni=c.Nro_Dni AND e.Cliente_Apellido=c.Cliente_Apellido)
