@@ -12,11 +12,7 @@ namespace AerolineaFrba.Repositories {
 
 	class PasajesRepository {
 
-<<<<<<< HEAD
 		public void comprarPasajes( int butaca, int codViaje, string apellido, int dni, string formaPago, long tarjeta, int codSeg, DateTime vencimiento, string tipoTarjeta )
-=======
-		public void comprarPasajes( int butaca, int codViaje, string apellido, int dni, string formaPago, int? tarjeta, int? codSeg, DateTime? vencimiento, string tipoTarjeta )
->>>>>>> e096e64b684acea7ec372e6389a6ccebcff51439
 		{
 			DBAdapter.executeProcedure("Comprar_Pasajes",
 				butaca, 

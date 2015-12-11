@@ -2623,5 +2623,3 @@ FROM TODOX2LUCAS.Encomiendas e JOIN TODOX2LUCAS.Clientes c ON (e.Nro_Dni=c.Nro_D
 GO
 
 
-
-select * from TODOX2LUCAS.Clientes

@@ -94,7 +94,7 @@ namespace AerolineaFrba.Compra
                     }
                     if (kgs != -1)
                     {
-                        encomienda = new Domain.Encomienda( codViaje, kgs, cl );
+                        encomienda = new Domain.Encomienda(kgs, codViaje, cl);
                     }
                     this.Close();
                 }
