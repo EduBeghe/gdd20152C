@@ -48,10 +48,9 @@ namespace AerolineaFrba.Compra
         {
             if ( dni.Text.Length == 7 && Apellido.Text != "")
             {
-                // check if exist
-                cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text );
-                if (cl != null)
+                if ( DBAdapter.executeProcedureWithReturnValue( "Verificar_Cliente", Convert.ToInt32(dni.Text), Apellido.Text ) == -1 )
                 {
+                    cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text );
                     Nombre.Text = cl.Cliente_Nombre;
                     Direccion.Text = cl.Cliente_Direccion;
                     Telefono.Text = cl.Cliente_Telefono.ToString();
@@ -114,10 +113,9 @@ namespace AerolineaFrba.Compra
         {
             if (dni.Text.Length == 7 && Apellido.Text != "")
             {
-                // check if exist
-                cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text);
-                if (cl != null)
+                if (DBAdapter.executeProcedureWithReturnValue("Verificar_Cliente", Convert.ToInt32(dni.Text), Apellido.Text) == -1)
                 {
+                    cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text);
                     Nombre.Text = cl.Cliente_Nombre;
                     Direccion.Text = cl.Cliente_Direccion;
                     Telefono.Text = cl.Cliente_Telefono.ToString();
