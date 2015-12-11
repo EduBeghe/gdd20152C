@@ -47,7 +47,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             int retorno = DBAdapter.executeProcedureWithReturnValue("Registrar_Llegada",
                 aeronave.Matricula, origen.Nombre_Ciudad, llegada.Nombre_Ciudad, Convert.ToDateTime(horario.Value));
             if (retorno == -1) MessageBox.Show("La aeronave no debia llegar al destino ingresado");
-            else 
+            else if (retorno == -2) MessageBox.Show("La fecha de llegada es menor a la fecha de salida");
+            else
             {
                 MessageBox.Show("Llegada registrada exitosamente");
                 this.Close();

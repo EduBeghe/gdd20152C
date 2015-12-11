@@ -1311,16 +1311,25 @@ BEGIN
 
 	IF EXISTS (SELECT A.Cod_Aeronave
 				FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON (A.Cod_Aeronave=V.Cod_Aeronave)
-				WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND Fecha_Llegada_Estimada  <= GETDATE())
+				WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND v.Fecha_Llegada IS NULL )
 	BEGIN
-		DECLARE @codAeronave int;
-		SELECT @codAeronave = A.Cod_Aeronave
+		DECLARE @codAeronave int,@fechaSalida datetime,@codViaje int;
+		SELECT TOP 1 @codViaje=v.Cod_Viaje, @codAeronave = A.Cod_Aeronave, @fechaSalida = v.Fecha_Salida
 		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON (A.Cod_Aeronave=V.Cod_Aeronave)
-		WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND Fecha_Llegada_Estimada  <= GETDATE() 
-		
-		UPDATE TODOX2LUCAS.Viajes
-		SET Fecha_Llegada = @fechaLlegada
-		WHERE Cod_Aeronave = @codAeronave AND Cod_Ciudad_Origen = @codOrigen AND Cod_Ciudad_Destino = @codDestino AND Fecha_Llegada_Estimada  <= GETDATE() 
+		WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND v.Fecha_Llegada IS NULL AND v.Fecha_Salida > GETDATE()
+		ORDER BY v.Fecha_Salida 
+
+		IF (@fechaLlegada > GETDATE())
+		BEGIN
+			UPDATE TODOX2LUCAS.Viajes
+			SET Fecha_Llegada = @fechaLlegada
+			WHERE Cod_Viaje =@codViaje AND Cod_Aeronave =@codAeronave
+		END
+		ELSE 
+		BEGIN
+			print 'La fecha de llegada es menor a la fecha de salida'
+			RETURN - 2;
+		END
 	END
 	ELSE
 	BEGIN
