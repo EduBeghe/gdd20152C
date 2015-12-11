@@ -1422,6 +1422,7 @@ RETURNS int
 AS
 BEGIN
 	DECLARE @kilogramosLibres int,@kilogramosCancelados int;
+
 	SELECT @kilogramosLibres =	(A.Kgs_Disponibles - SUM(E.Kgs_A_Enviar)) 
 	FROM TODOX2LUCAS.Viajes V JOIN TODOX2LUCAS.Aeronaves A ON (V.Cod_Aeronave=A.Cod_Aeronave)
 							JOIN TODOX2LUCAS.Encomiendas E ON (E.Cod_Viaje=V.Cod_Viaje)
@@ -1432,10 +1433,13 @@ BEGIN
 	FROM TODOX2LUCAS.Encomiendas E JOIN TODOX2LUCAS.CancelacionesPaquetes CE ON (E.Cod_Encomiendas = CE.Cod_Encomiendas)
 									JOIN TODOX2LUCAS.Viajes V ON (V.Cod_Viaje = E.Cod_Viaje)
 	WHERE V.Cod_Viaje = @codViaje
-
-	SET @kilogramosLibres = @kilogramosLibres - @kilogramosCancelados;
-
-	RETURN @kilogramosLibres ;
+	
+	IF (@kilogramosCancelados IS NOT NULL)
+	BEGIN
+		SET @kilogramosLibres = @kilogramosLibres - @kilogramosCancelados;
+	END
+	
+	RETURN @kilogramosLibres;
 END
 GO
 
@@ -1457,6 +1461,7 @@ BEGIN
 	FROM TODOX2LUCAS.Pasajes P JOIN TODOX2LUCAS.CancelacionesPasajes CP ON (P.Cod_Pasaje = CP.Cod_Pasaje)
 								JOIN TODOX2LUCAS.Viajes V ON(V.Cod_Viaje = P.Cod_Viaje)
 	WHERE V.Cod_Viaje = @codViaje
+
 	SET @butacasLibres = @butacasLibres - @butacasCancelados;
 	
 	RETURN @butacasLibres;
@@ -1554,24 +1559,24 @@ BEGIN
 		INSERT INTO TODOX2LUCAS.Encomiendas(Fecha_Compra,Cod_Viaje,Kgs_A_Enviar,Nro_Dni,Precio_Encomienda,Cliente_Apellido)
 		VALUES(@fecha,@codViaje,@kgs_a_enviar,@nro_dni,@precioEncomienda,@apellido)
 	
-		SET @codEncomienda = (SELECT DISTINCT @@IDENTITY FROM TODOX2LUCAS.Pasajes);
+		SET @codEncomienda = (SELECT DISTINCT @@IDENTITY FROM TODOX2LUCAS.Encomiendas);
 	
 		DECLARE @PNR int,@ultimoDni numeric(18);
-		SELECT DISTINCT TOP 1 @ultimoDni = Nro_Dni,@PNR = Numero_Compra FROM TODOX2LUCAS.TransaccionesPasajes ORDER BY Numero_Compra DESC
+		SELECT DISTINCT TOP 1 @ultimoDni = Nro_Dni,@PNR = Numero_Compra FROM TODOX2LUCAS.TransaccionesPaquetes ORDER BY Numero_Compra DESC
 	
 		IF (@nro_dni = @ultimoDni)
 		BEGIN
-			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes ON
+			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPaquetes ON
 			INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Numero_Compra,Nro_Dni,Cliente_Apellido,Cod_Encomiendas,Fecha_Transaccion,Forma_De_Pago)
 			VALUES (@PNR,@nro_dni,@apellido,@codEncomienda,GETDATE(),@formaDePago)
-			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes OFF
+			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPaquetes OFF
 		END
 		ELSE
 		BEGIN
-			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes ON
+			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPaquetes ON
 			INSERT INTO TODOX2LUCAS.TransaccionesPaquetes(Numero_Compra,Nro_Dni,Cliente_Apellido,Cod_Encomiendas,Fecha_Transaccion,Forma_De_Pago)
 			VALUES ((@PNR + 1),@nro_dni,@apellido,@codEncomienda,GETDATE(),@formaDePago)
-			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPasajes OFF
+			SET IDENTITY_INSERT TODOX2LUCAS.TransaccionesPaquetes OFF
 		END
 
 		IF (@formaDePago = 'Tarjeta')
@@ -2619,3 +2624,4 @@ GO
 
 
 
+select * from TODOX2LUCAS.Clientes

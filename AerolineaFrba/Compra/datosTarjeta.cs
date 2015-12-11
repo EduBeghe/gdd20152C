@@ -52,7 +52,7 @@ namespace AerolineaFrba.Compra
                         pasaje.cliente.Cliente_Apellido, 
                         pasaje.cliente.Nro_Dni,
                         "Tarjeta",
-                        Convert.ToInt32( numeroTarjeta.Text ),
+                        Convert.ToInt64( numeroTarjeta.Text ),
                         Convert.ToInt32( codSeg.Text ),
                         Convert.ToDateTime( vencimiento.Value ),
                         tipoTarjeta.SelectedItem.ToString()
@@ -66,7 +66,7 @@ namespace AerolineaFrba.Compra
                         encomienda.cliente.Cliente_Apellido,
                         encomienda.cliente.Nro_Dni,
                         "Tarjeta",
-                        Convert.ToInt32(numeroTarjeta.Text),
+                        Convert.ToInt64(numeroTarjeta.Text),
                         Convert.ToInt32(codSeg.Text),
                         Convert.ToDateTime(vencimiento.Value),
                         tipoTarjeta.SelectedItem.ToString()
