@@ -871,26 +871,18 @@ BEGIN
 END
 GO
 /* ------------ PROCEDIMIENTO PARA CANCELACIONES POR ADMINISTRADOR ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas(@fechaDevolucion datetime,@numeroCompra int,@codigo numeric(18),@motivo nvarchar(255))
+CREATE PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas(@fechaDevolucion datetime,@numeroCompra int,@codigo numeric(18),@motivo nvarchar(255),@tipo int)
 AS
 BEGIN
-	IF EXISTS (SELECT * FROM TODOX2LUCAS.TransaccionesPasajes T WHERE T.Numero_Compra =@numeroCompra AND T.Cod_Pasaje=@codigo)
+	IF (@tipo = 0)
 	BEGIN
 		INSERT INTO TODOX2LUCAS.CancelacionesPasajes(Cod_Pasaje,Fecha_Devolucion,Motivo,Numero_Compra_Pasajes)
 		VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
 	END
 	ELSE
 	BEGIN
-		IF EXISTS (SELECT * FROM TODOX2LUCAS.TransaccionesPaquetes T WHERE T.Numero_Compra =@numeroCompra AND T.Cod_Encomiendas=@codigo)
-		BEGIN
-			INSERT INTO TODOX2LUCAS.CancelacionesPaquetes(Cod_Encomiendas,Fecha_Devolucion,Motivo,Numero_Compra_Paquetes)
-			VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
-		END
-		ELSE
-		BEGIN
-			print 'Datos invalidos'
-			return -1;
-		END
+		INSERT INTO TODOX2LUCAS.CancelacionesPaquetes(Cod_Encomiendas,Fecha_Devolucion,Motivo,Numero_Compra_Paquetes)
+		VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
 	END
 	
 END
