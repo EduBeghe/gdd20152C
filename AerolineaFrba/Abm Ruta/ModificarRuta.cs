@@ -15,6 +15,10 @@ namespace AerolineaFrba.Abm_Ruta
 {
     public partial class ModificarRuta : Form
     {
+        int retornoServicio;
+        int retornoPrecio;
+        int retornoCiudades;
+
         private RutaAerea ruta;
 
         public ModificarRuta()
@@ -30,21 +34,30 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // if ( todos en null ) falla 
-            if (origen.SelectedItem != null && destino.SelectedItem != null ) new RutaAereaRepository().modificarCiudades( 
-                    ruta, 
-                    ( Ciudad ) origen.SelectedItem, 
-                    ( Ciudad ) destino.SelectedItem );
-            if (servicio.SelectedItem != null) new RutaAereaRepository().modificarTipoServicio(ruta, ( TipoServicio ) servicio.SelectedItem);
+            if (origen.SelectedItem != null && destino.SelectedItem != null)
+            {
+                retornoCiudades = new RutaAereaRepository().modificarCiudades(
+                    ruta,
+                    (Ciudad)origen.SelectedItem,
+                    (Ciudad)destino.SelectedItem);
+            }
+            if (servicio.SelectedItem != null)
+            {
+                retornoServicio = new RutaAereaRepository().modificarTipoServicio(ruta, (TipoServicio)servicio.SelectedItem);
+            }
             if (costoKgRuta.Text != "" && costoPasajeRuta.Text != "")
             {
-                if ( Validacion.soloNumeros( costoKgRuta, costoKgRuta.Name ) && Validacion.soloNumeros( costoPasajeRuta, costoPasajeRuta.Name ) )
-                new RutaAereaRepository().modificarPrecio(
-                ruta,
-                Convert.ToInt32(costoKgRuta.Text),
-                Convert.ToInt32(costoPasajeRuta.Text));
+                if (Validacion.soloNumeros(costoKgRuta, costoKgRuta.Name) && Validacion.soloNumeros(costoPasajeRuta, costoPasajeRuta.Name))
+                {
+                    retornoPrecio = new RutaAereaRepository().modificarPrecio(
+                    ruta,
+                    Convert.ToInt32(costoKgRuta.Text),
+                    Convert.ToInt32(costoPasajeRuta.Text));
+                }
             }
-            MessageBox.Show("Ruta modificada con exito");
+
+            if (retornoPrecio == -1) MessageBox.Show("Fallo la modificacion, la ruta tiene viajes asigandos");    
+            if (retornoCiudades != -1 && retornoPrecio != -1 && retornoServicio != -1) MessageBox.Show("Ruta modificada con exito");    
             this.Close();
         }
 

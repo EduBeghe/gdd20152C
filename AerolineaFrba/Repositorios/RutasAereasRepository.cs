@@ -44,26 +44,26 @@ namespace AerolineaFrba.Repositories {
 			));	
 		}
 
-		public void modificarCiudades(  RutaAerea rutaAerea, Ciudad origen, Ciudad destino )
+		public int modificarCiudades(  RutaAerea rutaAerea, Ciudad origen, Ciudad destino )
 		{
-			DBAdapter.executeProcedure("Modificar_Ciudades_Ruta_Aereas", 
+			return DBAdapter.executeProcedureWithReturnValue("Modificar_Ciudades_Ruta_Aereas", 
 			rutaAerea.Cod_Ruta,
 			origen.Nombre_Ciudad,
 			destino.Nombre_Ciudad
 			);				
 		}
 
-		public void modificarTipoServicio(  RutaAerea rutaAerea, TipoServicio servicio )
+		public int modificarTipoServicio(  RutaAerea rutaAerea, TipoServicio servicio )
 		{
-			DBAdapter.executeProcedure("Modificar_Servicio_Ruta_Aerea", 
+			return DBAdapter.executeProcedureWithReturnValue("Modificar_Servicio_Ruta_Aerea", 
 			rutaAerea.Cod_Ruta,
 			servicio.Descripcion_Servicio
 			);				
 		}
 
-		public void modificarPrecio(  RutaAerea rutaAerea, int precioKg, int precioPasaje )
+		public int modificarPrecio(  RutaAerea rutaAerea, int precioKg, int precioPasaje )
 		{
-			DBAdapter.executeProcedure("Modificar_Precios_Ruta_Aerea", 
+			return DBAdapter.executeProcedureWithReturnValue("Modificar_Precios_Ruta_Aerea", 
 			rutaAerea.Cod_Ruta,
 			precioKg,
 			precioPasaje
