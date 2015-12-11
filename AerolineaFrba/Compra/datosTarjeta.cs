@@ -83,9 +83,40 @@ namespace AerolineaFrba.Compra
         private void button2_Click(object sender, EventArgs e)
         {
             if (!esAdministrador) MessageBox.Show("Debe ser administrador para poder pagar en efectivo");
-            else { } // Pago en efecivo 
+            else 
+            {
+                    foreach (Pasaje pasaje in pasajes)
+                    {
+                        new PasajesRepository().comprarPasajes(
+                            pasaje.Butaca_Asociada,
+                            pasaje.viaje.Cod_Viaje,
+                            pasaje.cliente.Cliente_Apellido,
+                            pasaje.cliente.Nro_Dni,
+                            "Efectivo",
+                            1,
+                            1,
+                            Convert.ToDateTime(vencimiento.Value),
+                            "a"
+                            );
+                    }
+                    foreach (Domain.Encomienda encomienda in encomiendas)
+                    {
+                        int retorno = new EncomiendasRepository().comprarPaquete(
+                            encomienda.Kgs_A_Enviar,
+                            encomienda.codViaje,
+                            encomienda.cliente.Cliente_Apellido,
+                            encomienda.cliente.Nro_Dni,
+                            "Efectivo",
+                            1,
+                            1,
+                            Convert.ToDateTime(vencimiento.Value),
+                            "a"
+                            );
+                        if (retorno == -1) MessageBox.Show("No hay disponibilidad para la cantidad de kilogramos ingresada");
+                    }
+                }
+            this.Close();
         }
-
       
     }
 }
