@@ -89,20 +89,26 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void sumarPasillo_Click(object sender, EventArgs e)
         {
-            this.cantidadPasillo.Text = (Convert.ToInt32(this.cantidadPasillo.Text) + 1).ToString();
-            DBAdapter.executeProcedure("Modificar_Agregar_Butaca", aeronave.Cod_Aeronave, "Pasillo");
+                this.cantidadPasillo.Text = (Convert.ToInt32(this.cantidadPasillo.Text) + 1).ToString();
+                DBAdapter.executeProcedure("Modificar_Agregar_Butaca", aeronave.Cod_Aeronave, "Pasillo");
         }
 
         private void restarVentanilla_Click(object sender, EventArgs e)
         {
-            this.cantidadVentanilla.Text = (Convert.ToInt32(this.cantidadVentanilla.Text) -1 ).ToString();
-            DBAdapter.executeProcedure("Modificar_Quitar_Butaca", aeronave.Cod_Aeronave, "Ventanilla");
+            if (Convert.ToInt32(this.cantidadVentanilla.Text) > 0)
+            {
+                this.cantidadVentanilla.Text = (Convert.ToInt32(this.cantidadVentanilla.Text) -1 ).ToString();
+                DBAdapter.executeProcedure("Modificar_Quitar_Butaca", aeronave.Cod_Aeronave, "Ventanilla");
+            }
         }
 
         private void restarPasillo_Click(object sender, EventArgs e)
         {
-            this.cantidadPasillo.Text = (Convert.ToInt32(this.cantidadPasillo.Text) - 1).ToString();
-            DBAdapter.executeProcedure("Modificar_Quitar_Butaca", aeronave.Cod_Aeronave, "Pasillo");
+            if (Convert.ToInt32(this.cantidadPasillo.Text) > 0)
+            {
+                this.cantidadPasillo.Text = (Convert.ToInt32(this.cantidadPasillo.Text) - 1).ToString();
+                DBAdapter.executeProcedure("Modificar_Quitar_Butaca", aeronave.Cod_Aeronave, "Pasillo");
+            }
         }
     }
 }

@@ -9,37 +9,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Domain;
 
 namespace AerolineaFrba.Compra
 {
     public partial class datosTarjeta : Form
     {
-        string apellido;
-        string nombre;
-        int dni;
-        string domicilio;
-        int telefono;
-        string mail;
-        DateTime nacimiento;
-        int butaca;
-        int aeronave;
+        List<Pasaje> pasajes;
+        Boolean esAdministrador;
 
         public datosTarjeta()
         {
             InitializeComponent();
         }
 
-        internal void ShowDialog( string apellido, int dni, string nombre, string domicilio, int telefono, string email, DateTime nacimiento, int butaca, int aeronave )
+        internal void ShowDialog( List<Pasaje> pasajes, Boolean esAdministrador )
         {
-            this.apellido = apellido;
-            this.dni = dni;
-            this.nombre = nombre;
-            this.domicilio = domicilio;
-            this.telefono = telefono;
-            this.mail = email;
-            this.nacimiento = nacimiento;
-            this.butaca = butaca;
-            this.aeronave = aeronave;
+            this.pasajes = pasajes;
+            this.esAdministrador = esAdministrador;
             this.ShowDialog();
         }
 
@@ -54,7 +41,21 @@ namespace AerolineaFrba.Compra
             if (Validacion.validarInputs(this.Controls) && Validacion.soloNumeros(this.numeroTarjeta, "Numero de Tarjeta")
                 && Validacion.soloNumeros(this.codSeg, "Codigo de Seguridad") && Validacion.fechaMayorAlDiaDeHoy(vencimiento, "Vencimiento"))
             {
-              // new PasajesRepository().comprarPasajes( butaca, aeronave); 
+                foreach (Pasaje pasaje in pasajes)
+                {
+                    new PasajesRepository().comprarPasajes( 
+                        pasaje.Butaca_Asociada, 
+                        pasaje.viaje.Cod_Viaje, 
+                        pasaje.cliente.Cliente_Apellido, 
+                        pasaje.cliente.Nro_Dni, 
+                        // forma de pago ,
+                        Convert.ToInt32( numeroTarjeta.Text ),
+                        Convert.ToInt32( codSeg.Text ),
+                        Convert.ToDateTime( vencimiento.Value )
+                        // , tipo de tarjeta
+                        );
+                }
+                
             }
 
         }

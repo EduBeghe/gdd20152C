@@ -9,13 +9,9 @@ namespace AerolineaFrba.Repositories
 {
     class DevolucionRepository
     {
-        //public int devolverCompra(DateTime fechaDevolucion, , ,String motivo){
-        //    return DBAdapter.executeProcedureWithReturnValue("Cancelar_Pasajes_Encomiendas", 
-        //        fechaDevolucion,
-        //        ,
-        //        ,
-        //        motivo
-		//	);
-        // } //fechaDevolucion ,@numeroCompra int,@codigo numeric(18),@motivo nvarchar(255))
+       public int devolverCompra(DateTime fechaDevolucion,int numeroCompra ,int codigo ,String motivo){
+            return DBAdapter.executeProcedureWithReturnValue("Cancelar_Pasajes_Encomiendas", 
+                fechaDevolucion,numeroCompra,codigo,motivo);
+         } //fechaDevolucion ,@numeroCompra int,@codigo numeric(18),@motivo nvarchar(255))
     }
 }
