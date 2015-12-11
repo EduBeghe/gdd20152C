@@ -32,7 +32,8 @@ namespace AerolineaFrba.Repositories
 
         public Cliente getCliente( int dni, string apellido )
         {
-            return parse ( DBAdapter.retrieveDataTable("GetCliente", dni, apellido ).Rows[0]);
+           return  parse (DBAdapter.retrieveDataTable("GetCliente", dni, apellido ).Rows[0]);
+            
         }
 
 

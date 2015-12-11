@@ -89,12 +89,6 @@ namespace AerolineaFrba.Utils
             return _executeProcedureWithReturnValue(procedure, argumentos, values);
         }
 
-        public static long executeProcedureWithLongReturnValue(string procedure, params object[] values)
-        {
-            List<string> argumentos = _generateArguments(procedure);
-            DataTable data = _retrieveDataTable(procedure, argumentos, values);
-            return Convert.ToInt64(data.Rows[0][0]);
-        }
 
         private static void _executeProcedure(string procedure, List<string> args, params object[] values)
         {

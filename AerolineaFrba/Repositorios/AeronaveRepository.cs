@@ -53,6 +53,7 @@ namespace AerolineaFrba.Repositories {
 		public Aeronave getAeronave( int idAeronave )
 		{
 			return parse ( DBAdapter.retrieveDataTable("GetAeronave", idAeronave ).Rows[0]);
+
 		}
 
         public List<Aeronave> getAeronaves()

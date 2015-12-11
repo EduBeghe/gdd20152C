@@ -48,6 +48,7 @@ namespace AerolineaFrba.Compra
         {
             if ( dni.Text.Length == 7 && Apellido.Text != "")
             {
+                // check if exist
                 cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text );
                 if (cl != null)
                 {
@@ -113,6 +114,7 @@ namespace AerolineaFrba.Compra
         {
             if (dni.Text.Length == 7 && Apellido.Text != "")
             {
+                // check if exist
                 cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text);
                 if (cl != null)
                 {
