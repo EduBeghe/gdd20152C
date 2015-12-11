@@ -15,23 +15,26 @@ namespace AerolineaFrba.Compra
 {
     public partial class CargarDatos : Form
     {
-        Boolean esAdministrador;
-        int codAeronave;
+        int codViaje;
         int butaca;
         int encomienda;
+        Pasaje pasaje;
+        DateTime fechaSalida;
+        Cliente cl = null ;
 
         public CargarDatos()
         {
             InitializeComponent();
         }
         
-        internal void ShowDialog(object codAeronave, int butaca, int encomienda, Boolean administrador )
+        internal Pasaje ShowDialog(int codViaje, DateTime fechaSalida , int butaca, int encomienda )
         {
-            this.codAeronave = Convert.ToInt32(codAeronave);
+            this.codViaje = codViaje;
+            this.fechaSalida = fechaSalida;
             this.butaca = butaca;
             this.encomienda = encomienda;
-            this.esAdministrador = administrador;
             this.ShowDialog();
+            return pasaje;
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -41,12 +44,15 @@ namespace AerolineaFrba.Compra
 
         private void dni_TextChanged(object sender, EventArgs e)
         {
-            Cliente cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text );
-            Nombre.Text = cl.Cliente_Nombre;
-            Direccion.Text = cl.Cliente_Direccion;
-            Telefono.Text = cl.Cliente_Telefono.ToString();
-            Mail.Text = cl.Cliente_Mail;
-            fecha.Value = cl.Cliente_Fecha_Nacimiento;
+            cl = new ClientesRepository().getCliente(Convert.ToInt32(dni.Text), Apellido.Text );
+            if (cl != null)
+            {
+                Nombre.Text = cl.Cliente_Nombre;
+                Direccion.Text = cl.Cliente_Direccion;
+                Telefono.Text = cl.Cliente_Telefono.ToString();
+                Mail.Text = cl.Cliente_Mail;
+                fecha.Value = cl.Cliente_Fecha_Nacimiento;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,7 +65,27 @@ namespace AerolineaFrba.Compra
                 Validacion.emailValido( this.Mail ) &&
                 Validacion.fechaMenorAlDiaDeHoy( fecha, "Fecha de Nacimiento" )
                 // validar butaca y encomienda ?
-                ) {  }
+                ) 
+                { 
+                    if ( cl == null ) cl = new Cliente( 
+                        Convert.ToInt32( dni.Text ),
+                        Nombre.Text, 
+                        Apellido.Text,
+                        Direccion.Text,
+                        Convert.ToInt32( Telefono.Text ),
+                        Mail.Text,
+                        Convert.ToDateTime( fecha.Value ),
+                        0 );
+                    pasaje = new Pasaje( 
+                        codViaje, 
+                        fechaSalida, 
+                        new ViajesRepository().getViaje( codViaje ),
+                        butaca,
+                        cl,
+                        0 // Precio 
+                        );
+                    this.Close();
+                }
         }
 
         private void tarjetaCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -67,24 +93,8 @@ namespace AerolineaFrba.Compra
             
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            new datosTarjeta().ShowDialog( 
-                Apellido.Text, 
-                Convert.ToInt32( dni.Text ), 
-                Nombre.Text, 
-                Direccion.Text, 
-                Convert.ToInt32( Telefono.Text ), 
-                Mail.Text, 
-                Convert.ToDateTime( fecha ), 
-                butaca, 
-                codAeronave );
-        }
-
         private void CargarDatos_Load(object sender, EventArgs e)
         {
-            if (esAdministrador) this.efectivo.Visible = true;
-
         }
     }
 }

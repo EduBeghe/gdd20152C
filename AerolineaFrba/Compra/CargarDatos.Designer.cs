@@ -43,12 +43,10 @@
             this.Mail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.fecha = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.confirmar = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.tarjeta = new System.Windows.Forms.CheckBox();
             this.datosTarjeta = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.efectivo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -174,15 +172,15 @@
             this.fecha.Size = new System.Drawing.Size(200, 26);
             this.fecha.TabIndex = 14;
             // 
-            // button1
+            // confirmar
             // 
-            this.button1.Location = new System.Drawing.Point(328, 436);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 38);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Comprar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.confirmar.Location = new System.Drawing.Point(161, 404);
+            this.confirmar.Name = "confirmar";
+            this.confirmar.Size = new System.Drawing.Size(147, 38);
+            this.confirmar.TabIndex = 15;
+            this.confirmar.Text = "Confirmar Datos";
+            this.confirmar.UseVisualStyleBackColor = true;
+            this.confirmar.Click += new System.EventHandler(this.button1_Click);
             // 
             // label9
             // 
@@ -215,37 +213,15 @@
             this.datosTarjeta.UseVisualStyleBackColor = true;
             this.datosTarjeta.Visible = false;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(16, 436);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(198, 38);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "Cargar datos de tarjeta";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // efectivo
-            // 
-            this.efectivo.Location = new System.Drawing.Point(16, 390);
-            this.efectivo.Name = "efectivo";
-            this.efectivo.Size = new System.Drawing.Size(198, 40);
-            this.efectivo.TabIndex = 21;
-            this.efectivo.Text = "Pagar en Efectivo";
-            this.efectivo.UseVisualStyleBackColor = true;
-            this.efectivo.Visible = false;
-            // 
             // CargarDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 486);
-            this.Controls.Add(this.efectivo);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(488, 457);
             this.Controls.Add(this.datosTarjeta);
             this.Controls.Add(this.tarjeta);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.confirmar);
             this.Controls.Add(this.fecha);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -285,12 +261,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox Mail;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button confirmar;
         private System.Windows.Forms.DateTimePicker fecha;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox tarjeta;
         private System.Windows.Forms.Button datosTarjeta;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button efectivo;
     }
 }

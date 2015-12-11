@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
 using AerolineaFrba.Repositories;
+using AerolineaFrba.Compra;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -17,16 +18,20 @@ namespace AerolineaFrba.Abm_Ciudad
     {
         int codViaje;
         int butaca;
-            
+        DateTime fechaSalida;
+        Pasaje pasaje;  
+  
         public ListadoButacas()
         {
             InitializeComponent();
         }
 
-        internal void ShowDialog(object func)
+        internal Pasaje ShowDialog(object func,object func2 )
         {
             this.codViaje = Convert.ToInt32(func);
+            this.fechaSalida = Convert.ToDateTime(func2);
             this.ShowDialog();
+            return pasaje;
         }
      
         private void label1_Click(object sender, EventArgs e)
@@ -44,12 +49,12 @@ namespace AerolineaFrba.Abm_Ciudad
             if (butacas.SelectedRows.Count != 0)
             {
                 butaca = Convert.ToInt32( butacas.SelectedRows[0].Cells[0].Value ) ;
-                // abrir vista 
+                // MIRAR ENCOMIENDA
+                pasaje = new CargarDatos().ShowDialog(codViaje, fechaSalida , butaca, 0);
                 this.Close();
             }
             
         }
 
-      
     }
 }

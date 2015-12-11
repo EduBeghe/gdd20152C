@@ -39,7 +39,6 @@
             this.destino = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.disponibilidad = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -133,19 +132,9 @@
             this.disponibilidad.Size = new System.Drawing.Size(1148, 334);
             this.disponibilidad.TabIndex = 8;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(414, 151);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(179, 58);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Seleccionar butaca";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(785, 151);
+            this.button3.Location = new System.Drawing.Point(611, 151);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(164, 58);
             this.button3.TabIndex = 10;
@@ -155,7 +144,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(599, 151);
+            this.button4.Location = new System.Drawing.Point(412, 151);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(179, 58);
             this.button4.TabIndex = 11;
@@ -181,7 +170,6 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.disponibilidad);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.destino);
@@ -213,7 +201,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
         private System.Windows.Forms.DataGridView disponibilidad;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
