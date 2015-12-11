@@ -505,7 +505,6 @@ CREATE TABLE TODOX2LUCAS.CancelacionesPasajes (
 	Cod_Pasaje numeric(18) ,
 	Motivo nvarchar(255),
 	PRIMARY KEY CLUSTERED (Codigo_Devolucion, Cod_Pasaje),
-	FOREIGN KEY (Numero_Compra_Pasajes,Cod_Pasaje) REFERENCES TODOX2LUCAS.TransaccionesPasajes (Numero_Compra,Cod_Pasaje),
 )
 ;
 --CREACION TABLA CANCELACIONES PAQUETES -- 
@@ -516,7 +515,7 @@ CREATE TABLE TODOX2LUCAS.CancelacionesPaquetes (
 	Cod_Encomiendas numeric(18),
 	Motivo nvarchar(255),
 	PRIMARY KEY CLUSTERED (Codigo_Devolucion, Cod_Encomiendas),
-	FOREIGN KEY (Numero_Compra_Paquetes,Cod_Encomiendas) REFERENCES TODOX2LUCAS.TransaccionesPaquetes (Numero_Compra,Cod_Encomiendas)
+	
 )
 ;
 
@@ -871,7 +870,7 @@ CREATE PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas(@numeroCompra int,@cod
 AS
 BEGIN
 	DECLARE @fechaDevolucion datetime = GETDATE();
-	IF (@tipo = 0)
+	IF (@tipo != 0)
 	BEGIN
 		INSERT INTO TODOX2LUCAS.CancelacionesPasajes(Cod_Pasaje,Fecha_Devolucion,Motivo,Numero_Compra_Pasajes)
 		VALUES(@codigo,@fechaDevolucion,@motivo,@numeroCompra)
