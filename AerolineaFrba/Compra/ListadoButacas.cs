@@ -9,23 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Domain;
 using AerolineaFrba.Utils;
+using AerolineaFrba.Repositories;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
     public partial class ListadoButacas : Form
     {
-        int aeronave;
+        int codViaje;
+        int butaca;
             
         public ListadoButacas()
         {
             InitializeComponent();
         }
 
-        internal int  ShowDialog(object func)
+        internal void ShowDialog(object func)
         {
-            this.aeronave = Convert.ToInt32(func);
+            this.codViaje = Convert.ToInt32(func);
             this.ShowDialog();
-            return aeronave;
         }
      
         private void label1_Click(object sender, EventArgs e)
@@ -35,15 +36,15 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void ListadoButacas_Load(object sender, EventArgs e)
         {
-            this.butacas.DataSource = DBAdapter.retrieveDataTable("Butacas_Libres", aeronave );
+            this.butacas.DataSource = DBAdapter.retrieveDataTable("Butacas_Libres", codViaje );
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-           aeronave = -1;
             if (butacas.SelectedRows.Count != 0)
             {
-                aeronave = Convert.ToInt32( butacas.SelectedRows[0].Cells[0].Value ) ;
+                butaca = Convert.ToInt32( butacas.SelectedRows[0].Cells[0].Value ) ;
+                // abrir vista 
                 this.Close();
             }
             

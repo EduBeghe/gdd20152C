@@ -68,5 +68,11 @@ namespace AerolineaFrba.Compra
             if (disponibilidad.SelectedRows.Count != 0) encomienda = new Encomienda().ShowDialog();
             else MessageBox.Show("Debe seleccionar un vuelo para cargar su encomienda");
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (disponibilidad.SelectedRows.Count != 0) butaca = new ListadoButacas().ShowDialog(disponibilidad.SelectedRows[0].Cells[0].Value);
+            else MessageBox.Show("Debe seleccionar un vuelo para seleccionar butacas");
+        }
     }
 }
