@@ -1314,7 +1314,7 @@ BEGIN
 				WHERE Matricula = @matricula AND V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND v.Fecha_Llegada IS NULL )
 	BEGIN
 		DECLARE @codAeronave int,@fechaSalida datetime,@codViaje int;
-		SELECT @codViaje = .Cod_Viaje,@codAeronave = a.Cod_Aeronave,@fechaSalida = v.Fecha_Salida
+		SELECT @codViaje = v.Cod_Viaje,@codAeronave = a.Cod_Aeronave,@fechaSalida = v.Fecha_Salida
 		FROM TODOX2LUCAS.Aeronaves A JOIN TODOX2LUCAS.Viajes V ON (A.Cod_Aeronave=V.Cod_Aeronave)
 		WHERE a.Cod_Aeronave = (SELECT Cod_Aeronave FROM TODOX2LUCAS.Aeronaves WHERE Matricula = @matricula) AND
 				 V.Cod_Ciudad_Origen = @codOrigen AND V.Cod_Ciudad_Destino=@codDestino AND v.Fecha_Llegada IS NULL 
