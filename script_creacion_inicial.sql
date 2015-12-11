@@ -871,9 +871,10 @@ BEGIN
 END
 GO
 /* ------------ PROCEDIMIENTO PARA CANCELACIONES POR ADMINISTRADOR ------------ */
-CREATE PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas(@fechaDevolucion datetime,@numeroCompra int,@codigo numeric(18),@motivo nvarchar(255),@tipo int)
+CREATE PROCEDURE TODOX2LUCAS.Cancelar_Pasajes_Encomiendas(@numeroCompra int,@codigo numeric(18),@motivo nvarchar(255),@tipo int)
 AS
 BEGIN
+	DECLARE @fechaDevolucion datetime = GETDATE();
 	IF (@tipo = 0)
 	BEGIN
 		INSERT INTO TODOX2LUCAS.CancelacionesPasajes(Cod_Pasaje,Fecha_Devolucion,Motivo,Numero_Compra_Pasajes)
@@ -887,7 +888,6 @@ BEGIN
 	
 END
 GO
-
 /* ------------ PROCEDIMIENTO PARA DAR DE BAJA UNA RUTA AEREA ------------ */
 CREATE PROCEDURE TODOX2LUCAS.Baja_Ruta_Aerea(@codRuta numeric(18),@ciudadOrigen nvarchar(255),@ciudadDestino nvarchar(255),
 												@motivo nvarchar(255))
@@ -2635,5 +2635,7 @@ SELECT DISTINCT e.Cod_Encomiendas,m.Paquete_FechaCompra,c.Nro_Dni,c.Cliente_Apel
 FROM TODOX2LUCAS.Encomiendas e JOIN TODOX2LUCAS.Clientes c ON (e.Nro_Dni=c.Nro_Dni AND e.Cliente_Apellido=c.Cliente_Apellido)
 							JOIN gd_esquema.Maestra m ON (m.Paquete_Codigo=e.Cod_Encomiendas)
 GO
+
+
 
 
