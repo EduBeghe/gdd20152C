@@ -20,7 +20,7 @@ namespace AerolineaFrba.Repositories {
 			);
 		}
 
-        public int comprarPaquete(int kgs, int codViaje, string apellido, int dni, string formaPago, int numeroTarjeta, int codSeg, DateTime vencimiendo, string tipoTarjeta)
+        public int comprarPaquete(int kgs, int codViaje, string apellido, int dni, string formaPago, int? numeroTarjeta, int? codSeg, DateTime? vencimiendo, string tipoTarjeta)
         {
             return DBAdapter.executeProcedureWithReturnValue("Comprar_Encomienda",
                 kgs, codViaje, apellido, dni, formaPago, numeroTarjeta, codSeg, vencimiendo, tipoTarjeta);
