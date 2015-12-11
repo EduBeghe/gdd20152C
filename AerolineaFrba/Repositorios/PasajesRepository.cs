@@ -12,6 +12,8 @@ namespace AerolineaFrba.Repositories {
 
 	class PasajesRepository {
 
+        int tipoActual;
+
 		public void comprarPasajes( int butaca, int codViaje, string apellido, int dni, string formaPago, long tarjeta, int codSeg, DateTime vencimiento, string tipoTarjeta )
 		{
 			DBAdapter.executeProcedure("Comprar_Pasajes",
@@ -26,6 +28,25 @@ namespace AerolineaFrba.Repositories {
 				tipoTarjeta
 			);
 		}
+
+        public List<int> getCodigosCancelar( int encomienda, int tipo )
+        {
+            tipoActual = tipo;
+            return parseCodigos( DBAdapter.retrieveDataTable( "Get_Transacciones", encomienda, tipo ));
+        }
+
+        public List<int> parseCodigos(DataTable dataTable)
+        {
+            return dataTable.AsEnumerable().Select(dr => parseCodigo(dr)).ToList();
+        }
+
+        public int parseCodigo(DataRow dr)
+        {
+            if ( tipoActual == 0 ) return Convert.ToInt32( dr["Cod_Encomiendas"]);
+            else return Convert.ToInt32(dr["Cod_Pasaje"]);
+        }
+
+
 
 		public void cancelarPasaje( Pasaje pasaje, DateTime fecha, string motivo )
 		{

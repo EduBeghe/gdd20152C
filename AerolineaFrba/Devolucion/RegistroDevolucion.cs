@@ -14,6 +14,8 @@ namespace AerolineaFrba.Devolucion
 {
     public partial class RegistroDevolucion : Form
     {
+        int retorno;
+
         public RegistroDevolucion()
         {
             InitializeComponent();
@@ -32,7 +34,8 @@ namespace AerolineaFrba.Devolucion
                 Validacion.soloNumeros(this.codigo, "Codigo")
                 // && Validacion.fechaMayorMenos 
                 ) {
-                    var retorno = new DevolucionRepository().devolverCompra(DateTime.Today, int.Parse(pnr.Text), int.Parse(codigo.Text), motivo.Text);
+                    if ( devolucionDe.SelectedItem == "Cancelar Pasaje") retorno = new DevolucionRepository().devolverCompra( int.Parse(pnr.Text), int.Parse(codigo.Text), motivo.Text, 1 );
+                    else retorno = new DevolucionRepository().devolverCompra(int.Parse(pnr.Text), int.Parse(codigo.Text), motivo.Text, 0);
 
                 if (retorno == 0)
                 {
@@ -51,7 +54,9 @@ namespace AerolineaFrba.Devolucion
 
         private void RegistroDevolucion_Load(object sender, EventArgs e)
         {
-
+            devolucionDe.Items.Add("Cancelar Pasaje");
+            devolucionDe.Items.Add("Cancelar Encomienda");
+            
         }
 
         private void fecha_ValueChanged(object sender, EventArgs e)
@@ -62,6 +67,35 @@ namespace AerolineaFrba.Devolucion
         private void motivo_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void devolucionDe_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ( this.pnr.Text != ""  )
+            {
+                if (this.devolucionDe.SelectedItem == "Cancelar Pasaje")
+                {
+                    this.codigo.DataSource = new BindingSource(new BindingList<int>(new PasajesRepository().getCodigosCancelar(
+                    Convert.ToInt32(pnr.Text), 1)), null);
+                }
+                else this.codigo.DataSource = new BindingSource(new BindingList<int>(new PasajesRepository().getCodigosCancelar(
+                    Convert.ToInt32(pnr.Text), 0)), null);
+            }
+        }
+
+
+        private void pnr_TextChanged(object sender, EventArgs e)
+        {
+            if (this.pnr.Text != "")
+            {
+                if (this.devolucionDe.SelectedItem == "Cancelar Pasaje")
+                {
+                    this.codigo.DataSource = new BindingSource(new BindingList<int>(new PasajesRepository().getCodigosCancelar(
+                    Convert.ToInt32(pnr.Text), 1)), null);
+                }
+                else this.codigo.DataSource = new BindingSource(new BindingList<int>(new PasajesRepository().getCodigosCancelar(
+                    Convert.ToInt32(pnr.Text), 0)), null);
+            }
         }
     }
 }
